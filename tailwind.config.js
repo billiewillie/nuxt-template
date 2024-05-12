@@ -1,4 +1,6 @@
 const animate = require("tailwindcss-animate");
+import { content } from "#tailwind-config";
+import fluid, { extract, screens, fontSize } from "fluid-tailwind";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -80,5 +82,9 @@ module.exports = {
       },
     },
   },
-  plugins: [animate],
+  plugins: [animate, fluid],
+  content: {
+    files: [],
+    extract,
+  },
 };
