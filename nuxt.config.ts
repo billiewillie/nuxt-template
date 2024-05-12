@@ -38,8 +38,8 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Inter: {
-        wght: [300, 400, 600],
-        ital: [300, 400, 600],
+        wght: [300, 400, 700],
+        ital: [300],
       },
     },
     display: "swap",
