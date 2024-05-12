@@ -45,6 +45,8 @@ export default defineNuxtConfig({
     display: "swap",
     subsets: ["cyrillic", "latin"],
     preload: true,
+    prefetch: true,
     useStylesheet: true,
+    preconnect: true,
   },
 });
