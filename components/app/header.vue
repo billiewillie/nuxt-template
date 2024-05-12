@@ -1,0 +1,7 @@
+<template>
+  <header>
+    <div class="container">
+      <p>header</p>
+    </div>
+  </header>
+</template>
