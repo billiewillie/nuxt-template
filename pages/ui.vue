@@ -2,7 +2,7 @@
   <section>
     <div class="container">
       <h1 class="~text-[20px]/[40px]">
-        <span>fluid text</span>
+        <span>new text</span>
       </h1>
     </div>
   </section>
