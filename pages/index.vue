@@ -4,14 +4,8 @@ import { Separator } from '~/components/ui/separator'
 </script>
 
 <template>
-  <section>
-    <div class="container">
-      <h1 class="font-bold">первая страница</h1>
-      <p class="font-normal">фонт нормал</p>
-      <p class="font-light">лайт 1</p>
-    </div>
-  </section>
-  <section>
+
+  <section class="mb-16">
     <div class="container">
       <h2>Каталог</h2>
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(340px,_1fr))] gap-4">
@@ -31,4 +25,5 @@ import { Separator } from '~/components/ui/separator'
       </div>
     </div>
   </section>
+
 </template>
