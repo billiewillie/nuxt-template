@@ -23,17 +23,6 @@ export default defineNuxtConfig({
     config: {},
     viewer: true
   },
-  shadcn: {
-    /**
-     * Prefix for all the imported component
-     */
-    prefix: '',
-    /**
-     * Directory that the component lives in.
-     * @default "./components/ui"
-     */
-    componentDir: './components/ui'
-  },
   imports: {
     autoImport: false
   },
@@ -51,14 +40,14 @@ export default defineNuxtConfig({
     useStylesheet: true,
     preconnect: true
   },
+  experimental: {
+    typedPages: true
+  },
   typescript: {
     tsConfig: {
       compilerOptions: {
         baseUrl: '.'
       }
     }
-  },
-  experimental: {
-    typedPages: true
   },
 })

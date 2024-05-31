@@ -11,8 +11,7 @@
       <div
         v-for="i in 7"
         :key="i"
-        class="border-2 p-2 rounded"
-      >
+        class="border-2 p-2 rounded">
         card {{ i }}
       </div>
     </div>
