@@ -7,7 +7,8 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
-    'nuxt-icon'
+    'nuxt-icon',
+    '@nuxtjs/seo'
   ],
   image: {
     inject: true,
@@ -58,6 +59,6 @@ export default defineNuxtConfig({
     }
   },
   experimental: {
-    typedPages: true,
+    typedPages: true
   },
 })
