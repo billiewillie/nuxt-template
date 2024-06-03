@@ -1,7 +1,20 @@
+<script setup>
+import NAVIGATION from '~/data/navigation.js'
+</script>
+
 <template>
-  <footer>
+  <footer class="bg-background-dark py-20 text-foreground-dark">
     <div class="container">
-      <p>footer</p>
+      <nav>
+        <ul class="flex gap-4">
+          <li
+            v-for="item in NAVIGATION"
+            :key="item.title"
+            class="text-sm">
+            {{ item.title }}
+          </li>
+        </ul>
+      </nav>
     </div>
   </footer>
 </template>
