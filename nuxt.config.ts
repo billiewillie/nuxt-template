@@ -28,10 +28,7 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      Inter: {
-        wght: [300, 400, 700],
-        ital: [300]
-      }
+      Inter: '400..700'
     },
     display: 'swap',
     subsets: ['cyrillic', 'latin'],
@@ -55,6 +52,6 @@ export default defineNuxtConfig({
     name: 'Группа компаний ООО «БиоЛайн»',
     description: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
     defaultLocale: 'ru',
-    indexable: false,
+    indexable: false
   }
 })

@@ -1,12 +1,13 @@
 <script setup>
-import NAVIGATION from '~/data/navigation.js'
+import NAVIGATION from '~/data/navigation'
+import CONTACTS from '~/data/contacts'
 </script>
 
 <template>
   <footer class="bg-background-dark py-20 text-foreground-dark">
-    <div class="container">
+    <div class="container grid grid-cols-1 md:grid-cols-3 text-center">
       <nav>
-        <ul class="flex gap-4">
+        <ul class="flex flex-col gap-4 items-start">
           <li
             v-for="item in NAVIGATION"
             :key="item.title"
@@ -15,6 +16,16 @@ import NAVIGATION from '~/data/navigation.js'
           </li>
         </ul>
       </nav>
+      <div>
+        <NuxtLink to="/">
+          <NuxtImg
+            src="/img/logo.svg"
+            class="mx-auto w-40" />
+        </NuxtLink>
+      </div>
+      <div>
+        {{ CONTACTS.spb.index }}
+      </div>
     </div>
   </footer>
 </template>

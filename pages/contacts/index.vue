@@ -5,15 +5,9 @@ import { Separator } from '~/components/ui/separator'
 
 <template>
 
-  <section class="mb-16 h-[700px]">
-    <div class="container">
-      first screen
-    </div>
-  </section>
-
   <section class="mb-16">
     <div class="container">
-      <h2 class="section-title">Каталог</h2>
+      <h2>Каталог</h2>
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(340px,_1fr))] gap-4">
         <Card
           v-for="i in 9"
@@ -25,7 +19,7 @@ import { Separator } from '~/components/ui/separator'
             color="black" />
           <Separator></Separator>
           <CardContent class="p-0">
-            <p>Диагностика онкологических заболеваний</p>
+            <p>страница контактов</p>
           </CardContent>
         </Card>
       </div>

@@ -23,7 +23,7 @@
     --input: 214.3 31.8% 91.4%;
     
     --primary: 180 87% 32%;
-    --bg-primary-gradient: linear-gradient(90deg, rgba(11,151,152,1) 0%, rgba(10,236,238,1) 100%);
+    --bg-primary-gradient: linear-gradient(90deg, rgba(11, 151, 152, 1) 0%, rgba(10, 236, 238, 1) 100%);
     --primary-foreground: 0 0% 100%;
     
     --secondary: 210 40% 96.1%;
@@ -79,5 +79,14 @@
   
   body {
     @apply bg-background text-foreground;
+  }
+  
+  .section-title {
+    @apply relative text-[42px] font-normal leading-none pl-[42px] mb-20;
+  }
+  
+  .section-title::before {
+    @apply absolute block content-[''] left-0 top-1/2 -translate-y-1/2 w-1 h-[200%] rounded-full bg-[linear-gradient(0deg,_rgba(11,_151,_152,_1)_0%,_rgba(10,_236,_238,_1)_100%)];
+    
   }
 }
