@@ -1,8 +1,14 @@
-<template>
+<script
+  setup
+  lang="ts">
 
+</script>
+
+<template>
   <section class="mb-16 pt-14">
     <div class="container">
-      <h1 class="section-title">Новости</h1>
+      <div class="mb-8">breadcrumbs</div>
+      <h1 class="section-title">Календарь мероприятий</h1>
     </div>
   </section>
 

@@ -91,6 +91,7 @@ module.exports = {
         'collapsible-up': 'collapsible-up 0.2s ease-in-out'
       },
       screens: {
+        xs: '360px',
         '2xl': '1440px'
       }
     }
