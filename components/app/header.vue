@@ -27,18 +27,16 @@ import CONTACTS from '~/data/contacts'
     </div>
     <div class="py-2">
       <div class="container relative flex items-center gap-8">
-        <div class="h-[70px] w-[110px]">
-          <NuxtLink
-            to="/"
-            class="flex h-full w-full">
-            <NuxtImg
-              src="/img/logo.svg"
-              alt="logo"
-              height="70"
-              width="110"
-            />
-          </NuxtLink>
-        </div>
+        <NuxtLink
+          to="/"
+          class="flex h-full w-[110px]">
+          <NuxtImg
+            src="/img/logo.svg"
+            alt="logo"
+            height="59"
+            width="110"
+          />
+        </NuxtLink>
         <BaseNavigation ul-class="flex gap-4" />
       </div>
     </div>
