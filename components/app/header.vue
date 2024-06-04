@@ -25,7 +25,7 @@ import CONTACTS from '~/data/contacts'
         </div>
       </div>
     </div>
-    <div class="py-2">
+    <div class="py-4">
       <div class="container relative flex items-center gap-8">
         <NuxtLink
           to="/"

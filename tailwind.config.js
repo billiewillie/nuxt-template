@@ -13,6 +13,7 @@ module.exports = {
       padding: {
         DEFAULT: '1rem',
         sm: '2rem',
+        '3xl': '180px',
       }
     },
     fontFamily: {
@@ -92,7 +93,8 @@ module.exports = {
       },
       screens: {
         xs: '360px',
-        '2xl': '1440px'
+        '2xl': '1440px',
+        '3xl': '1800px'
       }
     }
   },
