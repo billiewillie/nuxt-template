@@ -34,16 +34,7 @@ import CONTACTS from '~/data/contacts'
             <NuxtImg src="/img/logo.svg" />
           </NuxtLink>
         </div>
-        <nav>
-          <ul class="flex gap-4">
-            <li
-              v-for="item in NAVIGATION"
-              :key="item.title"
-              class="text-sm">
-              {{ item.title }}
-            </li>
-          </ul>
-        </nav>
+        <BaseNavigation ul-class="flex gap-4" />
       </div>
     </div>
   </header>

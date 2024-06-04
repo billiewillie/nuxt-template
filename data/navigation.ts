@@ -16,8 +16,8 @@ const NAVIGATION = [
   },
   {
     id: 4,
-    title: 'О нас',
-    href: '/about'
+    title: 'На складе',
+    href: '/in-stock'
   },
   {
     id: 5,

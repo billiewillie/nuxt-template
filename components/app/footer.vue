@@ -6,16 +6,7 @@ import CONTACTS from '~/data/contacts'
 <template>
   <footer class="bg-background-dark py-20 text-foreground-dark">
     <div class="container grid grid-cols-1 md:grid-cols-3 text-center">
-      <nav>
-        <ul class="flex flex-col gap-4 items-start">
-          <li
-            v-for="item in NAVIGATION"
-            :key="item.title"
-            class="text-sm">
-            {{ item.title }}
-          </li>
-        </ul>
-      </nav>
+      <BaseNavigation ul-class="flex flex-col gap-4 items-start" />
       <div>
         <NuxtLink to="/">
           <NuxtImg

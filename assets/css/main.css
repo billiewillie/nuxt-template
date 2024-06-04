@@ -86,7 +86,6 @@
   }
   
   .section-title::before {
-    @apply absolute block content-[''] left-0 top-1/2 -translate-y-1/2 w-1 h-[200%] rounded-full bg-[linear-gradient(0deg,_rgba(11,_151,_152,_1)_0%,_rgba(10,_236,_238,_1)_100%)];
-    
+    @apply absolute block content-[''] left-0 top-1/2 -translate-y-1/2 w-1 h-[200%] rounded-full bg-[linear-gradient(0deg,_#0B9798_0%,_#0AECEE_100%)];
   }
 }
