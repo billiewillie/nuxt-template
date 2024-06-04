@@ -31,7 +31,10 @@ import CONTACTS from '~/data/contacts'
           <NuxtLink
             to="/"
             class="flex h-full w-full">
-            <NuxtImg src="/img/logo.svg" />
+            <NuxtImg
+              src="/img/logo.svg"
+              alt="logo"
+            />
           </NuxtLink>
         </div>
         <BaseNavigation ul-class="flex gap-4" />

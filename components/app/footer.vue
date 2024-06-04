@@ -11,6 +11,7 @@ import CONTACTS from '~/data/contacts'
         <NuxtLink to="/">
           <NuxtImg
             src="/img/logo.svg"
+            alt="logo"
             class="mx-auto w-40" />
         </NuxtLink>
       </div>

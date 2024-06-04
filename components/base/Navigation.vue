@@ -6,7 +6,7 @@ import NAVIGATION from '~/data/navigation'
 
 defineProps({
   ulClass: {
-    type: String,
+    type: String
   }
 })
 </script>
@@ -17,7 +17,11 @@ defineProps({
       <li
         v-for="item in NAVIGATION"
         :key="item.id">
-        <NuxtLink :to="item.href">{{ item.title }}</NuxtLink>
+        <NuxtLink
+          :to="item.href"
+          :aria-label="item.title">
+          {{ item.title }}
+        </NuxtLink>
       </li>
     </ul>
   </nav>
