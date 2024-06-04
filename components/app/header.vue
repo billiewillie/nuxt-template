@@ -34,6 +34,8 @@ import CONTACTS from '~/data/contacts'
             <NuxtImg
               src="/img/logo.svg"
               alt="logo"
+              height="70"
+              width="110"
             />
           </NuxtLink>
         </div>
