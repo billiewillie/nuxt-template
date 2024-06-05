@@ -21,14 +21,14 @@ import NEWS from '~/data/news'
           :to="`/news/${article.slug}`">
           <Card class="flex flex-col gap-6 pb-6">
             <CardHeader class="p-0">
-<!--              <BaseImage-->
-<!--                :src="article.preview"-->
-<!--                alt="alt"-->
-<!--                aspect-ratio="aspect-[7/5]"-->
-<!--                placeholder="bg-[#e4e7ef]"-->
-<!--                width="350"-->
-<!--                height="250"-->
-<!--              />-->
+              <BaseImage
+                :src="article.preview"
+                alt="alt"
+                aspect-ratio="aspect-[7/5]"
+                placeholder="bg-[#e4e7ef]"
+                width="350"
+                height="250"
+              />
             </CardHeader>
             <CardContent class="flex flex-col gap-4 p-0 px-6">
               <CardTitle>{{ article.title }}</CardTitle>

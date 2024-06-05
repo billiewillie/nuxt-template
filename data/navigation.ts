@@ -34,11 +34,11 @@ const NAVIGATION = [
     title: 'Календарь',
     href: '/calendar'
   },
-  {
-    id: 8,
-    title: 'Вакансии',
-    href: '/vacancies'
-  },
+  // {
+  //   id: 8,
+  //   title: 'Вакансии',
+  //   href: '/vacancies'
+  // },
   {
     id: 9,
     title: 'Контакты',
