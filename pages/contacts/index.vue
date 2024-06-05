@@ -1,7 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const isLoaded = ref(false)
+
+onMounted(() => {
+  console.log(1)
+})
 </script>
 
 <template>
@@ -15,9 +19,9 @@ const isLoaded = ref(false)
   <section class="h-screen mb-5">
     <div class="container flex gap-4">
       <div class="relative basis-2/3 3xl:min-h-[438px]">
-        <div
-          class="absolute left-0 top-0 w-full h-full bg-blue-500 transition-opacity duration-500"
-          :class="{ 'opacity-0': isLoaded }"></div>
+<!--        <div-->
+<!--          class="absolute left-0 top-0 w-full h-full bg-blue-500 transition-opacity duration-500"-->
+<!--          :class="{ 'opacity-0': isLoaded }"></div>-->
         <NuxtPicture
           src="/img/contacts-page-first.jpg"
           class="w-full h-full object-cover object-top"
@@ -25,6 +29,7 @@ const isLoaded = ref(false)
           quality="80"
           width="940"
           height="438"
+          preload
           alt="центральный офис"
           @load="isLoaded = true"
         />
