@@ -2,6 +2,7 @@
 import { Card, CardContent } from '~/components/ui/card'
 import { Separator } from '~/components/ui/separator'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import PARTNERS from '~/data/partners'
 </script>
 
 <template>
@@ -154,18 +155,17 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
     <NuxtMarquee
       :auto-fill="true"
       :pause-on-hover="true">
-      <div
-        v-for="(_, index) in 9"
-        :key="index"
-        class="md:basis-1/2 lg:basis-1/5">
-        <div class="p-1">
-          <Card>
-            <CardContent class="flex aspect-square items-center justify-center p-6">
-              <span class="text-3xl font-semibold">{{ index + 1 }}</span>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+      <NuxtLink
+        v-for="partner in PARTNERS"
+        :key="partner.id"
+        :to="`/manufacturers/${partner.slug}`"
+        class="h-[70px] mr-10 grayscale transition hover:grayscale-0">
+        <NuxtImg
+          loading="lazy"
+          :src="partner.logo"
+          :alt="partner.title"
+          class="w-full h-full object-contain object-center" />
+      </NuxtLink>
     </NuxtMarquee>
   </section>
 
