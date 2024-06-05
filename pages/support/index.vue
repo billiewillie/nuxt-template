@@ -6,8 +6,4 @@
     </div>
   </section>
 
-  <section class="h-screen">
-    <div class="container"></div>
-  </section>
-
 </template>

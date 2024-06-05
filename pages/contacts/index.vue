@@ -12,8 +12,8 @@
     </div>
   </section>
 
-  <section class="h-screen mb-5">
-    <div class="container flex gap-4">
+<!--  <section class="h-screen mb-5">-->
+<!--    <div class="container flex gap-4">-->
 <!--      <div class="relative basis-2/3 3xl:min-h-[438px]">-->
 <!--        <div-->
 <!--          class="absolute left-0 top-0 w-full h-full bg-blue-500 transition-opacity duration-500"-->
@@ -29,10 +29,10 @@
 <!--          @load="isLoaded = true"-->
 <!--        />-->
 <!--      </div>-->
-      <div class="basis-1/3">
-        <p>text</p>
-      </div>
-    </div>
-  </section>
+<!--      <div class="basis-1/3">-->
+<!--        <p>text</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
 
 </template>
