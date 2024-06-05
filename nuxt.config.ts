@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
     'nuxt-icon',
-    '@nuxtjs/seo',
     'nuxt-marquee'
   ],
   image: {
@@ -44,12 +43,5 @@ export default defineNuxtConfig({
         baseUrl: '.'
       }
     }
-  },
-  site: {
-    url: 'https://bioline.ru/',
-    name: 'Группа компаний ООО «БиоЛайн»',
-    description: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
-    defaultLocale: 'ru',
-    indexable: false
   }
 })
