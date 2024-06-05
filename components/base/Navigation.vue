@@ -17,7 +17,9 @@ defineProps({
       <li
         v-for="item in NAVIGATION"
         :key="item.id">
-        <NuxtLink :to="item.href">
+        <NuxtLink
+          :to="item.href"
+          :aria-label="item.title">
           {{ item.title }}
         </NuxtLink>
       </li>

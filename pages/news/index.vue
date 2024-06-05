@@ -1,9 +1,7 @@
-<script setup>
+<script
+  setup
+  lang="ts">
 import NEWS from '~/data/news'
-import { ref } from 'vue'
-
-const isLoaded = ref(false)
-
 </script>
 
 <template>
@@ -14,7 +12,7 @@ const isLoaded = ref(false)
     </div>
   </section>
 
-  <section class="h-screen">
+  <section>
     <div class="container">
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(340px,_1fr))] gap-4">
         <NuxtLink

@@ -1,11 +1,3 @@
-<script
-  setup
-  lang="ts">
-import { ref } from 'vue'
-
-const isLoaded = ref(false)
-</script>
-
 <template>
 
   <section class="mt-6">
