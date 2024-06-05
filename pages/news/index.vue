@@ -1,5 +1,9 @@
 <script setup>
 import NEWS from '~/data/news'
+import { ref } from 'vue'
+
+const isLoaded = ref(false)
+
 </script>
 
 <template>
@@ -19,10 +23,14 @@ import NEWS from '~/data/news'
           :to="`/news/${article.slug}`">
           <Card class="flex flex-col gap-6 pb-6">
             <CardHeader class="p-0">
-              <NuxtPicture
+              <BaseImage
                 :src="article.preview"
-                class="w-full h-full object-cover object-top"
-                :alt="article.title" />
+                alt="alt"
+                aspect-ratio="aspect-[7/5]"
+                placeholder="bg-[#e4e7ef]"
+                width="350"
+                height="250"
+              />
             </CardHeader>
             <CardContent class="flex flex-col gap-4 p-0 px-6">
               <CardTitle>{{ article.title }}</CardTitle>

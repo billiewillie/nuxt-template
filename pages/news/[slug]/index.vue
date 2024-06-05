@@ -10,22 +10,14 @@ const isLoaded = ref(false)
 
   <section class="mt-6">
     <div class="container">
-      <div class="relative aspect-[4/1]">
-        <div
-          class="absolute left-0 top-0 w-full h-full bg-[#e4e7ef] transition-opacity duration-500"
-          :class="{ 'opacity-0': isLoaded }"></div>
-        <NuxtPicture
-          src="/img/news/news-cover.jpg"
-          class="w-full h-full object-cover object-top"
-          :img-attrs="{class:'w-full h-full object-cover object-top'}"
-          quality="80"
-          width="1413"
-          height="332"
-          alt="alt"
-          @load="isLoaded = true"
-        />
-      </div>
-
+      <BaseImage
+        src="/img/news/news-cover.jpg"
+        alt="alt"
+        aspect-ratio="aspect-[4/1]"
+        placeholder="bg-[#e4e7ef]"
+        width="1413"
+        height="332"
+      />
     </div>
   </section>
 
