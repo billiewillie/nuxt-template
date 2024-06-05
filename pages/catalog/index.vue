@@ -6,12 +6,4 @@
     </div>
   </section>
 
-  <section class="h-screen">
-    <div class="container">
-      <p>мероприятия</p>
-    </div>
-  </section>
-
 </template>
-<script setup>
-</script>
