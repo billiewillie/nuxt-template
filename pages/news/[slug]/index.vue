@@ -2,14 +2,14 @@
 
   <section class="mt-6">
     <div class="container">
-      <BaseImage
-        src="/img/news/news-cover.jpg"
-        alt="alt"
-        aspect-ratio="aspect-[4/1]"
-        placeholder="bg-[#e4e7ef]"
-        width="1413"
-        height="332"
-      />
+<!--      <BaseImage-->
+<!--        src="/img/news/news-cover.jpg"-->
+<!--        alt="alt"-->
+<!--        aspect-ratio="aspect-[4/1]"-->
+<!--        placeholder="bg-[#e4e7ef]"-->
+<!--        width="1413"-->
+<!--        height="332"-->
+<!--      />-->
     </div>
   </section>
 

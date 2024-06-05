@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-icon',
     '@nuxtjs/seo',
-    "nuxt-marquee"
+    'nuxt-marquee'
   ],
   image: {
     inject: true,
@@ -37,9 +37,6 @@ export default defineNuxtConfig({
     prefetch: true,
     useStylesheet: true,
     preconnect: true
-  },
-  experimental: {
-    typedPages: true
   },
   typescript: {
     tsConfig: {
