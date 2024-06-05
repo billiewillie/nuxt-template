@@ -7,13 +7,13 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const props = defineProps<WithClassAsProps>()
+const props = defineProps<WithClassAsProps & {isVisible?: boolean}>()
 
 const { carouselRef, orientation } = useCarousel()
 </script>
 
 <template>
-  <div ref="carouselRef" class="overflow-hidden">
+  <div ref="carouselRef" class="overflow-hidden" :class="{ 'overflow-visible': isVisible}">
     <div
       :class="
         cn(

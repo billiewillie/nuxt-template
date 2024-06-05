@@ -1,6 +1,7 @@
 <script setup>
 import { Card, CardContent } from '~/components/ui/card'
 import { Separator } from '~/components/ui/separator'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 </script>
 
 <template>
@@ -29,7 +30,7 @@ import { Separator } from '~/components/ui/separator'
   <section class="mb-40">
     <div class="container">
       <h2 class="section-title">Каталог</h2>
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(340px,_1fr))] gap-4">
+      <div class="grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
         <Card
           v-for="i in 9"
           :key="i"
@@ -48,27 +49,124 @@ import { Separator } from '~/components/ui/separator'
   </section>
 
   <section class="mb-40">
-    <div class="container">
+    <div class="container mb-20">
       <h2 class="section-title">Новости</h2>
     </div>
+    <div class="container">
+      <Carousel
+        class="relative w-full"
+        :opts="{
+            align: 'start',
+          }"
+      >
+        <CarouselContent :is-visible="true">
+          <CarouselItem
+            v-for="(_, index) in 9"
+            :key="index"
+            class="md:basis-1/2 lg:basis-1/5">
+            <div class="p-1">
+              <Card>
+                <CardContent class="flex aspect-square items-center justify-center p-6">
+                  <span class="text-3xl font-semibold">{{ index + 1 }}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        </CarouselContent>
+        <div class="absolute right-0 -top-32 border">
+          <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+          <CarouselNext class="relative left-0 top-0 translate-y-0" />
+        </div>
+      </Carousel>
+    </div>
   </section>
 
   <section class="mb-40">
-    <div class="container">
+    <div class="container mb-20">
       <h2 class="section-title">Новинки</h2>
     </div>
+    <div class="container">
+      <Carousel
+        class="relative w-full"
+        :opts="{
+            align: 'start',
+          }"
+      >
+        <CarouselContent :is-visible="true">
+          <CarouselItem
+            v-for="(_, index) in 9"
+            :key="index"
+            class="md:basis-1/2 lg:basis-1/5">
+            <div class="p-1">
+              <Card>
+                <CardContent class="flex aspect-square items-center justify-center p-6">
+                  <span class="text-3xl font-semibold">{{ index + 1 }}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        </CarouselContent>
+        <div class="absolute right-0 -top-32 border">
+          <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+          <CarouselNext class="relative left-0 top-0 translate-y-0" />
+        </div>
+      </Carousel>
+    </div>
   </section>
 
   <section class="mb-40">
-    <div class="container">
+    <div class="container mb-20">
       <h2 class="section-title">Календарь событий</h2>
     </div>
+    <div class="container">
+      <Carousel
+        class="relative w-full"
+        :opts="{
+            align: 'start',
+          }"
+      >
+        <CarouselContent :is-visible="true">
+          <CarouselItem
+            v-for="(_, index) in 9"
+            :key="index"
+            class="md:basis-1/2 lg:basis-1/5">
+            <div class="p-1">
+              <Card>
+                <CardContent class="flex aspect-square items-center justify-center p-6">
+                  <span class="text-3xl font-semibold">{{ index + 1 }}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        </CarouselContent>
+        <div class="absolute right-0 -top-32 border">
+          <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+          <CarouselNext class="relative left-0 top-0 translate-y-0" />
+        </div>
+      </Carousel>
+    </div>
   </section>
 
   <section class="mb-40">
-    <div class="container">
+    <div class="container mb-20">
       <h2 class="section-title">Партнёры</h2>
     </div>
+    <NuxtMarquee
+      :auto-fill="true"
+      :pause-on-hover="true">
+      <div
+        v-for="(_, index) in 9"
+        :key="index"
+        class="md:basis-1/2 lg:basis-1/5">
+        <div class="p-1">
+          <Card>
+            <CardContent class="flex aspect-square items-center justify-center p-6">
+              <span class="text-3xl font-semibold">{{ index + 1 }}</span>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </NuxtMarquee>
   </section>
 
   <section class="relative h-[750px]">

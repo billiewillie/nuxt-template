@@ -80,7 +80,7 @@
   }
   
   .section-title {
-    @apply relative ~text-[28px]/[42px] font-normal leading-normal pl-[28px] lg:pl-[42px] mb-20;
+    @apply relative ~text-[28px]/[42px] font-normal leading-normal pl-[28px] lg:pl-[42px];
   }
   
   .section-title::before {

@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
     'nuxt-icon',
-    '@nuxtjs/seo'
+    '@nuxtjs/seo',
+    "nuxt-marquee"
   ],
   image: {
     inject: true,
