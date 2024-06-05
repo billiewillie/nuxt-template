@@ -56,8 +56,8 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
       <Carousel
         class="relative w-full"
         :opts="{
-            align: 'start',
-          }"
+          align: 'start',
+        }"
       >
         <CarouselContent :is-visible="true">
           <CarouselItem

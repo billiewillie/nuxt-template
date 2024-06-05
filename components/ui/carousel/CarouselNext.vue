@@ -22,6 +22,7 @@ const { orientation, canScrollNext, scrollNext } = useCarousel()
     )"
     variant="outline"
     @click="scrollNext"
+    aria-label="next"
   >
     <slot>
       <ArrowRight class="h-4 w-4 text-current" />
