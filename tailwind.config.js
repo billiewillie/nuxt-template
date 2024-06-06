@@ -13,7 +13,7 @@ module.exports = {
       padding: {
         DEFAULT: '1rem',
         sm: '2rem',
-        '3xl': '180px',
+        '3xl': '180px'
       }
     },
     fontFamily: {
@@ -90,6 +90,9 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'collapsible-down': 'collapsible-down 0.2s ease-in-out',
         'collapsible-up': 'collapsible-up 0.2s ease-in-out'
+      },
+      zIndex: {
+        '100': '100'
       },
       screens: {
         xs: '360px',

@@ -19,9 +19,9 @@ import { Card, CardContent } from '~/components/ui/card'
           :key="index"
           class="flex flex-col gap-6 p-4 items-center text-center">
           <CardContent class="flex flex-col xl:flex-row w-full p-0 gap-8">
-            <div class="flex basis-1/3 justify-center">
+            <div class="flex basis-full xl:basis-1/3 justify-center">
               <BaseImage
-                class="w-[350]"
+                class="w-full xl:w-[350]"
                 src="/img/items/item-1.jpg"
                 alt="alt"
                 aspect-ratio="aspect-square"
@@ -32,7 +32,7 @@ import { Card, CardContent } from '~/components/ui/card'
             </div>
 
             <div class="basis-2/3 flex flex-col items-start gap-6">
-              <h2 class="font-bold text-2xl">Автоматический разливочный модуль в чашки Петри</h2>
+              <h2 class="font-bold text-2xl">Автоматический разливочный модуль в чашки Петри</h2>
               <Separator />
               <p class="text-xl text-gray-500">
                 Производитель: Systec GmbH & Co. KG, Германия
@@ -40,15 +40,15 @@ import { Card, CardContent } from '~/components/ui/card'
               <ul class="text-start">
                 <li>Вместимость карусели: 440 чашек Петри.</li>
                 <li>Сенсорный цветной дисплей.</li>
-                <li>Встроенная база данных чашек Петри различных производителей с возможностью её дополнения.</li>
+                <li>Встроенная база данных чашек Петри различных производителей с возможностью её дополнения.</li>
                 <li>Диапазон дозирования среды - 1-1000 мл.</li>
-                <li>Возможность полуавтоматического розлива питательной среды в любую емкость.</li>
-                <li>УФ-лампа в зоне розлива среды.</li>
-                <li>Совместимость со средоваркой любого производителя.</li>
+                <li>Возможность полуавтоматического розлива питательной среды в любую емкость.</li>
+                <li>УФ-лампа в зоне розлива среды.</li>
+                <li>Совместимость со средоваркой любого производителя.</li>
               </ul>
             </div>
           </CardContent>
-          <CardFooter class="flex justify-between w-full">
+          <CardFooter class="flex flex-col xl:flex-row gap-4 justify-between w-full">
             <div class="flex">
               <Icon
                 name="iconoir:star"

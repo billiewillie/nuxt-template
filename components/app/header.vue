@@ -1,13 +1,14 @@
 <script
   setup
   lang="ts">
-import NAVIGATION from '~/data/navigation'
 import CONTACTS from '~/data/contacts'
+import { VisuallyHidden } from 'radix-vue'
+import NAVIGATION from '~/data/navigation'
 </script>
 
 <template>
   <header class="flex flex-col shadow-lg">
-    <div class="bg-background-dark py-4 text-foreground-dark">
+    <div class="hidden xl:flex bg-background-dark py-4 text-foreground-dark">
       <div class="container flex justify-between text-[14px]">
         <div class="flex">
           <div class="text-primary">{{ CONTACTS.spb.email }}</div>
@@ -26,7 +27,7 @@ import CONTACTS from '~/data/contacts'
       </div>
     </div>
     <div class="py-4">
-      <div class="container relative flex items-center gap-8">
+      <div class="container relative flex items-center gap-8 justify-between">
         <NuxtLink
           to="/"
           class="flex h-full w-[110px]">
@@ -38,6 +39,38 @@ import CONTACTS from '~/data/contacts'
           />
         </NuxtLink>
         <BaseNavigation ul-class="hidden xl:flex gap-4" />
+        <Sheet>
+          <SheetTrigger as-child>
+            <Button
+              variant="outline"
+              class="xl:hidden">
+              Open
+            </Button>
+          </SheetTrigger>
+          <SheetContent class="xl:hidden">
+            <SheetHeader>
+              <VisuallyHidden>
+                <SheetTitle></SheetTitle>
+                <SheetDescription></SheetDescription>
+              </VisuallyHidden>
+            </SheetHeader>
+            <nav>
+              <ul>
+                <li
+                  v-for="item in NAVIGATION"
+                  :key="item.id">
+                  <SheetClose as-child>
+                    <NuxtLink
+                      :to="item.href"
+                      :aria-label="item.title">
+                      {{ item.title }}
+                    </NuxtLink>
+                  </SheetClose>
+                </li>
+              </ul>
+            </nav>
+          </SheetContent>
+        </Sheet>
       </div>
     </div>
   </header>

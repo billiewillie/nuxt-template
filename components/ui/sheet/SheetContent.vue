@@ -1,4 +1,6 @@
-<script setup lang="ts">
+<script
+  setup
+  lang="ts">
 import { type HTMLAttributes, computed } from 'vue'
 import {
   DialogClose,
@@ -7,7 +9,7 @@ import {
   type DialogContentProps,
   DialogOverlay,
   DialogPortal,
-  useForwardPropsEmits,
+  useForwardPropsEmits
 } from 'radix-vue'
 import { X } from 'lucide-vue-next'
 import { type SheetVariants, sheetVariants } from '.'
@@ -19,7 +21,7 @@ interface SheetContentProps extends DialogContentProps {
 }
 
 defineOptions({
-  inheritAttrs: false,
+  inheritAttrs: false
 })
 
 const props = defineProps<SheetContentProps>()

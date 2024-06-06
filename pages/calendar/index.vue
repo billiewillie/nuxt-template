@@ -18,12 +18,12 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
   </section>
 
   <section class="mb-4">
-    <div class="container grid grid-cols-4 gap-4">
+    <div class="container grid grid-cols-1 xl:grid-cols-4 gap-y-4 xl:gap-y-0 xl:gap-x-4">
       <Calendar
         v-model="value"
         :weekday-format="'short'"
         class="rounded-md border col-span-3" />
-      <div class="flex flex-col basis-1/4 border rounded">
+      <div class="flex flex-col basis-full xl:basis-1/4 border rounded">
         <select>
           <option>
             тип события
@@ -55,7 +55,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 
   <section class="mb-16">
     <div class="container">
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(340px,_1fr))] gap-4">
+      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(340px,_1fr))] gap-4">
         <NuxtLink
           v-for="article in NEWS"
           :key="article.id"

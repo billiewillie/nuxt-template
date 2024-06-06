@@ -32,7 +32,7 @@ import CATEGORIES from '~/data/categories'
   <section class="mb-40">
     <div class="container">
       <h2 class="section-title mb-16">Каталог</h2>
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
+      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
         <Card
           v-for="item in CATEGORIES"
           :key="item.id"

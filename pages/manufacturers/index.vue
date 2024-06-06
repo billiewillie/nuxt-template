@@ -7,7 +7,7 @@
   </section>
 
   <section>
-    <div class="container grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4 mb-16">
+    <div class="container grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4 mb-16">
       <NuxtLink
         v-for="i in 9"
         :key="i"
@@ -17,6 +17,7 @@
             <NuxtImg
               src="/img/partners/leica-microsystems.svg"
               width="80"
+              height="80"
               class="mb-8"
               alt="leica microsystems" />
             <h2 class="font-bold">Leica Biosystems</h2>

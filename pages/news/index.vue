@@ -14,7 +14,7 @@ import NEWS from '~/data/news'
 
   <section class="mb-16">
     <div class="container">
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(340px,_1fr))] gap-4">
+      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(340px,_1fr))] gap-4">
         <NuxtLink
           v-for="article in NEWS"
           :key="article.id"
