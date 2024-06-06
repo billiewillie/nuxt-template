@@ -13,7 +13,6 @@ import CATEGORIES from '~/data/categories'
 
   <section class="mb-40">
     <div class="container">
-      <h2 class="section-title mb-16">Каталог</h2>
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
         <Card
           v-for="item in CATEGORIES"
@@ -21,7 +20,7 @@ import CATEGORIES from '~/data/categories'
           class="flex flex-col gap-6 p-4 items-center text-center">
           <NuxtImg
             :src="item.icon"
-            class="w-50 object-contain object-center"
+            class="w-[80px] object-contain object-center"
             :alt="item.title" />
           <CardContent class="p-0 font-medium">
             <p class="text-2xl">Диагностика онкологических заболеваний</p>

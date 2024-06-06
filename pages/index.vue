@@ -39,10 +39,10 @@ import CATEGORIES from '~/data/categories'
           class="flex flex-col gap-6 p-4 items-center text-center">
           <NuxtImg
             :src="item.icon"
-            class="w-50 object-contain object-center"
+            class="w-[80px] object-contain object-center"
             :alt="item.title" />
           <CardContent class="p-0 font-medium">
-            <p class="text-2xl">Диагностика онкологических заболеваний</p>
+            <p class="text-2xl">{{ item.title }}</p>
           </CardContent>
         </Card>
       </div>

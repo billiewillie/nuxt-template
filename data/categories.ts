@@ -6,44 +6,44 @@ const CATEGORIES = [
   },
   {
     id: 2,
-    title: 'Диагностика онкологических заболеваний',
+    title: 'Диагностика инфекционных заболеваний',
     icon: '/img/categories/icons/1.svg'
   },
   {
     id: 3,
-    title: 'Диагностика онкологических заболеваний',
+    title: 'Научные исследования в биологии и медицине',
     icon: '/img/categories/icons/1.svg'
   },
   {
     id: 4,
-    title: 'Диагностика онкологических заболеваний',
+    title: 'Общелабораторное оборудование',
     icon: '/img/categories/icons/1.svg'
   },
   {
     id: 5,
-    title: 'Диагностика онкологических заболеваний',
+    title: 'Госпитальная и лабораторная мебель',
     icon: '/img/categories/icons/1.svg'
   },
   {
     id: 6,
-    title: 'Диагностика онкологических заболеваний',
+    title: 'Преаналитика',
     icon: '/img/categories/icons/1.svg'
   },
   {
     id: 7,
-    title: 'Диагностика онкологических заболеваний',
+    title: 'Операционная микроскопия и госпитальное оборудование',
     icon: '/img/categories/icons/1.svg'
   },
   {
     id: 8,
-    title: 'Диагностика онкологических заболеваний',
+    title: 'Материнство и детство',
     icon: '/img/categories/icons/1.svg'
   },
   {
     id: 9,
-    title: 'Диагностика онкологических заболеваний',
+    title: 'Оборудование для моргов',
     icon: '/img/categories/icons/1.svg'
   }
-]
+];
 
 export default CATEGORIES

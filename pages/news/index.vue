@@ -12,7 +12,7 @@ import NEWS from '~/data/news'
     </div>
   </section>
 
-  <section>
+  <section class="mb-16">
     <div class="container">
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(340px,_1fr))] gap-4">
         <NuxtLink
