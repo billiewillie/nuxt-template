@@ -3,6 +3,7 @@ import { Card, CardContent } from '~/components/ui/card'
 import { Separator } from '~/components/ui/separator'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import PARTNERS from '~/data/partners'
+import CATEGORIES from '~/data/categories'
 </script>
 
 <template>
@@ -30,19 +31,18 @@ import PARTNERS from '~/data/partners'
 
   <section class="mb-40">
     <div class="container">
-      <h2 class="section-title">Каталог</h2>
+      <h2 class="section-title mb-16">Каталог</h2>
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
         <Card
-          v-for="i in 9"
-          :key="i"
+          v-for="item in CATEGORIES"
+          :key="item.id"
           class="flex flex-col gap-6 p-4 items-center text-center">
-          <Icon
-            name="uil:github"
-            size="80"
-            color="black" />
-          <Separator></Separator>
-          <CardContent class="p-0">
-            <p>Диагностика онкологических заболеваний</p>
+          <NuxtImg
+            :src="item.icon"
+            class="w-50 object-contain object-center"
+            :alt="item.title" />
+          <CardContent class="p-0 font-medium">
+            <p class="text-2xl">Диагностика онкологических заболеваний</p>
           </CardContent>
         </Card>
       </div>
