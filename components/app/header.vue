@@ -16,7 +16,7 @@ import CONTACTS from '~/data/contacts'
           <span class="flex mx-4">|</span>
           <div>связаться с нами</div>
         </div>
-        <div class="flex">
+        <div class="hidden xl:flex">
           <div>Сравнение (0)</div>
           <span class="flex mx-4">|</span>
           <div>Избранное (0)</div>
@@ -37,7 +37,7 @@ import CONTACTS from '~/data/contacts'
             width="110"
           />
         </NuxtLink>
-        <BaseNavigation ul-class="flex gap-4" />
+        <BaseNavigation ul-class="hidden xl:flex gap-4" />
       </div>
     </div>
   </header>
