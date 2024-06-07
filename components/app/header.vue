@@ -42,7 +42,7 @@ const route = useRoute()
             width="110"
           />
         </NuxtLink>
-        <nav>
+        <nav class="-mr-4">
           <ul class="hidden xl:flex gap-4">
             <li
               v-for="item in NAVIGATION"

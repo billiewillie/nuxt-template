@@ -11,7 +11,7 @@ import { Card, CardContent } from '~/components/ui/card'
     </div>
   </section>
 
-  <section class="mb-40">
+  <section class="mb-16">
     <div class="container">
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
         <Card
