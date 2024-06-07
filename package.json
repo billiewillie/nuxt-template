@@ -12,6 +12,7 @@
   "dependencies": {
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/seo": "^2.0.0-rc.10",
+    "@vee-validate/zod": "^4.13.1",
     "@vueuse/core": "^10.10.0",
     "@vueuse/nuxt": "^10.9.0",
     "class-variance-authority": "^0.7.0",
@@ -25,8 +26,10 @@
     "shadcn-nuxt": "^0.10.4",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
+    "vee-validate": "^4.13.1",
     "vue": "^3.4.27",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",

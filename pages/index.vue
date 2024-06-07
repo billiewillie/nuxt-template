@@ -4,6 +4,45 @@ import { Separator } from '~/components/ui/separator'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import PARTNERS from '~/data/partners'
 import CATEGORIES from '~/data/categories'
+import { toast } from '@/components/ui/toast'
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage
+} from '@/components/ui/form'
+import * as z from 'zod'
+
+const formSchema = toTypedSchema(z.object({
+  name: z.string().min(2).max(50),
+  email: z.string().email().min(2).max(50),
+  job: z.string().min(2).max(50).optional(),
+  phone: z.string().min(2).max(15),
+  city: z.string().min(2).max(20).optional(),
+  lab: z.string().min(2).max(50).optional(),
+  message: z
+    .string()
+    .min(10, {
+      message: 'Минимальная длина сообщения 10 символов.'
+    })
+    .max(160, {
+      message: 'Максимальная длина сообщения 160 символов.'
+    }).optional(),
+  checkbox: z.boolean({ message: 'Подтвердите согласие' })
+}))
+
+const form = useForm({
+  validationSchema: formSchema
+})
+
+const onSubmit = form.handleSubmit((values) => {
+  toast({
+    title: 'You submitted the following values:',
+    description: h('pre', { class: 'mt-2 w-[340px] rounded-md bg-slate-950 p-4' }, h('code', { class: 'text-white' }, JSON.stringify(values, null, 2)))
+  })
+})
 </script>
 
 <template>
@@ -178,19 +217,133 @@ import CATEGORIES from '~/data/categories'
       alt="contacts form image"
     />
     <div class="container flex justify-end items-center h-full">
-      <div class="bg-background relative p-10 rounded w-1/2">
-        <h2 class="text-center text-2xl">
+      <div class="bg-background relative p-10 rounded w-1/2 shadow-lg">
+        <h2 class="text-center text-2xl mb-4">
           Заполните форму с контактными данными и наш специалист свяжется с Вами:
         </h2>
-        <form action="">
-          <input
-            type="text"
-            placeholder="Ваше имя"
-            class="mb-4" />
-          <button
-            class="w-full"
-            type="submit">Отправить
-          </button>
+        <form
+          @submit="onSubmit"
+          class="flex flex-col gap-4">
+          <div class="grid grid-cols-3 gap-4">
+            <FormField
+              v-slot="{ componentField }"
+              name="name">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    placeholder="ФИО"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="phone">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="tel"
+                    placeholder="Телефон"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="message">
+              <FormItem class="row-span-3">
+                <FormControl>
+                  <Textarea
+                    placeholder="Сообщение"
+                    class="resize-none h-full"
+                    v-bind="componentField"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="email">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="E-mail"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="city">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    placeholder="Город"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="job">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    placeholder="Место работы"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="lab">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    placeholder="Лаборатория"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+          </div>
+          <div class="flex gap-4">
+            <Button
+              type="submit"
+              class="uppercase">
+              отправить
+            </Button>
+            <FormField
+              v-slot="{ value, handleChange }"
+              type="checkbox"
+              name="checkbox">
+              <FormItem class="flex flex-row items-start gap-x-3 space-y-0 rounded-md">
+                <FormControl>
+                  <Checkbox
+                    :checked="value"
+                    @update:checked="handleChange" />
+                </FormControl>
+                <div class="space-y-1 leading-none">
+                  <FormLabel>
+                    Я согласен(на) на обработку персональных данных.
+                    ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.
+                  </FormLabel>
+                  <FormMessage />
+                </div>
+              </FormItem>
+            </FormField>
+          </div>
         </form>
       </div>
     </div>

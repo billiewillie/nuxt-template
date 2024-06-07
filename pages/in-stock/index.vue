@@ -54,9 +54,11 @@ import { Card, CardContent } from '~/components/ui/card'
                 name="iconoir:star"
                 width="24"
                 height="24"
-                color="#575757"></Icon>
+                color="#575757" />
             </div>
-            <Button variant="outline">Отправить запрос</Button>
+            <Button variant="outline">
+              Отправить запрос
+            </Button>
             <span>Перейти на страницу</span>
           </CardFooter>
         </Card>
