@@ -11,7 +11,7 @@ import CATEGORIES from '~/data/categories'
     </div>
   </section>
 
-  <section class="mb-40">
+  <section class="mb-16">
     <div class="container">
       Something
     </div>

@@ -11,7 +11,7 @@ import { Card, CardContent } from '~/components/ui/card'
     </div>
   </section>
 
-  <section class="mb-40">
+  <section class="mb-16">
     <div class="container">
       <div class="flex flex-col gap-4">
         <Card
