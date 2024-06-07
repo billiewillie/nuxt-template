@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import CONTACTS from '~/data/contacts'
+import { SERVICE } from '~/data/constants'
 
 const isLoaded = ref(false)
 </script>
@@ -12,7 +14,7 @@ const isLoaded = ref(false)
     </div>
   </section>
 
-  <section class="mb-5">
+  <section class="mb-16">
     <div class="container flex gap-4">
       <div class="relative basis-2/3 3xl:min-h-[438px]">
         <div
@@ -30,7 +32,38 @@ const isLoaded = ref(false)
         />
       </div>
       <div class="basis-1/3">
-        <p>text</p>
+        <h2>Центральный офис</h2>
+        <p>{{ CONTACTS.spb.index }}</p>
+        <p>{{ CONTACTS.spb.country }}</p>
+        <p>{{ CONTACTS.spb.city }}</p>
+        <p>{{ CONTACTS.spb.address }}</p>
+        <p>{{ CONTACTS.spb.phone }}</p>
+        <p>{{ CONTACTS.spb.email }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <div class="container flex gap-4">
+      <div class="relative basis-2/3 3xl:min-h-[438px]">
+        <div
+          class="absolute left-0 top-0 w-full h-full bg-[#ccc] transition-opacity duration-500"
+          :class="{ 'opacity-0': isLoaded }"></div>
+        <NuxtPicture
+          src="/img/contacts-page-doctors.jpg"
+          class="w-full h-full object-cover object-top"
+          :img-attrs="{class:'w-full h-full object-cover object-top'}"
+          quality="90"
+          width="940"
+          height="438"
+          alt="центральный офис"
+          @load="isLoaded = true"
+        />
+      </div>
+      <div class="basis-1/3">
+        <h2>Сервисная служба для всех регионов России</h2>
+        <p>Телефон: {{ SERVICE.phone }}</p>
+        <p>Email: {{ SERVICE.email }}</p>
       </div>
     </div>
   </section>
