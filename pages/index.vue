@@ -16,20 +16,39 @@ import {
 import * as z from 'zod'
 
 const formSchema = toTypedSchema(z.object({
-  name: z.string().min(2).max(50),
-  email: z.string().email().min(2).max(50),
-  job: z.string().min(2).max(50).optional(),
-  phone: z.string().min(2).max(15),
-  city: z.string().min(2).max(20).optional(),
-  lab: z.string().min(2).max(50).optional(),
+  name: z
+    .string({ message: 'Обязательное поле' })
+    .min(2, { message: 'Минимальная длина 2 символа' })
+    .max(50, { message: 'Максимальная длина 50 символов' }),
+  email: z
+    .string({ message: 'Обязательное поле' })
+    .email({ message: 'Некорректная почта' })
+    .min(2, { message: 'Минимальная длина 2 символа' })
+    .max(50, { message: 'Максимальная длина 50 символов' }),
+  job: z
+    .string()
+    .min(2, { message: 'Минимальная длина 2 символа' })
+    .max(50, { message: 'Максимальная длина 50 символов' })
+    .optional(),
+  phone: z
+    .string({ message: 'Обязательное поле' })
+    .min(2, { message: 'Минимальная длина 2 символа' })
+    .max(15, { message: 'Максимальная длина 15 символов' }),
+  city: z
+    .string()
+    .min(2, { message: 'Минимальная длина 2 символа' })
+    .max(20, { message: 'Максимальная длина 20 символов' })
+    .optional(),
+  lab: z
+    .string()
+    .min(2, { message: 'Минимальная длина 2 символа' })
+    .max(50, { message: 'Максимальная длина 50 символов' })
+    .optional(),
   message: z
     .string()
-    .min(10, {
-      message: 'Минимальная длина сообщения 10 символов.'
-    })
-    .max(160, {
-      message: 'Максимальная длина сообщения 160 символов.'
-    }).optional(),
+    .min(10, { message: 'Минимальная длина сообщения 10 символов' })
+    .max(160, { message: 'Максимальная длина сообщения 160 символов' })
+    .optional(),
   checkbox: z.boolean({ message: 'Подтвердите согласие' })
 }))
 
