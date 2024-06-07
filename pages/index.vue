@@ -14,6 +14,16 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import * as z from 'zod'
+import { useId } from '#app'
+
+const nameId = useId()
+const emailId = useId()
+const phoneId = useId()
+const cityId = useId()
+const messageId = useId()
+const jobId = useId()
+const labId = useId()
+const checkId = useId()
 
 const formSchema = toTypedSchema(z.object({
   name: z
@@ -251,6 +261,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="text"
+                    :id="nameId"
                     placeholder="ФИО"
                     v-bind="componentField" />
                 </FormControl>
@@ -264,6 +275,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="tel"
+                    :id="phoneId"
                     placeholder="Телефон"
                     v-bind="componentField" />
                 </FormControl>
@@ -277,6 +289,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Textarea
                     placeholder="Сообщение"
+                    :id="messageId"
                     class="resize-none h-full"
                     v-bind="componentField"
                   />
@@ -291,6 +304,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="email"
+                    :id="emailId"
                     placeholder="E-mail"
                     v-bind="componentField" />
                 </FormControl>
@@ -304,6 +318,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="text"
+                    :id="cityId"
                     placeholder="Город"
                     v-bind="componentField" />
                 </FormControl>
@@ -317,6 +332,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="text"
+                    :id="jobId"
                     placeholder="Место работы"
                     v-bind="componentField" />
                 </FormControl>
@@ -330,6 +346,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="text"
+                    :id="labId"
                     placeholder="Лаборатория"
                     v-bind="componentField" />
                 </FormControl>
@@ -340,6 +357,7 @@ const onSubmit = form.handleSubmit((values) => {
           <div class="flex gap-4">
             <Button
               type="submit"
+              aria-label="submit"
               class="uppercase">
               отправить
             </Button>
@@ -348,13 +366,13 @@ const onSubmit = form.handleSubmit((values) => {
               type="checkbox"
               name="checkbox">
               <FormItem class="flex flex-row items-start gap-x-3 space-y-0 rounded-md">
-                <FormControl>
+                <FormControl :id="checkId">
                   <Checkbox
                     :checked="value"
                     @update:checked="handleChange" />
                 </FormControl>
                 <div class="space-y-1 leading-none">
-                  <FormLabel>
+                  <FormLabel :forId="checkId">
                     Я согласен(на) на обработку персональных данных.
                     ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.
                   </FormLabel>
