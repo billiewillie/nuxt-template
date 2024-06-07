@@ -85,9 +85,9 @@ const onSubmit = form.handleSubmit((values) => {
       alt="slider image"
     />
     <div class="container">
-      <div class="relative pt-40 w-1/2">
-        <h2 class="uppercase">операционное и госпитальное оборудование</h2>
-        <Separator />
+      <div class="relative pt-40 w-1/2 max-w-[660px]">
+        <h2 class="uppercase font-semibold ~text-[28px]/[36px]">операционное и госпитальное оборудование</h2>
+        <Separator class="my-4" />
         <p>
           метод исследования тканей при их значительном увеличении под микроскопом. Это один из наиболее
           распространённых способов в медицине, он позволяет увидеть структуру тканей, процессы происходящие в ней
@@ -108,6 +108,8 @@ const onSubmit = form.handleSubmit((values) => {
           <NuxtImg
             :src="item.icon"
             class="w-[80px] object-contain object-center"
+            width="80"
+            height="80"
             :alt="item.title" />
           <CardContent class="p-0 font-medium">
             <p class="text-2xl">{{ item.title }}</p>

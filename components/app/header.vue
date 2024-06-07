@@ -4,6 +4,10 @@
 import CONTACTS from '~/data/contacts'
 import { VisuallyHidden } from 'radix-vue'
 import NAVIGATION from '~/data/navigation'
+import { isRouteActive } from '~/utils/isRouteActive'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 </script>
 
 <template>
@@ -38,7 +42,23 @@ import NAVIGATION from '~/data/navigation'
             width="110"
           />
         </NuxtLink>
-        <BaseNavigation ul-class="hidden xl:flex gap-4" />
+        <nav>
+          <ul class="hidden xl:flex gap-4">
+            <li
+              v-for="item in NAVIGATION"
+              :key="item.id">
+              <Button
+                :variant="isRouteActive(item.slug, route) ? 'default' : 'ghost'"
+                as-child>
+                <NuxtLink
+                  :to="item.href"
+                  :aria-label="item.title">
+                  {{ item.title }}
+                </NuxtLink>
+              </Button>
+            </li>
+          </ul>
+        </nav>
         <Sheet>
           <SheetTrigger as-child>
             <Button

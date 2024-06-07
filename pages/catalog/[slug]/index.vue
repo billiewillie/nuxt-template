@@ -1,0 +1,20 @@
+<script setup>
+import { Card, CardContent } from '~/components/ui/card'
+import CATEGORIES from '~/data/categories'
+</script>
+
+<template>
+
+  <section class="mb-16 pt-14">
+    <div class="container">
+      <h1 class="section-title">Раздел</h1>
+    </div>
+  </section>
+
+  <section class="mb-40">
+    <div class="container">
+      Something
+    </div>
+  </section>
+
+</template>
