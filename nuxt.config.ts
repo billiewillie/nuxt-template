@@ -46,10 +46,11 @@ export default defineNuxtConfig({
     }
   },
   site: {
-    url: 'https://bioline.ru/',
+    url: 'https://bioline.vercel.app/',
     name: 'Группа компаний ООО «БиоЛайн»',
     description: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
     defaultLocale: 'ru',
-    image: '/img/og-logo.jpg'
+    image: '/img/og-logo.jpg',
+    indexable: false
   }
 })
