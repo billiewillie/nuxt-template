@@ -1,9 +1,13 @@
-<script setup>
+<script
+  setup
+  lang="ts">
 import { Card, CardContent } from '~/components/ui/card'
 import { Separator } from '~/components/ui/separator'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import PARTNERS from '~/data/partners'
 import CATEGORIES from '~/data/categories'
+
+defineOgImageComponent('NuxtSeo')
 </script>
 
 <template>
