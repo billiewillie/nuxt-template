@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-icon',
     'nuxt-marquee',
-    '@nuxtjs/seo'
   ],
   image: {
     inject: true,
@@ -48,23 +47,39 @@ export default defineNuxtConfig({
       }
     }
   },
-  site: {
-    title: 'Группа компаний ООО «БиоЛайн»',
-    name: 'Группа компаний ООО «БиоЛайн»',
-    description: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
-    icon: '/favicon.ico',
-    siteName: 'Группа компаний ООО «БиоЛайн»',
-    defaultLocale: 'ru',
-    image: '/img/og-logo.jpg',
-    indexable: false,
-    theme: '#FFFFFF',
-    colorMode: 'light',
-  },
   app: {
     head: {
+      title: 'Группа компаний ООО «БиоЛайн»',
+      meta: [
+        {
+          name: 'description',
+          content: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
+        },
+        {
+          name: 'keywords',
+          content: 'цитометр,  цитофлюориметр, цитофлуориметр, проточный, Бектон Дикинсон, BD,  Becton Dickinson,  FACS, Calibur, Canto, CantoII, Accuri, Verse, Aria,  цитометрия,  проточник,  сортировщик, сортер, Euroflow, ISHAGE, фенотипирование,  иммунофенотипирование,  FACS  Count, мониторинг CD4, стволовые   клетки,   онкогематология,  диагностика ВИЧ,  диагностика лейкозов',
+        },
+        {
+          name: 'robots',
+          content: 'noindex',
+        },
+        {
+          name: 'twitter:image',
+          content: '/img/logo.jpg',
+        },
+        {
+          name: 'twitter:title',
+          content: 'Группа компаний ООО «БиоЛайн»',
+        },
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image',
+        }
+      ],
       htmlAttrs: {
         lang: 'ru'
       }
     }
+
   }
 })
