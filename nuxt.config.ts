@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
     'nuxt-icon',
-    'nuxt-marquee',
+    'nuxt-marquee'
   ],
   image: {
     inject: true,
@@ -53,27 +53,31 @@ export default defineNuxtConfig({
       meta: [
         {
           name: 'description',
-          content: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
+          content: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.'
         },
         {
           name: 'keywords',
-          content: 'цитометр,  цитофлюориметр, цитофлуориметр, проточный, Бектон Дикинсон, BD,  Becton Dickinson,  FACS, Calibur, Canto, CantoII, Accuri, Verse, Aria,  цитометрия,  проточник,  сортировщик, сортер, Euroflow, ISHAGE, фенотипирование,  иммунофенотипирование,  FACS  Count, мониторинг CD4, стволовые   клетки,   онкогематология,  диагностика ВИЧ,  диагностика лейкозов',
+          content: 'цитометр,  цитофлюориметр, цитофлуориметр, проточный, Бектон Дикинсон, BD,  Becton Dickinson,  FACS, Calibur, Canto, CantoII, Accuri, Verse, Aria,  цитометрия,  проточник,  сортировщик, сортер, Euroflow, ISHAGE, фенотипирование,  иммунофенотипирование,  FACS  Count, мониторинг CD4, стволовые   клетки,   онкогематология,  диагностика ВИЧ,  диагностика лейкозов'
         },
         {
           name: 'robots',
-          content: 'noindex',
+          content: 'noindex'
         },
         {
           name: 'twitter:image',
-          content: '/img/logo.jpg',
+          content: '/img/logo.jpg'
         },
         {
           name: 'twitter:title',
-          content: 'Группа компаний ООО «БиоЛайн»',
+          content: 'Группа компаний ООО «БиоЛайн»'
+        },
+        {
+          name: 'twitter:description',
+          content: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.'
         },
         {
           name: 'twitter:card',
-          content: 'summary_large_image',
+          content: 'summary_large_image'
         }
       ],
       htmlAttrs: {
