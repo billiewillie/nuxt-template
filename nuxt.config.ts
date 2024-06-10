@@ -50,6 +50,6 @@ export default defineNuxtConfig({
     name: 'Группа компаний ООО «БиоЛайн»',
     description: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
     defaultLocale: 'ru',
-    indexable: false
+    image: '/img/og-logo.jpg'
   }
 })
