@@ -30,9 +30,6 @@ export default defineNuxtConfig({
     config: {},
     viewer: true
   },
-  // imports: {
-  //   autoImport: false
-  // },
   googleFonts: {
     families: {
       Inter: '400..700'
@@ -52,11 +49,22 @@ export default defineNuxtConfig({
     }
   },
   site: {
-    url: 'https://bioline.vercel.app/',
+    title: 'Группа компаний ООО «БиоЛайн»',
     name: 'Группа компаний ООО «БиоЛайн»',
     description: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
+    icon: '/favicon.ico',
+    siteName: 'Группа компаний ООО «БиоЛайн»',
     defaultLocale: 'ru',
     image: '/img/og-logo.jpg',
-    indexable: false
+    indexable: false,
+    theme: '#FFFFFF',
+    colorMode: 'light',
   },
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'ru'
+      }
+    }
+  }
 })
