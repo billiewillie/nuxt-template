@@ -6,6 +6,11 @@ import { Separator } from '~/components/ui/separator'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import PARTNERS from '~/data/partners'
 import CATEGORIES from '~/data/categories'
+
+useSeoMeta({
+  ogImage: '/img/og-logo.jpg',
+  twitterImage: '/img/og-logo.jpg',
+})
 </script>
 
 <template>
