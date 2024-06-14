@@ -119,7 +119,7 @@ console.log(data.value)
             :key="product.id"
             class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
             <NuxtLink
-              :to="product.url"
+              to="/"
               class="flex h-full">
               <Card class="flex flex-col gap-6 p-6">
                 <CardHeader class="p-0">
