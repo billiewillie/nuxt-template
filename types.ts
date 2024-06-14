@@ -8,3 +8,12 @@ export interface Branch {
   email: string;
   map?: number[];
 }
+
+export interface Article {
+  id: number
+  title: string
+  url: string
+  preview_img: string,
+  created_at: string,
+  annotation: string
+}

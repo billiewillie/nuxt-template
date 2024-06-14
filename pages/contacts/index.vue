@@ -2,34 +2,38 @@
 import { ref } from 'vue'
 import CONTACTS from '~/data/contacts'
 import { SERVICE } from '~/data/constants'
-import { useHead } from 'unhead'
+import { Card, CardContent } from '~/components/ui/card'
+import BRANCHES from '~/data/branches'
+import { useSeoMeta } from '#app'
 
 const isLoaded = ref(false)
 
-useHead({
-  title: 'Контакты - Группа компаний ООО «БиоЛайн»',
-  meta: [
-    {
-      name: 'description',
-      content: 'Центральный офис группы компаний «БиоЛайн» находится в Санкт-Петербурге по адресу: Санкт-Петербург, ул. Профессора Попова, д. 23, лит. Е. Тел.: +7 (812) 320-49-49'
-    },
-    {
-      name: 'keywords',
-      content: 'Контакты, Медицинская компания, Компания «БиоЛайн», Головной офис'
-    }
-  ]
+useSeoMeta({
+  ogImage: '/img/og-logo.jpg',
+  ogType: 'website',
+  ogImageHeight: 630,
+  ogImageWidth: 1200,
+  ogLocale: 'ru_RU',
+  ogSiteName: 'Группа компаний ООО «БиоЛайн»',
+  ogTitle: 'Группа компаний ООО «БиоЛайн»',
+  ogDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
+  ogUrl: 'https://bioline.ru',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Группа компаний ООО «БиоЛайн»',
+  twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
+  twitterImage: '/img/og-logo.jpg'
 })
 </script>
 
 <template>
 
-  <section class="mb-8 pt-14">
+  <section class="mb-12 pt-14">
     <div class="container">
       <h1 class="section-title">Контакты</h1>
     </div>
   </section>
 
-  <section class="mb-8">
+  <section class="mb-20">
     <div class="container flex gap-4">
       <div class="relative basis-2/3 3xl:min-h-[438px] rounded overflow-hidden">
         <div
@@ -58,7 +62,7 @@ useHead({
     </div>
   </section>
 
-  <section class="mb-16">
+  <section class="mb-20">
     <div class="container flex gap-4">
       <div class="relative basis-2/3 3xl:min-h-[438px] rounded overflow-hidden">
         <div
@@ -83,9 +87,28 @@ useHead({
     </div>
   </section>
 
-  <section class="mb-16">
+  <section class="mb-20">
     <div class="container">
-      <h2 class="section-title">Филиалы</h2>
+      <h2 class="section-title mb-12">Филиалы</h2>
+      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
+        <Card
+          v-for="branch in BRANCHES"
+          :key="branch.id"
+          class="flex flex-col gap-6 p-4">
+          <CardHeader class="p-0 font-medium">
+            <CardTitle>{{ branch.city }}</CardTitle>
+          </CardHeader>
+          <Separator />
+          <CardContent class="p-0 font-medium">
+            <span>{{ branch.index }}</span>,
+            <span>{{ branch.country }}</span>
+            <p>{{ branch.city }}</p>
+            <p>{{ branch.address }}</p>
+            <p>{{ branch.phone }}</p>
+            <p>{{ branch.email }}</p>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   </section>
 

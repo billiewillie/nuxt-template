@@ -1,11 +1,13 @@
 <script
   setup
   lang="ts">
-import { Card, CardContent } from '~/components/ui/card'
 import { Separator } from '~/components/ui/separator'
+import { Card, CardContent } from '~/components/ui/card'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import URLs from '~/data/urls'
 import PARTNERS from '~/data/partners'
 import CATEGORIES from '~/data/categories'
+import { useLazyFetch, useSeoMeta } from '#app'
 
 useSeoMeta({
   ogImage: '/img/og-logo.jpg',
@@ -20,13 +22,17 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
   twitterTitle: 'Группа компаний ООО «БиоЛайн»',
   twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
-  twitterImage: '/img/og-logo.jpg',
+  twitterImage: '/img/og-logo.jpg'
 })
+
+const { data } = await useLazyFetch(URLs.index)
+
+console.log(data.value)
 </script>
 
 <template>
 
-  <section class="relative mb-40 h-[750px]">
+  <section class="relative mb-32 h-[750px]">
     <NuxtPicture
       src="/img/index-page-slider/slider-1.jpg"
       class="absolute left-0 top-0 h-full w-full"
@@ -47,7 +53,7 @@ useSeoMeta({
     </div>
   </section>
 
-  <section class="mb-40">
+  <section class="mb-32">
     <div class="container">
       <h2 class="section-title mb-16">Каталог</h2>
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
@@ -69,8 +75,8 @@ useSeoMeta({
     </div>
   </section>
 
-  <section class="mb-40">
-    <div class="container mb-20">
+  <section class="mb-16 xl:mb-32">
+    <div class="container mb-16">
       <h2 class="section-title">Новости</h2>
     </div>
     <div class="container">
@@ -82,16 +88,10 @@ useSeoMeta({
       >
         <CarouselContent :is-visible="true">
           <CarouselItem
-            v-for="(_, index) in 9"
-            :key="index"
-            class="md:basis-1/2 lg:basis-1/5">
-            <div class="p-1">
-              <Card>
-                <CardContent class="flex aspect-square items-center justify-center p-6">
-                  <span class="text-3xl font-semibold">{{ index + 1 }}</span>
-                </CardContent>
-              </Card>
-            </div>
+            v-for="article in data.news"
+            :key="article.id"
+            class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
+            <BaseNewsCard :article="article" />
           </CarouselItem>
         </CarouselContent>
         <div class="absolute right-0 -top-32 border">
@@ -102,8 +102,8 @@ useSeoMeta({
     </div>
   </section>
 
-  <section class="mb-40">
-    <div class="container mb-20">
+  <section class="mb-16 xl:mb-32">
+    <div class="container mb-16">
       <h2 class="section-title">Новинки</h2>
     </div>
     <div class="container">
@@ -115,16 +115,43 @@ useSeoMeta({
       >
         <CarouselContent :is-visible="true">
           <CarouselItem
-            v-for="(_, index) in 9"
-            :key="index"
-            class="md:basis-1/2 lg:basis-1/5">
-            <div class="p-1">
-              <Card>
-                <CardContent class="flex aspect-square items-center justify-center p-6">
-                  <span class="text-3xl font-semibold">{{ index + 1 }}</span>
+            v-for="product in data.new_products.list"
+            :key="product.id"
+            class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
+            <NuxtLink
+              :to="product.url"
+              class="flex h-full">
+              <Card class="flex flex-col gap-6 p-6">
+                <CardHeader class="p-0">
+                  <NuxtPicture
+                    :src="`${URLs.main}/${product.preview_img}`"
+                    :alt="product.title"
+                    class="aspect-square"
+                    :img-attrs="{class:'w-full h-full object-scale-down object-center'}"
+                    width="350"
+                    height="250"
+                  />
+                </CardHeader>
+                <CardContent class="flex flex-col p-0 flex-auto">
+                  <Separator class="w-full mb-6" />
+                  <h3 class="text-center font-semibold text-xl">{{ product.title }}</h3>
                 </CardContent>
+                <CardFooter class="flex items-center justify-between p-0">
+                  <div class="flex gap-4 items-center">
+                    <Icon
+                      name="solar:calendar-linear"
+                      width="18"
+                      height="18"
+                      color="#575757" />
+                  </div>
+                  <Icon
+                    name="iconamoon:arrow-right-2-light"
+                    width="18"
+                    height="18"
+                    style="color: #575757" />
+                </CardFooter>
               </Card>
-            </div>
+            </NuxtLink>
           </CarouselItem>
         </CarouselContent>
         <div class="absolute right-0 -top-32 border">
@@ -135,8 +162,8 @@ useSeoMeta({
     </div>
   </section>
 
-  <section class="mb-40">
-    <div class="container mb-20">
+  <section class="mb-32">
+    <div class="container mb-16">
       <h2 class="section-title">Календарь событий</h2>
     </div>
     <div class="container">
@@ -168,8 +195,8 @@ useSeoMeta({
     </div>
   </section>
 
-  <section class="mb-40">
-    <div class="container mb-20">
+  <section class="mb-32">
+    <div class="container mb-16">
       <h2 class="section-title">Партнёры</h2>
     </div>
     <NuxtMarquee

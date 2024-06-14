@@ -20,6 +20,9 @@ export default defineNuxtConfig({
     inject: true,
     format: ['webp']
   },
+  imports: {
+    autoImport: false
+  },
   tailwindcss: {
     cssPath: ['~/assets/css/main.css', { injectPosition: 'first' }],
     configPath: 'tailwind.config',

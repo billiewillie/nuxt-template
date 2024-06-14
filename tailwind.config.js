@@ -9,10 +9,8 @@ module.exports = {
   prefix: '',
   theme: {
     container: {
-      center: true,
       padding: {
         DEFAULT: '1rem',
-        sm: '2rem',
         '3xl': '180px'
       }
     },
@@ -101,7 +99,27 @@ module.exports = {
       }
     }
   },
-  plugins: [animate, fluid],
+  corePlugins: {
+    container: false
+  },
+  plugins: [animate, fluid, function({ addComponents }) {
+    addComponents({
+      '.container': {
+        width: '100%',
+        margin: '0 auto',
+        maxWidth: '100%',
+        padding: '0 1rem',
+        '@screen 2xl': {
+          maxWidth: '1440px',
+          padding: '0 2rem'
+        },
+        '@screen 3xl': {
+          maxWidth: '1620px',
+          padding: '0 180px'
+        }
+      }
+    })
+  }],
   content: {
     files: [],
     extract
