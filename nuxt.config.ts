@@ -63,22 +63,6 @@ export default defineNuxtConfig({
           name: 'robots',
           content: 'noindex'
         },
-        {
-          name: 'twitter:image',
-          content: '/img/logo.jpg'
-        },
-        {
-          name: 'twitter:title',
-          content: 'Группа компаний ООО «БиоЛайн»'
-        },
-        {
-          name: 'twitter:description',
-          content: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.'
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary_large_image'
-        }
       ],
       htmlAttrs: {
         lang: 'ru'

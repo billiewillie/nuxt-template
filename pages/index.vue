@@ -6,6 +6,22 @@ import { Separator } from '~/components/ui/separator'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import PARTNERS from '~/data/partners'
 import CATEGORIES from '~/data/categories'
+
+useSeoMeta({
+  ogImage: '/img/og-logo.jpg',
+  ogType: 'website',
+  ogImageHeight: 630,
+  ogImageWidth: 1200,
+  ogLocale: 'ru_RU',
+  ogSiteName: 'Группа компаний ООО «БиоЛайн»',
+  ogTitle: 'Группа компаний ООО «БиоЛайн»',
+  ogDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
+  ogUrl: 'https://bioline.ru',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Группа компаний ООО «БиоЛайн»',
+  twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
+  twitterImage: '/img/og-logo.jpg',
+})
 </script>
 
 <template>
