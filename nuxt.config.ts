@@ -75,7 +75,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      backendUrl: process.env.BACKEND_URL
+      backendUrl: "https://telvla.ru"
     }
   }
 })

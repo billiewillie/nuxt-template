@@ -7,7 +7,6 @@ import type { News } from '~/types'
 const { backendUrl } = useRuntimeConfig().public
 
 const { data: news }: { news: News[] } = await useFetch(`${backendUrl}${URLs.news}`)
-
 </script>
 
 <template>
