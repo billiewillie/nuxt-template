@@ -1,7 +1,7 @@
 <template>
   <AppHeader />
-  <main>
+  <main class="flex-auto">
     <slot></slot>
   </main>
-  <AppFooter />
+  <LazyAppFooter />
 </template>

@@ -16,7 +16,7 @@ defineProps<{
     <Card class="flex flex-col gap-6 pb-6">
       <CardHeader class="p-0">
         <NuxtPicture
-          :src="`${URLs.main}/${article.preview_img}`"
+          :src="article.preview_img"
           :alt="article.title"
           class="aspect-[7/5]"
           :img-attrs="{class:'w-full h-full object-cover object-center'}"

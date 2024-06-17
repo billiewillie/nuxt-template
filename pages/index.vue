@@ -1,13 +1,16 @@
 <script
   setup
   lang="ts">
+import { useFetch, useRuntimeConfig, useSeoMeta } from '#app'
 import { Separator } from '~/components/ui/separator'
 import { Card, CardContent } from '~/components/ui/card'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import URLs from '~/data/urls'
 import PARTNERS from '~/data/partners'
 import CATEGORIES from '~/data/categories'
-import { useLazyFetch, useSeoMeta } from '#app'
+import type { IndexPageApi } from '~/types'
+
+const { backendUrl } = useRuntimeConfig().public
 
 useSeoMeta({
   ogImage: '/img/og-logo.jpg',
@@ -25,14 +28,12 @@ useSeoMeta({
   twitterImage: '/img/og-logo.jpg'
 })
 
-const { data } = await useLazyFetch(URLs.index)
-
-console.log(data.value)
+const { data }: { data: IndexPageApi } = await useFetch(`${backendUrl}${URLs.index}`)
 </script>
 
 <template>
 
-  <section class="relative mb-32 h-[750px]">
+  <section class="relative mb-24 xl:mb-32 h-[750px]">
     <NuxtPicture
       src="/img/index-page-slider/slider-1.jpg"
       class="absolute left-0 top-0 h-full w-full"
@@ -53,9 +54,9 @@ console.log(data.value)
     </div>
   </section>
 
-  <section class="mb-32">
+  <section class="mb-24 xl:mb-32">
     <div class="container">
-      <h2 class="section-title mb-16">Каталог</h2>
+      <h2 class="section-title mb-12 xl:mb-16">Каталог</h2>
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
         <Card
           v-for="item in CATEGORIES"
@@ -75,7 +76,7 @@ console.log(data.value)
     </div>
   </section>
 
-  <section class="mb-16 xl:mb-32">
+  <section class="mb-24 xl:mb-32">
     <div class="container mb-16">
       <h2 class="section-title">Новости</h2>
     </div>
@@ -83,8 +84,8 @@ console.log(data.value)
       <Carousel
         class="relative w-full"
         :opts="{
-          align: 'start',
-        }"
+            align: 'start',
+          }"
       >
         <CarouselContent :is-visible="true">
           <CarouselItem
@@ -102,7 +103,7 @@ console.log(data.value)
     </div>
   </section>
 
-  <section class="mb-16 xl:mb-32">
+  <section class="mb-24 xl:mb-32">
     <div class="container mb-16">
       <h2 class="section-title">Новинки</h2>
     </div>
@@ -124,10 +125,10 @@ console.log(data.value)
               <Card class="flex flex-col gap-6 p-6">
                 <CardHeader class="p-0">
                   <NuxtPicture
-                    :src="`${URLs.main}/${product.preview_img}`"
+                    :src="product.preview_img"
                     :alt="product.title"
-                    class="aspect-square"
                     :img-attrs="{class:'w-full h-full object-scale-down object-center'}"
+                    class="aspect-square"
                     width="350"
                     height="250"
                   />
@@ -162,7 +163,7 @@ console.log(data.value)
     </div>
   </section>
 
-  <section class="mb-32">
+  <section class="mb-24 xl:mb-32">
     <div class="container mb-16">
       <h2 class="section-title">Календарь событий</h2>
     </div>
@@ -195,7 +196,7 @@ console.log(data.value)
     </div>
   </section>
 
-  <section class="mb-32">
+  <section class="mb-24 xl:mb-32">
     <div class="container mb-16">
       <h2 class="section-title">Партнёры</h2>
     </div>

@@ -65,12 +65,17 @@ export default defineNuxtConfig({
         {
           name: 'robots',
           content: 'noindex'
-        },
+        }
       ],
       htmlAttrs: {
         lang: 'ru'
       }
     }
 
+  },
+  runtimeConfig: {
+    public: {
+      backendUrl: process.env.BACKEND_URL
+    }
   }
 })

@@ -1,7 +1,6 @@
 const URLs = {
-  main: 'https://telvla.ru',
-  index: 'https://telvla.ru/index',
-  news: 'https://telvla.ru/news',
+  index: `/index`,
+  news: '/news',
 }
 
 export default URLs
