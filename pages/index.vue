@@ -29,6 +29,7 @@ useSeoMeta({
 })
 
 const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
+
 </script>
 
 <template>
@@ -111,8 +112,8 @@ const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.i
       <Carousel
         class="relative w-full"
         :opts="{
-            align: 'start',
-          }"
+          align: 'start',
+        }"
       >
         <CarouselContent :is-visible="true">
           <CarouselItem
@@ -140,7 +141,12 @@ const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.i
                 <CardFooter class="flex items-center justify-between p-0">
                   <div class="flex gap-4 items-center">
                     <Icon
-                      name="solar:calendar-linear"
+                      name="mdi:compare-horizontal"
+                      width="18"
+                      height="18"
+                      color="#575757" />
+                    <Icon
+                      name="cil:star"
                       width="18"
                       height="18"
                       color="#575757" />
@@ -204,14 +210,14 @@ const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.i
       :auto-fill="true"
       :pause-on-hover="true">
       <NuxtLink
-        v-for="partner in PARTNERS"
-        :key="partner.id"
-        :to="`/manufacturers/${partner.slug}`"
+        v-for="manufacturer in data.manufacturers"
+        :key="manufacturer.id"
+        :to="manufacturer.url"
         class="h-[70px] mr-10 grayscale transition hover:grayscale-0">
         <NuxtImg
           loading="lazy"
-          :src="partner.logo"
-          :alt="partner.title"
+          :src="manufacturer.logo"
+          :alt="manufacturer.title"
           class="w-full h-full object-contain object-center" />
       </NuxtLink>
     </NuxtMarquee>
