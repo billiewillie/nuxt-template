@@ -4,9 +4,9 @@
 import URLs from '~/data/urls'
 import { useFetch, useRuntimeConfig } from '#app'
 import type { News } from '~/types'
-const { backendUrl } = useRuntimeConfig().public
+const { API_ENDPOINT } = useRuntimeConfig().public
 
-const { data: news }: { news: News[] } = await useFetch(`${backendUrl}${URLs.news}`)
+const { data: news }: { news: News[] } = await useFetch(`${API_ENDPOINT}${URLs.news}`)
 </script>
 
 <template>

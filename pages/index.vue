@@ -10,7 +10,7 @@ import PARTNERS from '~/data/partners'
 import CATEGORIES from '~/data/categories'
 import type { IndexPageApi } from '~/types'
 
-const { backendUrl } = useRuntimeConfig().public
+const { API_ENDPOINT } = useRuntimeConfig().public
 
 useSeoMeta({
   ogImage: '/img/og-logo.jpg',
@@ -28,7 +28,7 @@ useSeoMeta({
   twitterImage: '/img/og-logo.jpg'
 })
 
-const { data }: { data: IndexPageApi } = await useFetch(`${backendUrl}${URLs.index}`)
+const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
 </script>
 
 <template>
