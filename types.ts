@@ -38,6 +38,15 @@ interface Metadata {
   title: string
 }
 
+interface Recommendation {
+  id: number
+  title: string
+  url: string
+  preview_img: string
+  annotation: string
+  created_at: string
+}
+
 export interface News {
   annotation: string,
   created_at: string,
@@ -48,6 +57,7 @@ export interface News {
   section: Array<Section>,
   content: HTMLElement,
   year: number
+  recommendations: Array<Recommendation>
 }
 
 interface NewProductTitle {
@@ -75,7 +85,7 @@ export interface IndexPageApi {
   template: string,
   url: string,
   manufacturers: Array<Manufacturer>,
-  news: Array<Omit<News, 'year' | 'content'>>,
+  news: Array<Omit<News, 'year' | 'content' | 'recommendations'>>,
   metadata: Metadata,
   new_products: {
     title: Array<NewProductTitle>,

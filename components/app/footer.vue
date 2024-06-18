@@ -17,8 +17,15 @@ import CONTACTS from '~/data/contacts'
             class="mx-auto w-40" />
         </NuxtLink>
       </div>
-      <div>
-        {{ CONTACTS.spb.index }}
+      <div class="flex flex-col items-start text-left">
+        <h3 class="text-primary font-semibold">Центральный офис:</h3>
+        {{ CONTACTS.spb.index }}, {{ CONTACTS.spb.country }}, {{ CONTACTS.spb.city }},
+        <br>
+        {{ CONTACTS.spb.address }}
+        <br />
+        {{ CONTACTS.spb.phone }}
+        <br />
+        {{ CONTACTS.spb.email }}
       </div>
     </div>
   </footer>

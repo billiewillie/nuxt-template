@@ -9,6 +9,9 @@ import URLs from '~/data/urls'
 import PARTNERS from '~/data/partners'
 import CATEGORIES from '~/data/categories'
 import type { IndexPageApi } from '~/types'
+import { Calendar } from '~/components/ui/calendar'
+import { type Ref, ref } from 'vue'
+import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
@@ -29,6 +32,8 @@ useSeoMeta({
 })
 
 const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
+
+const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 
 </script>
 
@@ -136,7 +141,7 @@ const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.i
                 </CardHeader>
                 <CardContent class="flex flex-col p-0 flex-auto">
                   <Separator class="w-full mb-6" />
-                  <h3 class="text-center font-semibold text-xl">{{ product.title }}</h3>
+                  <h3 class="font-semibold text-xl">{{ product.title }}</h3>
                 </CardContent>
                 <CardFooter class="flex items-center justify-between p-0">
                   <div class="flex gap-4 items-center">
@@ -173,28 +178,32 @@ const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.i
     <div class="container mb-16">
       <h2 class="section-title">Календарь событий</h2>
     </div>
-    <div class="container">
+    <div class="container relative flex gap-4">
+      <Calendar
+        v-model="value"
+        :weekday-format="'short'"
+        class="rounded-md border w-1/2" />
+
       <Carousel
-        class="relative w-full"
+        class="absolute left-[calc(50%+1rem)] w-[calc(50%-180px-1rem)] h-full"
         :opts="{
-            align: 'start',
-          }"
-      >
-        <CarouselContent :is-visible="true">
+          align: 'start',
+        }">
+        <CarouselContent :is-visible="true" :is-height-full="true" class="h-full">
           <CarouselItem
             v-for="(_, index) in 9"
             :key="index"
-            class="md:basis-1/2 lg:basis-1/5">
-            <div class="p-1">
-              <Card>
-                <CardContent class="flex aspect-square items-center justify-center p-6">
+            class="md:basis-1/2 h-full">
+            <div class="p-0 h-full">
+              <Card class="h-full">
+                <CardContent class="flex items-center justify-center p-6">
                   <span class="text-3xl font-semibold">{{ index + 1 }}</span>
                 </CardContent>
               </Card>
             </div>
           </CarouselItem>
         </CarouselContent>
-        <div class="absolute right-0 -top-32 border">
+        <div class="absolute right-0 -top-28 border">
           <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
           <CarouselNext class="relative left-0 top-0 translate-y-0" />
         </div>

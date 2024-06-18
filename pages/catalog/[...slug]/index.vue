@@ -1,8 +1,3 @@
-<script setup>
-import { Card, CardContent } from '~/components/ui/card'
-import CATEGORIES from '~/data/categories'
-</script>
-
 <template>
 
   <section class="mb-16 pt-14">

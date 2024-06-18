@@ -64,9 +64,24 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit((values) => {
-  toast({
-    title: 'Успешная отправка',
-  })
+  const data = {
+    check: values.checkbox,
+    email: values.email,
+    name: values.name,
+    phone: values.phone,
+    city: values.city,
+    job: values.job,
+    lab: values.lab,
+    message: values.message,
+    token: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
+  }
+  console.log(data)
+  setTimeout(() => {
+    form.resetForm()
+    toast({
+      description: 'Заявка отправлена!'
+    })
+  }, 500)
 })
 </script>
 
@@ -95,6 +110,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="text"
+                    name="name"
                     :id="nameId"
                     placeholder="ФИО"
                     v-bind="componentField" />
@@ -109,6 +125,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="tel"
+                    name="phone"
                     :id="phoneId"
                     placeholder="Телефон"
                     v-bind="componentField" />
@@ -123,6 +140,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Textarea
                     placeholder="Сообщение"
+                    name="message"
                     :id="messageId"
                     class="resize-none h-full"
                     v-bind="componentField"
@@ -138,6 +156,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="email"
+                    name="email"
                     :id="emailId"
                     placeholder="E-mail"
                     v-bind="componentField" />
@@ -152,6 +171,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="text"
+                    name="city"
                     :id="cityId"
                     placeholder="Город"
                     v-bind="componentField" />
@@ -166,6 +186,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="text"
+                    name="job"
                     :id="jobId"
                     placeholder="Место работы"
                     v-bind="componentField" />
@@ -180,6 +201,7 @@ const onSubmit = form.handleSubmit((values) => {
                 <FormControl>
                   <Input
                     type="text"
+                    name="lab"
                     :id="labId"
                     placeholder="Лаборатория"
                     v-bind="componentField" />
