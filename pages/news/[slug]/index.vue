@@ -27,6 +27,8 @@ if (article.value) {
 useSeoMeta({
   ogImage: () => article.banner,
   twitterImage: () => article.banner,
+  ogTitle: () => title.value,
+  twitterTitle: () => title.value,
   ogImageHeight: 630,
   ogImageWidth: 1200,
   ogUrl: 'https://bioline.ru',
