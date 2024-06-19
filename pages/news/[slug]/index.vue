@@ -13,53 +13,20 @@ const { API_ENDPOINT } = useRuntimeConfig().public
 
 const { data: article, error }: { data: News } = await useLazyFetch(`${API_ENDPOINT}${URLs.news}/${slug}`)
 
-useHead({
-  meta: [
-    {
-      property: 'og:title',
-      content: `${article.title} | Группа компаний ООО «БиоЛайн»`
-    },
-    {
-      property: 'twitter:title',
-      content: `${article.title} | Группа компаний ООО «БиоЛайн»`
-    },
-    {
-      property: 'og:description',
-      content: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.'
-    },
-    {
-      property: 'twitter:description',
-      content: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.'
-    },
-    {
-      property: 'og:image',
-      content: article.banner
-    },
-    {
-      property: 'twitter:image',
-      content: article.banner
-    },
-    {
-      property: 'og:image:height',
-      content: '630'
-    },
-    {
-      property: 'og:image:width',
-      content: '1200'
-    },
-    {
-      property: 'og:locale',
-      content: 'ru_RU'
-    },
-    {
-      property: 'og:site_name',
-      content: 'Группа компаний ООО «БиоЛайн»'
-    },
-    {
-      property: 'twitter:card',
-      content: 'summary_large_image'
-    }
-  ]
+useSeoMeta({
+  ogImage: () => article.banner,
+  twitterImage: () => article.banner,
+  ogImageHeight: 630,
+  ogImageWidth: 1200,
+  ogUrl: 'https://bioline.ru',
+  ogType: 'website',
+  ogLocale: 'ru_RU',
+  ogSiteName: `Группа компаний ООО «БиоЛайн»`,
+  twitterTitle: () => `${article.title} | Группа компаний ООО «БиоЛайн»`,
+  ogTitle: () => `${article.title} | Группа компаний ООО «БиоЛайн»`,
+  ogDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
+  twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
+  twitterCard: 'summary_large_image'
 })
 </script>
 
