@@ -3,15 +3,26 @@
   lang="ts">
 import URLs from '~/data/urls'
 import type { News } from '~/types'
-import { useFetch, useHead, useRuntimeConfig, useSeoMeta } from '#app'
+import { useAsyncData, useFetch, useHead, useRuntimeConfig, useSeoMeta } from '#app'
 import { useRoute } from 'vue-router'
-import { useLazyFetch } from '#imports'
+import { ref } from 'vue'
+
+const title = ref('')
+const banner = ref('')
 
 const { slug } = useRoute().params
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
-const { data: article, error }: { data: News } = await useLazyFetch(`${API_ENDPOINT}${URLs.news}/${slug}`)
+const { data: article, error }: { data: News } = await useAsyncData(
+  'article',
+  () => $fetch(`${API_ENDPOINT}${URLs.news}/${slug}`)
+)
+
+if (article.value) {
+  title.value = article.value.title
+  banner.value = article.value.banner
+}
 
 useSeoMeta({
   ogImage: () => article.banner,
@@ -21,12 +32,31 @@ useSeoMeta({
   ogUrl: 'https://bioline.ru',
   ogType: 'website',
   ogLocale: 'ru_RU',
-  ogSiteName: `Группа компаний ООО «БиоЛайн»`,
-  twitterTitle: () => `${article.title} | Группа компаний ООО «БиоЛайн»`,
-  ogTitle: () => `${article.title} | Группа компаний ООО «БиоЛайн»`,
   ogDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
   twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
   twitterCard: 'summary_large_image'
+})
+
+useHead({
+  title: () => `${title.value}`,
+  meta: [
+    {
+      property: 'og:title',
+      content: () => `${title.value}`,
+    },
+    {
+      property: 'twitter:title',
+      content: () => `${title.value}`,
+    },
+    {
+      property: 'og:image',
+      content: () => article.banner
+    },
+    {
+      property: 'twitter:image',
+      content: () => article.banner
+    }
+  ]
 })
 </script>
 
