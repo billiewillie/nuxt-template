@@ -1,7 +1,9 @@
 <template>
   <NuxtLayout>
-    <section>
-      <p class="text-4xl">You've Arrived on Error</p>
+    <section class="mt-6">
+      <div class="container">
+        <p class="text-4xl">404</p>
+      </div>
     </section>
   </NuxtLayout>
 </template>

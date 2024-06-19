@@ -58,6 +58,7 @@ export interface News {
   content: HTMLElement,
   year: number
   recommendations: Array<Recommendation>
+  banner: string
 }
 
 interface NewProductTitle {
@@ -85,7 +86,7 @@ export interface IndexPageApi {
   template: string,
   url: string,
   manufacturers: Array<Manufacturer>,
-  news: Array<Omit<News, 'year' | 'content' | 'recommendations'>>,
+  news: Array<Omit<News, 'year' | 'content' | 'recommendations' | 'banner'>>,
   metadata: Metadata,
   new_products: {
     title: Array<NewProductTitle>,

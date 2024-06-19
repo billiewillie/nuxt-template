@@ -4,14 +4,20 @@
 import URLs from '~/data/urls'
 import type { News } from '~/types'
 import { useFetch, useRuntimeConfig, useSeoMeta } from '#app'
+import { useRoute } from 'vue-router'
+
+const { slug } = useRoute().params
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
-const { data: article }: { data: News } = await useFetch(`${API_ENDPOINT}${URLs.news}/world-health-day-2024`)
+const { data: article, error }: { data: News } = await useFetch(`${API_ENDPOINT}${URLs.news}/${slug}`)
+
+console.log(article)
+console.log(error)
 
 useSeoMeta({
-  ogImage: article.preview_img,
-  twitterImage: article.preview_img,
+  ogImage: article.banner,
+  twitterImage: article.banner,
   ogImageHeight: 630,
   ogImageWidth: 1200,
   ogUrl: 'https://bioline.ru',
@@ -31,7 +37,7 @@ useSeoMeta({
   <section class="mt-6">
     <div class="container">
       <BaseImage
-        :src="article.preview_img"
+        :src="article.banner"
         aspect-ratio="aspect-[4/1]"
         placeholder="bg-[#e4e7ef]"
         width="1413"
@@ -58,7 +64,7 @@ useSeoMeta({
           {{ article.created_at }}
         </time>
       </div>
-      <template v-html="article.content" />
+      <article v-html="article.content" />
     </div>
   </section>
 
