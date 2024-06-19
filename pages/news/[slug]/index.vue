@@ -24,7 +24,6 @@ useSeoMeta({
   twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
   twitterCard: 'summary_large_image'
 })
-
 </script>
 
 <template>
@@ -33,11 +32,11 @@ useSeoMeta({
     <div class="container">
       <BaseImage
         :src="article.preview_img"
-        alt="alt"
         aspect-ratio="aspect-[4/1]"
         placeholder="bg-[#e4e7ef]"
         width="1413"
         height="332"
+        alt="alt"
       />
     </div>
   </section>

@@ -50,7 +50,37 @@ const BRANCHES: Record<string, Branch> = {
     phone: '+7 (831) 278 61 47',
     email: 'main@bioline.ru',
     map: [43.998827, 56.290260]
-  }
+  },
+  ekb: {
+    id: 6,
+    country: 'Россия',
+    index: 620027,
+    city: 'Екатеринбург',
+    address: 'ул. Николая Никонова, дом 21',
+    phone: '+7 (343) 357 30 26',
+    email: 'main@bioline.ru',
+    map: [82.914, 55.0316]
+  },
+  ufa: {
+    id: 7,
+    country: 'Россия',
+    index: 450078,
+    city: 'Уфа',
+    address: 'ул. Кирова 52, Бизнес-центр "На Кирова"',
+    phone: '+7 (937) 855 78 52',
+    email: 'main@bioline.ru',
+    map: [82.914, 55.0316]
+  },
+  samara: {
+    id: 8,
+    country: 'Россия',
+    index: 443040,
+    city: 'Самара',
+    address: 'ул. Аэродромная, д. 45, Бизнес-центр "А-45"',
+    phone: '+7 (927) 688 28 49',
+    email: 'main@bioline.ru',
+    map: [82.914, 55.0316]
+  },
 }
 
 export default BRANCHES

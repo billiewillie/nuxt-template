@@ -14,7 +14,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
     'nuxt-icon',
-    'nuxt-marquee'
+    'nuxt-marquee',
+    'vue-yandex-maps/nuxt'
   ],
   image: {
     inject: true,
@@ -53,6 +54,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Группа компаний ООО «БиоЛайн»',
+      htmlAttrs: {
+        lang: 'ru'
+      },
       meta: [
         {
           name: 'description',
@@ -60,22 +64,22 @@ export default defineNuxtConfig({
         },
         {
           name: 'keywords',
-          content: 'цитометр,  цитофлюориметр, цитофлуориметр, проточный, Бектон Дикинсон, BD,  Becton Dickinson,  FACS, Calibur, Canto, CantoII, Accuri, Verse, Aria,  цитометрия,  проточник,  сортировщик, сортер, Euroflow, ISHAGE, фенотипирование,  иммунофенотипирование,  FACS  Count, мониторинг CD4, стволовые   клетки,   онкогематология,  диагностика ВИЧ,  диагностика лейкозов'
+          content: 'цитометр, цитофлюориметр, цитофлуориметр, проточный, Бектон Дикинсон, BD, Becton Dickinson, FACS, Calibur, Canto, CantoII, Accuri, Verse, Aria, цитометрия, проточник, сортировщик, сортер, Euroflow, ISHAGE, фенотипирование, иммунофенотипирование, FACS  Count, мониторинг CD4, стволовые клетки, онкогематология, диагностика ВИЧ, диагностика лейкозов'
         },
         {
           name: 'robots',
-          content: 'noindex'
+          content: 'noindex, nofollow'
         }
       ],
-      htmlAttrs: {
-        lang: 'ru'
-      }
     }
 
   },
   runtimeConfig: {
     public: {
-      API_ENDPOINT: ""
+      API_ENDPOINT: ''
     }
+  },
+  yandexMaps: {
+    apikey: '3c059258-c2fe-4ad1-85b6-f124123aa8e1'
   }
 })

@@ -84,6 +84,11 @@
   }
   
   .section-title::before {
-    @apply absolute block content-[''] left-0 top-1/2 -translate-y-1/2 w-1 h-[calc(100%+20px)] rounded-full bg-[linear-gradient(0deg,_#0B9798_0%,_#0AECEE_100%)];
+    @apply absolute block content-[''] left-0 top-1/2 -translate-y-1/2 w-1 h-[calc(100%+20px)] rounded-full bg-gradient-to-b from-[#0AECEE] to-[#0B9798];
+  }
+  
+  .marker {
+    @apply relative w-[20px] h-[20px] bg-primary rounded-full border-2 border-background text-center text-background font-bold leading-[20px];
   }
 }
+

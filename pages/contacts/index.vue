@@ -1,12 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 import CONTACTS from '~/data/contacts'
 import { SERVICE } from '~/data/constants'
 import { Card, CardContent } from '~/components/ui/card'
 import BRANCHES from '~/data/branches'
 import { useSeoMeta } from '#app'
+import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, YandexMapMarker } from 'vue-yandex-maps'
 
 const isLoaded = ref(false)
+
+const coordinates = ref(BRANCHES.spb.map)
 
 useSeoMeta({
   ogImage: '/img/og-logo.jpg',
@@ -33,7 +36,7 @@ useSeoMeta({
     </div>
   </section>
 
-  <section class="mb-20">
+  <section class="mb-12">
     <div class="container flex gap-4">
       <div class="relative basis-2/3 3xl:min-h-[438px] rounded overflow-hidden">
         <div
@@ -59,6 +62,30 @@ useSeoMeta({
         <p>{{ CONTACTS.spb.phone }}</p>
         <p>{{ CONTACTS.spb.email }}</p>
       </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="container">
+      <yandex-map
+        :settings="{
+          location: {
+            center: coordinates,
+            zoom: 16,
+          },
+        }"
+        width="100%"
+        height="500px"
+      >
+        <yandex-map-default-scheme-layer />
+        <yandex-map-default-features-layer />
+        <yandex-map-marker
+          :settings="{
+            hintContent: 'Центральный офис', coordinates: coordinates
+          }">
+          <div class="marker" />
+        </yandex-map-marker>
+      </yandex-map>
     </div>
   </section>
 
