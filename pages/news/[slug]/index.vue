@@ -20,13 +20,13 @@ const { data: article, error }: { data: News } = await useAsyncData(
 )
 
 if (article.value) {
-  title.value = article.value.title
+  title.value = `${article.value.title} | Группа компаний ООО «БиоЛайн»`
   banner.value = article.value.banner
 }
 
 useSeoMeta({
-  ogImage: () => article.banner,
-  twitterImage: () => article.banner,
+  ogImage: () => `${banner.value}`,
+  twitterImage: () => `${banner.value}`,
   ogTitle: () => title.value,
   twitterTitle: () => title.value,
   ogImageHeight: 630,
@@ -40,23 +40,23 @@ useSeoMeta({
 })
 
 useHead({
-  title: () => `${title.value}`,
+  title: () => title.value,
   meta: [
     {
       property: 'og:title',
-      content: () => `${title.value}`,
+      content: () => title.value
     },
     {
       property: 'twitter:title',
-      content: () => `${title.value}`,
+      content: () => title.value
     },
     {
       property: 'og:image',
-      content: () => article.banner
+      content: () => banner.value
     },
     {
       property: 'twitter:image',
-      content: () => article.banner
+      content: () => banner.value
     }
   ]
 })
