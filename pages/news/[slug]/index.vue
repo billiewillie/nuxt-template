@@ -36,7 +36,7 @@ useSeoMeta({
   ogImageWidth: 1200,
   ogImageHeight: 630,
   ogLocale: 'ru_RU',
-  twitterImage: '/img/og-logo.jpg',
+  twitterImage: () => banner.value ?? '/img/og-logo.jpg',
   twitterTitle: () => title.value,
   twitterDescription: () => description.value,
   twitterSite: 'bioline.vercel.app',
@@ -69,7 +69,7 @@ useHead({
     },
     {
       property: 'twitter:image',
-      content: '/img/og-logo.jpg'
+      content: () => banner.value ?? '/img/og-logo.jpg'
     },
     {
       property: 'twitter:url',
