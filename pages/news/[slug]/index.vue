@@ -25,12 +25,10 @@ if (article.value) {
 }
 
 useSeoMeta({
-  ogImage: () => `${banner.value}`,
-  twitterImage: () => `${banner.value}`,
+  ogImage: () => banner.value,
+  twitterImage: () => banner.value,
   ogTitle: () => title.value,
   twitterTitle: () => title.value,
-  ogImageHeight: 630,
-  ogImageWidth: 1200,
   ogUrl: 'https://bioline.ru',
   ogType: 'website',
   ogLocale: 'ru_RU',
