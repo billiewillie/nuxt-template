@@ -5,15 +5,13 @@ import URLs from '~/data/urls'
 import type { News } from '~/types'
 import { useFetch, useRuntimeConfig, useSeoMeta } from '#app'
 import { useRoute } from 'vue-router'
+import { useLazyFetch } from '#imports'
 
 const { slug } = useRoute().params
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
-const { data: article, error }: { data: News } = await useFetch(`${API_ENDPOINT}${URLs.news}/${slug}`)
-
-console.log(article)
-console.log(error)
+const { data: article, error }: { data: News } = await useLazyFetch(`${API_ENDPOINT}${URLs.news}/${slug}`)
 
 useSeoMeta({
   ogImage: article.banner,
