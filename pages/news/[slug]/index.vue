@@ -9,6 +9,7 @@ import { ref } from 'vue'
 
 const title = ref('Новости | Группа компаний ООО «БиоЛайн»')
 const banner = ref('/img/og-logo.jpg')
+const description = ref('Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.')
 
 const { slug } = useRoute().params
 
@@ -20,20 +21,25 @@ const { data: article, error }: { data: News } = await useAsyncData(
 )
 
 if (article.value) {
-  title.value = `${article.value.title} | Группа компаний ООО «БиоЛайн»`
+  title.value = article.value.title ? `${article.value.title} | Группа компаний ООО «БиоЛайн»` : 'Новости | Группа компаний ООО «БиоЛайн»'
   banner.value = article.value.banner
+  description.value = article.value.annotation
 }
 
 useSeoMeta({
   ogImage: () => banner.value ?? '/img/og-logo.jpg',
-  twitterImage: () => banner.value ?? '/img/og-logo.jpg',
   ogTitle: () => title.value,
-  twitterTitle: () => title.value,
-  ogDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
-  twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
-  ogType: 'website',
+  ogSiteName: 'bioline.vercel.app',
+  ogUrl: () => 'https://bioline.vercel.app/news/' + slug,
+  ogType: 'article',
+  ogDescription: () => description.value,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
   ogLocale: 'ru_RU',
-  ogUrl: 'https://bioline.ru',
+  twitterImage: '/img/og-logo.jpg',
+  twitterTitle: () => title.value,
+  twitterDescription: () => description.value,
+  twitterSite: 'bioline.vercel.app',
   twitterCard: 'summary_large_image'
 })
 
@@ -45,16 +51,29 @@ useHead({
       content: () => title.value
     },
     {
-      property: 'twitter:title',
-      content: () => title.value
+      property: 'og:site:name',
+      content: 'bioline.vercel.app'
     },
+
     {
       property: 'og:image',
       content: () => banner.value ?? '/img/og-logo.jpg'
     },
     {
+      property: 'twitter:title',
+      content: () => title.value
+    },
+    {
+      property: 'twitter:description',
+      content: () => description.value
+    },
+    {
       property: 'twitter:image',
-      content: () => banner.value ?? '/img/og-logo.jpg'
+      content: '/img/og-logo.jpg'
+    },
+    {
+      property: 'twitter:url',
+      content: () => 'https://bioline.vercel.app/news/' + slug
     }
   ]
 })
