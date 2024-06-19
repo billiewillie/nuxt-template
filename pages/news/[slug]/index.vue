@@ -7,8 +7,8 @@ import { useAsyncData, useFetch, useHead, useRuntimeConfig, useSeoMeta } from '#
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
 
-const title = ref('')
-const banner = ref('')
+const title = ref('Новости | Группа компаний ООО «БиоЛайн»')
+const banner = ref('/img/og-logo.jpg')
 
 const { slug } = useRoute().params
 
@@ -25,15 +25,15 @@ if (article.value) {
 }
 
 useSeoMeta({
-  ogImage: () => banner.value,
-  twitterImage: () => banner.value,
+  ogImage: () => banner.value ?? '/img/og-logo.jpg',
+  twitterImage: () => banner.value ?? '/img/og-logo.jpg',
   ogTitle: () => title.value,
   twitterTitle: () => title.value,
-  ogUrl: 'https://bioline.ru',
-  ogType: 'website',
-  ogLocale: 'ru_RU',
   ogDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
   twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
+  ogType: 'website',
+  ogLocale: 'ru_RU',
+  ogUrl: 'https://bioline.ru',
   twitterCard: 'summary_large_image'
 })
 
@@ -50,11 +50,11 @@ useHead({
     },
     {
       property: 'og:image',
-      content: () => banner.value
+      content: () => banner.value ?? '/img/og-logo.jpg'
     },
     {
       property: 'twitter:image',
-      content: () => banner.value
+      content: () => banner.value ?? '/img/og-logo.jpg'
     }
   ]
 })
