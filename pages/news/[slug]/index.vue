@@ -21,27 +21,10 @@ const { data: article, error }: { data: News } = await useAsyncData(
 )
 
 if (article.value) {
-  title.value = article.value.title ? `${article.value.title} | Группа компаний ООО «БиоЛайн»` : 'Новости | Группа компаний ООО «БиоЛайн»'
+  title.value = article.value.title
   banner.value = article.value.banner
   description.value = article.value.annotation
 }
-
-// useSeoMeta({
-//   ogImage: () => banner.value ?? '/img/og-logo.jpg',
-//   ogTitle: () => title.value,
-//   ogSiteName: 'bioline.vercel.app',
-//   ogUrl: () => 'https://bioline.vercel.app/news/' + slug,
-//   ogType: 'article',
-//   ogDescription: () => description.value,
-//   ogImageWidth: 1200,
-//   ogImageHeight: 630,
-//   ogLocale: 'ru_RU',
-//   twitterImage: () => banner.value ?? '/img/og-logo.jpg',
-//   twitterTitle: () => title.value,
-//   twitterDescription: () => description.value,
-//   twitterSite: 'bioline.vercel.app',
-//   twitterCard: 'summary_large_image'
-// })
 </script>
 
 <template>
@@ -57,12 +40,42 @@ if (article.value) {
     <Meta
       name="twitter:image"
       :content="article.banner" />
-    <Meta name="og:title" :content="article.title" />
-    <Meta name="og:description" :content="article.annotation" />
-    <Meta name="twitter:title" :content="article.title" />
-    <Meta name="twitter:description" :content="article.annotation" />
-    <Meta name="twitter:site" content="bioline.vercel.app" />
-    <Meta name="twitter:card" content="summary_large_image" />
+    <Meta
+      name="og:title"
+      :content="article.title" />
+    <Meta
+      name="og:description"
+      :content="article.annotation" />
+    <Meta
+      name="og:site_name"
+      content="bioline.vercel.app" />
+    <Meta
+      name="og:url"
+      :content="`https://bioline.vercel.app/news/${slug}`" />
+    <Meta
+      name="og:image:width"
+      content="1200" />
+    <Meta
+      name="og:image:height"
+      content="630" />
+    <Meta
+      name="og:type"
+      content="article" />
+    <Meta
+      name="og:locale"
+      content="ru_RU" />
+    <Meta
+      name="twitter:title"
+      :content="article.title" />
+    <Meta
+      name="twitter:description"
+      :content="article.annotation" />
+    <Meta
+      name="twitter:site"
+      content="bioline.vercel.app" />
+    <Meta
+      name="twitter:card"
+      content="summary_large_image" />
   </Head>
 
   <section class="mt-6">
