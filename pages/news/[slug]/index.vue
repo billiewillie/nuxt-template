@@ -27,6 +27,7 @@ if (article.value) {
 }
 
 useSeoMeta({
+  title: () => title.value,
   ogImage: () => banner.value ?? '/img/og-logo.jpg',
   ogTitle: () => title.value,
   ogSiteName: 'bioline.vercel.app',
@@ -41,41 +42,6 @@ useSeoMeta({
   twitterDescription: () => description.value,
   twitterSite: 'bioline.vercel.app',
   twitterCard: 'summary_large_image'
-})
-
-useHead({
-  title: () => title.value,
-  meta: [
-    {
-      property: 'og:title',
-      content: () => title.value
-    },
-    {
-      property: 'og:site:name',
-      content: 'bioline.vercel.app'
-    },
-
-    {
-      property: 'og:image',
-      content: () => banner.value ?? '/img/og-logo.jpg'
-    },
-    {
-      property: 'twitter:title',
-      content: () => title.value
-    },
-    {
-      property: 'twitter:description',
-      content: () => description.value
-    },
-    {
-      property: 'twitter:image',
-      content: () => banner.value ?? '/img/og-logo.jpg'
-    },
-    {
-      property: 'twitter:url',
-      content: () => 'https://bioline.vercel.app/news/' + slug
-    }
-  ]
 })
 </script>
 
