@@ -26,26 +26,44 @@ if (article.value) {
   description.value = article.value.annotation
 }
 
-useSeoMeta({
-  title: () => title.value,
-  ogImage: () => banner.value ?? '/img/og-logo.jpg',
-  ogTitle: () => title.value,
-  ogSiteName: 'bioline.vercel.app',
-  ogUrl: () => 'https://bioline.vercel.app/news/' + slug,
-  ogType: 'article',
-  ogDescription: () => description.value,
-  ogImageWidth: 1200,
-  ogImageHeight: 630,
-  ogLocale: 'ru_RU',
-  twitterImage: () => banner.value ?? '/img/og-logo.jpg',
-  twitterTitle: () => title.value,
-  twitterDescription: () => description.value,
-  twitterSite: 'bioline.vercel.app',
-  twitterCard: 'summary_large_image'
-})
+// useSeoMeta({
+//   ogImage: () => banner.value ?? '/img/og-logo.jpg',
+//   ogTitle: () => title.value,
+//   ogSiteName: 'bioline.vercel.app',
+//   ogUrl: () => 'https://bioline.vercel.app/news/' + slug,
+//   ogType: 'article',
+//   ogDescription: () => description.value,
+//   ogImageWidth: 1200,
+//   ogImageHeight: 630,
+//   ogLocale: 'ru_RU',
+//   twitterImage: () => banner.value ?? '/img/og-logo.jpg',
+//   twitterTitle: () => title.value,
+//   twitterDescription: () => description.value,
+//   twitterSite: 'bioline.vercel.app',
+//   twitterCard: 'summary_large_image'
+// })
 </script>
 
 <template>
+
+  <Head>
+    <Title>{{ article.title }}</Title>
+    <Meta
+      name="description"
+      :content="article.annotation" />
+    <Meta
+      name="og:image"
+      :content="article.banner" />
+    <Meta
+      name="twitter:image"
+      :content="article.banner" />
+    <Meta name="og:title" :content="article.title" />
+    <Meta name="og:description" :content="article.annotation" />
+    <Meta name="twitter:title" :content="article.title" />
+    <Meta name="twitter:description" :content="article.annotation" />
+    <Meta name="twitter:site" content="bioline.vercel.app" />
+    <Meta name="twitter:card" content="summary_large_image" />
+  </Head>
 
   <section class="mt-6">
     <div class="container">
