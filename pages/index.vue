@@ -73,7 +73,7 @@ console.log(data.value)
           class="flex flex-col gap-6 p-4 items-center text-center">
           <NuxtImg
             :src="item.icon"
-            class="w-[80px] object-contain object-center"
+            class="object-contain object-center w-[80px] h-[80px]"
             width="80"
             height="80"
             :alt="item.title" />
@@ -214,7 +214,7 @@ console.log(data.value)
                     class="w-full h-[150px] object-cover object-top"
                   />
                 </CardHeader>
-                <CardContent class="flex flex-col items-center justify-center p-6">
+                <CardContent class="flex flex-col justify-center p-6">
                   <h3 class="text-3xl font-semibold">{{ event.title }}</h3>
                   <p>{{ event.annotation }}</p>
                 </CardContent>
