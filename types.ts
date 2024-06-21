@@ -1,21 +1,16 @@
-export interface Branch {
-  id: number;
-  country: string | null;
-  index: number;
-  city: string;
-  address: string;
-  phone: string;
-  email: string;
-  map?: number[];
-}
-
-export interface Article {
+interface CalendarItem {
   id: number
   title: string
   url: string
-  preview_img: string,
-  created_at: string,
   annotation: string
+  preview_img: string
+  date_end: string
+  date_start: string
+}
+
+interface Calendar {
+  list: Array<CalendarItem>
+  all_events_month: Array<CalendarItem>
 }
 
 interface Section {
@@ -47,20 +42,6 @@ interface Recommendation {
   created_at: string
 }
 
-export interface News {
-  annotation: string,
-  created_at: string,
-  id: number,
-  preview_img: string,
-  title: string,
-  url: string,
-  section: Array<Section>,
-  content: HTMLElement,
-  year: number
-  recommendations: Array<Recommendation>
-  banner: string
-}
-
 interface NewProductTitle {
   id: number
   title: string
@@ -76,9 +57,44 @@ interface NewProductList {
   preview_img: string
 }
 
+export interface Branch {
+  id: number
+  country: string | null
+  index: string
+  city: string
+  address: string
+  phone: string
+  email: string
+  map?: number[]
+  title?: string
+}
+
+export interface Article {
+  id: number
+  title: string
+  url: string
+  preview_img: string,
+  created_at: string,
+  annotation: string
+}
+
+export interface News {
+  annotation: string,
+  created_at: string,
+  id: number,
+  preview_img: string,
+  title: string,
+  url: string,
+  section: Array<Section>,
+  content: HTMLElement,
+  year: number
+  recommendations: Array<Recommendation>
+  banner: string
+}
+
 export interface IndexPageApi {
-  catalog: Array<string>,
-  calendar: Array<string>,
+  catalog: Array<string>
+  calendar: Calendar
   content: string,
   created_at: string,
   id: number,
@@ -91,5 +107,5 @@ export interface IndexPageApi {
   new_products: {
     title: Array<NewProductTitle>,
     list: Array<NewProductList>
-  },
+  }
 }

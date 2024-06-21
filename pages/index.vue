@@ -9,9 +9,11 @@ import URLs from '~/data/urls'
 import PARTNERS from '~/data/partners'
 import CATEGORIES from '~/data/categories'
 import type { IndexPageApi } from '~/types'
-import { Calendar } from '~/components/ui/calendar'
+import { Calendar } from '@/components/ui/v-calendar'
 import { type Ref, ref } from 'vue'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
+
+const date = ref(new Date())
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
@@ -21,12 +23,12 @@ useSeoMeta({
   ogImageHeight: 630,
   ogImageWidth: 1200,
   ogLocale: 'ru_RU',
-  // ogSiteName: 'Группа компаний ООО «БиоЛайн»',
-  // ogTitle: 'Группа компаний ООО «БиоЛайн»',
+  ogSiteName: 'Группа компаний ООО «БиоЛайн»',
+  ogTitle: 'Группа компаний ООО «БиоЛайн»',
   ogDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
   ogUrl: 'https://bioline.ru',
   twitterCard: 'summary_large_image',
-  // twitterTitle: 'Группа компаний ООО «БиоЛайн»',
+  twitterTitle: 'Группа компаний ООО «БиоЛайн»',
   twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
   twitterImage: '/img/og-logo.jpg'
 })
@@ -35,6 +37,7 @@ const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.i
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 
+console.log(data.value)
 </script>
 
 <template>
@@ -179,25 +182,41 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
       <h2 class="section-title">Календарь событий</h2>
     </div>
     <div class="container relative flex gap-4">
+
       <Calendar
-        v-model="value"
-        :weekday-format="'short'"
-        class="rounded-md border w-1/2" />
+        v-model="date"
+        :first-day-of-week="2"
+        locale="ru"
+        wrapper-class="w-1/2 bg-background relative z-10"
+        class="rounded-md border">
+      </calendar>
 
       <Carousel
         class="absolute left-[calc(50%+1rem)] w-[calc(50%-180px-1rem)] h-full"
         :opts="{
           align: 'start',
         }">
-        <CarouselContent :is-visible="true" :is-height-full="true" class="h-full">
+        <CarouselContent
+          :is-visible="true"
+          :is-height-full="true"
+          class="h-full">
           <CarouselItem
-            v-for="(_, index) in 9"
-            :key="index"
+            v-for="event in data.calendar.list"
+            :key="event.id"
             class="md:basis-1/2 h-full">
             <div class="p-0 h-full">
               <Card class="h-full">
-                <CardContent class="flex items-center justify-center p-6">
-                  <span class="text-3xl font-semibold">{{ index + 1 }}</span>
+                <CardHeader class="p-0">
+                  <NuxtImg
+                    :src="event.preview_img"
+                    :alt="event.title"
+                    height="150"
+                    class="w-full h-[150px] object-cover object-top"
+                  />
+                </CardHeader>
+                <CardContent class="flex flex-col items-center justify-center p-6">
+                  <h3 class="text-3xl font-semibold">{{ event.title }}</h3>
+                  <p>{{ event.annotation }}</p>
                 </CardContent>
               </Card>
             </div>

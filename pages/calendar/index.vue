@@ -3,10 +3,12 @@
   lang="ts">
 import { type Ref, ref } from 'vue'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/ui/v-calendar'
 import NEWS from '~/data/news'
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
+const date = ref(new Date())
+
 </script>
 
 <template>
@@ -20,9 +22,12 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
   <section class="mb-4">
     <div class="container grid grid-cols-1 xl:grid-cols-4 gap-y-4 xl:gap-y-0 xl:gap-x-4">
       <Calendar
-        v-model="value"
-        :weekday-format="'short'"
-        class="rounded-md border col-span-3" />
+        v-model="date"
+        :first-day-of-week="2"
+        locale="ru"
+        wrapper-class="col-span-3 bg-background relative z-10"
+        class="rounded-md border">
+      </calendar>
       <div class="flex flex-col basis-full xl:basis-1/4 border rounded">
         <select>
           <option>

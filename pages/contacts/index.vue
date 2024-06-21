@@ -1,34 +1,67 @@
 <script setup>
-import { ref, shallowRef } from 'vue'
+import { ref } from 'vue'
 import CONTACTS from '~/data/contacts'
 import { SERVICE } from '~/data/constants'
 import { Card, CardContent } from '~/components/ui/card'
 import BRANCHES from '~/data/branches'
-import { useSeoMeta } from '#app'
+import BRANCH_PARTNERS from '~/data/branch-partners'
 import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, YandexMapMarker } from 'vue-yandex-maps'
 
 const isLoaded = ref(false)
 
 const coordinates = ref(BRANCHES.spb.map)
-
-useSeoMeta({
-  ogImage: '/img/og-logo.jpg',
-  ogType: 'website',
-  ogImageHeight: 630,
-  ogImageWidth: 1200,
-  ogLocale: 'ru_RU',
-  // ogSiteName: 'Группа компаний ООО «БиоЛайн»',
-  // ogTitle: 'Группа компаний ООО «БиоЛайн»',
-  ogDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
-  ogUrl: 'https://bioline.ru',
-  twitterCard: 'summary_large_image',
-  // twitterTitle: 'Группа компаний ООО «БиоЛайн»',
-  twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
-  twitterImage: '/img/og-logo.jpg'
-})
 </script>
 
 <template>
+
+  <Head>
+    <Title>Контакты | Группа компаний ООО «БиоЛайн»</Title>
+    <Meta
+      name="description"
+      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+    <Meta
+      name="og:image"
+      content="/img/og-logo.jpg" />
+    <Meta
+      name="twitter:image"
+      content="/img/og-logo.jpg" />
+    <Meta
+      name="og:title"
+      content="Контакты | Группа компаний ООО «БиоЛайн»" />
+    <Meta
+      name="og:description"
+      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+    <Meta
+      name="og:site_name"
+      content="bioline.vercel.app" />
+    <Meta
+      name="og:url"
+      content="https://bioline.vercel.app/contacts" />
+    <Meta
+      name="og:image:width"
+      content="1200" />
+    <Meta
+      name="og:image:height"
+      content="630" />
+    <Meta
+      name="og:type"
+      content="article" />
+    <Meta
+      name="og:locale"
+      content="ru_RU" />
+    <Meta
+      name="twitter:title"
+      content="Контакты | Группа компаний ООО «БиоЛайн»" />
+    <Meta
+      name="twitter:description"
+      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+    <Meta
+      name="twitter:site"
+      content="bioline.vercel.app" />
+    <Meta
+      name="twitter:card"
+      content="summary_large_image" />
+  </Head>
 
   <section class="mb-12 pt-14">
     <div class="container">
@@ -124,6 +157,30 @@ useSeoMeta({
           class="flex flex-col gap-6 p-4">
           <CardHeader class="p-0 font-medium">
             <CardTitle>{{ branch.city }}</CardTitle>
+          </CardHeader>
+          <Separator />
+          <CardContent class="p-0 font-medium">
+            <span>{{ branch.index }}</span>,
+            <span>{{ branch.country }}</span>
+            <p>{{ branch.city }}</p>
+            <p>{{ branch.address }}</p>
+            <p>{{ branch.phone }}</p>
+            <p>{{ branch.email }}</p>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-20">
+    <div class="container">
+      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
+        <Card
+          v-for="branch in BRANCH_PARTNERS"
+          :key="branch.id"
+          class="flex flex-col gap-6 p-4">
+          <CardHeader class="p-0 font-medium">
+            <CardTitle>{{ branch.title }}</CardTitle>
           </CardHeader>
           <Separator />
           <CardContent class="p-0 font-medium">
