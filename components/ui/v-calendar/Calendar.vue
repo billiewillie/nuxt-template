@@ -43,6 +43,7 @@ const props = withDefaults(defineProps<{
   type: 'single',
   columns: 1
 })
+
 const emits = defineEmits<{
   (e: 'update:modelValue', payload: typeof props.modelValue): void
 }>()
@@ -53,7 +54,8 @@ const modelValue = useVModel(
   emits,
   {
     passive: true
-  })
+  }
+)
 
 const datePicker = ref<InstanceType<typeof DatePicker>>()
 // @ts-expect-error in this current version of v-calendar has the calendaRef instance, which is required to handle arrow nav.
@@ -89,16 +91,16 @@ const vCalendarSlots = computed(() => {
   <div :class="cn('relative', props.wrapperClass)">
     <div
       v-if="$attrs.mode !== 'time'"
-      class="absolute flex justify-between w-full px-4 top-3 z-20">
+      class="absolute flex justify-between w-full z-20 bg-background-dark text-white">
       <button
-        :class="cn(buttonVariants({ variant: 'outline' }), 'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100')"
+        :class="cn(buttonVariants({ variant: 'ghost' }), 'h-12 w-7 bg-transparent p-0 opacity-100 hover:opacity-100 hover:bg-transparent')"
         @click="handleNav('prev')">
-        <ChevronLeft class="w-4 h-4" />
+        <ChevronLeft class="w-4 h-4 text-white" />
       </button>
       <button
-        :class="cn(buttonVariants({ variant: 'outline' }), 'h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100')"
+        :class="cn(buttonVariants({ variant: 'ghost' }), 'h-12 w-7 bg-transparent p-0 opacity-100 hover:opacity-100 hover:bg-transparent')"
         @click="handleNav('next')">
-        <ChevronRight class="w-4 h-4" />
+        <ChevronRight class="w-4 h-4 text-white" />
       </button>
     </div>
 
@@ -133,7 +135,7 @@ const vCalendarSlots = computed(() => {
 
 <style lang="css">
 .calendar {
-  @apply p-3 text-center;
+  @apply text-center p-4 pt-2.5 rounded;
 }
 
 .calendar .vc-pane-layout {
@@ -141,7 +143,7 @@ const vCalendarSlots = computed(() => {
 }
 
 .calendar .vc-title {
-  @apply text-sm font-medium relative z-20;
+  @apply text-base leading-none font-medium relative z-20 text-white;
 }
 
 .vc-popover-content-wrapper .vc-popover-content {
@@ -173,11 +175,19 @@ const vCalendarSlots = computed(() => {
 }
 
 .calendar .vc-weeks {
-  @apply mt-4;
+  @apply mt-8;
+}
+
+.calendar .vc-week {
+  @apply border-t border-solid border-foreground border-l border-r !mt-0;
+}
+
+.calendar .vc-week:last-child {
+  @apply border-b;
 }
 
 .calendar .vc-weekdays {
-  @apply justify-items-center;
+  @apply justify-items-center mb-4;
 }
 
 .calendar .vc-weekday {
@@ -186,6 +196,14 @@ const vCalendarSlots = computed(() => {
 
 .calendar .vc-weeks {
   @apply w-full space-y-2 flex flex-col [&>_div]:grid [&>_div]:grid-cols-7;
+}
+
+.calendar .vc-day {
+  @apply border-r border-solid border-foreground h-14;
+}
+
+.calendar .vc-day:last-child {
+  @apply border-none;
 }
 
 .calendar .vc-day:has(.vc-highlights) {
@@ -209,11 +227,7 @@ const vCalendarSlots = computed(() => {
 }
 
 .calendar .vc-day-content {
-  @apply text-center text-sm p-0 relative focus-within:relative focus-within:z-20 inline-flex items-center justify-center ring-offset-background hover:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-accent hover:text-accent-foreground h-9 w-9 font-normal aria-selected:opacity-100 select-none;
-}
-
-.calendar .vc-day-content:not(.vc-highlight-content-light) {
-  @apply rounded-md;
+  @apply text-center text-sm p-1 relative focus-within:relative focus-within:z-20 inline-flex top-0 ring-offset-background hover:transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 hover:bg-accent hover:text-accent-foreground h-full w-full font-normal aria-selected:opacity-100 select-none;
 }
 
 .calendar .is-not-in-month:not(:has(.vc-highlight-content-solid)):not(:has(.vc-highlight-content-light)):not(:has(.vc-highlight-content-outline)),

@@ -8,7 +8,11 @@ import BRANCH_PARTNERS from '~/data/branch-partners'
 import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, YandexMapMarker } from 'vue-yandex-maps'
 
 // create branches object without spb
-const branchesFiltered = Object.fromEntries(Object.entries(BRANCHES).filter(([key]) => key !== 'spb'))
+const branchesFiltered = Object.fromEntries(
+  Object
+    .entries(BRANCHES)
+    .filter(([key]) => key !== 'spb')
+)
 
 const isLoaded = ref(false)
 

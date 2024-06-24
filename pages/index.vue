@@ -60,6 +60,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
     </div>
   </section>
 
+  <!--каталог-->
   <section class="mb-24 xl:mb-32">
     <div class="container">
       <h2 class="section-title mb-12 xl:mb-16">Каталог</h2>
@@ -82,6 +83,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
     </div>
   </section>
 
+  <!--новости-->
   <section class="mb-24 xl:mb-32">
     <div class="container mb-16">
       <h2 class="section-title">Новости</h2>
@@ -109,6 +111,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
     </div>
   </section>
 
+  <!--новинки-->
   <section class="mb-24 xl:mb-32">
     <div class="container mb-16">
       <h2 class="section-title">Новинки</h2>
@@ -174,6 +177,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
     </div>
   </section>
 
+  <!--календарь-->
   <section class="mb-24 xl:mb-32">
     <div class="container mb-16">
       <h2 class="section-title">Календарь событий</h2>
@@ -189,7 +193,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
       </calendar>
 
       <Carousel
-        class="absolute left-[calc(50%+1rem)] w-[calc(50%-180px-1rem)] h-full"
+        class="absolute left-[calc(50%+1rem)] xl:w-[calc(50%-2rem)] 2xl:w-[calc(50%-180px-1rem)] h-full"
         :opts="{
           align: 'start',
         }">
@@ -227,6 +231,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
     </div>
   </section>
 
+  <!--партнёры-->
   <section class="mb-24 xl:mb-32">
     <div class="container mb-16">
       <h2 class="section-title">Партнёры</h2>

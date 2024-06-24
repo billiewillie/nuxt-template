@@ -13,6 +13,55 @@ const date = ref(new Date())
 
 <template>
 
+  <Head>
+    <Title>Календарь | Группа компаний ООО «БиоЛайн»</Title>
+    <Meta
+      name="description"
+      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+    <Meta
+      name="og:image"
+      content="/img/og-logo.jpg" />
+    <Meta
+      name="twitter:image"
+      content="/img/og-logo.jpg" />
+    <Meta
+      name="og:title"
+      content="Календарь | Группа компаний ООО «БиоЛайн»" />
+    <Meta
+      name="og:description"
+      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+    <Meta
+      name="og:site_name"
+      content="bioline.vercel.app" />
+    <Meta
+      name="og:url"
+      content="https://bioline.vercel.app/contacts" />
+    <Meta
+      name="og:image:width"
+      content="1200" />
+    <Meta
+      name="og:image:height"
+      content="630" />
+    <Meta
+      name="og:type"
+      content="article" />
+    <Meta
+      name="og:locale"
+      content="ru_RU" />
+    <Meta
+      name="twitter:title"
+      content="Календарь | Группа компаний ООО «БиоЛайн»" />
+    <Meta
+      name="twitter:description"
+      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+    <Meta
+      name="twitter:site"
+      content="bioline.vercel.app" />
+    <Meta
+      name="twitter:card"
+      content="summary_large_image" />
+  </Head>
+
   <section class="mb-16 pt-14">
     <div class="container">
       <h1 class="section-title">Календарь мероприятий</h1>
@@ -20,15 +69,15 @@ const date = ref(new Date())
   </section>
 
   <section class="mb-4">
-    <div class="container grid grid-cols-1 xl:grid-cols-4 gap-y-4 xl:gap-y-0 xl:gap-x-4">
+    <div class="container grid grid-cols-1 xl:grid-cols-3 gap-y-4 xl:gap-y-0 xl:gap-x-4">
       <Calendar
         v-model="date"
         :first-day-of-week="2"
         locale="ru"
-        wrapper-class="col-span-3 bg-background relative z-10"
+        wrapper-class="col-span-2 bg-background relative z-10"
         class="rounded-md border">
       </calendar>
-      <div class="flex flex-col basis-full xl:basis-1/4 border rounded">
+      <div class="flex flex-col border rounded">
         <select>
           <option>
             тип события
