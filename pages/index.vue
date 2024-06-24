@@ -6,7 +6,6 @@ import { Separator } from '~/components/ui/separator'
 import { Card, CardContent } from '~/components/ui/card'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import URLs from '~/data/urls'
-import PARTNERS from '~/data/partners'
 import CATEGORIES from '~/data/categories'
 import type { IndexPageApi } from '~/types'
 import { Calendar } from '@/components/ui/v-calendar'
@@ -36,8 +35,6 @@ useSeoMeta({
 const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
-
-console.log(data.value)
 </script>
 
 <template>

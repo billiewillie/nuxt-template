@@ -7,6 +7,9 @@ import BRANCHES from '~/data/branches'
 import BRANCH_PARTNERS from '~/data/branch-partners'
 import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, YandexMapMarker } from 'vue-yandex-maps'
 
+// create branches object without spb
+const branchesFiltered = Object.fromEntries(Object.entries(BRANCHES).filter(([key]) => key !== 'spb'))
+
 const isLoaded = ref(false)
 
 const coordinates = ref(BRANCHES.spb.map)
@@ -152,20 +155,20 @@ const coordinates = ref(BRANCHES.spb.map)
       <h2 class="section-title mb-12">Филиалы</h2>
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
         <Card
-          v-for="branch in BRANCHES"
+          v-for="branch in branchesFiltered"
           :key="branch.id"
           class="flex flex-col gap-6 p-4">
           <CardHeader class="p-0 font-medium">
-            <CardTitle>{{ branch.city }}</CardTitle>
+            <CardTitle>{{ branch.title }}</CardTitle>
           </CardHeader>
           <Separator />
           <CardContent class="p-0 font-medium">
-            <span>{{ branch.index }}</span>,
-            <span>{{ branch.country }}</span>
-            <p>{{ branch.city }}</p>
-            <p>{{ branch.address }}</p>
+            <span v-if="branch.index">{{ branch.index }}, </span>
+            <span v-if="branch.country">{{ branch.country }}, </span>
+            <span v-if="branch.city">{{ branch.city }}, </span>
+            <p v-if="branch.address">{{ branch.address }}</p>
             <p>{{ branch.phone }}</p>
-            <p>{{ branch.email }}</p>
+            <p v-if="branch.email">{{ branch.email }}</p>
           </CardContent>
         </Card>
       </div>

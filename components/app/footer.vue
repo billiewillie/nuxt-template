@@ -6,7 +6,7 @@ import CONTACTS from '~/data/contacts'
 <template>
   <footer class="bg-background-dark py-20 text-foreground-dark">
     <div class="container grid grid-cols-1 md:grid-cols-3 text-center">
-      <BaseNavigation ul-class="flex flex-col gap-4 items-start" />
+      <BaseNavigation ul-class="grid gap-4 grid-cols-2 text-left" />
       <div>
         <NuxtLink to="/">
           <NuxtImg

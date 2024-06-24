@@ -59,14 +59,14 @@ interface NewProductList {
 
 export interface Branch {
   id: number
-  country: string | null
-  index: string
-  city: string
-  address: string
   phone: string
-  email: string
+  title: string
+  city?: string
+  country?: string
+  index?: string
+  address?: string
+  email?: string
   map?: number[]
-  title?: string
 }
 
 export interface Article {
