@@ -70,7 +70,7 @@ import CATEGORIES from '~/data/categories'
           <Card class="flex flex-col gap-6 p-4 items-center text-center">
             <NuxtImg
               :src="item.icon"
-              class="w-[80px] object-contain object-center"
+              class="w-[80px] object-contain object-center h-[80px]"
               :alt="item.title" />
             <CardContent class="p-0 font-medium">
               <p class="text-2xl">Диагностика онкологических заболеваний</p>

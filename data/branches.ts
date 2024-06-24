@@ -12,6 +12,17 @@ const BRANCHES: Record<string, Branch> = {
     email: 'main@bioline.ru',
     map: [30.3136, 59.972014]
   },
+  minsk: {
+    id: 2,
+    country: 'Республика Беларусь',
+    index: '220123',
+    title: 'ООО "БиоЛайн-БС"',
+    city: 'Минск',
+    address: 'ул. В. Хоружей, 32 а',
+    phone: '+375 17 399 43 79',
+    email: 'info@bioline-bs.by',
+    map: [27.56265, 53.92365]
+  },
   msk: {
     id: 3,
     country: 'Россия',
@@ -81,17 +92,6 @@ const BRANCHES: Record<string, Branch> = {
     address: 'ул. Постышева, 22 а, Бизнес-центр "Хабаровск Сити"',
     phone: '+7 (924) 203 10 58',
     map: [82.914, 55.0316]
-  },
-  minsk: {
-    id: 2,
-    country: 'Республика Беларусь',
-    index: '220123',
-    title: 'ООО "БиоЛайн-БС"',
-    city: 'Минск',
-    address: 'ул. В. Хоружей, 32 а',
-    phone: '+375 17 399 43 79',
-    email: 'info@bioline-bs.by',
-    map: [27.56265, 53.92365]
   },
   rostov: {
     id: 10,
