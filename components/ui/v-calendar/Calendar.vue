@@ -53,7 +53,7 @@ const modelValue = useVModel(
   'modelValue',
   emits,
   {
-    passive: true
+    passive: false
   }
 )
 
@@ -73,7 +73,7 @@ function handleNav(direction: 'prev' | 'next') {
 onMounted(async () => {
   await nextTick()
   if (modelValue.value instanceof Date && calendarRef.value)
-    calendarRef.value.focusDate(modelValue.value)
+    await calendarRef.value.focusDate(modelValue.value)
 })
 
 const $slots = useSlots()

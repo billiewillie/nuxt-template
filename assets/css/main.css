@@ -75,6 +75,10 @@
     @apply flex flex-col justify-between min-h-[100.1vh] overflow-hidden;
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-background text-foreground;
   }

@@ -70,14 +70,10 @@ const date = ref(new Date())
 
   <section class="mb-4">
     <div class="container grid grid-cols-1 xl:grid-cols-3 gap-y-4 xl:gap-y-0 xl:gap-x-4">
-      <Calendar
-        v-model="date"
-        :first-day-of-week="2"
-        locale="ru"
-        wrapper-class="col-span-2 bg-background relative z-10"
-        class="rounded-md border">
-      </calendar>
-      <div class="flex flex-col border rounded">
+
+      <AppCalendar class="col-span-2 bg-background relative z-10" />
+
+      <div class="flex flex-col border rounded justify-between p-4">
         <select>
           <option>
             тип события

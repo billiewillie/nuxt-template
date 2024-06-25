@@ -1,7 +1,7 @@
 <script
   setup
   lang="ts">
-import { useFetch, useRuntimeConfig, useSeoMeta } from '#app'
+import { useFetch, useRuntimeConfig } from '#app'
 import { Separator } from '~/components/ui/separator'
 import { Card, CardContent } from '~/components/ui/card'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
@@ -9,28 +9,12 @@ import URLs from '~/data/urls'
 import CATEGORIES from '~/data/categories'
 import type { IndexPageApi } from '~/types'
 import { Calendar } from '@/components/ui/v-calendar'
-import { type Ref, ref } from 'vue'
+import { onMounted, type Ref, ref } from 'vue'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 
 const date = ref(new Date())
 
 const { API_ENDPOINT } = useRuntimeConfig().public
-
-useSeoMeta({
-  ogImage: '/img/og-logo.jpg',
-  ogType: 'website',
-  ogImageHeight: 630,
-  ogImageWidth: 1200,
-  ogLocale: 'ru_RU',
-  ogSiteName: 'Группа компаний ООО «БиоЛайн»',
-  ogTitle: 'Группа компаний ООО «БиоЛайн»',
-  ogDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
-  ogUrl: 'https://bioline.ru',
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'Группа компаний ООО «БиоЛайн»',
-  twitterDescription: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
-  twitterImage: '/img/og-logo.jpg'
-})
 
 const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
 
@@ -38,6 +22,55 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 </script>
 
 <template>
+
+  <Head>
+    <Title>Группа компаний ООО «БиоЛайн»</Title>
+    <Meta
+      name="description"
+      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+    <Meta
+      name="og:image"
+      content="/img/og-logo.jpg" />
+    <Meta
+      name="twitter:image"
+      content="/img/og-logo.jpg" />
+    <Meta
+      name="og:title"
+      content="Группа компаний ООО «БиоЛайн»" />
+    <Meta
+      name="og:description"
+      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+    <Meta
+      name="og:site_name"
+      content="bioline.vercel.app" />
+    <Meta
+      name="og:url"
+      content="https://bioline.vercel.app/contacts" />
+    <Meta
+      name="og:image:width"
+      content="1200" />
+    <Meta
+      name="og:image:height"
+      content="630" />
+    <Meta
+      name="og:type"
+      content="article" />
+    <Meta
+      name="og:locale"
+      content="ru_RU" />
+    <Meta
+      name="twitter:title"
+      content="Группа компаний ООО «БиоЛайн»" />
+    <Meta
+      name="twitter:description"
+      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+    <Meta
+      name="twitter:site"
+      content="bioline.vercel.app" />
+    <Meta
+      name="twitter:card"
+      content="summary_large_image" />
+  </Head>
 
   <!-- Slider -->
   <section class="relative mb-24 xl:mb-32 xl:h-[750px]">
@@ -183,18 +216,13 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
     <div class="container mb-16">
       <h2 class="section-title">Календарь событий</h2>
     </div>
+
     <div class="container relative flex flex-col md:flex-row gap-4">
 
-      <Calendar
-        v-model="date"
-        :first-day-of-week="2"
-        locale="ru"
-        wrapper-class="xl:w-1/2 bg-background relative z-10"
-        class="rounded-md border">
-      </calendar>
+      <LazyAppCalendar class="md:w-1/2 relative z-20 bg-background" />
 
       <Carousel
-        class="xl:absolute xl:left-[calc(50%+1rem)] xl:w-[calc(50%-2rem)] 2xl:w-[calc(50%-180px-1rem)] h-full"
+        class="h-[inherit] md:w-1/2 relative"
         :opts="{
           align: 'start',
         }">
@@ -205,8 +233,10 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
           <CarouselItem
             v-for="event in data.calendar.list"
             :key="event.id"
-            class="md:basis-1/2 h-full">
-            <div class="p-0 h-full">
+            class="lg:basis-1/2 h-full">
+            <NuxtLink
+              to="/"
+              class="p-0 h-full">
               <Card class="h-full">
                 <CardHeader class="p-0">
                   <NuxtImg
@@ -217,11 +247,41 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
                   />
                 </CardHeader>
                 <CardContent class="flex flex-col justify-center p-6">
-                  <h3 class="text-3xl font-semibold">{{ event.title }}</h3>
-                  <p>{{ event.annotation }}</p>
+                  <div class="flex items-center mb-4">
+                    <Icon
+                      name="solar:calendar-linear"
+                      class="mr-2"
+                      width="18"
+                      height="18"
+                      color="#575757" />
+                    <time
+                      class="text-[#575757] leading-none text-sm"
+                      :datetime="event.date_start">
+                      {{ event.date_start }}
+                    </time>
+                    <time
+                      v-if="event.date_end && event.date_end !== event.date_start"
+                      class="text-[#575757] leading-none text-sm"
+                      :datetime="event.date_end"> - {{ event.date_end }}
+                    </time>
+                  </div>
+                  <h3 class="text-[18px] font-semibold line-clamp-3">НПК "Новые медицинские технологии в оториноларингологии.
+                    Прошлое, настоящее и будущее".</h3>
+                  <Separator class="w-full my-4" />
+                  <p class="text-base mb-4">
+                    Крокус Экспо
+                    <br>
+                    Московская обл., Красногорск, Международная ул., 16
+                  </p>
+                  <Icon
+                    name="iconamoon:arrow-right-2-light"
+                    class="flex mr-2 self-end"
+                    width="18"
+                    height="18"
+                    color="#575757" />
                 </CardContent>
               </Card>
-            </div>
+            </NuxtLink>
           </CarouselItem>
         </CarouselContent>
         <div class="absolute right-0 -top-28 border">
