@@ -8,8 +8,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import URLs from '~/data/urls'
 import CATEGORIES from '~/data/categories'
 import type { IndexPageApi } from '~/types'
-import { Calendar } from '@/components/ui/v-calendar'
-import { onMounted, type Ref, ref } from 'vue'
+import { type Ref, ref } from 'vue'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 
 const date = ref(new Date())
