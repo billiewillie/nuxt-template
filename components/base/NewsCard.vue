@@ -2,10 +2,10 @@
   setup
   lang="ts">
 import type { Article } from '~/types'
-import URLs from '~/data/urls'
 
-defineProps<{
+const props = defineProps<{
   article: Article
+  imageLoading: 'eager' | 'lazy'
 }>()
 </script>
 
@@ -13,7 +13,7 @@ defineProps<{
   <NuxtLink
     :to="article.url"
     class="flex h-full">
-    <Card class="flex flex-col gap-6 pb-6">
+    <Card class="flex flex-col gap-6 pb-6 shadow-md hover:shadow-lg">
       <CardHeader class="p-0">
         <NuxtPicture
           :src="article.preview_img"
@@ -22,6 +22,7 @@ defineProps<{
           :img-attrs="{class:'w-full h-full object-cover object-center'}"
           width="350"
           height="250"
+          :loading="imageLoading"
         />
       </CardHeader>
       <CardContent class="flex flex-col gap-4 p-0 px-6 flex-auto">

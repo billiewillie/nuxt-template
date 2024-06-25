@@ -93,20 +93,21 @@ const onSubmit = form.handleSubmit((values) => {
       quality="90"
       :imgAttrs="{class:'w-full h-full object-cover object-top'}"
       alt="contacts form image"
+      loading="lazy"
     />
     <div class="container flex justify-end items-center h-full">
       <div class="bg-background relative p-10 rounded w-full xl:w-1/2 shadow-lg">
-        <h2 class="text-center text-2xl mb-4">
+        <h2 class="xl:text-center text-2xl mb-4">
           Заполните форму с контактными данными и наш специалист свяжется с Вами:
         </h2>
         <form
           @submit="onSubmit"
           class="flex flex-col gap-4">
-          <div class="grid xl:grid-cols-3 gap-4">
+          <div class="grid lg:grid-cols-3 gap-4">
             <FormField
               v-slot="{ componentField }"
               name="name">
-              <FormItem>
+              <FormItem class="order-1">
                 <FormControl>
                   <Input
                     type="text"
@@ -121,7 +122,7 @@ const onSubmit = form.handleSubmit((values) => {
             <FormField
               v-slot="{ componentField }"
               name="phone">
-              <FormItem>
+              <FormItem class="order-2">
                 <FormControl>
                   <Input
                     type="tel"
@@ -136,7 +137,7 @@ const onSubmit = form.handleSubmit((values) => {
             <FormField
               v-slot="{ componentField }"
               name="message">
-              <FormItem class="row-span-3 order-1">
+              <FormItem class="row-span-3 order-7 lg:order-3">
                 <FormControl>
                   <Textarea
                     placeholder="Сообщение"
@@ -152,7 +153,7 @@ const onSubmit = form.handleSubmit((values) => {
             <FormField
               v-slot="{ componentField }"
               name="email">
-              <FormItem>
+              <FormItem class="order-3 lg:order-4">
                 <FormControl>
                   <Input
                     type="email"
@@ -167,7 +168,7 @@ const onSubmit = form.handleSubmit((values) => {
             <FormField
               v-slot="{ componentField }"
               name="city">
-              <FormItem>
+              <FormItem class="order-4 lg:order-5">
                 <FormControl>
                   <Input
                     type="text"
@@ -182,7 +183,7 @@ const onSubmit = form.handleSubmit((values) => {
             <FormField
               v-slot="{ componentField }"
               name="job">
-              <FormItem>
+              <FormItem class="order-5 lg:order-6">
                 <FormControl>
                   <Input
                     type="text"
@@ -197,7 +198,7 @@ const onSubmit = form.handleSubmit((values) => {
             <FormField
               v-slot="{ componentField }"
               name="lab">
-              <FormItem>
+              <FormItem class="order-6 lg:order-7">
                 <FormControl>
                   <Input
                     type="text"

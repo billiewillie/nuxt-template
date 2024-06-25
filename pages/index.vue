@@ -98,20 +98,22 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
     <div class="container">
       <h2 class="section-title mb-12 xl:mb-16">Каталог</h2>
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-4">
-        <Card
+        <NuxtLink
+          :to="`/catalog/${item.slug}`"
           v-for="item in CATEGORIES"
-          :key="item.id"
-          class="flex flex-col gap-6 p-4 items-center text-center">
-          <NuxtImg
-            :src="item.icon"
-            class="object-contain object-center w-[80px] h-[80px]"
-            width="80"
-            height="80"
-            :alt="item.title" />
-          <CardContent class="p-0 font-medium">
-            <p class="~text-[18px]/[22px]">{{ item.title }}</p>
-          </CardContent>
-        </Card>
+          :key="item.id">
+          <Card class="flex flex-col gap-6 p-4 items-center text-center shadow-md hover:shadow-lg transition-shadow h-full">
+            <NuxtImg
+              :src="item.icon"
+              class="object-contain object-center w-[80px] h-[80px]"
+              width="80"
+              height="80"
+              :alt="item.title" />
+            <CardContent class="p-0 font-medium">
+              <p class="~text-[18px]/[22px]">{{ item.title }}</p>
+            </CardContent>
+          </Card>
+        </NuxtLink>
       </div>
     </div>
   </section>
@@ -133,7 +135,9 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
             v-for="article in data.news"
             :key="article.id"
             class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
-            <BaseNewsCard :article="article" />
+            <BaseNewsCard
+              :article="article"
+              image-loading="lazy" />
           </CarouselItem>
         </CarouselContent>
         <div class="absolute right-0 -top-32 border">
@@ -264,7 +268,8 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
                       :datetime="event.date_end"> - {{ event.date_end }}
                     </time>
                   </div>
-                  <h3 class="text-[18px] font-semibold line-clamp-3">НПК "Новые медицинские технологии в оториноларингологии.
+                  <h3 class="text-[18px] font-semibold line-clamp-3">НПК "Новые медицинские технологии в
+                    оториноларингологии.
                     Прошлое, настоящее и будущее".</h3>
                   <Separator class="w-full my-4" />
                   <p class="text-base mb-4">
