@@ -86,7 +86,7 @@ const onSubmit = form.handleSubmit((values) => {
 </script>
 
 <template>
-  <section class="relative h-[750px]">
+  <section class="relative xl:h-[750px] py-8">
     <NuxtPicture
       src="/img/contacts-form-bg.jpg"
       class="absolute left-0 top-0 h-full w-full"
@@ -95,14 +95,14 @@ const onSubmit = form.handleSubmit((values) => {
       alt="contacts form image"
     />
     <div class="container flex justify-end items-center h-full">
-      <div class="bg-background relative p-10 rounded w-1/2 shadow-lg">
+      <div class="bg-background relative p-10 rounded w-full xl:w-1/2 shadow-lg">
         <h2 class="text-center text-2xl mb-4">
           Заполните форму с контактными данными и наш специалист свяжется с Вами:
         </h2>
         <form
           @submit="onSubmit"
           class="flex flex-col gap-4">
-          <div class="grid grid-cols-3 gap-4">
+          <div class="grid xl:grid-cols-3 gap-4">
             <FormField
               v-slot="{ componentField }"
               name="name">
@@ -136,7 +136,7 @@ const onSubmit = form.handleSubmit((values) => {
             <FormField
               v-slot="{ componentField }"
               name="message">
-              <FormItem class="row-span-3">
+              <FormItem class="row-span-3 order-1">
                 <FormControl>
                   <Textarea
                     placeholder="Сообщение"
@@ -210,7 +210,7 @@ const onSubmit = form.handleSubmit((values) => {
               </FormItem>
             </FormField>
           </div>
-          <div class="flex gap-4">
+          <div class="flex flex-col xl:flex-row gap-4">
             <Button
               type="submit"
               aria-label="submit"
@@ -242,7 +242,3 @@ const onSubmit = form.handleSubmit((values) => {
     </div>
   </section>
 </template>
-
-<style scoped>
-
-</style>

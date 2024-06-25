@@ -61,7 +61,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
     </div>
   </section>
 
-  <!--каталог-->
+  <!-- каталог -->
   <section class="mb-24 xl:mb-32">
     <div class="container">
       <h2 class="section-title mb-12 xl:mb-16">Каталог</h2>
@@ -77,7 +77,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
             height="80"
             :alt="item.title" />
           <CardContent class="p-0 font-medium">
-            <p class="text-2xl">{{ item.title }}</p>
+            <p class="~text-[18px]/[22px]">{{ item.title }}</p>
           </CardContent>
         </Card>
       </div>
@@ -183,18 +183,18 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
     <div class="container mb-16">
       <h2 class="section-title">Календарь событий</h2>
     </div>
-    <div class="container relative flex gap-4">
+    <div class="container relative flex flex-col md:flex-row gap-4">
 
       <Calendar
         v-model="date"
         :first-day-of-week="2"
         locale="ru"
-        wrapper-class="w-1/2 bg-background relative z-10"
+        wrapper-class="xl:w-1/2 bg-background relative z-10"
         class="rounded-md border">
       </calendar>
 
       <Carousel
-        class="absolute left-[calc(50%+1rem)] xl:w-[calc(50%-2rem)] 2xl:w-[calc(50%-180px-1rem)] h-full"
+        class="xl:absolute xl:left-[calc(50%+1rem)] xl:w-[calc(50%-2rem)] 2xl:w-[calc(50%-180px-1rem)] h-full"
         :opts="{
           align: 'start',
         }">
