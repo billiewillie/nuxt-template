@@ -39,7 +39,8 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 
 <template>
 
-  <section class="relative mb-24 xl:mb-32 h-[750px]">
+  <!-- Slider -->
+  <section class="relative mb-24 xl:mb-32 xl:h-[750px]">
     <NuxtPicture
       src="/img/index-page-slider/slider-1.jpg"
       class="absolute left-0 top-0 h-full w-full"
@@ -48,7 +49,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
       alt="slider image"
     />
     <div class="container">
-      <div class="relative pt-40 w-1/2 max-w-[660px]">
+      <div class="relative py-20 xl:pt-40 xl:w-1/2 max-w-[660px]">
         <h2 class="uppercase font-semibold ~text-[28px]/[36px]">операционное и госпитальное оборудование</h2>
         <Separator class="my-4" />
         <p>
@@ -64,7 +65,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
   <section class="mb-24 xl:mb-32">
     <div class="container">
       <h2 class="section-title mb-12 xl:mb-16">Каталог</h2>
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
+      <div class="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-4">
         <Card
           v-for="item in CATEGORIES"
           :key="item.id"

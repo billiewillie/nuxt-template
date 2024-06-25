@@ -54,26 +54,26 @@ import CATEGORIES from '~/data/categories'
       content="summary_large_image" />
   </Head>
 
-  <section class="mb-16 pt-14">
+  <section class="mb-12 xl:mb-16 pt-14">
     <div class="container">
       <h1 class="section-title">Каталог</h1>
     </div>
   </section>
 
-  <section class="mb-16">
+  <section class="mb-12 xl:mb-16">
     <div class="container">
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
+      <div class="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-4">
         <NuxtLink
           v-for="item in CATEGORIES"
           :key="item.id"
           :to="`/catalog/${item.slug}`">
-          <Card class="flex flex-col gap-6 p-4 items-center text-center">
+          <Card class="flex flex-col gap-6 p-4 items-center text-center h-full">
             <NuxtImg
               :src="item.icon"
               class="w-[80px] object-contain object-center h-[80px]"
               :alt="item.title" />
             <CardContent class="p-0 font-medium">
-              <p class="text-2xl">Диагностика онкологических заболеваний</p>
+              <p class="text-2xl">{{ item.title }}</p>
             </CardContent>
           </Card>
         </NuxtLink>

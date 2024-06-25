@@ -4,8 +4,8 @@ import CONTACTS from '~/data/contacts'
 </script>
 
 <template>
-  <footer class="bg-background-dark py-20 text-foreground-dark">
-    <div class="container grid grid-cols-1 md:grid-cols-3 text-center">
+  <footer class="bg-background-dark py-12 text-foreground-dark">
+    <div class="container grid grid-cols-1 md:grid-cols-3 text-center gap-8">
       <BaseNavigation ul-class="grid gap-4 grid-cols-2 text-left" />
       <div>
         <NuxtLink to="/">
@@ -18,7 +18,7 @@ import CONTACTS from '~/data/contacts'
         </NuxtLink>
       </div>
       <div class="flex flex-col items-start text-left">
-        <h3 class="text-primary font-semibold">Центральный офис:</h3>
+        <h3 class="text-primary font-semibold mb-4">Центральный офис:</h3>
         {{ CONTACTS.spb.index }}, {{ CONTACTS.spb.country }}, {{ CONTACTS.spb.city }},
         <br>
         {{ CONTACTS.spb.address }}
