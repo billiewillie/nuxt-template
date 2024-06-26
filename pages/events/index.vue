@@ -4,10 +4,38 @@
 import { type Ref, ref } from 'vue'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 import NEWS from '~/data/news'
+import type { Events } from '~/types'
+import { useFetch, useRuntimeConfig } from '#app'
+import URLs from '~/data/urls'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
+
+const { API_ENDPOINT } = useRuntimeConfig().public
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
+
 const date = ref(new Date())
 
+const month = date.value.getMonth() + 1
+
+const { data: events, pending, error }: {
+  data: Events
+  pending: Ref<boolean>
+  error: Ref<any>
+} = await useFetch(
+  `${API_ENDPOINT}${URLs.events}/${month}/10`,
+  {
+    pick: ['list', 'countries', 'categories']
+  }
+)
+
+console.log(events.value)
 </script>
 
 <template>
@@ -68,83 +96,38 @@ const date = ref(new Date())
   </section>
 
   <section class="mb-4">
-    <div class="container grid grid-cols-1 xl:grid-cols-3 gap-y-4 xl:gap-y-0 xl:gap-x-4">
+    <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-4 xl:gap-y-0 gap-x-4">
 
-      <AppCalendar class="col-span-2 bg-background relative z-10" />
+      <AppCalendar class="xl:col-span-2 bg-background relative z-10" />
 
       <div class="flex flex-col border rounded justify-between p-4">
-        <select>
-          <option>
-            тип события
-          </option>
-          <option>
-            тип события
-          </option>
-        </select>
-        <select>
-          <option>
-            тип события
-          </option>
-          <option>
-            тип события
-          </option>
-        </select>
-        <select>
-          <option>
-            тип события
-          </option>
-          <option>
-            тип события
-          </option>
-        </select>
-        <button>Применить</button>
+        <Select>
+          <SelectTrigger class="w-full">
+            <SelectValue placeholder="Категория" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem
+                v-for="category in events.categories"
+                :key="category.id"
+                :value="category.title">
+                {{ category.title }}
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <Button>Применить</Button>
       </div>
     </div>
   </section>
 
   <section class="mb-16">
     <div class="container">
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(340px,_1fr))] gap-4">
-        <NuxtLink
-          v-for="article in NEWS"
-          :key="article.id"
-          :to="`/news/${article.slug}`">
-          <Card class="flex flex-col gap-6 pb-6">
-            <CardHeader class="p-0">
-              <BaseImage
-                :src="article.preview"
-                alt="alt"
-                aspect-ratio="aspect-[7/5]"
-                placeholder="bg-[#e4e7ef]"
-                width="350"
-                height="250"
-              />
-            </CardHeader>
-            <CardContent class="flex flex-col gap-4 p-0 px-6">
-              <CardTitle>{{ article.title }}</CardTitle>
-              <CardDescription>{{ article.title }}</CardDescription>
-            </CardContent>
-            <CardFooter class="flex items-center justify-between p-0 px-6">
-              <div class="flex gap-4 items-center">
-                <Icon
-                  name="solar:calendar-linear"
-                  width="18"
-                  height="18"
-                  color="#575757" />
-                <time
-                  class="text-[#575757]"
-                  :datetime="article.date">
-                  {{ article.date }}
-                </time>
-              </div>
-              <Icon
-                name="iconamoon:arrow-right-2-light"
-                width="18"
-                height="18"
-                style="color: #575757" />
-            </CardFooter>
-          </Card>
-        </NuxtLink>
+      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-3 gap-4">
+        <BaseEventCard
+          v-for="event in events.list"
+          :key="event.id"
+          :event="event" />
       </div>
     </div>
   </section>

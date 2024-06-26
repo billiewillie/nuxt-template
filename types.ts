@@ -1,16 +1,19 @@
-interface CalendarItem {
+interface Category {
+  id: number
+  title: string
+}
+
+interface City {
   id: number
   title: string
   url: string
-  annotation: string
-  preview_img: string
-  date_end: string
-  date_start: string
 }
 
-interface Calendar {
-  list: Array<CalendarItem>
-  all_events_month: Array<CalendarItem>
+interface Country {
+  id: number
+  title: string
+  url: string
+  cities: Array<City>
 }
 
 interface Section {
@@ -57,6 +60,23 @@ interface NewProductList {
   preview_img: string
 }
 
+export interface Event {
+  id: number
+  title: string
+  url: string
+  annotation: string
+  preview_img: string
+  date_end: string
+  date_start: string
+}
+
+export interface Events {
+  list: Array<Event>
+  all_events_month: Array<Event>
+  countries: Array<Country>
+  categories: Array<Category>
+}
+
 export interface Branch {
   id: number
   phone: string
@@ -94,7 +114,7 @@ export interface News {
 
 export interface IndexPageApi {
   catalog: Array<string>
-  calendar: Calendar
+  calendar: Events
   content: string,
   created_at: string,
   id: number,

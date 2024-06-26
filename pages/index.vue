@@ -10,7 +10,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
@@ -283,55 +282,7 @@ console.log(data.value)
             v-for="event in data.calendar.list"
             :key="event.id"
             class="lg:basis-1/2 h-full">
-            <NuxtLink
-              to="/"
-              class="p-0 h-full">
-              <Card class="h-full shadow-md hover:shadow-lg">
-                <CardHeader class="p-0">
-                  <NuxtImg
-                    :src="event.preview_img"
-                    :alt="event.title"
-                    height="150"
-                    class="w-full h-[150px] object-cover object-top"
-                  />
-                </CardHeader>
-                <CardContent class="flex flex-col justify-center p-6">
-                  <div class="flex items-center mb-4">
-                    <Icon
-                      name="solar:calendar-linear"
-                      class="mr-2"
-                      width="18"
-                      height="18"
-                      color="#575757" />
-                    <time
-                      class="text-[#575757] leading-none text-sm"
-                      :datetime="event.date_start">
-                      {{ event.date_start }}
-                    </time>
-                    <time
-                      v-if="event.date_end && event.date_end !== event.date_start"
-                      class="text-[#575757] leading-none text-sm"
-                      :datetime="event.date_end"> - {{ event.date_end }}
-                    </time>
-                  </div>
-                  <h3 class="text-[18px] font-semibold line-clamp-3">НПК "Новые медицинские технологии в
-                    оториноларингологии.
-                    Прошлое, настоящее и будущее".</h3>
-                  <Separator class="w-full my-4" />
-                  <p class="text-base mb-4">
-                    Крокус Экспо
-                    <br>
-                    Московская обл., Красногорск, Международная ул., 16
-                  </p>
-                  <Icon
-                    name="iconamoon:arrow-right-2-light"
-                    class="flex mr-2 self-end"
-                    width="18"
-                    height="18"
-                    color="#575757" />
-                </CardContent>
-              </Card>
-            </NuxtLink>
+            <BaseEventCard :event="event" />
           </CarouselItem>
         </CarouselContent>
         <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
@@ -341,7 +292,7 @@ console.log(data.value)
           </div>
           <Button as-child>
             <NuxtLink
-              to="/news"
+              to="/events"
               class="flex gap-2 items-center">
               Все события
               <ChevronRight class="w-4 h-4" />
@@ -380,7 +331,8 @@ console.log(data.value)
 
 <style>
 .calendar-backdrop::before {
-  display: block;
+
+  display: none;
   content: '';
   position: absolute;
   top: -4%;
@@ -389,5 +341,11 @@ console.log(data.value)
   height: 108%;
   background: #fff;
   z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .calendar-backdrop::before {
+    display: block;
+  }
 }
 </style>

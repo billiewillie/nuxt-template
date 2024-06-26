@@ -72,6 +72,7 @@ const { data: news }: { news: News[] } = await useFetch(`${API_ENDPOINT}${URLs.n
         <BaseNewsCard
           v-for="article in news"
           :key="article.id"
+          image-loading="lazy"
           :article="article" />
       </div>
     </div>
