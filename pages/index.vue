@@ -5,10 +5,20 @@ import { useFetch, useRuntimeConfig } from '#app'
 import { Separator } from '~/components/ui/separator'
 import { Card, CardContent } from '~/components/ui/card'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
 import URLs from '~/data/urls'
 import CATEGORIES from '~/data/categories'
 import type { IndexPageApi } from '~/types'
 import { type Ref, ref } from 'vue'
+import { ChevronRight } from 'lucide-vue-next'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 
 const date = ref(new Date())
@@ -18,6 +28,8 @@ const { API_ENDPOINT } = useRuntimeConfig().public
 const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
+
+console.log(data.value)
 </script>
 
 <template>
@@ -140,9 +152,19 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
               image-loading="lazy" />
           </CarouselItem>
         </CarouselContent>
-        <div class="absolute right-0 -top-32 border">
-          <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
-          <CarouselNext class="relative left-0 top-0 translate-y-0" />
+        <div class="absolute right-0 -top-32 flex gap-4 items-center">
+          <div class="flex gap-4">
+            <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+            <CarouselNext class="relative left-0 top-0 translate-y-0" />
+          </div>
+          <Button as-child>
+            <NuxtLink
+              to="/news"
+              class="flex gap-2 items-center">
+              Все новости
+              <ChevronRight class="w-4 h-4" />
+            </NuxtLink>
+          </Button>
         </div>
       </Carousel>
     </div>
@@ -168,7 +190,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
             <NuxtLink
               to="/"
               class="flex h-full">
-              <Card class="flex flex-col gap-6 p-6">
+              <Card class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg">
                 <CardHeader class="p-0">
                   <NuxtPicture
                     :src="product.preview_img"
@@ -206,15 +228,40 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
             </NuxtLink>
           </CarouselItem>
         </CarouselContent>
-        <div class="absolute right-0 -top-32 border">
-          <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
-          <CarouselNext class="relative left-0 top-0 translate-y-0" />
+        <div class="absolute right-0 -top-32 flex gap-4 items-center">
+          <div class="flex gap-4">
+            <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+            <CarouselNext class="relative left-0 top-0 translate-y-0" />
+          </div>
+          <Select>
+            <SelectTrigger class="w-[180px]">
+              <SelectValue placeholder="Категория" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem
+                  v-for="category in data.new_products.title"
+                  :key="category.id"
+                  :value="category.title">
+                  {{ category.title }}
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Button as-child>
+            <NuxtLink
+              to="/news"
+              class="flex gap-2 items-center">
+              Все новинки
+              <ChevronRight class="w-4 h-4" />
+            </NuxtLink>
+          </Button>
         </div>
       </Carousel>
     </div>
   </section>
 
-  <!--календарь-->
+  <!--события-->
   <section class="mb-24 xl:mb-32">
     <div class="container mb-16">
       <h2 class="section-title">Календарь событий</h2>
@@ -240,7 +287,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
             <NuxtLink
               to="/"
               class="p-0 h-full">
-              <Card class="h-full">
+              <Card class="h-full shadow-md hover:shadow-lg">
                 <CardHeader class="p-0">
                   <NuxtImg
                     :src="event.preview_img"

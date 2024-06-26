@@ -37,9 +37,9 @@ const NAVIGATION = [
   },
   {
     id: 7,
-    title: 'Календарь',
-    slug: 'calendar',
-    href: '/calendar'
+    title: 'События',
+    slug: 'events',
+    href: '/events'
   },
   {
     id: 9,
