@@ -139,9 +139,8 @@ console.log(data.value)
       <Carousel
         class="relative w-full"
         :opts="{
-            align: 'start',
-          }"
-      >
+          align: 'start',
+        }">
         <CarouselContent :is-visible="true">
           <CarouselItem
             v-for="article in data.news"
@@ -152,12 +151,12 @@ console.log(data.value)
               image-loading="lazy" />
           </CarouselItem>
         </CarouselContent>
-        <div class="absolute right-0 -top-32 flex gap-4 items-center">
+        <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
           <div class="flex gap-4">
             <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
             <CarouselNext class="relative left-0 top-0 translate-y-0" />
           </div>
-          <Button as-child>
+          <Button as-child class="hidden md:flex">
             <NuxtLink
               to="/news"
               class="flex gap-2 items-center">
@@ -190,7 +189,7 @@ console.log(data.value)
             <NuxtLink
               to="/"
               class="flex h-full">
-              <Card class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg">
+              <Card class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full">
                 <CardHeader class="p-0">
                   <NuxtPicture
                     :src="product.preview_img"
@@ -228,13 +227,13 @@ console.log(data.value)
             </NuxtLink>
           </CarouselItem>
         </CarouselContent>
-        <div class="absolute right-0 -top-32 flex gap-4 items-center">
+        <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
           <div class="flex gap-4">
             <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
             <CarouselNext class="relative left-0 top-0 translate-y-0" />
           </div>
           <Select>
-            <SelectTrigger class="w-[180px]">
+            <SelectTrigger class="w-[180px] hidden md:flex">
               <SelectValue placeholder="Категория" />
             </SelectTrigger>
             <SelectContent>
@@ -248,7 +247,7 @@ console.log(data.value)
               </SelectGroup>
             </SelectContent>
           </Select>
-          <Button as-child>
+          <Button as-child class="hidden md:flex">
             <NuxtLink
               to="/news"
               class="flex gap-2 items-center">
@@ -267,7 +266,7 @@ console.log(data.value)
       <h2 class="section-title">Календарь событий</h2>
     </div>
 
-    <div class="container relative flex flex-col md:flex-row gap-4">
+    <div class="container relative flex flex-col md:flex-row gap-4 calendar-backdrop">
 
       <LazyAppCalendar class="md:w-1/2 relative z-20 bg-background" />
 
@@ -335,9 +334,19 @@ console.log(data.value)
             </NuxtLink>
           </CarouselItem>
         </CarouselContent>
-        <div class="absolute right-0 -top-28 border">
-          <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
-          <CarouselNext class="relative left-0 top-0 translate-y-0" />
+        <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
+          <div class="flex gap-4">
+            <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+            <CarouselNext class="relative left-0 top-0 translate-y-0" />
+          </div>
+          <Button as-child>
+            <NuxtLink
+              to="/news"
+              class="flex gap-2 items-center">
+              Все события
+              <ChevronRight class="w-4 h-4" />
+            </NuxtLink>
+          </Button>
         </div>
       </Carousel>
     </div>
@@ -368,3 +377,17 @@ console.log(data.value)
   <BaseContactForm />
 
 </template>
+
+<style>
+.calendar-backdrop::before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: -4%;
+  left: 0;
+  width: calc(50% - 8px);
+  height: 108%;
+  background: #fff;
+  z-index: 1;
+}
+</style>

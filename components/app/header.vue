@@ -75,7 +75,7 @@ const route = useRoute()
               </VisuallyHidden>
             </SheetHeader>
             <nav>
-              <ul>
+              <ul class="flex flex-col gap-4">
                 <li
                   v-for="item in NAVIGATION"
                   :key="item.id">

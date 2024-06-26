@@ -5,7 +5,7 @@ import CONTACTS from '~/data/contacts'
 
 <template>
   <footer class="bg-background-dark py-12 text-foreground-dark">
-    <div class="container grid grid-cols-1 md:grid-cols-3 text-center gap-8">
+    <div class="container grid grid-cols-1 lg:grid-cols-3 text-center gap-12">
       <BaseNavigation ul-class="grid gap-4 grid-cols-2 text-left" />
       <div>
         <NuxtLink to="/">
@@ -14,7 +14,7 @@ import CONTACTS from '~/data/contacts'
             alt="logo"
             height="86"
             width="161"
-            class="mx-auto w-40" />
+            class="lg:mx-auto w-40" />
         </NuxtLink>
       </div>
       <div class="flex flex-col items-start text-left">

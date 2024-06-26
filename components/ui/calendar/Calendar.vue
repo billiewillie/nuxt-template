@@ -72,7 +72,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
               <CalendarCellTrigger
                 :day="weekDate"
                 :month="month.value"
-                class="h-full w-full items-start justify-start p-2 !rounded-none"
+                class="h-full w-full items-start justify-center xl:justify-start p-2 !rounded-none"
               />
             </CalendarCell>
           </CalendarGridRow>

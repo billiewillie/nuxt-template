@@ -22,7 +22,3 @@ const props = withDefaults(defineProps<{
     weekday-format="short"
     :class="cn('rounded-md border', props.class)" />
 </template>
-
-<style scoped>
-
-</style>
