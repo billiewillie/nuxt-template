@@ -1,3 +1,14 @@
+interface Product {
+  id: number
+  title: string
+  preview_img: string
+  url: string
+  content: string
+  sort: number
+  is_favourites: number
+  is_comparison: number
+}
+
 interface Category {
   id: number
   title: string
@@ -128,4 +139,10 @@ export interface IndexPageApi {
     title: Array<NewProductTitle>,
     list: Array<NewProductList>
   }
+}
+
+export interface InStockCategory {
+  id: number
+  title: string
+  list: Array<Product>
 }

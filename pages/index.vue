@@ -27,8 +27,6 @@ const { API_ENDPOINT } = useRuntimeConfig().public
 const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
-
-console.log(data.value)
 </script>
 
 <template>

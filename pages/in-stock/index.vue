@@ -1,6 +1,16 @@
-<script setup>
-import CATEGORIES from '~/data/categories'
-import { Card, CardContent } from '~/components/ui/card'
+<script setup lang="ts">
+import type { InStockCategory } from '~/types'
+import URLs from '~/data/urls'
+
+const activeCategory = ref(1)
+
+const { API_ENDPOINT } = useRuntimeConfig().public
+
+const { data }: {data: InStockCategory[]} = await useFetch(`${API_ENDPOINT}${URLs.inStock}`)
+
+activeCategory.value = data.value[0].id
+
+console.log(data.value)
 </script>
 
 <template>
