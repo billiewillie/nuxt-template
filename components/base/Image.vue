@@ -28,6 +28,10 @@ const props = defineProps({
   height: {
     type: String,
     default: "90"
+  },
+  loading: {
+    type: String,
+    default: "eager"
   }
 })
 

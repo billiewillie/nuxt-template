@@ -211,7 +211,7 @@ const onSubmit = form.handleSubmit((values) => {
               </FormItem>
             </FormField>
           </div>
-          <div class="flex flex-col xl:flex-row gap-4">
+          <div class="grid lg:grid-cols-3 gap-4">
             <Button
               type="submit"
               aria-label="submit"
@@ -222,7 +222,7 @@ const onSubmit = form.handleSubmit((values) => {
               v-slot="{ value, handleChange }"
               type="checkbox"
               name="checkbox">
-              <FormItem class="flex flex-row items-start gap-x-3 space-y-0 rounded-md">
+              <FormItem class="flex items-start lg:col-span-2 gap-x-2 space-y-0 rounded-md">
                 <FormControl :id="checkId">
                   <Checkbox
                     :checked="value"

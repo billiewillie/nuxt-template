@@ -15,14 +15,12 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-icon',
     'nuxt-marquee',
-    'vue-yandex-maps/nuxt'
+    'vue-yandex-maps/nuxt',
+    "nuxt-viewport"
   ],
   image: {
     inject: true,
     format: ['webp']
-  },
-  imports: {
-    autoImport: false
   },
   tailwindcss: {
     cssPath: ['~/assets/css/main.css', { injectPosition: 'first' }],

@@ -3,9 +3,16 @@ import { ref } from 'vue'
 import CONTACTS from '~/data/contacts'
 import { SERVICE } from '~/data/constants'
 import { Card, CardContent } from '~/components/ui/card'
+import { setMapHeight } from '~/composables/setMapHeight'
 import BRANCHES from '~/data/branches'
 import BRANCH_PARTNERS from '~/data/branch-partners'
 import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, YandexMapMarker } from 'vue-yandex-maps'
+
+const isLoaded = ref(false)
+
+const coordinates = ref(BRANCHES.spb.map)
+
+const viewport = useViewport()
 
 // create branches object without spb
 const branchesFiltered = Object.fromEntries(
@@ -13,10 +20,6 @@ const branchesFiltered = Object.fromEntries(
     .entries(BRANCHES)
     .filter(([key]) => key !== 'spb')
 )
-
-const isLoaded = ref(false)
-
-const coordinates = ref(BRANCHES.spb.map)
 </script>
 
 <template>
@@ -77,30 +80,23 @@ const coordinates = ref(BRANCHES.spb.map)
   </section>
 
   <section class="mb-12">
-    <div class="container flex gap-4">
-      <div class="relative basis-2/3 3xl:min-h-[438px] rounded overflow-hidden">
-        <div
-          class="absolute left-0 top-0 w-full h-full bg-blue-500 transition-opacity duration-500"
-          :class="{ 'opacity-0': isLoaded }"></div>
-        <NuxtPicture
-          src="/img/contacts-page-first.jpg"
-          class="w-full h-full object-cover object-top"
-          :img-attrs="{class:'w-full h-full object-cover object-top'}"
-          quality="80"
-          width="940"
-          height="438"
-          alt="центральный офис"
-          @load="isLoaded = true"
-        />
-      </div>
-      <div class="basis-1/3">
-        <h2>Центральный офис</h2>
-        <p>{{ CONTACTS.spb.index }}</p>
-        <p>{{ CONTACTS.spb.country }}</p>
-        <p>{{ CONTACTS.spb.city }}</p>
-        <p>{{ CONTACTS.spb.address }}</p>
-        <p>{{ CONTACTS.spb.phone }}</p>
-        <p>{{ CONTACTS.spb.email }}</p>
+    <div class="container flex flex-col md:flex-row gap-4">
+      <BaseImage
+        class="basis-full md:basis-1/2 lg:basis-2/3 rounded overflow-hidden"
+        src="/img/contacts-page-first.jpg"
+        alt="центральный офис"
+        width="884"
+        height="438"
+        placeholder="bg-[#2264B4]"
+      />
+      <div class="basis-full md:basis-1/2 lg:basis-1/3">
+        <h2 class="font-bold mb-2">Центральный офис</h2>
+        <span>{{ CONTACTS.spb.index }}, </span>
+        <span>{{ CONTACTS.spb.country }}, </span>
+        <span>{{ CONTACTS.spb.city }}</span>
+        <p class="mb-2">{{ CONTACTS.spb.address }}</p>
+        <p class="mb-2">{{ CONTACTS.spb.phone }}</p>
+        <p class="mb-2">{{ CONTACTS.spb.email }}</p>
       </div>
     </div>
   </section>
@@ -115,7 +111,7 @@ const coordinates = ref(BRANCHES.spb.map)
           },
         }"
         width="100%"
-        height="500px"
+        :height="setMapHeight()"
       >
         <yandex-map-default-scheme-layer />
         <yandex-map-default-features-layer />
@@ -129,32 +125,31 @@ const coordinates = ref(BRANCHES.spb.map)
     </div>
   </section>
 
-  <section class="mb-20">
-    <div class="container flex gap-4">
-      <div class="relative basis-2/3 3xl:min-h-[438px] rounded overflow-hidden">
-        <div
-          class="absolute left-0 top-0 w-full h-full bg-[#ccc] transition-opacity duration-500"
-          :class="{ 'opacity-0': isLoaded }"></div>
-        <NuxtPicture
-          src="/img/contacts-page-doctors.jpg"
-          class="w-full h-full object-cover object-top"
-          :img-attrs="{class:'w-full h-full object-cover object-top'}"
-          quality="90"
-          width="940"
-          height="438"
-          alt="центральный офис"
-          @load="isLoaded = true"
-        />
-      </div>
-      <div class="basis-1/3">
-        <h2>Сервисная служба для всех регионов России</h2>
-        <p>Телефон: {{ SERVICE.phone }}</p>
-        <p>Email: {{ SERVICE.email }}</p>
-      </div>
+  <section class="mb-24 xl:mb-32">
+    <div class="container flex flex-col md:flex-row gap-4">
+      <BaseImage
+        class="basis-full md:basis-1/2 lg:basis-2/3 rounded overflow-hidden 2xl:min-h-[438px]"
+        src="/img/contacts-page-doctors.jpg"
+        alt="сервисная служба"
+        width="940"
+        height="438"
+        quality="90"
+        placeholder="bg-[#DDDED9]"
+      />
+      <Card class="basis-full md:basis-1/2 lg:basis-1/3 p-4">
+        <CardHeader class="font-medium p-0">
+          <h2 class="~text-[18px]/[22px]">Сервисная служба для всех регионов России</h2>
+        </CardHeader>
+        <Separator class="my-2" />
+        <CardContent class="p-0">
+          <p>Телефон: {{ SERVICE.phone }}</p>
+          <p>Email: {{ SERVICE.email }}</p>
+        </CardContent>
+      </Card>
     </div>
   </section>
 
-  <section class="mb-20">
+  <section class="mb-12">
     <div class="container">
       <h2 class="section-title mb-12">Филиалы</h2>
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
@@ -179,7 +174,7 @@ const coordinates = ref(BRANCHES.spb.map)
     </div>
   </section>
 
-  <section class="mb-20">
+  <section class="mb-24 xl:mb-32">
     <div class="container">
       <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
         <Card
@@ -187,7 +182,9 @@ const coordinates = ref(BRANCHES.spb.map)
           :key="branch.id"
           class="flex flex-col gap-6 p-4">
           <CardHeader class="p-0 font-medium">
-            <CardTitle>{{ branch.title }}</CardTitle>
+            <CardTitle class="leading-7">
+              {{ branch.title }}
+            </CardTitle>
           </CardHeader>
           <Separator />
           <CardContent class="p-0 font-medium">
