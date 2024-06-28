@@ -1,14 +1,16 @@
-<script setup lang="ts">
+<script
+  setup
+  lang="ts">
 import type { InStockCategory } from '~/types'
 import URLs from '~/data/urls'
 
-const activeCategory = ref(1)
+const activeCategory = ref({})
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
-const { data }: {data: InStockCategory[]} = await useFetch(`${API_ENDPOINT}${URLs.inStock}`)
+const { data }: { data: InStockCategory[] } = await useFetch(`${API_ENDPOINT}${URLs.inStock}`)
 
-activeCategory.value = data.value[0].id
+activeCategory.value = data.value[0]
 
 console.log(data.value)
 </script>
@@ -65,8 +67,17 @@ console.log(data.value)
   </Head>
 
   <section class="mb-16 pt-14">
-    <div class="container">
+    <div class="container flex justify-between items-center">
       <h1 class="section-title">На складе</h1>
+      <div class="flex gap-4">
+        <Button
+          v-for="category in data"
+          :key="category.id"
+          :variant="category.id === activeCategory.id ? 'default' : 'outline'"
+          @click="activeCategory = category">
+          {{ category.title }}
+        </Button>
+      </div>
     </div>
   </section>
 
@@ -74,15 +85,15 @@ console.log(data.value)
     <div class="container">
       <div class="flex flex-col gap-4">
         <Card
-          v-for="(_, index) in 4"
-          :key="index"
-          class="flex flex-col gap-6 p-4 items-center text-center">
+          v-for="product in activeCategory.list"
+          :key="product.id"
+          class="flex flex-col gap-6 p-4 lg:p-8 items-center text-center">
           <CardContent class="flex flex-col xl:flex-row w-full p-0 gap-8">
             <div class="flex basis-full xl:basis-1/3 justify-center">
               <BaseImage
                 class="w-full xl:w-[350]"
-                src="/img/items/item-1.jpg"
-                alt="alt"
+                :src="product.preview_img"
+                :alt="product.title"
                 aspect-ratio="aspect-square"
                 placeholder="bg-[#fff]"
                 width="350"
@@ -91,23 +102,14 @@ console.log(data.value)
             </div>
 
             <div class="basis-2/3 flex flex-col items-start gap-6">
-              <h2 class="font-bold text-2xl">Автоматический разливочный модуль в чашки Петри</h2>
+              <h2 class="font-bold text-2xl">{{ product.title }}</h2>
               <Separator />
-              <p class="text-xl text-gray-500">
-                Производитель: Systec GmbH & Co. KG, Германия
-              </p>
-              <ul class="text-start">
-                <li>Вместимость карусели: 440 чашек Петри.</li>
-                <li>Сенсорный цветной дисплей.</li>
-                <li>Встроенная база данных чашек Петри различных производителей с возможностью её дополнения.</li>
-                <li>Диапазон дозирования среды - 1-1000 мл.</li>
-                <li>Возможность полуавтоматического розлива питательной среды в любую емкость.</li>
-                <li>УФ-лампа в зоне розлива среды.</li>
-                <li>Совместимость со средоваркой любого производителя.</li>
-              </ul>
+              <div
+                v-html="product.content"
+                class="text-left"></div>
             </div>
           </CardContent>
-          <CardFooter class="flex flex-col xl:flex-row gap-4 justify-between w-full">
+          <CardFooter class="flex flex-col xl:flex-row gap-4 justify-between w-full p-0">
             <div class="flex">
               <Icon
                 name="iconoir:star"
