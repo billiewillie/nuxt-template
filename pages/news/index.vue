@@ -4,9 +4,24 @@
 import URLs from '~/data/urls'
 import { useFetch, useRuntimeConfig } from '#app'
 import type { News } from '~/types'
+import { years } from '~/data/constants'
+
 const { API_ENDPOINT } = useRuntimeConfig().public
 
+const newsByYear = ref(null)
+const activeYear = ref(years[0])
+
 const { data: news }: { news: News[] } = await useFetch(`${API_ENDPOINT}${URLs.news}`)
+
+function getNewsByYear() {
+  newsByYear.value = news.value.filter((article) => article.year === activeYear.value)
+}
+
+onMounted(() => {
+  getNewsByYear()
+})
+
+console.log(news.value)
 </script>
 
 <template>
@@ -61,16 +76,25 @@ const { data: news }: { news: News[] } = await useFetch(`${API_ENDPOINT}${URLs.n
   </Head>
 
   <section class="mb-16 pt-14">
-    <div class="container">
+    <div class="container flex justify-between items-center">
       <h1 class="section-title">Новости</h1>
+      <div class="flex gap-4">
+        <Button
+          :variant="activeYear === year ? 'default' : 'ghost'"
+          v-for="year in years"
+          @click="activeYear = year; getNewsByYear()"
+          :key="year">
+          {{ year }}
+        </Button>
+      </div>
     </div>
   </section>
 
   <section class="mb-16">
     <div class="container">
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] gap-4 items-stretch">
+      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] lg:grid-cols-3 2xl:grid-cols-4 gap-4 items-stretch">
         <BaseNewsCard
-          v-for="article in news"
+          v-for="article in newsByYear"
           :key="article.id"
           image-loading="lazy"
           :article="article" />

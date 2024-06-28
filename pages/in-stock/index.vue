@@ -4,7 +4,7 @@
 import type { InStockCategory } from '~/types'
 import URLs from '~/data/urls'
 
-const activeCategory = ref({})
+const activeCategory = ref<InStockCategory | null>(null)
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
