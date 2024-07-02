@@ -3,12 +3,13 @@
   lang="ts">
 import type { InStockCategory } from '~/types'
 import URLs from '~/data/urls'
+import type { Ref } from 'vue'
 
 const activeCategory = ref<InStockCategory | null>(null)
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
-const { data }: { data: InStockCategory[] } = await useFetch(`${API_ENDPOINT}${URLs.inStock}`)
+const { data }: { data: Ref<InStockCategory[]> } = await useFetch(`${API_ENDPOINT}${URLs.inStock}`)
 
 activeCategory.value = data.value[0]
 
@@ -67,13 +68,28 @@ console.log(data.value)
   </Head>
 
   <section class="mb-16 pt-14">
+    <div class="container mb-12">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink as-child>
+              <NuxtLink to="/">Главная</NuxtLink>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>На складе</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
     <div class="container flex justify-between items-center">
       <h1 class="section-title">На складе</h1>
       <div class="flex gap-4">
         <Button
           v-for="category in data"
           :key="category.id"
-          :variant="category.id === activeCategory.id ? 'default' : 'outline'"
+          :variant="category.id === activeCategory?.id ? 'default' : 'outline'"
           @click="activeCategory = category">
           {{ category.title }}
         </Button>

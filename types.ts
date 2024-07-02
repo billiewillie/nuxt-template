@@ -1,3 +1,9 @@
+interface City {
+  id: number
+  title: string
+  url: string
+}
+
 interface Product {
   id: number
   title: string
@@ -7,17 +13,7 @@ interface Product {
   sort: number
   is_favourites: number
   is_comparison: number
-}
-
-interface Category {
-  id: number
-  title: string
-}
-
-interface City {
-  id: number
-  title: string
-  url: string
+  slug: string
 }
 
 interface Country {
@@ -31,13 +27,6 @@ interface Section {
   title: string
 }
 
-interface Manufacturer {
-  id: number,
-  title: string,
-  logo: string,
-  url: string
-}
-
 interface Metadata {
   charset: string,
   description: string,
@@ -45,6 +34,46 @@ interface Metadata {
   lang: string,
   robots: string,
   title: string
+}
+
+interface Category {
+  id: number
+  title: string
+}
+
+interface Metadata {
+  lang: string
+  charset: string
+  robots: string
+  title: string
+  description: string
+  keywords: string
+}
+
+interface BreadCrumb {
+  slug: string
+  title: string
+}
+
+export interface News {
+  annotation: string,
+  created_at: string,
+  id: number,
+  preview_img: string,
+  title: string,
+  url: string,
+  section: Array<Section>,
+  content: HTMLElement,
+  year: number
+  recommendations: Array<Recommendation>
+  banner: string
+}
+
+interface Manufacturer {
+  id: number,
+  title: string,
+  logo: string,
+  url: string
 }
 
 interface Recommendation {
@@ -56,11 +85,6 @@ interface Recommendation {
   created_at: string
 }
 
-interface NewProductTitle {
-  id: number
-  title: string
-}
-
 interface NewProductList {
   id: number
   title: string
@@ -69,6 +93,11 @@ interface NewProductList {
   is_comparison: number
   is_favourites: number
   preview_img: string
+}
+
+interface NewProductTitle {
+  id: number
+  title: string
 }
 
 export interface Event {
@@ -109,20 +138,6 @@ export interface Article {
   annotation: string
 }
 
-export interface News {
-  annotation: string,
-  created_at: string,
-  id: number,
-  preview_img: string,
-  title: string,
-  url: string,
-  section: Array<Section>,
-  content: HTMLElement,
-  year: number
-  recommendations: Array<Recommendation>
-  banner: string
-}
-
 export interface IndexPageApi {
   catalog: Array<string>
   calendar: Events
@@ -146,3 +161,23 @@ export interface InStockCategory {
   title: string
   list: Array<Product>
 }
+
+export interface ProductCategory {
+  id: number
+  title: string
+  slug: string
+  icon: string
+}
+
+export interface ProductCategoryPageApi extends Category {
+  url: string
+  content: string
+  is_page: string
+  template: string
+  created_at: string
+  metadata: Metadata
+  preview_img: string
+  list: Array<Product>
+  bread_crumbs: Array<BreadCrumb>
+}
+

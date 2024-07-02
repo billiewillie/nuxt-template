@@ -24,9 +24,11 @@ const date = ref(new Date())
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
-const { data }: { data: IndexPageApi } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
-
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
+
+const { data }: { data: Ref<IndexPageApi> } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
+
+console.log(data.value)
 </script>
 
 <template>
@@ -93,7 +95,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
       <div class="relative py-20 xl:pt-40 xl:w-1/2 max-w-[660px]">
         <h2 class="uppercase font-semibold ~text-[28px]/[36px]">операционное и госпитальное оборудование</h2>
         <Separator class="my-4" />
-        <p>
+        <p style="font-size: 16px;">
           метод исследования тканей при их значительном увеличении под микроскопом. Это один из наиболее
           распространённых способов в медицине, он позволяет увидеть структуру тканей, процессы происходящие в ней
           и патологические нарушения.
@@ -339,6 +341,10 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
   height: 108%;
   background: #fff;
   z-index: 1;
+}
+
+.antialiased {
+  -webkit-font-smoothing: antialiased;
 }
 
 @media (min-width: 768px) {

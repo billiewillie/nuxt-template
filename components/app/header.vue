@@ -22,9 +22,9 @@ const route = useRoute()
           <div>связаться с нами</div>
         </div>
         <div class="hidden xl:flex">
-          <div>Сравнение (0)</div>
+          <NuxtLink to="/compare">Сравнение (0)</NuxtLink>
           <span class="flex mx-4">|</span>
-          <div>Избранное (0)</div>
+          <NuxtLink to="/wishlist">Избранное (0)</NuxtLink>
           <span class="flex mx-4">|</span>
           <div>Поиск</div>
         </div>

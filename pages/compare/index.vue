@@ -1,7 +1,11 @@
+<script
+  setup
+  lang="ts"></script>
+
 <template>
 
   <Head>
-    <Title>Каталог | Группа компаний ООО «БиоЛайн»</Title>
+    <Title>Сравнение | Группа компаний ООО «БиоЛайн»</Title>
     <Meta
       name="description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -13,7 +17,7 @@
       content="/img/og-logo.jpg" />
     <Meta
       name="og:title"
-      content="Каталог | Группа компаний ООО «БиоЛайн»" />
+      content="Сравнение | Группа компаний ООО «БиоЛайн»" />
     <Meta
       name="og:description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -22,7 +26,7 @@
       content="bioline.vercel.app" />
     <Meta
       name="og:url"
-      content="https://bioline.vercel.app/contacts" />
+      content="https://bioline.vercel.app/compare" />
     <Meta
       name="og:image:width"
       content="1200" />
@@ -37,7 +41,7 @@
       content="ru_RU" />
     <Meta
       name="twitter:title"
-      content="Каталог | Группа компаний ООО «БиоЛайн»" />
+      content="Сравнение | Группа компаний ООО «БиоЛайн»" />
     <Meta
       name="twitter:description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -49,15 +53,23 @@
       content="summary_large_image" />
   </Head>
 
-  <section class="mb-16 pt-14">
+  <section class="mb-24 xl:mb-32 pt-14">
     <div class="container">
-      <h1 class="section-title">Раздел</h1>
-    </div>
-  </section>
+      <Breadcrumb class="mb-12">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink as-child>
+              <NuxtLink to="/">Главная</NuxtLink>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Сравнение</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
 
-  <section class="mb-16">
-    <div class="container">
-      Something
+      <h1 class="section-title">Сравнение</h1>
     </div>
   </section>
 

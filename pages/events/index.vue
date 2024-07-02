@@ -3,7 +3,6 @@
   lang="ts">
 import { type Ref, ref } from 'vue'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
-import NEWS from '~/data/news'
 import type { Events } from '~/types'
 import { useFetch, useRuntimeConfig } from '#app'
 import URLs from '~/data/urls'
@@ -24,18 +23,9 @@ const date = ref(new Date())
 
 const month = date.value.getMonth() + 1
 
-const { data: events, pending, error }: {
-  data: Events
-  pending: Ref<boolean>
-  error: Ref<any>
-} = await useFetch(
-  `${API_ENDPOINT}${URLs.events}/${month}/10`,
-  {
-    pick: ['list', 'countries', 'categories']
-  }
-)
-
-console.log(events.value)
+const { data: events }: {
+  data: Ref<Events>
+} = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/10`)
 </script>
 
 <template>
@@ -91,6 +81,20 @@ console.log(events.value)
 
   <section class="mb-16 pt-14">
     <div class="container">
+      <Breadcrumb class="mb-12">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink as-child>
+              <NuxtLink to="/">Главная</NuxtLink>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Календарь мероприятий</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
       <h1 class="section-title">Календарь мероприятий</h1>
     </div>
   </section>

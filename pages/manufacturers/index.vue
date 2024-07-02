@@ -51,7 +51,21 @@
 
   <section class="mb-16 pt-14">
     <div class="container">
-      <h2 class="section-title">Производитель “БиоЛайн”</h2>
+      <Breadcrumb class="mb-12">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink as-child>
+              <NuxtLink to="/">Главная</NuxtLink>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Производители “БиоЛайн”</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
+      <h2 class="section-title">Производители “БиоЛайн”</h2>
     </div>
   </section>
 

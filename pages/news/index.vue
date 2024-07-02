@@ -5,13 +5,14 @@ import URLs from '~/data/urls'
 import { useFetch, useRuntimeConfig } from '#app'
 import type { News } from '~/types'
 import { years } from '~/data/constants'
+import type { Ref } from 'vue'
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
 const newsByYear = ref(null)
 const activeYear = ref(years[0])
 
-const { data: news }: { news: News[] } = await useFetch(`${API_ENDPOINT}${URLs.news}`)
+const { data: news }: { news: Ref<News[]> } = await useFetch(`${API_ENDPOINT}${URLs.news}`)
 
 function getNewsByYear() {
   newsByYear.value = news.value.filter((article) => article.year === activeYear.value)
@@ -76,6 +77,21 @@ console.log(news.value)
   </Head>
 
   <section class="mb-16 pt-14">
+    <div class="container mb-12">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink as-child>
+              <NuxtLink to="/">Главная</NuxtLink>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Новости</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
     <div class="container flex justify-between items-center">
       <h1 class="section-title">Новости</h1>
       <div class="flex gap-4">
@@ -92,7 +108,7 @@ console.log(news.value)
 
   <section class="mb-16">
     <div class="container">
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] lg:grid-cols-3 2xl:grid-cols-4 gap-4 items-stretch">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 items-stretch">
         <BaseNewsCard
           v-for="article in newsByYear"
           :key="article.id"

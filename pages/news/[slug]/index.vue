@@ -5,7 +5,7 @@ import URLs from '~/data/urls'
 import type { News } from '~/types'
 import { useAsyncData, useFetch, useHead, useRuntimeConfig, useSeoMeta } from '#app'
 import { useRoute } from 'vue-router'
-import { ref } from 'vue'
+import { type Ref, ref } from 'vue'
 
 const title = ref('Новости | Группа компаний ООО «БиоЛайн»')
 const banner = ref('/img/og-logo.jpg')
@@ -15,7 +15,7 @@ const { slug } = useRoute().params
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
-const { data: article, error }: { data: News } = await useAsyncData(
+const { data: article, error }: { data: Ref<News> } = await useAsyncData(
   'article',
   () => $fetch(`${API_ENDPOINT}${URLs.news}/${slug}`)
 )
@@ -78,8 +78,28 @@ if (article.value) {
       content="summary_large_image" />
   </Head>
 
-  <section class="mt-6">
+  <section class="mt-16">
     <div class="container">
+      <Breadcrumb class="mb-12">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink as-child>
+              <NuxtLink to="/">Главная</NuxtLink>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink as-child>
+              <NuxtLink to="/news">Новости</NuxtLink>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{{ article.title }}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
       <BaseImage
         :src="article.banner"
         aspect-ratio="aspect-[4/1]"
@@ -96,14 +116,14 @@ if (article.value) {
       <h1 class="section-title mb-10">
         {{ article.title }}
       </h1>
-      <div class="mb-10">
+      <div class="mb-10 flex items-center gap-2">
         <Icon
           name="solar:calendar-linear"
           width="18"
           height="18"
           color="#575757" />
         <time
-          class="mb-20 text=[#575757]"
+          class="text-[#575757]"
           :datetime="article.created_at">
           {{ article.created_at }}
         </time>

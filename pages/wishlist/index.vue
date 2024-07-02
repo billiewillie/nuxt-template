@@ -1,12 +1,12 @@
-<script setup>
-import { Card, CardContent } from '~/components/ui/card'
-import CATEGORIES from '~/data/categories'
+<script
+  setup
+  lang="ts">
 </script>
 
 <template>
 
   <Head>
-    <Title>Каталог | Группа компаний ООО «БиоЛайн»</Title>
+    <Title>Избранное | Группа компаний ООО «БиоЛайн»</Title>
     <Meta
       name="description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -18,7 +18,7 @@ import CATEGORIES from '~/data/categories'
       content="/img/og-logo.jpg" />
     <Meta
       name="og:title"
-      content="Каталог | Группа компаний ООО «БиоЛайн»" />
+      content="Избранное | Группа компаний ООО «БиоЛайн»" />
     <Meta
       name="og:description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -27,7 +27,7 @@ import CATEGORIES from '~/data/categories'
       content="bioline.vercel.app" />
     <Meta
       name="og:url"
-      content="https://bioline.vercel.app/contacts" />
+      content="https://bioline.vercel.app/wishlist" />
     <Meta
       name="og:image:width"
       content="1200" />
@@ -42,7 +42,7 @@ import CATEGORIES from '~/data/categories'
       content="ru_RU" />
     <Meta
       name="twitter:title"
-      content="Каталог | Группа компаний ООО «БиоЛайн»" />
+      content="Избранное | Группа компаний ООО «БиоЛайн»" />
     <Meta
       name="twitter:description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -54,44 +54,9 @@ import CATEGORIES from '~/data/categories'
       content="summary_large_image" />
   </Head>
 
-  <section class="mb-12 xl:mb-16 pt-12">
+  <section class="mb-24 xl:mb-32 pt-14">
     <div class="container">
-      <Breadcrumb class="mb-12">
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink as-child>
-              <NuxtLink to="/">Главная</NuxtLink>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Каталог</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-
-      <h1 class="section-title">Каталог</h1>
-    </div>
-  </section>
-
-  <section class="mb-12 xl:mb-16">
-    <div class="container">
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-4">
-        <NuxtLink
-          v-for="item in CATEGORIES"
-          :key="item.id"
-          :to="`/catalog/${item.slug}`">
-          <Card class="flex flex-col gap-6 p-4 items-center text-center h-full">
-            <NuxtImg
-              :src="item.icon"
-              class="w-[80px] object-contain object-center h-[80px]"
-              :alt="item.title" />
-            <CardContent class="p-0 font-medium">
-              <p class="text-2xl">{{ item.title }}</p>
-            </CardContent>
-          </Card>
-        </NuxtLink>
-      </div>
+      <h1 class="section-title">Избранное</h1>
     </div>
   </section>
 

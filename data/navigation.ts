@@ -7,7 +7,7 @@ const NAVIGATION = [
   },
   {
     id: 2,
-    title: 'О нас',
+    title: 'О компании',
     slug: 'about',
     href: '/about'
   },

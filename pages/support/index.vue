@@ -55,6 +55,19 @@ import { Card, CardContent } from '~/components/ui/card'
 
   <section class="mb-16 pt-14">
     <div class="container">
+      <Breadcrumb class="mb-12">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink as-child>
+              <NuxtLink to="/">Главная</NuxtLink>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Технический сервис</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
       <h1 class="section-title">Технический сервис</h1>
     </div>
   </section>

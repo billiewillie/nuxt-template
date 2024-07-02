@@ -1,12 +1,17 @@
-<script setup>
-import CATEGORIES from '~/data/categories'
-import { Card, CardContent } from '~/components/ui/card'
+<script
+  setup
+  lang="ts">
+import type { ProductCategoryPageApi } from '~/types'
+
+const props = defineProps<{
+  category: ProductCategoryPageApi
+}>()
 </script>
 
 <template>
 
   <Head>
-    <Title>О компании | Группа компаний ООО «БиоЛайн»</Title>
+    <Title>Каталог | Группа компаний ООО «БиоЛайн»</Title>
     <Meta
       name="description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -18,7 +23,7 @@ import { Card, CardContent } from '~/components/ui/card'
       content="/img/og-logo.jpg" />
     <Meta
       name="og:title"
-      content="О компании | Группа компаний ООО «БиоЛайн»" />
+      content="Каталог | Группа компаний ООО «БиоЛайн»" />
     <Meta
       name="og:description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -42,7 +47,7 @@ import { Card, CardContent } from '~/components/ui/card'
       content="ru_RU" />
     <Meta
       name="twitter:title"
-      content="О компании | Группа компаний ООО «БиоЛайн»" />
+      content="Каталог | Группа компаний ООО «БиоЛайн»" />
     <Meta
       name="twitter:description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -65,39 +70,45 @@ import { Card, CardContent } from '~/components/ui/card'
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>О компании</BreadcrumbPage>
+            <BreadcrumbLink as-child>
+              <NuxtLink to="/catalog">Каталог</NuxtLink>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{{ props.category?.title }}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <h1 class="section-title">О компании</h1>
+      <h1 class="section-title">{{ props.category?.title }}</h1>
     </div>
   </section>
 
   <section class="mb-16">
-    <div class="container">
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        <Card
-          v-for="(item, index) in 6"
-          :key="index"
-          class="flex flex-col gap-6 p-4 items-center text-center">
-
-          <CardHeader class="flex flex-row gap-8 items-center">
-            <NuxtImg
-              src="/img/categories/icons/1.svg"
-              class="w-[50px] object-contain object-center"
-              alt="alt" />
-            <CardTitle class="text-left">Удобство работы с нами</CardTitle>
+    <div class="container grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <NuxtLink
+        v-for="category in props.category?.list"
+        :to="category.url"
+        :key="category.id">
+        <Card class="h-full shadow-md hover:shadow-lg p-4 rounded transition-shadow">
+          <CardHeader class="p-0">
+            <BaseImage
+              class="basis-full md:basis-1/2 lg:basis-2/3 rounded overflow-hidden"
+              :src="category.preview_img"
+              :alt="category.title"
+              width="375"
+              height="375"
+              placeholder="bg-[#fff]"
+              loading="lazy"
+              aspect-ratio="1/1"
+            />
           </CardHeader>
-          <Separator />
-          <CardContent class="p-0 font-medium text-left">
-            <p class="text-xl">
-              Мы признательны всем, кто ежедневно делает свой вклад в сохранение здоровья людей,
-              мы восхищаемся вашим трудолюбием
-            </p>
+          <Separator class="my-4" />
+          <CardContent class="p-0">
+            <h2 class="card-title text-center font-semibold ~text-[18px]/[22px]">{{ category.title }}</h2>
           </CardContent>
         </Card>
-      </div>
+      </NuxtLink>
     </div>
   </section>
-
 </template>

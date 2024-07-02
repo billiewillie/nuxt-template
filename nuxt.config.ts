@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     families: {
       Inter: '400..700'
     },
-    display: 'swap',
+    display: 'fallback',
     subsets: ['cyrillic', 'latin'],
     preload: true,
     prefetch: true,
