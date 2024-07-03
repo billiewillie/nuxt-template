@@ -100,6 +100,8 @@ interface NewProductTitle {
   title: string
 }
 
+export type CatalogInnerPageType = Record<string, string>
+
 export interface Event {
   id: number
   title: string
@@ -179,5 +181,19 @@ export interface ProductCategoryPageApi extends Category {
   preview_img: string
   list: Array<Product>
   bread_crumbs: Array<BreadCrumb>
+}
+
+export interface ProductPageApi {
+  id: number
+  sort: number
+  title: string
+  preview_img: string
+  url: string
+  bread_crumbs: Array<BreadCrumb>
+  is_page: string
+  template: string
+  content: string
+  metadata: Metadata
+  manufacturers: Array<Manufacturer>
 }
 

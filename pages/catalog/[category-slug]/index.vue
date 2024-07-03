@@ -20,6 +20,6 @@ console.log(category.value)
 
 <template>
 
-  <ProductCategoryPageLayout :category="category" />
+  <ProductCategoryPageLayout :data="category" />
 
 </template>

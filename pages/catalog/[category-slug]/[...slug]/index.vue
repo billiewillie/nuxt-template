@@ -1,19 +1,34 @@
-<script setup>
+<script
+  setup
+  lang="ts">
 import ProductCategoryPageLayout from '~/layouts/ProductCategoryPageLayout.vue'
 import { useRuntimeConfig } from '#app'
-import URLs from '~/data/urls'
+import type { ProductCategoryPageApi, ProductPageApi } from '~/types'
+import type { Ref } from 'vue'
+import { CATALOG_INNER_PAGE_TYPE } from '~/data/constants'
+import ProductExpendablePageLayout from '~/layouts/ProductExpendablePageLayout.vue'
+import ProductPageLayout from '~/layouts/ProductPageLayout.vue'
 
 const route = useRoute()
 const { API_ENDPOINT } = useRuntimeConfig().public
 
-console.log(route.params)
+const { data }: {
+  data: Ref<ProductCategoryPageApi | ProductPageApi>
+} = await useFetch(`${API_ENDPOINT}${route.fullPath}`)
 
+const page = {
+  catalog: ProductCategoryPageLayout,
+  expendable_material: ProductExpendablePageLayout,
+  products: ProductPageLayout
+}
+
+console.log(page['catalog'])
 </script>
 
 <template>
 
-  <div>hello</div>
-
-<!--  <ProductCategoryPageLayout title="Диагностика онкологических заболеваний" />-->
+  <component
+    :is="page[data.is_page]"
+    :data="data" />
 
 </template>

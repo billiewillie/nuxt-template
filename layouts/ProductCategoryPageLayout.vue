@@ -4,8 +4,10 @@
 import type { ProductCategoryPageApi } from '~/types'
 
 const props = defineProps<{
-  category: ProductCategoryPageApi
+  data: ProductCategoryPageApi
 }>()
+
+console.log(props.data)
 </script>
 
 <template>
@@ -76,28 +78,33 @@ const props = defineProps<{
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{{ props.category?.title }}</BreadcrumbPage>
+            <BreadcrumbPage>{{ props.data?.title }}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <h1 class="section-title">{{ props.category?.title }}</h1>
+      <h1 class="section-title">{{ props.data?.title }}</h1>
     </div>
   </section>
 
   <section class="mb-16">
-    <div class="container grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+    <div class="container grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
       <NuxtLink
-        v-for="category in props.category?.list"
+        v-for="category in props.data?.list"
         :to="category.url"
         :key="category.id">
-        <Card class="h-full shadow-md hover:shadow-lg p-4 rounded transition-shadow">
-          <CardHeader class="p-0">
+        <Card class="group h-full shadow-md hover:shadow-lg p-4 rounded transition-shadow">
+          <CardHeader class="p-0 relative">
+            <Icon
+              name="clarity:layers-line"
+              class="absolute right-0 top-0 z-10 text-[#ccc] group-hover:text-red-500 transition-colors"
+              width="36"
+              height="36" />
             <BaseImage
               class="basis-full md:basis-1/2 lg:basis-2/3 rounded overflow-hidden"
               :src="category.preview_img"
               :alt="category.title"
-              width="375"
-              height="375"
+              width="269"
+              height="269"
               placeholder="bg-[#fff]"
               loading="lazy"
               aspect-ratio="1/1"
@@ -105,7 +112,7 @@ const props = defineProps<{
           </CardHeader>
           <Separator class="my-4" />
           <CardContent class="p-0">
-            <h2 class="card-title text-center font-semibold ~text-[18px]/[22px]">{{ category.title }}</h2>
+            <h2 class="card-title text-center font-semibold ~text-[18px]/[20px]">{{ category.title }}</h2>
           </CardContent>
         </Card>
       </NuxtLink>
