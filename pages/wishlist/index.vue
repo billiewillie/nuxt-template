@@ -54,8 +54,21 @@
       content="summary_large_image" />
   </Head>
 
-  <section class="mb-24 xl:mb-32 pt-14">
+  <section class="mb-12 xl:mb-16 pt-14">
     <div class="container">
+      <Breadcrumb class="mb-12">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink as-child>
+              <NuxtLink to="/">Главная</NuxtLink>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Избранное</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
       <h1 class="section-title">Избранное</h1>
     </div>
   </section>

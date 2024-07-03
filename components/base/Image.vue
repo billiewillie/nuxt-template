@@ -49,6 +49,7 @@ const isLoaded = ref(false)
       :width="props.width"
       :height="props.height"
       :alt="props.alt"
+      :loading="props.loading"
       @load="isLoaded = true"
     />
   </div>

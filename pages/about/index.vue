@@ -54,7 +54,7 @@ import { Card, CardContent } from '~/components/ui/card'
       content="summary_large_image" />
   </Head>
 
-  <section class="mb-16 pt-14">
+  <section class="mb-12 xl:mb-16 pt-14">
     <div class="container">
       <Breadcrumb class="mb-12">
         <BreadcrumbList>
@@ -81,7 +81,7 @@ import { Card, CardContent } from '~/components/ui/card'
           :key="index"
           class="flex flex-col gap-6 p-4 items-center text-center">
 
-          <CardHeader class="flex flex-row gap-8 items-center">
+          <CardHeader class="flex flex-row gap-8 items-center p-0">
             <NuxtImg
               src="/img/categories/icons/1.svg"
               class="w-[50px] object-contain object-center"

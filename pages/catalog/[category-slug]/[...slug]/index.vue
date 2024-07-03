@@ -5,7 +5,6 @@ import ProductCategoryPageLayout from '~/layouts/ProductCategoryPageLayout.vue'
 import { useRuntimeConfig } from '#app'
 import type { ProductCategoryPageApi, ProductPageApi } from '~/types'
 import type { Ref } from 'vue'
-import { CATALOG_INNER_PAGE_TYPE } from '~/data/constants'
 import ProductExpendablePageLayout from '~/layouts/ProductExpendablePageLayout.vue'
 import ProductPageLayout from '~/layouts/ProductPageLayout.vue'
 
@@ -21,8 +20,6 @@ const page = {
   expendable_material: ProductExpendablePageLayout,
   products: ProductPageLayout
 }
-
-console.log(page['catalog'])
 </script>
 
 <template>

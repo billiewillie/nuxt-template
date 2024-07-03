@@ -105,14 +105,15 @@ console.log(props.data)
               :alt="category.title"
               width="269"
               height="269"
-              placeholder="bg-[#fff]"
-              loading="lazy"
+              placeholder="bg-[rgba(255,255,255,0)]"
               aspect-ratio="1/1"
             />
           </CardHeader>
           <Separator class="my-4" />
           <CardContent class="p-0">
-            <h2 class="card-title text-center font-semibold ~text-[18px]/[20px]">{{ category.title }}</h2>
+            <h2 class="card-title text-center font-semibold ~text-[18px]/[20px]">
+              {{ category.title }}
+            </h2>
           </CardContent>
         </Card>
       </NuxtLink>

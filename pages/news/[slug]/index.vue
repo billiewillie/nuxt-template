@@ -3,7 +3,7 @@
   lang="ts">
 import URLs from '~/data/urls'
 import type { News } from '~/types'
-import { useAsyncData, useFetch, useHead, useRuntimeConfig, useSeoMeta } from '#app'
+import { useAsyncData, useRuntimeConfig } from '#app'
 import { useRoute } from 'vue-router'
 import { type Ref, ref } from 'vue'
 
@@ -78,7 +78,7 @@ if (article.value) {
       content="summary_large_image" />
   </Head>
 
-  <section class="mt-16">
+  <section class="mb-12 xl:mb-16 pt-14">
     <div class="container">
       <Breadcrumb class="mb-12">
         <BreadcrumbList>
@@ -111,9 +111,9 @@ if (article.value) {
     </div>
   </section>
 
-  <section class="mb-16 pt-14">
+  <section class="mb-12 xl:mb-16">
     <div class="container">
-      <h1 class="section-title mb-10">
+      <h1 class="section-title mb-12">
         {{ article.title }}
       </h1>
       <div class="mb-10 flex items-center gap-2">

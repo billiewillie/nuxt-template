@@ -9,6 +9,9 @@ const props = defineProps<{
 </script>
 
 <template>
-  <h1>Product Page</h1>
-  <p>{{ props.data.title }}</p>
+  <section class="mb-16 pt-14">
+    <div class="container">
+      <h1 class="section-title">{{ props.data.title }}</h1>
+    </div>
+  </section>
 </template>
