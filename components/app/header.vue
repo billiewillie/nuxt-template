@@ -3,7 +3,7 @@
   lang="ts">
 import { VisuallyHidden } from 'radix-vue'
 import NAVIGATION from '~/data/navigation'
-import BRANCHES from '../../data/branches'
+import BRANCHES from '~/data/branches'
 import { isRouteActive } from '~/utils/isRouteActive'
 import { useRoute } from 'vue-router'
 
@@ -22,7 +22,7 @@ const route = useRoute()
           <div>связаться с нами</div>
         </div>
         <div class="hidden xl:flex">
-          <NuxtLink to="/compare">Сравнение (0)</NuxtLink>
+          <NuxtLink to="/comparison">Сравнение (0)</NuxtLink>
           <span class="flex mx-4">|</span>
           <NuxtLink to="/wishlist">Избранное (0)</NuxtLink>
           <span class="flex mx-4">|</span>

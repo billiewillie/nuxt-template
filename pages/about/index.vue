@@ -1,5 +1,6 @@
-<script setup>
-import CATEGORIES from '~/data/categories'
+<script
+  setup
+  lang="ts">
 import { Card, CardContent } from '~/components/ui/card'
 </script>
 
@@ -77,10 +78,9 @@ import { Card, CardContent } from '~/components/ui/card'
     <div class="container">
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         <Card
-          v-for="(item, index) in 6"
+          v-for="(_, index) in 6"
           :key="index"
           class="flex flex-col gap-6 p-4 items-center text-center">
-
           <CardHeader class="flex flex-row gap-8 items-center p-0">
             <NuxtImg
               src="/img/categories/icons/1.svg"

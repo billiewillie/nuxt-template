@@ -1,4 +1,6 @@
-<script setup>
+<script
+  setup
+  lang="ts">
 import { Card, CardContent } from '~/components/ui/card'
 import CATEGORIES from '~/data/categories'
 </script>

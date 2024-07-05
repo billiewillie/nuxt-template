@@ -73,4 +73,10 @@
     </div>
   </section>
 
+  <section class="mb-12 xl:mb-16 pt-14">
+    <div class="container">
+      content
+    </div>
+  </section>
+
 </template>

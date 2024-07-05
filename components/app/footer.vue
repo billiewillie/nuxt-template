@@ -1,6 +1,7 @@
-<script setup>
-import NAVIGATION from '~/data/navigation'
-import BRANCHES from '../../data/branches'
+<script
+  setup
+  lang="ts">
+import BRANCHES from '~/data/branches'
 </script>
 
 <template>

@@ -80,6 +80,7 @@ if (article.value) {
 
   <section class="mb-12 xl:mb-16 pt-14">
     <div class="container">
+
       <Breadcrumb class="mb-12">
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -108,6 +109,7 @@ if (article.value) {
         height="332"
         alt="alt"
       />
+
     </div>
   </section>
 

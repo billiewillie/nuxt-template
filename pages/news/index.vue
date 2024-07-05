@@ -96,10 +96,10 @@ console.log(news.value)
       <h1 class="section-title">Новости</h1>
       <div class="flex gap-4">
         <Button
-          :variant="activeYear === year ? 'default' : 'ghost'"
+          :key="year"
           v-for="year in years"
           @click="activeYear = year; getNewsByYear()"
-          :key="year">
+          :variant="activeYear === year ? 'default' : 'ghost'">
           {{ year }}
         </Button>
         <Button variant="ghost">

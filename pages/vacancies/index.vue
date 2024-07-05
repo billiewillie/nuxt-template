@@ -75,7 +75,7 @@
 
   <section class="mb-12 xl:mb-16">
     <div class="container">
-      content
+      <h2 class="section-title">Основные направления кадровой политики «БиоЛайн»</h2>
     </div>
   </section>
 </template>

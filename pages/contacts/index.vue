@@ -1,4 +1,6 @@
-<script setup>
+<script
+  setup
+  lang="ts">
 import { ref } from 'vue'
 import { SERVICE } from '~/data/constants'
 import { Card, CardContent } from '~/components/ui/card'
@@ -6,7 +8,6 @@ import { setMapHeight } from '~/composables/setMapHeight'
 import BRANCHES from '~/data/branches'
 import BRANCH_PARTNERS from '~/data/branch-partners'
 import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, YandexMapMarker } from 'vue-yandex-maps'
-
 
 const coordinates = ref(BRANCHES.spb.map)
 
@@ -16,7 +17,7 @@ const viewport = useViewport()
 const branchesFiltered = Object.fromEntries(
   Object
     .entries(BRANCHES)
-    .filter(([key]) => key !== 'spb')
+    .filter(([key, _]) => key !== 'spb')
 )
 </script>
 

@@ -12,8 +12,6 @@ const { API_ENDPOINT } = useRuntimeConfig().public
 const { data }: { data: Ref<InStockCategory[]> } = await useFetch(`${API_ENDPOINT}${URLs.inStock}`)
 
 activeCategory.value = data.value[0]
-
-console.log(data.value)
 </script>
 
 <template>
