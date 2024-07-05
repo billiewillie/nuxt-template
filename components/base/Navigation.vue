@@ -27,7 +27,3 @@ defineProps({
   </nav>
 
 </template>
-
-<style scoped>
-
-</style>

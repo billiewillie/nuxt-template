@@ -1,4 +1,6 @@
-const NAVIGATION = [
+import type { NavigationItem } from '~/types'
+
+const NAVIGATION: NavigationItem[] = [
   {
     id: 1,
     title: 'Каталог',
@@ -40,6 +42,12 @@ const NAVIGATION = [
     title: 'События',
     slug: 'events',
     href: '/events'
+  },
+  {
+    id: 8,
+    title: 'Вакансии',
+    slug: 'vacancies',
+    href: '/vacancies'
   },
   {
     id: 9,

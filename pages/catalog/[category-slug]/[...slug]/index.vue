@@ -23,9 +23,7 @@ const page = {
 </script>
 
 <template>
-
   <component
     :is="page[data.is_page]"
     :data="data" />
-
 </template>

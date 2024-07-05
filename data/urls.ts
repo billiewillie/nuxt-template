@@ -4,6 +4,7 @@ const URLs = {
   events: '/events/index',
   inStock: '/stock/show/all',
   catalog: '/catalog',
+  manufacturers: '/manufacturers',
 }
 
 export default URLs

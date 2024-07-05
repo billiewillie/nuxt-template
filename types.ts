@@ -27,15 +27,6 @@ interface Section {
   title: string
 }
 
-interface Metadata {
-  charset: string,
-  description: string,
-  keywords: string,
-  lang: string,
-  robots: string,
-  title: string
-}
-
 interface Category {
   id: number
   title: string
@@ -70,10 +61,13 @@ export interface News {
 }
 
 interface Manufacturer {
-  id: number,
-  title: string,
-  logo: string,
+  id: number
+  title: string
+  logo: string
   url: string
+  article?: string
+  sort?: number
+  created_at?: string
 }
 
 interface Recommendation {
@@ -101,6 +95,13 @@ interface NewProductTitle {
 }
 
 export type CatalogInnerPageType = Record<string, string>
+
+export type NavigationItem = {
+  id: number
+  title: string
+  slug: string
+  href: string
+}
 
 export interface Event {
   id: number
@@ -158,31 +159,6 @@ export interface IndexPageApi {
   }
 }
 
-export interface InStockCategory {
-  id: number
-  title: string
-  list: Array<Product>
-}
-
-export interface ProductCategory {
-  id: number
-  title: string
-  slug: string
-  icon: string
-}
-
-export interface ProductCategoryPageApi extends Category {
-  url: string
-  content: string
-  is_page: string
-  template: string
-  created_at: string
-  metadata: Metadata
-  preview_img: string
-  list: Array<Product>
-  bread_crumbs: Array<BreadCrumb>
-}
-
 export interface ProductPageApi {
   id: number
   sort: number
@@ -197,3 +173,54 @@ export interface ProductPageApi {
   manufacturers: Array<Manufacturer>
 }
 
+export interface InStockCategory {
+  id: number
+  title: string
+  list: Array<Product>
+}
+
+export interface ProductCategory {
+  id: number
+  title: string
+  slug: string
+  icon: string
+}
+
+export interface ManufacturerButton {
+  title: string
+  value: string
+}
+
+export interface ManufacturersPageApi {
+  id: number
+  title: string
+  url: string
+  content: string
+  template: string
+  created_at: string
+  metadata: Metadata
+  manufacturers: Array<Manufacturer>
+}
+
+export interface ManufacturerCategory {
+  id: number
+  lang_id: number
+  title: string
+  url: string
+  logo: string
+  sort?: number
+  created_at?: string
+  list: Array<Manufacturer>
+}
+
+export interface ProductCategoryPageApi extends Category {
+  url: string
+  content: string
+  is_page: string
+  template: string
+  created_at: string
+  metadata: Metadata
+  preview_img: string
+  list: Array<Product>
+  bread_crumbs: Array<BreadCrumb>
+}

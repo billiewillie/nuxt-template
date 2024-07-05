@@ -33,7 +33,7 @@ const props = defineProps<{
         </CardDescription>
       </CardContent>
       <CardFooter class="flex items-center justify-between p-0 px-6">
-        <div class="flex gap-4 items-center">
+        <div class="flex gap-2 items-center">
           <Icon
             name="solar:calendar-linear"
             width="18"

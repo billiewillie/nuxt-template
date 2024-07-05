@@ -1,3 +1,20 @@
+<script
+  setup
+  lang="ts">
+import { MANUFACTURER_BUTTONS } from '~/data/constants'
+import type { ManufacturerCategory, ManufacturersPageApi } from '~/types'
+import type { Ref } from 'vue'
+import URLs from '~/data/urls'
+
+const activeCategory = ref<ManufacturerCategory | null>(null)
+
+const { API_ENDPOINT } = useRuntimeConfig().public
+
+const { data: categories }: { data: Ref<ManufacturersPageApi> } = await useFetch(`${API_ENDPOINT}${URLs.manufacturers}`)
+
+activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory
+</script>
+
 <template>
 
   <Head>
@@ -65,25 +82,36 @@
         </BreadcrumbList>
       </Breadcrumb>
 
-      <h2 class="section-title">Производители “БиоЛайн”</h2>
+      <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-8">
+        <h1 class="section-title">Производители</h1>
+        <div class="flex flex-col md:flex-row gap-4">
+          <Button
+            v-for="manufacturer in MANUFACTURER_BUTTONS"
+            :variant="manufacturer.value === activeCategory?.url ? 'default' : 'outline'"
+            @click="activeCategory = categories.manufacturers.find(({url}) => url ===  manufacturer.value) as ManufacturerCategory"
+            :key="manufacturer.value">
+            {{ manufacturer.title }}
+          </Button>
+        </div>
+      </div>
     </div>
   </section>
 
   <section>
-    <div class="container grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4 mb-16">
+    <div class="container grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] md:grid-cols-2 xl:grid-cols-3 gap-4 mb-16">
       <NuxtLink
-        v-for="i in 9"
-        :key="i"
-        to="/">
+        v-for="manufacturer in activeCategory?.list"
+        :key="manufacturer"
+        :to="manufacturer.url">
         <Card class="flex flex-col gap-4">
           <CardHeader>
             <NuxtImg
-              src="/img/partners/leica-microsystems.svg"
+              :src="manufacturer.logo"
               width="80"
               height="80"
               class="mb-8"
-              alt="leica microsystems" />
-            <h2 class="font-bold">Leica Biosystems</h2>
+              :alt="manufacturer.title" />
+            <h2 class="font-bold ~text-[20px]/[24px]">{{ manufacturer.title }}</h2>
           </CardHeader>
           <CardContent>
             <p class="text-2xl">

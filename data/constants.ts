@@ -1,4 +1,4 @@
-import type { CatalogInnerPageType } from '~/types'
+import type { CatalogInnerPageType, ManufacturerButton } from '~/types'
 
 export const SERVICE = {
   phone: '+7 (800) 444 33 49',
@@ -16,3 +16,14 @@ export const CATALOG_INNER_PAGE_TYPE: Record<string, string> = {
   products: 'products',
   expendable_material: 'expendable_material'
 }
+
+export const MANUFACTURER_BUTTONS: ManufacturerButton[] = [
+  {
+    title: 'Производители "БиоЛайн"',
+    value: 'bioline'
+  },
+  {
+    title: 'Производители "БиоСистемы"',
+    value: 'biosystemy'
+  }
+]

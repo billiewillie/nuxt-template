@@ -1,34 +1,12 @@
 <script
   setup
   lang="ts">
-import URLs from '~/data/urls'
-import { useFetch, useRuntimeConfig } from '#app'
-import type { News } from '~/types'
-import { years } from '~/data/constants'
-import type { Ref } from 'vue'
 
-const { API_ENDPOINT } = useRuntimeConfig().public
-
-const newsByYear = ref(null)
-const activeYear = ref(years[0])
-
-const { data: news }: { news: Ref<News[]> } = await useFetch(`${API_ENDPOINT}${URLs.news}`)
-
-function getNewsByYear() {
-  newsByYear.value = news.value.filter((article) => article.year === activeYear.value)
-}
-
-onMounted(() => {
-  getNewsByYear()
-})
-
-console.log(news.value)
 </script>
 
 <template>
-
   <Head>
-    <Title>Новости | Группа компаний ООО «БиоЛайн»</Title>
+    <Title>Вакансии | Группа компаний ООО «БиоЛайн»</Title>
     <Meta
       name="description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -40,7 +18,7 @@ console.log(news.value)
       content="/img/og-logo.jpg" />
     <Meta
       name="og:title"
-      content="Новости | Группа компаний ООО «БиоЛайн»" />
+      content="Вакансии | Группа компаний ООО «БиоЛайн»" />
     <Meta
       name="og:description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -64,7 +42,7 @@ console.log(news.value)
       content="ru_RU" />
     <Meta
       name="twitter:title"
-      content="Новости | Группа компаний ООО «БиоЛайн»" />
+      content="Вакансии | Группа компаний ООО «БиоЛайн»" />
     <Meta
       name="twitter:description"
       content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -77,8 +55,8 @@ console.log(news.value)
   </Head>
 
   <section class="mb-12 xl:mb-16 pt-14">
-    <div class="container mb-12">
-      <Breadcrumb>
+    <div class="container">
+      <Breadcrumb class="mb-12">
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink as-child>
@@ -87,38 +65,17 @@ console.log(news.value)
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Новости</BreadcrumbPage>
+            <BreadcrumbPage>Вакансии</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-    </div>
-    <div class="container flex justify-between items-center">
-      <h1 class="section-title">Новости</h1>
-      <div class="flex gap-4">
-        <Button
-          :variant="activeYear === year ? 'default' : 'ghost'"
-          v-for="year in years"
-          @click="activeYear = year; getNewsByYear()"
-          :key="year">
-          {{ year }}
-        </Button>
-        <Button variant="ghost">
-          Архив
-        </Button>
-      </div>
+      <h1 class="section-title">Вакансии</h1>
     </div>
   </section>
 
-  <section class="mb-16">
+  <section class="mb-12 xl:mb-16">
     <div class="container">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 items-stretch">
-        <BaseNewsCard
-          v-for="article in newsByYear"
-          :key="article.id"
-          image-loading="lazy"
-          :article="article" />
-      </div>
+      content
     </div>
   </section>
-
 </template>
