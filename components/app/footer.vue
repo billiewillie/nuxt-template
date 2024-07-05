@@ -1,6 +1,6 @@
 <script setup>
 import NAVIGATION from '~/data/navigation'
-import CONTACTS from '~/data/contacts'
+import BRANCHES from '../../data/branches'
 </script>
 
 <template>
@@ -19,13 +19,13 @@ import CONTACTS from '~/data/contacts'
       </div>
       <div class="flex flex-col items-start text-left">
         <h3 class="text-primary font-semibold mb-4">Центральный офис:</h3>
-        {{ CONTACTS.spb.index }}, {{ CONTACTS.spb.country }}, {{ CONTACTS.spb.city }},
+        {{ BRANCHES.spb.index }}, {{ BRANCHES.spb.country }}, {{ BRANCHES.spb.city }},
         <br>
-        {{ CONTACTS.spb.address }}
+        {{ BRANCHES.spb.address }}
         <br />
-        {{ CONTACTS.spb.phone }}
+        {{ BRANCHES.spb.phone }}
         <br />
-        {{ CONTACTS.spb.email }}
+        {{ BRANCHES.spb.email }}
       </div>
     </div>
   </footer>

@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import CONTACTS from '~/data/contacts'
 import { SERVICE } from '~/data/constants'
 import { Card, CardContent } from '~/components/ui/card'
 import { setMapHeight } from '~/composables/setMapHeight'
@@ -8,7 +7,6 @@ import BRANCHES from '~/data/branches'
 import BRANCH_PARTNERS from '~/data/branch-partners'
 import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, YandexMapMarker } from 'vue-yandex-maps'
 
-const isLoaded = ref(false)
 
 const coordinates = ref(BRANCHES.spb.map)
 
@@ -105,12 +103,12 @@ const branchesFiltered = Object.fromEntries(
       />
       <div class="basis-full md:basis-1/2 lg:basis-1/3">
         <h2 class="font-bold mb-2">Центральный офис</h2>
-        <span>{{ CONTACTS.spb.index }}, </span>
-        <span>{{ CONTACTS.spb.country }}, </span>
-        <span>{{ CONTACTS.spb.city }}</span>
-        <p class="mb-2">{{ CONTACTS.spb.address }}</p>
-        <p class="mb-2">{{ CONTACTS.spb.phone }}</p>
-        <p class="mb-2">{{ CONTACTS.spb.email }}</p>
+        <span>{{ BRANCHES.spb.index }}, </span>
+        <span>{{ BRANCHES.spb.country }}, </span>
+        <span>{{ BRANCHES.spb.city }}</span>
+        <p class="mb-2">{{ BRANCHES.spb.address }}</p>
+        <p class="mb-2">{{ BRANCHES.spb.phone }}</p>
+        <p class="mb-2">{{ BRANCHES.spb.email }}</p>
       </div>
     </div>
   </section>

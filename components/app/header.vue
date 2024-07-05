@@ -1,9 +1,9 @@
 <script
   setup
   lang="ts">
-import CONTACTS from '~/data/contacts'
 import { VisuallyHidden } from 'radix-vue'
 import NAVIGATION from '~/data/navigation'
+import BRANCHES from '../../data/branches'
 import { isRouteActive } from '~/utils/isRouteActive'
 import { useRoute } from 'vue-router'
 
@@ -15,9 +15,9 @@ const route = useRoute()
     <div class="hidden xl:flex bg-background-dark py-4 text-foreground-dark">
       <div class="container flex justify-between text-[14px]">
         <div class="flex">
-          <div class="text-primary">{{ CONTACTS.spb.email }}</div>
+          <div class="text-primary">{{ BRANCHES.spb.email }}</div>
           <span class="flex mx-4">|</span>
-          <div>{{ CONTACTS.spb.phone }}</div>
+          <div>{{ BRANCHES.spb.phone }}</div>
           <span class="flex mx-4">|</span>
           <div>связаться с нами</div>
         </div>
