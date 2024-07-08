@@ -23,19 +23,19 @@ const props = defineProps({
   },
   width: {
     type: String,
-    default: "160"
+    default: '160'
   },
   height: {
     type: String,
-    default: "90"
+    default: '90'
   },
   loading: {
     type: String,
-    default: "eager"
+    default: 'eager'
   }
 })
 
-const isLoaded = ref(false)
+const isLoaded = ref<boolean>(false)
 </script>
 
 <template>

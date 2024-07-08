@@ -19,7 +19,7 @@ const { API_ENDPOINT } = useRuntimeConfig().public
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 
-const date = ref(new Date())
+const date = ref<Date>(new Date())
 
 const month = date.value.getMonth() + 1
 

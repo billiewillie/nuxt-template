@@ -1,7 +1,7 @@
 <script
   setup
   lang="ts">
-import { ref } from 'vue'
+import { type Ref, ref } from 'vue'
 import { SERVICE } from '~/data/constants'
 import { Card, CardContent } from '~/components/ui/card'
 import { setMapHeight } from '~/composables/setMapHeight'
@@ -9,15 +9,15 @@ import BRANCHES from '~/data/branches'
 import BRANCH_PARTNERS from '~/data/branch-partners'
 import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, YandexMapMarker } from 'vue-yandex-maps'
 
-const coordinates = ref(BRANCHES.spb.map)
+const coordinates = ref(BRANCHES.spb.map) as Ref<number[]>
 
-const viewport = useViewport()
+const viewport = useViewport() as Ref<boolean>
 
 // create branches object without spb
 const branchesFiltered = Object.fromEntries(
   Object
     .entries(BRANCHES)
-    .filter(([key, _]) => key !== 'spb')
+    .filter(([key, _]): boolean => key !== 'spb')
 )
 </script>
 

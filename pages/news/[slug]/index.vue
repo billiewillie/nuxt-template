@@ -7,13 +7,13 @@ import { useAsyncData, useRuntimeConfig } from '#app'
 import { useRoute } from 'vue-router'
 import { type Ref, ref } from 'vue'
 
-const title = ref('Новости | Группа компаний ООО «БиоЛайн»')
-const banner = ref('/img/og-logo.jpg')
-const description = ref('Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.')
+const title = ref<string>('Новости | Группа компаний ООО «БиоЛайн»')
+const banner = ref<string>('/img/og-logo.jpg')
+const description = ref<string>('Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.')
 
-const { slug } = useRoute().params
+const { slug }: { slug: string } = useRoute().params
 
-const { API_ENDPOINT } = useRuntimeConfig().public
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const { data: article, error }: { data: Ref<News> } = await useAsyncData(
   'article',

@@ -20,15 +20,13 @@ import { type Ref, ref } from 'vue'
 import { ChevronRight } from 'lucide-vue-next'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 
-const date = ref(new Date())
+const date = ref<Date>(new Date())
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 
 const { data }: { data: Ref<IndexPageApi> } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
-
-console.log(data.value)
 </script>
 
 <template>
@@ -155,7 +153,9 @@ console.log(data.value)
             <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
             <CarouselNext class="relative left-0 top-0 translate-y-0" />
           </div>
-          <Button as-child class="hidden md:flex">
+          <Button
+            as-child
+            class="hidden md:flex">
             <NuxtLink
               to="/news"
               class="flex gap-2 items-center">
@@ -246,7 +246,9 @@ console.log(data.value)
               </SelectGroup>
             </SelectContent>
           </Select>
-          <Button as-child class="hidden md:flex">
+          <Button
+            as-child
+            class="hidden md:flex">
             <NuxtLink
               to="/news"
               class="flex gap-2 items-center">

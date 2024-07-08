@@ -9,20 +9,18 @@ import type { Ref } from 'vue'
 
 const { API_ENDPOINT } = useRuntimeConfig().public
 
-const newsByYear = ref(null)
-const activeYear = ref(years[0])
+const newsByYear = ref<News[]>([])
+const activeYear = ref<number>(years[0])
 
 const { data: news }: { news: Ref<News[]> } = await useFetch(`${API_ENDPOINT}${URLs.news}`)
 
 function getNewsByYear() {
-  newsByYear.value = news.value.filter((article) => article.year === activeYear.value)
+  newsByYear.value = news.value.filter((article: News): boolean => article.year === activeYear.value)
 }
 
 onMounted(() => {
   getNewsByYear()
 })
-
-console.log(news.value)
 </script>
 
 <template>

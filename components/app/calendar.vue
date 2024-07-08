@@ -1,12 +1,12 @@
 <script
   setup
   lang="ts">
-import { type Ref, ref } from 'vue'
+import { ref } from 'vue'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 import { Calendar } from '@/components/ui/calendar'
 import { cn } from '~/lib/utils'
 
-const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
+const value = ref<DateValue>(today(getLocalTimeZone()))
 
 const props = withDefaults(defineProps<{
   class?: string
