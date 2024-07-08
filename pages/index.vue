@@ -106,19 +106,22 @@ const { data }: { data: Ref<IndexPageApi> } = await useFetch(`${API_ENDPOINT}${U
   <section class="mb-24 xl:mb-32">
     <div class="container">
       <h2 class="section-title mb-12 xl:mb-16">Каталог</h2>
-      <div class="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-4">
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
         <NuxtLink
           :to="`/catalog/${item.slug}`"
           v-for="item in CATEGORIES"
+          class="aspect-video xl:aspect-square"
           :key="item.id">
-          <Card class="flex flex-col gap-6 p-4 items-center text-center shadow-md hover:shadow-lg transition-shadow h-full">
-            <NuxtImg
-              :src="item.icon"
-              class="object-contain object-center w-[80px] h-[80px]"
-              width="80"
-              height="80"
-              :alt="item.title" />
-            <CardContent class="p-0 font-medium">
+          <Card class="flex flex-col gap-6 p-4 items-center justify-between text-center shadow-md square hover:shadow-lg transition-shadow h-full w-full">
+            <div class="flex items-center h-1/2 ">
+              <NuxtImg
+                :src="item.icon"
+                height="80"
+                width="80"
+                class="object-contain object-center h-[80px] w-[80px]"
+                :alt="item.title" />
+            </div>
+            <CardContent class="p-0 font-medium h-1/2">
               <p class="~text-[18px]/[22px]">{{ item.title }}</p>
             </CardContent>
           </Card>
