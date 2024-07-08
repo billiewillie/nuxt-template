@@ -7,7 +7,7 @@ import type { Ref } from 'vue'
 
 const activeCategory = ref<InStockCategory | null>(null)
 
-const { API_ENDPOINT } = useRuntimeConfig().public
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const { data }: { data: Ref<InStockCategory[]> } = await useFetch(`${API_ENDPOINT}${URLs.inStock}`)
 

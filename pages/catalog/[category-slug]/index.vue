@@ -9,7 +9,7 @@ import URLs from '~/data/urls'
 
 const route = useRoute()
 
-const { API_ENDPOINT } = useRuntimeConfig().public
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const { data: category }: {
   data: Ref<ProductCategoryPageApi>

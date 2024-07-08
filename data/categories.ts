@@ -39,7 +39,7 @@ const CATEGORIES: Array<ProductCategory> = [
   },
   {
     id: 7,
-    title: 'Операционная микроскопия и госпитальное оборудование',
+    title: 'Операционная микроскопия',
     slug: 'surgical-microscopy',
     icon: '/img/categories/icons/7.svg'
   },

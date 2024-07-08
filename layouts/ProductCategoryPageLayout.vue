@@ -6,8 +6,6 @@ import type { ProductCategoryPageApi } from '~/types'
 const props = defineProps<{
   data: ProductCategoryPageApi
 }>()
-
-console.log(props.data)
 </script>
 
 <template>
@@ -95,19 +93,19 @@ console.log(props.data)
         <Card class="group h-full shadow-md hover:shadow-lg p-4 rounded transition-shadow">
           <CardHeader class="p-0 relative">
             <Icon
-              name="clarity:layers-line"
-              class="absolute right-0 top-0 z-10 text-[#ccc] group-hover:text-red-500 transition-colors"
               width="36"
-              height="36" />
+              height="36"
+              name="clarity:layers-line"
+              v-if="category.is_partition === 1"
+              class="absolute right-0 top-0 z-10 text-[#ccc] group-hover:text-red-500 transition-colors" />
             <BaseImage
-              class="basis-full md:basis-1/2 lg:basis-2/3 rounded overflow-hidden"
-              :src="category.preview_img"
-              :alt="category.title"
               width="269"
               height="269"
-              placeholder="bg-[rgba(255,255,255,0)]"
               aspect-ratio="1/1"
-            />
+              :alt="category.title"
+              :src="category.preview_img"
+              placeholder="bg-[rgba(255,255,255,0)]"
+              class="basis-full md:basis-1/2 lg:basis-2/3 rounded overflow-hidden" />
           </CardHeader>
           <Separator class="my-4" />
           <CardContent class="p-0">

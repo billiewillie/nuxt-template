@@ -1,15 +1,15 @@
 <script
   setup
   lang="ts">
-import ProductCategoryPageLayout from '~/layouts/ProductCategoryPageLayout.vue'
+import type { Ref } from 'vue'
 import { useRuntimeConfig } from '#app'
 import type { ProductCategoryPageApi, ProductPageApi } from '~/types'
-import type { Ref } from 'vue'
-import ProductExpendablePageLayout from '~/layouts/ProductExpendablePageLayout.vue'
 import ProductPageLayout from '~/layouts/ProductPageLayout.vue'
+import ProductCategoryPageLayout from '~/layouts/ProductCategoryPageLayout.vue'
+import ProductExpendablePageLayout from '~/layouts/ProductExpendablePageLayout.vue'
 
 const route = useRoute()
-const { API_ENDPOINT } = useRuntimeConfig().public
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const { data }: {
   data: Ref<ProductCategoryPageApi | ProductPageApi>

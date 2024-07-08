@@ -15,7 +15,7 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
-const { API_ENDPOINT } = useRuntimeConfig().public
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 

@@ -7,7 +7,7 @@ import type { News } from '~/types'
 import { years } from '~/data/constants'
 import type { Ref } from 'vue'
 
-const { API_ENDPOINT } = useRuntimeConfig().public
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const newsByYear = ref<News[]>([])
 const activeYear = ref<number>(years[0])

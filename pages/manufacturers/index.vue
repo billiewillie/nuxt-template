@@ -8,7 +8,7 @@ import URLs from '~/data/urls'
 
 const activeCategory = ref<ManufacturerCategory | null>(null)
 
-const { API_ENDPOINT } = useRuntimeConfig().public
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const { data: categories }: { data: Ref<ManufacturersPageApi> } = await useFetch(`${API_ENDPOINT}${URLs.manufacturers}`)
 

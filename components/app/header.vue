@@ -26,7 +26,7 @@ const route = useRoute()
           <span class="flex mx-4">|</span>
           <NuxtLink to="/wishlist">Избранное (0)</NuxtLink>
           <span class="flex mx-4">|</span>
-          <div>Поиск</div>
+          <NuxtLink to="/search">Поиск</NuxtLink>
         </div>
       </div>
     </div>

@@ -13,6 +13,7 @@ interface Product {
   sort: number
   is_favourites: number
   is_comparison: number
+  is_partition: number
   slug: string
 }
 
