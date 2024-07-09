@@ -1,7 +1,7 @@
 <script
   setup
   lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { cn } from '~/lib/utils'
 
 const props = defineProps({
@@ -37,10 +37,13 @@ const props = defineProps({
 
 let isLoaded = ref<boolean>(false)
 
-onMounted(() => {
-  setTimeout(() => {
-    isLoaded.value = true
-  })
+function onLoad() {
+  isLoaded.value = true
+}
+
+onMounted(async () => {
+  await nextTick()
+  onLoad()
 })
 </script>
 
@@ -56,6 +59,7 @@ onMounted(() => {
       :height="props.height"
       :alt="props.alt"
       :loading="props.loading"
+      @load="onLoad"
     />
   </div>
 </template>

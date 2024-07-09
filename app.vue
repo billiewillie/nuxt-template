@@ -5,15 +5,18 @@
 </template>
 
 <style>
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.2s;
 }
-
-.page-enter-from,
+.page-enter-from {
+  opacity: 0;
+  transform: translate(10px, 0);
+}
 .page-leave-to {
   opacity: 0;
-  filter: blur(0.5rem);
+  transform: translate(-10px, 0);
 }
 </style>
 
