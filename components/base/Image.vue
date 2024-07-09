@@ -37,11 +37,11 @@ const props = defineProps({
 
 let isLoaded = ref<boolean>(false)
 
-function onLoad() {
+function onLoad(): void {
   isLoaded.value = true
 }
 
-onMounted(async () => {
+onMounted(async (): Promise<void> => {
   await nextTick()
   onLoad()
 })

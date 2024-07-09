@@ -12,11 +12,11 @@
 }
 .page-enter-from {
   opacity: 0;
-  transform: translate(10px, 0);
+  transform: translate(0, -10px);
 }
 .page-leave-to {
   opacity: 0;
-  transform: translate(-10px, 0);
+  transform: translate(0, 10px);
 }
 </style>
 

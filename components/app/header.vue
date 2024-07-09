@@ -11,7 +11,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <header class="flex flex-col shadow-lg">
+  <header class="flex flex-col shadow-lg z-10">
     <div class="hidden xl:flex bg-background-dark py-4 text-foreground-dark">
       <div class="container flex justify-between text-[14px]">
         <div class="flex">
@@ -30,7 +30,7 @@ const route = useRoute()
         </div>
       </div>
     </div>
-    <div class="py-4">
+    <div class="py-4 bg-background">
       <div class="container relative flex items-center gap-8 justify-between">
         <NuxtLink
           to="/"

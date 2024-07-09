@@ -4,8 +4,7 @@
 </script>
 
 <template>
-
-  <main class="flex-auto">
+  <main class="flex-auto min-h-screen">
 
     <Head>
       <Title>Сравнение | Группа компаний ООО «БиоЛайн»</Title>
@@ -77,5 +76,4 @@
     </section>
 
   </main>
-
 </template>

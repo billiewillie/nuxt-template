@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <main class="flex-auto">
+  <main class="flex-auto min-h-screen">
 
     <Head>
       <Title>Вакансии | Группа компаний ООО «БиоЛайн»</Title>
