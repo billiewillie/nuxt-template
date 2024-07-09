@@ -5,8 +5,7 @@ import { Card, CardContent } from '~/components/ui/card'
 </script>
 
 <template>
-
-  <main class="flex-auto">
+  <main>
 
     <Head>
       <Title>Технический сервис | Группа компаний ООО «БиоЛайн»</Title>

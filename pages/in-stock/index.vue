@@ -16,7 +16,7 @@ activeCategory.value = data.value[0]
 
 <template>
 
-  <main class="flex-auto">
+  <main>
 
     <Head>
       <Title>На складе | Группа компаний ООО «БиоЛайн»</Title>

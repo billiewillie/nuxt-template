@@ -1,6 +1,6 @@
 <template>
 
-  <main class="flex-auto">
+  <main>
 
     <section class="mb-16 pt-14">
       <div class="container">

@@ -7,7 +7,7 @@ import CATEGORIES from '~/data/categories'
 
 <template>
 
-  <main class="flex-auto">
+  <main>
 
     <Head>
       <Title>Каталог | Группа компаний ООО «БиоЛайн»</Title>

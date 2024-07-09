@@ -7,7 +7,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div>
+  <div class="min-h-screen">
 
     <Head>
       <Title>Поиск | Группа компаний ООО «БиоЛайн»</Title>

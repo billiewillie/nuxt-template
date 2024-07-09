@@ -9,12 +9,13 @@ const props = defineProps<{
 </script>
 
 <template>
-
   <main class="flex-auto">
 
     <section class="mb-16 pt-14">
       <div class="container">
-        <h1 class="section-title">{{ props.data.title }}</h1>
+        <h1 class="section-title">
+          {{ props.data.title }}
+        </h1>
       </div>
     </section>
 

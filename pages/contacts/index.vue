@@ -23,7 +23,7 @@ const branchesFiltered = Object.fromEntries(
 
 <template>
 
-  <main class="flex-auto">
+  <main>
 
     <Head>
       <Title>Контакты | Группа компаний ООО «БиоЛайн»</Title>

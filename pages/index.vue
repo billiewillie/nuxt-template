@@ -30,7 +30,7 @@ const { data }: { data: Ref<IndexPageApi> } = await useFetch(`${API_ENDPOINT}${U
 </script>
 
 <template>
-  <main class="flex-auto">
+  <main>
 
     <Head>
       <Title>Группа компаний ООО «БиоЛайн»</Title>

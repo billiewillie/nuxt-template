@@ -25,7 +25,7 @@ onMounted(() => {
 
 <template>
 
-  <main class="flex-auto">
+  <main>
 
     <Head>
       <Title>Новости | Группа компаний ООО «БиоЛайн»</Title>

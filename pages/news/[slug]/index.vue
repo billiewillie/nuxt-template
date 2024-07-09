@@ -29,7 +29,7 @@ if (article.value) {
 
 <template>
 
-  <main class="flex-auto">
+  <main>
 
     <Head>
       <Title>{{ article.title }}</Title>

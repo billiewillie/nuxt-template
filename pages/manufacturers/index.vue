@@ -16,7 +16,7 @@ activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory
 </script>
 
 <template>
-  <main class="flex-auto min-h-screen">
+  <main>
 
     <Head>
       <Title>Производители | Группа компаний ООО «БиоЛайн»</Title>

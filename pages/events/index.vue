@@ -30,7 +30,7 @@ const { data: events }: {
 
 <template>
 
-  <main class="flex-auto min-h-screen">
+  <main>
 
     <Head>
       <Title>Календарь | Группа компаний ООО «БиоЛайн»</Title>
