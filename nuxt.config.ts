@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     'nuxt-marquee',
     'vue-yandex-maps/nuxt',
-    "nuxt-viewport"
+    'nuxt-viewport'
   ],
   image: {
     inject: true,
@@ -105,7 +105,9 @@ export default defineNuxtConfig({
           color: '#5bbad5'
         }
       ]
-    }
+    },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
+    pageTransition: { name: 'page', mode: 'out-in' }
   },
   runtimeConfig: {
     public: {
@@ -114,5 +116,5 @@ export default defineNuxtConfig({
   },
   yandexMaps: {
     apikey: '3c059258-c2fe-4ad1-85b6-f124123aa8e1'
-  },
+  }
 })

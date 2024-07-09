@@ -1,5 +1,7 @@
 <template>
   <main class="flex-auto">
-    <slot></slot>
+    <slot />
   </main>
 </template>
+<script setup>
+</script>

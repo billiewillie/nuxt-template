@@ -35,12 +35,18 @@ const props = defineProps({
   }
 })
 
-const isLoaded = ref<boolean>(false)
+let isLoaded = ref<boolean>(false)
+
+onMounted(() => {
+  setTimeout(() => {
+    isLoaded.value = true
+  })
+})
 </script>
 
 <template>
   <div :class="cn('relative', props.aspectRatio)">
-    <div :class="cn('absolute left-0 top-0 w-full h-full transition-opacity duration-500', { 'opacity-0': isLoaded }, props.placeholder)"></div>
+    <div :class="cn({ 'opacity-0': isLoaded },'absolute left-0 top-0 w-full h-full transition-opacity duration-500', props.placeholder)"></div>
     <NuxtPicture
       :src="props.src"
       class="w-full h-full object-cover object-top"
@@ -50,11 +56,6 @@ const isLoaded = ref<boolean>(false)
       :height="props.height"
       :alt="props.alt"
       :loading="props.loading"
-      @load="isLoaded = true"
     />
   </div>
 </template>
-
-<style scoped>
-
-</style>

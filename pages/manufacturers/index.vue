@@ -16,112 +16,114 @@ activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory
 </script>
 
 <template>
+  <main class="flex-auto min-h-screen">
 
-  <Head>
-    <Title>Производители | Группа компаний ООО «БиоЛайн»</Title>
-    <Meta
-      name="description"
-      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
-    <Meta
-      name="og:image"
-      content="/img/og-logo.jpg" />
-    <Meta
-      name="twitter:image"
-      content="/img/og-logo.jpg" />
-    <Meta
-      name="og:title"
-      content="Производители | Группа компаний ООО «БиоЛайн»" />
-    <Meta
-      name="og:description"
-      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
-    <Meta
-      name="og:site_name"
-      content="bioline.vercel.app" />
-    <Meta
-      name="og:url"
-      content="https://bioline.vercel.app/contacts" />
-    <Meta
-      name="og:image:width"
-      content="1200" />
-    <Meta
-      name="og:image:height"
-      content="630" />
-    <Meta
-      name="og:type"
-      content="article" />
-    <Meta
-      name="og:locale"
-      content="ru_RU" />
-    <Meta
-      name="twitter:title"
-      content="Производители | Группа компаний ООО «БиоЛайн»" />
-    <Meta
-      name="twitter:description"
-      content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
-    <Meta
-      name="twitter:site"
-      content="bioline.vercel.app" />
-    <Meta
-      name="twitter:card"
-      content="summary_large_image" />
-  </Head>
+    <Head>
+      <Title>Производители | Группа компаний ООО «БиоЛайн»</Title>
+      <Meta
+        name="description"
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+      <Meta
+        name="og:image"
+        content="/img/og-logo.jpg" />
+      <Meta
+        name="twitter:image"
+        content="/img/og-logo.jpg" />
+      <Meta
+        name="og:title"
+        content="Производители | Группа компаний ООО «БиоЛайн»" />
+      <Meta
+        name="og:description"
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+      <Meta
+        name="og:site_name"
+        content="bioline.vercel.app" />
+      <Meta
+        name="og:url"
+        content="https://bioline.vercel.app/contacts" />
+      <Meta
+        name="og:image:width"
+        content="1200" />
+      <Meta
+        name="og:image:height"
+        content="630" />
+      <Meta
+        name="og:type"
+        content="article" />
+      <Meta
+        name="og:locale"
+        content="ru_RU" />
+      <Meta
+        name="twitter:title"
+        content="Производители | Группа компаний ООО «БиоЛайн»" />
+      <Meta
+        name="twitter:description"
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+      <Meta
+        name="twitter:site"
+        content="bioline.vercel.app" />
+      <Meta
+        name="twitter:card"
+        content="summary_large_image" />
+    </Head>
 
-  <section class="mb-12 xl:mb-16 pt-14">
-    <div class="container">
-      <Breadcrumb class="mb-12">
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink as-child>
-              <NuxtLink to="/">Главная</NuxtLink>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Производители “БиоЛайн”</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+    <section class="mb-12 xl:mb-16 pt-14">
+      <div class="container">
+        <Breadcrumb class="mb-12">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink as-child>
+                <NuxtLink to="/">Главная</NuxtLink>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Производители “БиоЛайн”</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
-      <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-8">
-        <h1 class="section-title">Производители</h1>
-        <div class="flex flex-col md:flex-row gap-4">
-          <Button
-            v-for="manufacturer in MANUFACTURER_BUTTONS"
-            :variant="manufacturer.value === activeCategory?.url ? 'default' : 'outline'"
-            @click="activeCategory = categories.manufacturers.find(({url}) => url ===  manufacturer.value) as ManufacturerCategory"
-            :key="manufacturer.value">
-            {{ manufacturer.title }}
-          </Button>
+        <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-8">
+          <h1 class="section-title">Производители</h1>
+          <div class="flex flex-col md:flex-row gap-4">
+            <Button
+              v-for="manufacturer in MANUFACTURER_BUTTONS"
+              :variant="manufacturer.value === activeCategory?.url ? 'default' : 'outline'"
+              @click="activeCategory = categories.manufacturers.find(({url}) => url ===  manufacturer.value) as ManufacturerCategory"
+              :key="manufacturer.value">
+              {{ manufacturer.title }}
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <div class="container grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] md:grid-cols-2 xl:grid-cols-3 gap-4 mb-16">
-      <NuxtLink
-        v-for="manufacturer in activeCategory?.list"
-        :key="manufacturer"
-        :to="manufacturer.url">
-        <Card class="flex flex-col gap-4">
-          <CardHeader>
-            <NuxtImg
-              :src="manufacturer.logo"
-              width="80"
-              height="80"
-              class="mb-8"
-              :alt="manufacturer.title" />
-            <h2 class="font-bold ~text-[20px]/[24px]">{{ manufacturer.title }}</h2>
-          </CardHeader>
-          <CardContent>
-            <p class="text-2xl">
-              <b>Leica Biosystems</b> - разработчик решений и средств автоматизации рабочих процессов для проведения
-              патогистологических исследований.
-            </p>
-          </CardContent>
-        </Card>
-      </NuxtLink>
-    </div>
-  </section>
+    <section>
+      <div class="container grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] md:grid-cols-2 xl:grid-cols-3 gap-4 mb-16">
+        <NuxtLink
+          v-for="manufacturer in activeCategory?.list"
+          :key="manufacturer"
+          :to="manufacturer.url">
+          <Card class="flex flex-col gap-4">
+            <CardHeader>
+              <NuxtImg
+                :src="manufacturer.logo"
+                width="80"
+                height="80"
+                class="mb-8"
+                :alt="manufacturer.title" />
+              <h2 class="font-bold ~text-[20px]/[24px]">{{ manufacturer.title }}</h2>
+            </CardHeader>
+            <CardContent>
+              <p class="text-2xl">
+                <b>Leica Biosystems</b> - разработчик решений и средств автоматизации рабочих процессов для проведения
+                патогистологических исследований.
+              </p>
+            </CardContent>
+          </Card>
+        </NuxtLink>
+      </div>
+    </section>
 
+  </main>
 </template>

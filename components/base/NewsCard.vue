@@ -3,7 +3,7 @@
   lang="ts">
 import type { Article } from '~/types'
 
-const props = defineProps<{
+defineProps<{
   article: Article
   imageLoading: 'eager' | 'lazy'
 }>()
@@ -15,10 +15,10 @@ const props = defineProps<{
     class="flex h-full">
     <Card class="flex flex-col gap-6 pb-6 shadow-md hover:shadow-lg">
       <CardHeader class="p-0">
-        <NuxtPicture
+        <BaseImage
           :src="article.preview_img"
           :alt="article.title"
-          class="aspect-[7/5]"
+          class="w-full h-full object-cover object-center"
           :img-attrs="{class:'w-full h-full object-cover object-center'}"
           width="350"
           height="250"

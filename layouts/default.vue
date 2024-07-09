@@ -1,7 +1,9 @@
 <template>
-  <AppHeader />
-  <main class="flex-auto">
-    <slot></slot>
-  </main>
-  <LazyAppFooter />
+  <div class="flex flex-col min-h-screen justify-between">
+    <AppHeader />
+    <div class="flex-auto">
+      <slot />
+    </div>
+    <LazyAppFooter />
+  </div>
 </template>

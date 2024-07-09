@@ -14,8 +14,6 @@ const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 const { data: category }: {
   data: Ref<ProductCategoryPageApi>
 } = await useFetch(`${API_ENDPOINT}${URLs.catalog}/${route.params.categoryslug}`)
-
-console.log(category.value)
 </script>
 
 <template>
