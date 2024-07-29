@@ -26,7 +26,10 @@ const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 
-const { data }: { data: Ref<IndexPageApi> } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
+const { data, error }: {
+  data: Ref<IndexPageApi> | undefined;
+  error: Ref<any>
+} = await useFetch(`${API_ENDPOINT}${URLs.index}`)
 </script>
 
 <template>
@@ -143,14 +146,16 @@ const { data }: { data: Ref<IndexPageApi> } = await useFetch(`${API_ENDPOINT}${U
             align: 'start',
           }">
           <CarouselContent :is-visible="true">
-            <CarouselItem
-              v-for="article in data.news"
-              :key="article.id"
-              class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
-              <BaseNewsCard
-                :article="article"
-                image-loading="lazy" />
-            </CarouselItem>
+            <template v-if="data?.news">
+              <CarouselItem
+                v-for="article in data.news"
+                :key="article.id"
+                class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
+                <BaseNewsCard
+                  :article="article"
+                  image-loading="lazy" />
+              </CarouselItem>
+            </template>
           </CarouselContent>
           <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
             <div class="flex gap-4">
@@ -178,90 +183,92 @@ const { data }: { data: Ref<IndexPageApi> } = await useFetch(`${API_ENDPOINT}${U
         <h2 class="section-title">Новинки</h2>
       </div>
       <div class="container">
-        <Carousel
-          class="relative w-full"
-          :opts="{
-          align: 'start',
-        }"
-        >
-          <CarouselContent :is-visible="true">
-            <CarouselItem
-              v-for="product in data.new_products.list"
-              :key="product.id"
-              class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
-              <NuxtLink
-                to="/"
-                class="flex h-full">
-                <Card class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full">
-                  <CardHeader class="p-0">
-                    <NuxtPicture
-                      :src="product.preview_img"
-                      :alt="product.title"
-                      :img-attrs="{class:'w-full h-full object-scale-down object-center'}"
-                      class="aspect-square"
-                      width="350"
-                      height="250"
-                    />
-                  </CardHeader>
-                  <CardContent class="flex flex-col p-0 flex-auto">
-                    <Separator class="w-full mb-6" />
-                    <h3 class="font-semibold text-xl">{{ product.title }}</h3>
-                  </CardContent>
-                  <CardFooter class="flex items-center justify-between p-0">
-                    <div class="flex gap-4 items-center">
+        <template v-if="data?.new_products">
+          <Carousel
+            class="relative w-full"
+            :opts="{
+              align: 'start',
+            }"
+          >
+            <CarouselContent :is-visible="true">
+              <CarouselItem
+                v-for="product in data.new_products.list"
+                :key="product.id"
+                class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
+                <NuxtLink
+                  to="/"
+                  class="flex h-full">
+                  <Card class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full">
+                    <CardHeader class="p-0">
+                      <NuxtPicture
+                        :src="product.preview_img"
+                        :alt="product.title"
+                        :img-attrs="{class:'w-full h-full object-scale-down object-center'}"
+                        class="aspect-square"
+                        width="350"
+                        height="250"
+                      />
+                    </CardHeader>
+                    <CardContent class="flex flex-col p-0 flex-auto">
+                      <Separator class="w-full mb-6" />
+                      <h3 class="font-semibold text-xl">{{ product.title }}</h3>
+                    </CardContent>
+                    <CardFooter class="flex items-center justify-between p-0">
+                      <div class="flex gap-4 items-center">
+                        <Icon
+                          name="mdi:compare-horizontal"
+                          width="18"
+                          height="18"
+                          color="#575757" />
+                        <Icon
+                          name="cil:star"
+                          width="18"
+                          height="18"
+                          color="#575757" />
+                      </div>
                       <Icon
-                        name="mdi:compare-horizontal"
+                        name="iconamoon:arrow-right-2-light"
                         width="18"
                         height="18"
-                        color="#575757" />
-                      <Icon
-                        name="cil:star"
-                        width="18"
-                        height="18"
-                        color="#575757" />
-                    </div>
-                    <Icon
-                      name="iconamoon:arrow-right-2-light"
-                      width="18"
-                      height="18"
-                      style="color: #575757" />
-                  </CardFooter>
-                </Card>
-              </NuxtLink>
-            </CarouselItem>
-          </CarouselContent>
-          <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
-            <div class="flex gap-4">
-              <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
-              <CarouselNext class="relative left-0 top-0 translate-y-0" />
+                        style="color: #575757" />
+                    </CardFooter>
+                  </Card>
+                </NuxtLink>
+              </CarouselItem>
+            </CarouselContent>
+            <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
+              <div class="flex gap-4">
+                <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+                <CarouselNext class="relative left-0 top-0 translate-y-0" />
+              </div>
+              <Select>
+                <SelectTrigger class="w-[180px] hidden md:flex">
+                  <SelectValue placeholder="Категория" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem
+                      v-for="category in data.new_products.title"
+                      :key="category.id"
+                      :value="category.title">
+                      {{ category.title }}
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Button
+                as-child
+                class="hidden md:flex">
+                <NuxtLink
+                  to="/news"
+                  class="flex gap-2 items-center">
+                  Все новинки
+                  <ChevronRight class="w-4 h-4" />
+                </NuxtLink>
+              </Button>
             </div>
-            <Select>
-              <SelectTrigger class="w-[180px] hidden md:flex">
-                <SelectValue placeholder="Категория" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem
-                    v-for="category in data.new_products.title"
-                    :key="category.id"
-                    :value="category.title">
-                    {{ category.title }}
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Button
-              as-child
-              class="hidden md:flex">
-              <NuxtLink
-                to="/news"
-                class="flex gap-2 items-center">
-                Все новинки
-                <ChevronRight class="w-4 h-4" />
-              </NuxtLink>
-            </Button>
-          </div>
-        </Carousel>
+          </Carousel>
+        </template>
       </div>
     </section>
 
@@ -275,37 +282,111 @@ const { data }: { data: Ref<IndexPageApi> } = await useFetch(`${API_ENDPOINT}${U
 
         <LazyAppCalendar class="md:w-1/2 relative z-20 bg-background" />
 
-        <Carousel
-          class="h-[inherit] md:w-1/2 relative"
-          :opts="{
-          align: 'start',
-        }">
-          <CarouselContent
-            :is-visible="true"
-            :is-height-full="true"
-            class="h-full">
-            <CarouselItem
-              v-for="event in data.calendar.list"
-              :key="event.id"
-              class="lg:basis-1/2 h-full">
-              <BaseEventCard :event="event" />
-            </CarouselItem>
-          </CarouselContent>
-          <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
-            <div class="flex gap-4">
-              <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
-              <CarouselNext class="relative left-0 top-0 translate-y-0" />
+        <template v-if="data?.calendar?.list.length">
+          <Carousel
+            class="h-[inherit] md:w-1/2 relative"
+            :opts="{
+              align: 'start',
+            }">
+            <CarouselContent
+              :is-visible="true"
+              :is-height-full="true"
+              class="h-full">
+              <CarouselItem
+                v-for="event in data?.calendar.list"
+                :key="event.id"
+                class="lg:basis-1/2 h-full">
+                <BaseEventCard :event="event" />
+              </CarouselItem>
+            </CarouselContent>
+            <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
+              <div class="flex gap-4">
+                <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+                <CarouselNext class="relative left-0 top-0 translate-y-0" />
+              </div>
+              <Button as-child>
+                <NuxtLink
+                  to="/events"
+                  class="flex gap-2 items-center">
+                  Все события
+                  <ChevronRight class="w-4 h-4" />
+                </NuxtLink>
+              </Button>
             </div>
-            <Button as-child>
-              <NuxtLink
-                to="/events"
-                class="flex gap-2 items-center">
-                Все события
-                <ChevronRight class="w-4 h-4" />
-              </NuxtLink>
-            </Button>
-          </div>
-        </Carousel>
+          </Carousel>
+        </template>
+
+        <template v-else>
+          <Carousel
+            class="h-[inherit] md:w-1/2 relative"
+            :opts="{
+              align: 'start',
+            }">
+            <CarouselContent
+              :is-visible="true"
+              :is-height-full="true"
+              class="h-full">
+              <CarouselItem
+                v-for="(_, index) in 3"
+                :key="index"
+                class="lg:basis-1/2 h-full">
+                <NuxtLink
+                  to="/"
+                  class="p-0 h-full">
+                  <Card class="h-full shadow-md hover:shadow-lg">
+                    <CardHeader class="p-0">
+                      <div class="h-[150px] w-full bg-gray-200"></div>
+                    </CardHeader>
+                    <CardContent class="flex flex-col justify-center p-6">
+                      <div class="flex items-center mb-4">
+                        <Icon
+                          name="solar:calendar-linear"
+                          class="mr-2"
+                          width="18"
+                          height="18"
+                          color="#575757" />
+                        <time
+                          class="text-[#575757] leading-none text-sm"
+                          :datetime="2024-12-12">
+                          2024-12-12
+                        </time>
+                      </div>
+                      <h3 class="text-[18px] font-semibold line-clamp-3">НПК "Новые медицинские технологии в
+                        оториноларингологии.
+                        Прошлое, настоящее и будущее".</h3>
+                      <Separator class="w-full my-4" />
+                      <p class="text-base mb-4">
+                        Крокус Экспо
+                        <br>
+                        Московская обл., Красногорск, Международная ул., 16
+                      </p>
+                      <Icon
+                        name="iconamoon:arrow-right-2-light"
+                        class="flex mr-2 self-end"
+                        width="18"
+                        height="18"
+                        color="#575757" />
+                    </CardContent>
+                  </Card>
+                </NuxtLink>
+              </CarouselItem>
+            </CarouselContent>
+            <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
+              <div class="flex gap-4">
+                <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+                <CarouselNext class="relative left-0 top-0 translate-y-0" />
+              </div>
+              <Button as-child>
+                <NuxtLink
+                  to="/events"
+                  class="flex gap-2 items-center">
+                  Все события
+                  <ChevronRight class="w-4 h-4" />
+                </NuxtLink>
+              </Button>
+            </div>
+          </Carousel>
+        </template>
       </div>
     </section>
 
@@ -314,21 +395,23 @@ const { data }: { data: Ref<IndexPageApi> } = await useFetch(`${API_ENDPOINT}${U
       <div class="container mb-16">
         <h2 class="section-title">Партнёры</h2>
       </div>
-      <NuxtMarquee
-        :auto-fill="true"
-        :pause-on-hover="true">
-        <NuxtLink
-          v-for="manufacturer in data.manufacturers"
-          :key="manufacturer.id"
-          :to="manufacturer.url"
-          class="h-[70px] mr-10 grayscale transition hover:grayscale-0">
-          <NuxtImg
-            loading="lazy"
-            :src="manufacturer.logo"
-            :alt="manufacturer.title"
-            class="w-full h-full object-contain object-center" />
-        </NuxtLink>
-      </NuxtMarquee>
+      <template v-if="data?.manufacturers">
+        <NuxtMarquee
+          :auto-fill="true"
+          :pause-on-hover="true">
+          <NuxtLink
+            v-for="manufacturer in data.manufacturers"
+            :key="manufacturer.id"
+            :to="manufacturer.url"
+            class="h-[70px] mr-10 grayscale transition hover:grayscale-0">
+            <NuxtImg
+              loading="lazy"
+              :src="manufacturer.logo"
+              :alt="manufacturer.title"
+              class="w-full h-full object-contain object-center" />
+          </NuxtLink>
+        </NuxtMarquee>
+      </template>
     </section>
 
     <BaseContactForm />
