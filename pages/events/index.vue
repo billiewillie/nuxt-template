@@ -24,7 +24,7 @@ const date = ref<Date>(new Date())
 const month = date.value.getMonth() + 1
 
 const { data: events }: {
-  data: Ref<Events>
+  data: Ref<Events> | undefined
 } = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/10`)
 </script>
 
@@ -114,7 +114,7 @@ const { data: events }: {
             <SelectContent>
               <SelectGroup>
                 <SelectItem
-                  v-for="category in events.categories"
+                  v-for="category in events?.categories"
                   :key="category.id"
                   :value="category.title">
                   {{ category.title }}
@@ -131,7 +131,7 @@ const { data: events }: {
       <div class="container">
         <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-3 gap-4">
           <BaseEventCard
-            v-for="event in events.list"
+            v-for="event in events?.list"
             :key="event.id"
             :event="event" />
         </div>

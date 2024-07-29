@@ -117,7 +117,7 @@ const { data, error }: {
             class="aspect-video xl:aspect-square"
             :key="item.id">
             <Card class="flex flex-col gap-6 p-4 items-center justify-between text-center shadow-md square hover:shadow-lg transition-shadow h-full w-full">
-              <div class="flex items-center h-1/2 ">
+              <div class="flex items-center h-1/2">
                 <NuxtImg
                   :src="item.icon"
                   height="80"
@@ -136,9 +136,11 @@ const { data, error }: {
 
     <!--новости-->
     <section class="mb-24 xl:mb-32">
+
       <div class="container mb-16">
         <h2 class="section-title">Новости</h2>
       </div>
+
       <div class="container">
         <Carousel
           class="relative w-full"
@@ -146,6 +148,7 @@ const { data, error }: {
             align: 'start',
           }">
           <CarouselContent :is-visible="true">
+
             <template v-if="data?.news">
               <CarouselItem
                 v-for="article in data.news"
@@ -154,6 +157,48 @@ const { data, error }: {
                 <BaseNewsCard
                   :article="article"
                   image-loading="lazy" />
+              </CarouselItem>
+            </template>
+
+            <template v-else>
+              <CarouselItem
+                v-for="(_, index) in 10"
+                :key="index"
+                class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
+                <div class="flex h-full">
+                  <Card class="flex flex-col gap-6 pb-6 shadow-md hover:shadow-lg">
+                    <CardHeader class="p-0">
+                      <div class="w-full h-full bg-gray-200"></div>
+                    </CardHeader>
+                    <CardContent class="flex flex-col gap-4 p-0 px-6 flex-auto">
+                      <CardTitle class="text-xl">
+                        <Skeleton class="h-4 w-[250px]" />
+                        <Skeleton class="h-4 w-[250px]" />
+                      </CardTitle>
+                      <Separator />
+                      <CardDescription class="text-base text-foreground">annotation</CardDescription>
+                    </CardContent>
+                    <CardFooter class="flex items-center justify-between p-0 px-6">
+                      <div class="flex gap-2 items-center">
+                        <Icon
+                          name="solar:calendar-linear"
+                          width="18"
+                          height="18"
+                          color="#575757" />
+                        <time
+                          class="text-[#575757]"
+                          :datetime="2012-12-12">
+                          2012-12-12
+                        </time>
+                      </div>
+                      <Icon
+                        name="iconamoon:arrow-right-2-light"
+                        width="18"
+                        height="18"
+                        style="color: #575757" />
+                    </CardFooter>
+                  </Card>
+                </div>
               </CarouselItem>
             </template>
           </CarouselContent>
@@ -175,6 +220,7 @@ const { data, error }: {
           </div>
         </Carousel>
       </div>
+
     </section>
 
     <!--новинки-->
@@ -330,12 +376,10 @@ const { data, error }: {
                 v-for="(_, index) in 3"
                 :key="index"
                 class="lg:basis-1/2 h-full">
-                <NuxtLink
-                  to="/"
-                  class="p-0 h-full">
+                <div class="p-0 h-full">
                   <Card class="h-full shadow-md hover:shadow-lg">
                     <CardHeader class="p-0">
-                      <div class="h-[150px] w-full bg-gray-200"></div>
+                      <Skeleton class="h-[150px] w-full" />
                     </CardHeader>
                     <CardContent class="flex flex-col justify-center p-6">
                       <div class="flex items-center mb-4">
@@ -345,21 +389,19 @@ const { data, error }: {
                           width="18"
                           height="18"
                           color="#575757" />
-                        <time
-                          class="text-[#575757] leading-none text-sm"
-                          :datetime="2024-12-12">
-                          2024-12-12
-                        </time>
+                        <Skeleton class="h-4 w-20" />
                       </div>
-                      <h3 class="text-[18px] font-semibold line-clamp-3">НПК "Новые медицинские технологии в
-                        оториноларингологии.
-                        Прошлое, настоящее и будущее".</h3>
+                      <div class="space-y-2">
+                        <Skeleton class="h-4 w-full" />
+                        <Skeleton class="h-4 w-full" />
+                        <Skeleton class="h-4 w-full" />
+                      </div>
                       <Separator class="w-full my-4" />
-                      <p class="text-base mb-4">
-                        Крокус Экспо
-                        <br>
-                        Московская обл., Красногорск, Международная ул., 16
-                      </p>
+                      <div class="space-y-2 mb-2">
+                        <Skeleton class="h-3 w-full" />
+                        <Skeleton class="h-3 w-full" />
+                        <Skeleton class="h-3 w-full" />
+                      </div>
                       <Icon
                         name="iconamoon:arrow-right-2-light"
                         class="flex mr-2 self-end"
@@ -368,7 +410,7 @@ const { data, error }: {
                         color="#575757" />
                     </CardContent>
                   </Card>
-                </NuxtLink>
+                </div>
               </CarouselItem>
             </CarouselContent>
             <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
@@ -387,6 +429,7 @@ const { data, error }: {
             </div>
           </Carousel>
         </template>
+
       </div>
     </section>
 

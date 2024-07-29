@@ -80,18 +80,23 @@ import CATEGORIES from '~/data/categories'
 
     <section class="mb-12 xl:mb-16">
       <div class="container">
-        <div class="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-4">
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
           <NuxtLink
             v-for="item in CATEGORIES"
             :key="item.id"
+            class="aspect-video xl:aspect-square"
             :to="`/catalog/${item.slug}`">
-            <Card class="flex flex-col gap-6 p-4 items-center text-center h-full">
-              <NuxtImg
-                :src="item.icon"
-                class="w-[80px] object-contain object-center h-[80px]"
-                :alt="item.title" />
-              <CardContent class="p-0 font-medium">
-                <p class="text-2xl">{{ item.title }}</p>
+            <Card class="flex flex-col gap-6 p-4 items-center justify-between text-center shadow-md square hover:shadow-lg transition-shadow h-full w-full">
+              <div class="flex items-center h-1/2">
+                <NuxtImg
+                  :src="item.icon"
+                  height="80"
+                  width="80"
+                  class="object-contain object-center h-[80px] w-[80px]"
+                  :alt="item.title" />
+              </div>
+              <CardContent class="p-0 font-medium h-1/2">
+                <p class="~text-[18px]/[22px]">{{ item.title }}</p>
               </CardContent>
             </Card>
           </NuxtLink>
