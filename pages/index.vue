@@ -100,7 +100,7 @@ const { data, error }: {
 
       <div class="container">
         <div class="relative py-20 xl:pt-40 max-w-[620px]">
-          <h2 class="uppercase font-semibold ~text-[28px]/[34px]">операционное и госпитальное оборудование</h2>
+          <h2 class="uppercase font-semibold ~text-[28px]/[33px]">операционное и госпитальное оборудование</h2>
           <Separator class="my-4" />
           <p class="~text-[16px]/[18px]">
             метод исследования тканей при их значительном увеличении под микроскопом. Это один из наиболее
