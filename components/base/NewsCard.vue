@@ -18,10 +18,10 @@ defineProps<{
         <BaseImage
           :src="article.preview_img"
           :alt="article.title"
-          class="w-full h-full object-cover object-center"
+          class="w-full h-[226px] object-cover object-center aspect-auto"
           :img-attrs="{class:'w-full h-full object-cover object-center'}"
           width="350"
-          height="250"
+          height="226"
           :loading="imageLoading"
         />
       </CardHeader>

@@ -112,11 +112,16 @@ onMounted(() => {
     <section class="mb-16">
       <div class="container">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 items-stretch">
-          <BaseNewsCard
-            v-for="article in newsByYear"
-            :key="article.id"
-            image-loading="lazy"
-            :article="article" />
+          <template v-if="newsByYear.length">
+            <BaseNewsCard
+              v-for="article in newsByYear"
+              :key="article.id"
+              image-loading="lazy"
+              :article="article" />
+          </template>
+          <template v-else>
+            <BaseNewsCardSkeleton v-for="i in 8" :key="i" />
+          </template>
         </div>
       </div>
     </section>

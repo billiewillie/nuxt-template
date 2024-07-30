@@ -100,7 +100,9 @@ const { data, error }: {
 
       <div class="container">
         <div class="relative py-20 xl:pt-40 max-w-[620px]">
-          <h2 class="uppercase font-semibold ~text-[28px]/[33px]">операционное и госпитальное оборудование</h2>
+          <h2 class="uppercase font-semibold ~text-[28px]/[33px]">
+            операционное и госпитальное оборудование
+          </h2>
           <Separator class="my-4" />
           <p class="~text-[16px]/[18px]">
             метод исследования тканей при их значительном увеличении под микроскопом. Это один из наиболее
@@ -155,7 +157,7 @@ const { data, error }: {
           }">
           <CarouselContent :is-visible="true">
 
-            <template v-if="data?.news">
+            <template v-if="data?.news.length">
               <CarouselItem
                 v-for="article in data.news"
                 :key="article.id"
@@ -171,43 +173,12 @@ const { data, error }: {
                 v-for="(_, index) in 10"
                 :key="index"
                 class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
-                <div class="flex h-full">
-                  <Card class="flex flex-col gap-6 pb-6 shadow-md hover:shadow-lg">
-                    <CardHeader class="p-0">
-                      <div class="w-full h-full bg-gray-200"></div>
-                    </CardHeader>
-                    <CardContent class="flex flex-col gap-4 p-0 px-6 flex-auto">
-                      <CardTitle class="text-xl">
-                        <Skeleton class="h-4 w-[250px]" />
-                        <Skeleton class="h-4 w-[250px]" />
-                      </CardTitle>
-                      <Separator />
-                      <CardDescription class="text-base text-foreground">annotation</CardDescription>
-                    </CardContent>
-                    <CardFooter class="flex items-center justify-between p-0 px-6">
-                      <div class="flex gap-2 items-center">
-                        <Icon
-                          name="solar:calendar-linear"
-                          width="18"
-                          height="18"
-                          color="#575757" />
-                        <time
-                          class="text-[#575757]"
-                          :datetime="2012-12-12">
-                          2012-12-12
-                        </time>
-                      </div>
-                      <Icon
-                        name="iconamoon:arrow-right-2-light"
-                        width="18"
-                        height="18"
-                        style="color: #575757" />
-                    </CardFooter>
-                  </Card>
-                </div>
+                <BaseNewsCardSkeleton />
               </CarouselItem>
             </template>
+
           </CarouselContent>
+
           <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
             <div class="flex gap-4">
               <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
@@ -224,6 +195,7 @@ const { data, error }: {
               </NuxtLink>
             </Button>
           </div>
+
         </Carousel>
       </div>
 
@@ -380,7 +352,7 @@ const { data, error }: {
                 v-for="(_, index) in 3"
                 :key="index"
                 class="lg:basis-1/2 h-full">
-                <EventCardSkeleton/>
+                <EventCardSkeleton />
               </CarouselItem>
             </CarouselContent>
             <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
