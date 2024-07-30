@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import EventCardSkeleton from '~/components/base/EventCardSkeleton.vue'
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
@@ -122,18 +123,59 @@ const { data: events }: {
               </SelectGroup>
             </SelectContent>
           </Select>
+          <Select>
+            <SelectTrigger class="w-full">
+              <SelectValue placeholder="Категория" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem
+                  v-for="category in events?.categories"
+                  :key="category.id"
+                  :value="category.title">
+                  {{ category.title }}
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger class="w-full">
+              <SelectValue placeholder="Категория" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem
+                  v-for="category in events?.categories"
+                  :key="category.id"
+                  :value="category.title">
+                  {{ category.title }}
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
           <Button>Применить</Button>
         </div>
+
       </div>
     </section>
 
     <section class="mb-16">
       <div class="container">
         <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-3 gap-4">
-          <BaseEventCard
-            v-for="event in events?.list"
-            :key="event.id"
-            :event="event" />
+
+          <template v-if="events?.list.length">
+            <BaseEventCard
+              v-for="event in events.list"
+              :key="event.id"
+              :event="event" />
+          </template>
+
+          <template v-else>
+            <EventCardSkeleton
+              v-for="index in 3"
+              :key="index" />
+          </template>
+
         </div>
       </div>
     </section>

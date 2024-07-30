@@ -95,10 +95,10 @@ const { data, error }: {
         alt="slider image"
       />
       <div class="container">
-        <div class="relative py-20 xl:pt-40 xl:w-1/2 max-w-[660px]">
-          <h2 class="uppercase font-semibold ~text-[28px]/[36px]">операционное и госпитальное оборудование</h2>
+        <div class="relative py-20 xl:pt-40 max-w-[620px]">
+          <h2 class="uppercase font-semibold ~text-[28px]/[34px]">операционное и госпитальное оборудование</h2>
           <Separator class="my-4" />
-          <p style="font-size: 16px;">
+          <p class="~text-[16px]/[18px]">
             метод исследования тканей при их значительном увеличении под микроскопом. Это один из наиболее
             распространённых способов в медицине, он позволяет увидеть структуру тканей, процессы происходящие в ней
             и патологические нарушения.
@@ -366,9 +366,7 @@ const { data, error }: {
         <template v-else>
           <Carousel
             class="h-[inherit] md:w-1/2 relative"
-            :opts="{
-              align: 'start',
-            }">
+            :opts="{align: 'start'}">
             <CarouselContent
               :is-visible="true"
               :is-height-full="true"
