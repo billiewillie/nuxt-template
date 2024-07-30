@@ -87,13 +87,18 @@ const { data, error }: {
 
     <!-- Slider -->
     <section class="relative mb-24 xl:mb-32 xl:h-[750px]">
-      <NuxtPicture
+
+      <BaseImage
         src="/img/index-page-slider/slider-1.jpg"
-        class="absolute left-0 top-0 h-full w-full"
-        quality="90"
-        :imgAttrs="{class:'w-full h-full object-cover object-top'}"
         alt="slider image"
+        class="!absolute left-0 top-0 h-full w-full"
+        :img-attrs="{class:'w-full h-full object-cover object-top'}"
+        placeholder="bg-[rgba(255,255,255,0)]"
+        width="1920"
+        height="860"
+        quality="90"
       />
+
       <div class="container">
         <div class="relative py-20 xl:pt-40 max-w-[620px]">
           <h2 class="uppercase font-semibold ~text-[28px]/[34px]">операционное и госпитальное оборудование</h2>
@@ -105,6 +110,7 @@ const { data, error }: {
           </p>
         </div>
       </div>
+
     </section>
 
     <!-- каталог -->

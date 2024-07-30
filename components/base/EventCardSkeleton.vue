@@ -24,7 +24,6 @@ import { Separator } from '~/components/ui/separator'
         <div class="space-y-2">
           <Skeleton class="h-4 w-full" />
           <Skeleton class="h-4 w-full" />
-          <Skeleton class="h-4 w-full" />
         </div>
         <Separator class="w-full my-4" />
         <div class="space-y-2 mb-2">
