@@ -47,6 +47,16 @@ interface BreadCrumb {
   title: string
 }
 
+export interface ProductCard {
+  id: number
+  title: string
+  preview_img: string
+  url: string
+  sort: number
+  is_favourites: number
+  is_comparison: number
+}
+
 export interface News {
   annotation: string,
   created_at: string,

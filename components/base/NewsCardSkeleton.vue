@@ -7,7 +7,7 @@ import { Separator } from '~/components/ui/separator'
 
 <template>
   <div class="p-0 h-full">
-    <Card class="flex flex-col gap-6 pb-6 shadow-md hover:shadow-lg">
+    <Card class="flex flex-col gap-6 pb-6 shadow-md hover:shadow-lg transition-shadow">
       <CardHeader class="p-0">
         <Skeleton class="h-[226px] w-full" />
       </CardHeader>

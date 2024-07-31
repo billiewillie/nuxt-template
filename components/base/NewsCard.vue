@@ -13,7 +13,7 @@ defineProps<{
   <NuxtLink
     :to="article.url"
     class="flex h-full">
-    <Card class="flex flex-col gap-6 pb-6 shadow-md hover:shadow-lg">
+    <Card class="flex flex-col gap-6 pb-6 shadow-md hover:shadow-lg transition-shadow">
       <CardHeader class="p-0">
         <BaseImage
           :src="article.preview_img"

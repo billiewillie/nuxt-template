@@ -31,6 +31,8 @@ const { data, error }: {
   data: Ref<IndexPageApi> | undefined;
   error: Ref<any>
 } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
+
+console.log(data?.value)
 </script>
 
 <template>
@@ -152,9 +154,7 @@ const { data, error }: {
       <div class="container">
         <Carousel
           class="relative w-full"
-          :opts="{
-            align: 'start',
-          }">
+          :opts="{align: 'start'}">
           <CarouselContent :is-visible="true">
 
             <template v-if="data?.news.length">
@@ -203,17 +203,16 @@ const { data, error }: {
 
     <!--новинки-->
     <section class="mb-24 xl:mb-32">
+
       <div class="container mb-16">
         <h2 class="section-title">Новинки</h2>
       </div>
+
       <div class="container">
         <template v-if="data?.new_products">
           <Carousel
             class="relative w-full"
-            :opts="{
-              align: 'start',
-            }"
-          >
+            :opts="{align: 'start'}">
             <CarouselContent :is-visible="true">
               <CarouselItem
                 v-for="product in data.new_products.list"
@@ -294,6 +293,7 @@ const { data, error }: {
           </Carousel>
         </template>
       </div>
+
     </section>
 
     <!--события-->
