@@ -191,7 +191,7 @@ console.log(data?.value)
                 to="/news"
                 class="flex gap-2 items-center">
                 Все новости
-                <ChevronRight class="w-4 h-4" />
+                <ChevronRight class="w-4 h-4 -mr-[6px]" />
               </NuxtLink>
             </Button>
           </div>
@@ -209,89 +209,63 @@ console.log(data?.value)
       </div>
 
       <div class="container">
-        <template v-if="data?.new_products">
-          <Carousel
-            class="relative w-full"
-            :opts="{align: 'start'}">
-            <CarouselContent :is-visible="true">
+        <Carousel
+          class="relative w-full"
+          :opts="{align: 'start'}">
+          <CarouselContent :is-visible="true">
+            <template v-if="data?.new_products">
               <CarouselItem
                 v-for="product in data.new_products.list"
                 :key="product.id"
                 class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
-                <NuxtLink
-                  to="/"
-                  class="flex h-full">
-                  <Card class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full">
-                    <CardHeader class="p-0">
-                      <NuxtPicture
-                        :src="product.preview_img"
-                        :alt="product.title"
-                        :img-attrs="{class:'w-full h-full object-scale-down object-center'}"
-                        class="aspect-square"
-                        width="350"
-                        height="250"
-                      />
-                    </CardHeader>
-                    <CardContent class="flex flex-col p-0 flex-auto">
-                      <Separator class="w-full mb-6" />
-                      <h3 class="font-semibold text-xl">{{ product.title }}</h3>
-                    </CardContent>
-                    <CardFooter class="flex items-center justify-between p-0">
-                      <div class="flex gap-4 items-center">
-                        <Icon
-                          name="mdi:compare-horizontal"
-                          width="18"
-                          height="18"
-                          color="#575757" />
-                        <Icon
-                          name="cil:star"
-                          width="18"
-                          height="18"
-                          color="#575757" />
-                      </div>
-                      <Icon
-                        name="iconamoon:arrow-right-2-light"
-                        width="18"
-                        height="18"
-                        style="color: #575757" />
-                    </CardFooter>
-                  </Card>
-                </NuxtLink>
+                <BaseProductCard :product="product" />
               </CarouselItem>
-            </CarouselContent>
-            <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
-              <div class="flex gap-4">
-                <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
-                <CarouselNext class="relative left-0 top-0 translate-y-0" />
-              </div>
-              <Select>
-                <SelectTrigger class="w-[180px] hidden md:flex">
-                  <SelectValue placeholder="Категория" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
+            </template>
+            <template v-else>
+              <CarouselItem
+                v-for="(_, index) in 8"
+                :key="index"
+                class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
+                <div>
+                  placeholder
+                </div>
+              </CarouselItem>
+            </template>
+          </CarouselContent>
+          <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
+            <div class="flex gap-4">
+              <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+              <CarouselNext class="relative left-0 top-0 translate-y-0" />
+            </div>
+            <Select>
+              <SelectTrigger class="w-[180px] hidden md:flex">
+                <SelectValue placeholder="Категория" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <template v-if="data?.new_products">
                     <SelectItem
                       v-for="category in data.new_products.title"
                       :key="category.id"
                       :value="category.title">
                       {{ category.title }}
                     </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <Button
-                as-child
-                class="hidden md:flex">
-                <NuxtLink
-                  to="/news"
-                  class="flex gap-2 items-center">
-                  Все новинки
-                  <ChevronRight class="w-4 h-4" />
-                </NuxtLink>
-              </Button>
-            </div>
-          </Carousel>
-        </template>
+                  </template>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Button
+              as-child
+              class="hidden md:flex">
+              <NuxtLink
+                to="/news"
+                class="flex gap-2 items-center">
+                Все новинки
+                <ChevronRight class="w-4 h-4 -mr-[6px]" />
+              </NuxtLink>
+            </Button>
+          </div>
+        </Carousel>
       </div>
 
     </section>
@@ -306,71 +280,48 @@ console.log(data?.value)
 
         <LazyAppCalendar class="md:w-1/2 relative z-20 bg-background" />
 
-        <template v-if="data?.calendar?.list.length">
-          <Carousel
-            class="h-[inherit] md:w-1/2 relative"
-            :opts="{
-              align: 'start',
-            }">
-            <CarouselContent
-              :is-visible="true"
-              :is-height-full="true"
-              class="h-full">
+        <Carousel
+          class="h-[inherit] md:w-1/2 relative"
+          :opts="{align: 'start'}">
+          <CarouselContent
+            :is-visible="true"
+            :is-height-full="true"
+            class="h-full">
+
+            <template v-if="data?.calendar?.list.length">
               <CarouselItem
                 v-for="event in data?.calendar.list"
                 :key="event.id"
                 class="lg:basis-1/2 h-full">
                 <BaseEventCard :event="event" />
               </CarouselItem>
-            </CarouselContent>
-            <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
-              <div class="flex gap-4">
-                <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
-                <CarouselNext class="relative left-0 top-0 translate-y-0" />
-              </div>
-              <Button as-child>
-                <NuxtLink
-                  to="/events"
-                  class="flex gap-2 items-center">
-                  Все события
-                  <ChevronRight class="w-4 h-4" />
-                </NuxtLink>
-              </Button>
-            </div>
-          </Carousel>
-        </template>
+            </template>
 
-        <template v-else>
-          <Carousel
-            class="h-[inherit] md:w-1/2 relative"
-            :opts="{align: 'start'}">
-            <CarouselContent
-              :is-visible="true"
-              :is-height-full="true"
-              class="h-full">
+            <template v-else>
               <CarouselItem
                 v-for="(_, index) in 3"
                 :key="index"
                 class="lg:basis-1/2 h-full">
                 <EventCardSkeleton />
               </CarouselItem>
-            </CarouselContent>
-            <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
-              <div class="flex gap-4">
-                <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
-                <CarouselNext class="relative left-0 top-0 translate-y-0" />
-              </div>
-              <Button as-child>
-                <NuxtLink
-                  to="/events"
-                  class="flex gap-2 items-center">
-                  Все события
-                  <ChevronRight class="w-4 h-4" />
-                </NuxtLink>
-              </Button>
+            </template>
+
+          </CarouselContent>
+          <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
+            <div class="flex gap-4">
+              <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+              <CarouselNext class="relative left-0 top-0 translate-y-0" />
             </div>
-          </Carousel>
-        </template>
+            <Button as-child>
+              <NuxtLink
+                to="/events"
+                class="flex gap-2 items-center">
+                Все события
+                <ChevronRight class="w-4 h-4 -mr-[6px]" />
+              </NuxtLink>
+            </Button>
+          </div>
+        </Carousel>
 
       </div>
     </section>

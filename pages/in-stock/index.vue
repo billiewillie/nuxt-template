@@ -107,13 +107,13 @@ activeCategory.value = data.value[0]
             <CardContent class="flex flex-col xl:flex-row w-full p-0 gap-8">
               <div class="flex basis-full xl:basis-1/3 justify-center">
                 <BaseImage
-                  class="w-full xl:w-[350]"
+                  class="w-full xl:w-[390]"
                   :src="product.preview_img"
                   :alt="product.title"
                   aspect-ratio="aspect-square"
-                  placeholder="bg-[#fff]"
-                  width="350"
-                  height="350"
+                  placeholder="bg-white"
+                  width="390"
+                  height="390"
                 />
               </div>
 

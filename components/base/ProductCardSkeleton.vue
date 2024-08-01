@@ -11,10 +11,8 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink
-    :to="product.url"
-    class="flex h-full">
-    <Card class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full transition-shadow">
+  <div class="flex h-full">
+    <Card class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full">
       <CardHeader class="p-0">
         <NuxtPicture
           :src="product.preview_img"
@@ -49,5 +47,5 @@ defineProps<{
           style="color: #575757" />
       </CardFooter>
     </Card>
-  </NuxtLink>
+  </div>
 </template>
