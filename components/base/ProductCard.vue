@@ -21,13 +21,15 @@ defineProps<{
           :alt="product.title"
           :img-attrs="{class:'w-full h-full object-scale-down object-center'}"
           class="aspect-square"
-          width="350"
-          height="250"
+          width="253"
+          height="253"
         />
       </CardHeader>
       <CardContent class="flex flex-col p-0 flex-auto">
         <Separator class="w-full mb-6" />
-        <h3 class="font-semibold text-xl">{{ product.title }}</h3>
+        <h3 class="font-semibold ~text-[18px]/[20px]">
+          {{ product.title }}
+        </h3>
       </CardContent>
       <CardFooter class="flex items-center justify-between p-0">
         <div class="flex gap-4 items-center">

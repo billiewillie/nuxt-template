@@ -170,7 +170,7 @@ console.log(data?.value)
 
             <template v-else>
               <CarouselItem
-                v-for="(_, index) in 10"
+                v-for="(_, index) in 6"
                 :key="index"
                 class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
                 <BaseNewsCardSkeleton />
@@ -213,6 +213,7 @@ console.log(data?.value)
           class="relative w-full"
           :opts="{align: 'start'}">
           <CarouselContent :is-visible="true">
+
             <template v-if="data?.new_products">
               <CarouselItem
                 v-for="product in data.new_products.list"
@@ -221,16 +222,16 @@ console.log(data?.value)
                 <BaseProductCard :product="product" />
               </CarouselItem>
             </template>
+
             <template v-else>
               <CarouselItem
-                v-for="(_, index) in 8"
+                v-for="(_, index) in 6"
                 :key="index"
                 class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
-                <div>
-                  placeholder
-                </div>
+                <BaseProductCardSkeleton />
               </CarouselItem>
             </template>
+
           </CarouselContent>
           <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
             <div class="flex gap-4">

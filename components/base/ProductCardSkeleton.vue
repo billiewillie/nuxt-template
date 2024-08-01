@@ -12,20 +12,17 @@ defineProps<{
 
 <template>
   <div class="flex h-full">
-    <Card class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full">
+    <Card class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full transition-shadow">
       <CardHeader class="p-0">
-        <NuxtPicture
-          :src="product.preview_img"
-          :alt="product.title"
-          :img-attrs="{class:'w-full h-full object-scale-down object-center'}"
-          class="aspect-square"
-          width="350"
-          height="250"
-        />
+        <Skeleton class="h-[253px] w-full" />
       </CardHeader>
       <CardContent class="flex flex-col p-0 flex-auto">
         <Separator class="w-full mb-6" />
-        <h3 class="font-semibold text-xl">{{ product.title }}</h3>
+        <h3 class="flex flex-col gap-y-2">
+          <Skeleton class="h-4 w-full" />
+          <Skeleton class="h-4 w-full" />
+          <Skeleton class="h-4 w-full" />
+        </h3>
       </CardContent>
       <CardFooter class="flex items-center justify-between p-0">
         <div class="flex gap-4 items-center">
