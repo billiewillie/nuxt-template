@@ -20,6 +20,7 @@ import { type Ref, ref } from 'vue'
 import { ChevronRight } from 'lucide-vue-next'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 import EventCardSkeleton from '~/components/base/EventCardSkeleton.vue'
+import { definePageMeta } from '#imports'
 
 const date = ref<Date>(new Date())
 

@@ -107,7 +107,7 @@ activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory
           <Card class="flex flex-col gap-4">
             <CardHeader>
               <NuxtImg
-                :src="manufacturer.logo"
+                src="/img/partners/leica-biosystems.svg"
                 width="80"
                 height="80"
                 class="mb-8"

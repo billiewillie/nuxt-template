@@ -1,11 +1,3 @@
-<script
-  setup
-  lang="ts">
-definePageMeta({
-  layout: false
-})
-</script>
-
 <template>
   <div class="min-h-screen">
 
@@ -81,3 +73,4 @@ definePageMeta({
 
   </div>
 </template>
+
