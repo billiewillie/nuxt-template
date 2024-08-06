@@ -42,7 +42,7 @@ const route = useRoute()
           <span class="flex mx-4">|</span>
           <Sheet>
             <SheetTrigger as-child>
-              <Button variant="outline">
+              <Button variant="ghost" class="p-0 h-auto">
                 Поиск
               </Button>
             </SheetTrigger>
