@@ -3,25 +3,36 @@
   lang="ts">
 import { Input } from '@/components/ui/input'
 import { VisuallyHidden } from 'radix-vue'
-import { SEARCH_CATEGORIES } from '~/data/constants'
+import { SEARCH_CATEGORIES, SEARCH_LENGTH } from '~/data/constants'
 
 const inputValue = ref('')
-const result = ref([])
+const category = ref(SEARCH_CATEGORIES[0])
+const subcategories = ref(category.value.subCategories ?? [])
+const subcategory = ref(null)
+const result = ref({})
 
-function search() {
-  $fetch('https://search.telvla.ru/search/show', {
-    method: 'POST',
-    body: {
-      search: 'для',
-      category: 'all',
-      subcategory: ''
-    },
-    onResponse({ request, response }) {
-      result.value = response._data
-      console.log(result.value)
-    },
+async function search() {
+  if (inputValue.value.length >= SEARCH_LENGTH) {
+    result.value = await $fetch(
+      'https://search.telvla.ru/search/show',
+      {
+        method: 'POST',
+        body: {
+          search: inputValue.value.trim(),
+          category: category.value.value,
+          subcategory: subcategory.value ?? ''
+        },
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    console.log(result.value)
+  }
+}
 
-  })
+function setSearchCategory(item) {
+  category.value = item
+  subcategories.value = item.subCategories ?? []
 }
 </script>
 
@@ -47,28 +58,33 @@ function search() {
       </SheetHeader>
       <section class="mb-12">
         <div class="container">
-          <ul class="flex gap-4 mb-2">
-            <li
+          <div class="flex gap-4 mb-2">
+            <div
               v-for="item in SEARCH_CATEGORIES"
+              class="cursor-pointer"
+              :class="{'underline': category.value === item.value}"
+              @click="setSearchCategory(item)"
               :key="item.value">
               <p>{{ item.title }}</p>
-            </li>
-          </ul>
-          <ul class="flex gap-4 mb-12">
-            <li
-              v-for="item in SEARCH_CATEGORIES"
-              :key="item.value">
-              <p>{{ item.title }}</p>
-            </li>
-          </ul>
+            </div>
+          </div>
+          <div class="flex gap-4 mb-12 h-10">
+            <template v-if="subcategories">
+              <div
+                v-for="item in subcategories"
+                :key="item.value">
+                <p>{{ item.title }}</p>
+              </div>
+            </template>
+          </div>
           <div class="relative w-full items-center">
             <Input
               id="search"
               type="text"
               placeholder="Поиск..."
               autocomplete="off"
-              autocorrect="off"
               v-model="inputValue"
+              @input="search()"
               class="pl-10 h-20" />
             <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
                       <Icon
@@ -84,17 +100,6 @@ function search() {
         <div class="container">
           <h3 class="title mb-4">Продукция</h3>
           <Separator class="my-4" />
-          <div
-            class="item fruit"
-            v-for="fruit in search()"
-            :key="fruit">
-            <p>{{ fruit }}</p>
-          </div>
-          <div
-            class="item error"
-            v-if="inputValue && !search().length">
-            <p>No results found!</p>
-          </div>
         </div>
       </section>
     </SheetContent>

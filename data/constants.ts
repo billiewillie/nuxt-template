@@ -43,10 +43,12 @@ export const SEARCH_CATEGORIES: SearchCategory[] = [
   },
   {
     title: 'Производители',
-    value: 'all'
+    value: 'manufacturer'
   },
   {
     title: 'А-Я',
     value: 'alphabet'
   }
 ]
+
+export const SEARCH_LENGTH = 3
