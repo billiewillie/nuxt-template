@@ -4,14 +4,36 @@
 import { Input } from '@/components/ui/input'
 import { VisuallyHidden } from 'radix-vue'
 import { SEARCH_CATEGORIES, SEARCH_LENGTH } from '~/data/constants'
+import type { SearchCategory } from '~/types'
 
-const inputValue = ref('')
-const category = ref(SEARCH_CATEGORIES[0])
-const subcategories = ref(category.value.subCategories ?? [])
-const subcategory = ref(null)
-const result = ref({})
+const inputValue = ref<string>('')
+const category = ref<SearchCategory>(SEARCH_CATEGORIES[0])
+const subcategories = ref<Array<{ title: string, value: string }> | []>(category.value.subCategories ?? [])
+const subcategory = ref<{ title: string, value: string } | null>(null)
+const result = ref({
+  expendable_material: {
+    title: 'Расходные материалы',
+    list: []
+  },
+  manufacturers: {
+    title: 'Производители',
+    list: []
+  },
+  news: {
+    title: 'Новости',
+    list: []
+  },
+  products: {
+    title: 'Продукция',
+    list: []
+  },
+  stock: {
+    title: 'На складе',
+    list: []
+  }
+})
 
-async function search() {
+async function search(): Promise<void> {
   if (inputValue.value.length >= SEARCH_LENGTH) {
     result.value = await $fetch(
       'https://search.telvla.ru/search/show',
@@ -26,11 +48,12 @@ async function search() {
           'Content-Type': 'application/json'
         }
       })
+
     console.log(result.value)
   }
 }
 
-function setSearchCategory(item) {
+function setSearchCategory(item): void {
   category.value = item
   subcategories.value = item.subCategories ?? []
 }

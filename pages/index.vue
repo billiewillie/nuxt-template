@@ -32,8 +32,6 @@ const { data, error }: {
   data: Ref<IndexPageApi> | undefined;
   error: Ref<any>
 } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
-
-console.log(data?.value)
 </script>
 
 <template>

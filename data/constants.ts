@@ -51,4 +51,12 @@ export const SEARCH_CATEGORIES: SearchCategory[] = [
   }
 ]
 
+export const SEARCH_RESULT = {
+  expendable_material: [],
+  manufacturers: [],
+  news: [],
+  products: [],
+  stock: [],
+}
+
 export const SEARCH_LENGTH = 3
