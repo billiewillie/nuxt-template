@@ -1,21 +1,15 @@
-import type { CatalogInnerPageType, ManufacturerButton } from '~/types'
+import type { ManufacturerButton, SearchCategory, Service } from '~/types'
 
-export const SERVICE = {
+export const SERVICE: Service = {
   phone: '+7 (800) 444 33 49',
   email: 'service@bioline.ru'
 }
 
-export const years: number[] = [
+export const YEARS: number[] = [
   new Date().getFullYear(),
   new Date().getFullYear() - 1,
   new Date().getFullYear() - 2
 ]
-
-export const CATALOG_INNER_PAGE_TYPE: Record<string, string> = {
-  catalog: 'catalog',
-  products: 'products',
-  expendable_material: 'expendable_material'
-}
 
 export const MANUFACTURER_BUTTONS: ManufacturerButton[] = [
   {
@@ -25,5 +19,34 @@ export const MANUFACTURER_BUTTONS: ManufacturerButton[] = [
   {
     title: 'Производители "БиоСистемы"',
     value: 'biosystemy'
+  }
+]
+
+export const SEARCH_CATEGORIES: SearchCategory[] = [
+  {
+    title: 'Все',
+    value: 'all'
+  },
+  {
+    title: 'Каталог',
+    value: 'catalog',
+    subCategories: [
+      {
+        title: 'Оборудование',
+        value: 'equipment'
+      },
+      {
+        title: 'Расходные материалы',
+        value: 'expendable_material'
+      }
+    ]
+  },
+  {
+    title: 'Производители',
+    value: 'all'
+  },
+  {
+    title: 'А-Я',
+    value: 'alphabet'
   }
 ]

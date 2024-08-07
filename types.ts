@@ -105,8 +105,6 @@ interface NewProductTitle {
   title: string
 }
 
-export type CatalogInnerPageType = Record<string, string>
-
 export type NavigationItem = {
   id: number
   title: string
@@ -222,6 +220,20 @@ export interface ManufacturerCategory {
   sort?: number
   created_at?: string
   list: Array<Manufacturer>
+}
+
+export interface SearchCategory {
+  title: string
+  value: string
+  subCategories?: Array<{
+    title: string
+    value: string
+  }>
+}
+
+export interface Service {
+  phone: string
+  email: string
 }
 
 export interface ProductCategoryPageApi extends Category {

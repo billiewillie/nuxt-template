@@ -4,13 +4,13 @@
 import URLs from '~/data/urls'
 import { useFetch, useRuntimeConfig } from '#app'
 import type { News } from '~/types'
-import { years } from '~/data/constants'
+import { YEARS } from '~/data/constants'
 import type { Ref } from 'vue'
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const newsByYear = ref<News[]>([])
-const activeYear = ref<number>(years[0])
+const activeYear = ref<number>(YEARS[0])
 
 const { data: news }: { news: Ref<News[]> } = await useFetch(`${API_ENDPOINT}${URLs.news}`)
 
@@ -97,7 +97,7 @@ onMounted(() => {
         <div class="flex gap-4">
           <Button
             :key="year"
-            v-for="year in years"
+            v-for="year in YEARS"
             @click="activeYear = year; getNewsByYear()"
             :variant="activeYear === year ? 'default' : 'ghost'">
             {{ year }}
