@@ -21,7 +21,7 @@ const BRANCHES: Record<string, Branch> = {
     address: 'ул. В. Хоружей, 32 а',
     phone: '+375 17 399 43 79',
     email: 'info@bioline-bs.by',
-    map: [27.56265, 53.92365]
+    map: [27.56265, 53.92365],
   },
   msk: {
     id: 3,
@@ -31,7 +31,7 @@ const BRANCHES: Record<string, Branch> = {
     city: 'Москва',
     address: 'Бутырский вал, дом 68/70, стр. 1, Бизнес-центр "Baker Plaza", этаж 3, офис 34',
     phone: '+7 (800) 555 49 40',
-    map: [37.589, 55.7888]
+    map: [37.589, 55.7888],
   },
   novosibirsk: {
     id: 4,

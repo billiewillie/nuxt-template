@@ -11,43 +11,49 @@ const category = ref<SearchCategory>(SEARCH_CATEGORIES[0])
 const subcategories = ref<Array<{ title: string, value: string }> | []>(category.value.subCategories ?? [])
 const subcategory = ref<{ title: string, value: string } | null>(null)
 const result = ref({
-  expendable_material: {
-    title: 'Расходные материалы',
-    list: []
-  },
-  manufacturers: {
-    title: 'Производители',
-    list: []
-  },
   news: {
     title: 'Новости',
+    list: []
+  },
+  stock: {
+    title: 'На складе',
     list: []
   },
   products: {
     title: 'Продукция',
     list: []
   },
-  stock: {
-    title: 'На складе',
+  manufacturers: {
+    title: 'Производители',
     list: []
-  }
+  },
+  expendable_material: {
+    title: 'Расходные материалы',
+    list: []
+  },
 })
 
 async function search(): Promise<void> {
   if (inputValue.value.length >= SEARCH_LENGTH) {
-    result.value = await $fetch(
+    const response = await $fetch(
       'https://search.telvla.ru/search/show',
       {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: {
           search: inputValue.value.trim(),
           category: category.value.value,
           subcategory: subcategory.value ?? ''
         },
-        headers: {
-          'Content-Type': 'application/json'
-        }
       })
+
+    result.value.news.list = response.news ?? []
+    result.value.stock.list = response.stock ?? []
+    result.value.products.list = response.products ?? []
+    result.value.manufacturers.list = response.manufacturers ?? []
+    result.value.expendable_material.list = response.expendable_material ?? []
 
     console.log(result.value)
   }
