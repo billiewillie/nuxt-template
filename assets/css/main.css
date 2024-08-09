@@ -94,4 +94,12 @@
   .marker {
     @apply relative w-[20px] h-[20px] bg-primary rounded-full border-2 border-background text-center text-background font-bold leading-[20px];
   }
+  
+  .active-link {
+    @apply relative;
+  }
+  
+  .active-link::before {
+    @apply absolute block content-[''] left-0 bottom-0 w-full h-[2px] rounded-full bg-gradient-to-l from-[#0AECEE] to-[#0B9798];
+  }
 }

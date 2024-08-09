@@ -32,11 +32,11 @@ async function search(): Promise<void> {
         }
       })
 
-    news.value = response.news ?? []
-    stock.value = response.stock ?? []
-    products.value = response.products ?? []
-    manufacturers.value = response.manufacturers ?? []
-    expendable_material.value = response.expendable_material ?? []
+    news.value = response.news.slice(0, 10) ?? []
+    stock.value = response.stock.slice(0, 10) ?? []
+    products.value = response.products.slice(0, 10) ?? []
+    manufacturers.value = response.manufacturers.slice(0, 10) ?? []
+    expendable_material.value = response.expendable_material.slice(0, 10) ?? []
 
     console.log(response)
   } else {
@@ -65,13 +65,11 @@ function setSearchCategory(item): void {
     </SheetTrigger>
     <SheetContent
       :side="'bottom'"
-      class="h-full">
+      class="h-full overflow-y-scroll">
       <SheetHeader>
         <VisuallyHidden>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
-          </SheetDescription>
+          <SheetTitle></SheetTitle>
+          <SheetDescription></SheetDescription>
         </VisuallyHidden>
       </SheetHeader>
       <section class="mb-20">
@@ -79,8 +77,8 @@ function setSearchCategory(item): void {
           <div class="flex gap-4 mb-2">
             <div
               v-for="item in SEARCH_CATEGORIES"
-              class="cursor-pointer"
-              :class="{'underline': category.value === item.value}"
+              class="cursor-pointer text-lg"
+              :class="{'active-link': category.value === item.value}"
               @click="setSearchCategory(item)"
               :key="item.value">
               <p>{{ item.title }}</p>
@@ -114,58 +112,22 @@ function setSearchCategory(item): void {
           </div>
         </div>
       </section>
-      <section class="mb-20" v-if="products.length">
-        <div class="container">
-          <h3 class="title mb-4">Продукция</h3>
-          <Separator class="my-4" />
-          <div
-            v-for="item in products"
-            :key="item.id">
-            <p>{{ item.title }}</p>
-          </div>
-        </div>
-      </section>
-      <section class="mb-20" v-if="stock.length">
-        <div class="container">
-          <h3 class="title mb-4">На складе</h3>
-          <Separator class="my-4" />
-          <div
-            v-for="product in products"
-            :key="product.id">
-            <p>{{ product.title }}</p>
-          </div>
-        </div>
-      </section>
-      <section class="mb-20" v-if="expendable_material.length">
-        <div class="container">
-          <h3 class="title mb-4">Расходные материалы</h3>
-          <Separator class="my-4" />
-          <div
-            v-for="material in expendable_material"
-            :key="material.id">
-            <p>{{ material.title }}</p>
-          </div>
-        </div>
-      </section>
-      <section class="mb-20" v-if="news.length">
-        <div class="container">
-          <h3 class="title mb-4">Новости</h3>
-          <Separator class="my-4" />
-          <div
-            v-for="article in news"
-            :key="article.id">
-            <p>{{ article.title }}</p>
-          </div>
-        </div>
-      </section>
-      <section class="mb-20" v-if="manufacturers.length">
-        <div class="container">
-          <h3 class="title mb-4">Производители</h3>
-          <Separator class="my-4" />
-          <div
-            v-for="manufacturer in manufacturers"
-            :key="manufacturer.id">
-            <p>{{ manufacturer.title }}</p>
+      <section>
+        <div
+          class="mb-20"
+          v-if="products.length">
+          <div class="container">
+            <h3 class="title mb-4">Продукция</h3>
+            <Separator class="my-4" />
+            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4">
+              <Card
+                v-for="item in products"
+                :key="item.id">
+                <CardContent>
+
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
