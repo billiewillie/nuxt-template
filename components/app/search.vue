@@ -10,28 +10,11 @@ const inputValue = ref<string>('')
 const category = ref<SearchCategory>(SEARCH_CATEGORIES[0])
 const subcategories = ref<Array<{ title: string, value: string }> | []>(category.value.subCategories ?? [])
 const subcategory = ref<{ title: string, value: string } | null>(null)
-const result = ref({
-  news: {
-    title: 'Новости',
-    list: []
-  },
-  stock: {
-    title: 'На складе',
-    list: []
-  },
-  products: {
-    title: 'Продукция',
-    list: []
-  },
-  manufacturers: {
-    title: 'Производители',
-    list: []
-  },
-  expendable_material: {
-    title: 'Расходные материалы',
-    list: []
-  },
-})
+const products = ref([])
+const stock = ref([])
+const manufacturers = ref([])
+const news = ref([])
+const expendable_material = ref([])
 
 async function search(): Promise<void> {
   if (inputValue.value.length >= SEARCH_LENGTH) {
@@ -46,16 +29,22 @@ async function search(): Promise<void> {
           search: inputValue.value.trim(),
           category: category.value.value,
           subcategory: subcategory.value ?? ''
-        },
+        }
       })
 
-    result.value.news.list = response.news ?? []
-    result.value.stock.list = response.stock ?? []
-    result.value.products.list = response.products ?? []
-    result.value.manufacturers.list = response.manufacturers ?? []
-    result.value.expendable_material.list = response.expendable_material ?? []
+    news.value = response.news ?? []
+    stock.value = response.stock ?? []
+    products.value = response.products ?? []
+    manufacturers.value = response.manufacturers ?? []
+    expendable_material.value = response.expendable_material ?? []
 
-    console.log(result.value)
+    console.log(response)
+  } else {
+    news.value = []
+    stock.value = []
+    products.value = []
+    manufacturers.value = []
+    expendable_material.value = []
   }
 }
 
@@ -85,7 +74,7 @@ function setSearchCategory(item): void {
           </SheetDescription>
         </VisuallyHidden>
       </SheetHeader>
-      <section class="mb-12">
+      <section class="mb-20">
         <div class="container">
           <div class="flex gap-4 mb-2">
             <div
@@ -125,10 +114,59 @@ function setSearchCategory(item): void {
           </div>
         </div>
       </section>
-      <section>
+      <section class="mb-20" v-if="products.length">
         <div class="container">
           <h3 class="title mb-4">Продукция</h3>
           <Separator class="my-4" />
+          <div
+            v-for="item in products"
+            :key="item.id">
+            <p>{{ item.title }}</p>
+          </div>
+        </div>
+      </section>
+      <section class="mb-20" v-if="stock.length">
+        <div class="container">
+          <h3 class="title mb-4">На складе</h3>
+          <Separator class="my-4" />
+          <div
+            v-for="product in products"
+            :key="product.id">
+            <p>{{ product.title }}</p>
+          </div>
+        </div>
+      </section>
+      <section class="mb-20" v-if="expendable_material.length">
+        <div class="container">
+          <h3 class="title mb-4">Расходные материалы</h3>
+          <Separator class="my-4" />
+          <div
+            v-for="material in expendable_material"
+            :key="material.id">
+            <p>{{ material.title }}</p>
+          </div>
+        </div>
+      </section>
+      <section class="mb-20" v-if="news.length">
+        <div class="container">
+          <h3 class="title mb-4">Новости</h3>
+          <Separator class="my-4" />
+          <div
+            v-for="article in news"
+            :key="article.id">
+            <p>{{ article.title }}</p>
+          </div>
+        </div>
+      </section>
+      <section class="mb-20" v-if="manufacturers.length">
+        <div class="container">
+          <h3 class="title mb-4">Производители</h3>
+          <Separator class="my-4" />
+          <div
+            v-for="manufacturer in manufacturers"
+            :key="manufacturer.id">
+            <p>{{ manufacturer.title }}</p>
+          </div>
         </div>
       </section>
     </SheetContent>
