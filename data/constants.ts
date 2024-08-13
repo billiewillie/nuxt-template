@@ -60,3 +60,5 @@ export const SEARCH_RESULT = {
 }
 
 export const SEARCH_LENGTH = 3
+
+export const SEARCH_RESULT_LENGTH = 8
