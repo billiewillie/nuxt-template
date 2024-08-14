@@ -6,6 +6,15 @@ import { VisuallyHidden } from 'radix-vue'
 import { SEARCH_CATEGORIES, SEARCH_LENGTH, SEARCH_RESULT_LENGTH } from '~/data/constants'
 import type { SearchCategory } from '~/types'
 import { setResultOutput } from '~/utils/setResultOutput'
+import { cn } from '~/lib/utils'
+
+const props = withDefaults(defineProps<{
+  side?: string
+  trigger?: string
+}>(), {
+  side: 'bottom',
+  trigger: 'icon'
+})
 
 const inputValue = ref<string>('')
 const category = ref<SearchCategory>(SEARCH_CATEGORIES[0])
@@ -84,15 +93,19 @@ function setSearchCategory(item): void {
 <template>
   <Sheet v-model:open="isOpen">
     <SheetTrigger as-child>
-      <Button
-        variant="ghost"
-        class="p-0 h-auto">
-        Поиск
-      </Button>
+      <Icon
+        v-if="props.trigger === 'icon'"
+        name="carbon:search"
+        width="24"
+        height="24"
+        color="#575757" />
+      <p
+        v-else
+        class='cursor-pointer hover:underline underline-offset-4'>Поиск</p>
     </SheetTrigger>
     <SheetContent
-      :side="'bottom'"
-      class="h-full overflow-y-scroll px-0">
+      :side="props.side === 'left' ? 'left' : 'bottom'"
+      class="h-full w-full overflow-y-scroll px-0">
       <SheetHeader>
         <VisuallyHidden>
           <SheetTitle></SheetTitle>

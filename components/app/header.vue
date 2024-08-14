@@ -32,28 +32,70 @@ const route = useRoute()
           <div>связаться с нами</div>
         </div>
         <div class="hidden xl:flex">
-          <NuxtLink to="/comparison">Сравнение (0)</NuxtLink>
+          <NuxtLink
+            to="/comparison"
+            class="hover:underline underline-offset-4">Сравнение (0)
+          </NuxtLink>
           <span class="flex mx-4">|</span>
-          <NuxtLink to="/wishlist">Избранное (0)</NuxtLink>
+          <NuxtLink
+            to="/wishlist"
+            class="hover:underline underline-offset-4">Избранное (0)
+          </NuxtLink>
           <span class="flex mx-4">|</span>
-          <LazyAppSearch />
+          <LazyAppSearch side="bottom" trigger="поиск" />
         </div>
       </div>
     </div>
     <div class="py-4 bg-background">
       <div class="container relative flex items-center gap-8 justify-between">
-        <NuxtLink
-          to="/"
-          class="flex h-full w-[110px]">
-          <NuxtImg
-            src="/img/logo.svg"
-            alt="logo"
-            height="59"
-            width="110"
-          />
-        </NuxtLink>
-        <nav class="-mr-4">
-          <ul class="hidden xl:flex gap-2">
+        <div class="basis-1/3 xl:hidden">
+          <Sheet>
+            <SheetTrigger as-child>
+              <Button
+                variant="outline"
+                class="xl:hidden">
+                Open
+              </Button>
+            </SheetTrigger>
+            <SheetContent class="xl:hidden">
+              <SheetHeader>
+                <VisuallyHidden>
+                  <SheetTitle></SheetTitle>
+                  <SheetDescription></SheetDescription>
+                </VisuallyHidden>
+              </SheetHeader>
+              <nav>
+                <ul class="flex flex-col gap-4">
+                  <li
+                    v-for="item in NAVIGATION"
+                    :key="item.id">
+                    <SheetClose as-child>
+                      <NuxtLink
+                        :to="item.href"
+                        :aria-label="item.title">
+                        {{ item.title }}
+                      </NuxtLink>
+                    </SheetClose>
+                  </li>
+                </ul>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+        <div class="basis-1/3 xl:basis-auto">
+          <NuxtLink
+            to="/"
+            class="flex h-full w-[110px]">
+            <NuxtImg
+              src="/img/logo.svg"
+              alt="logo"
+              height="59"
+              width="110"
+            />
+          </NuxtLink>
+        </div>
+        <nav class="hidden xl:flex -mr-4">
+          <ul class="flex gap-2">
             <li
               v-for="item in NAVIGATION"
               :key="item.id">
@@ -69,38 +111,10 @@ const route = useRoute()
             </li>
           </ul>
         </nav>
-        <Sheet>
-          <SheetTrigger as-child>
-            <Button
-              variant="outline"
-              class="xl:hidden">
-              Open
-            </Button>
-          </SheetTrigger>
-          <SheetContent class="xl:hidden">
-            <SheetHeader>
-              <VisuallyHidden>
-                <SheetTitle></SheetTitle>
-                <SheetDescription></SheetDescription>
-              </VisuallyHidden>
-            </SheetHeader>
-            <nav>
-              <ul class="flex flex-col gap-4">
-                <li
-                  v-for="item in NAVIGATION"
-                  :key="item.id">
-                  <SheetClose as-child>
-                    <NuxtLink
-                      :to="item.href"
-                      :aria-label="item.title">
-                      {{ item.title }}
-                    </NuxtLink>
-                  </SheetClose>
-                </li>
-              </ul>
-            </nav>
-          </SheetContent>
-        </Sheet>
+        <div class="flex basis-1/3 justify-end xl:hidden">
+          <LazyAppSearch
+            side="left" />
+        </div>
       </div>
     </div>
   </header>
