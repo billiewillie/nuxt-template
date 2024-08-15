@@ -53,8 +53,12 @@ export interface ProductCard {
   preview_img: string
   url: string
   sort: number
-  is_favourites: number
-  is_comparison: number
+  is_favourites: 1 | 0
+  is_comparison: 1 | 0
+  description?: string,
+  is_published?: number,
+  keywords?: string,
+  tag?: string,
 }
 
 export interface News {

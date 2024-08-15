@@ -26,9 +26,9 @@ defineProps<{
         />
       </CardHeader>
       <CardContent class="flex flex-col gap-4 p-0 px-6 flex-auto">
-        <CardTitle class="text-xl">{{ article.title }}</CardTitle>
+        <CardTitle class="~text-[16px]/[18px]">{{ article.title }}</CardTitle>
         <Separator />
-        <CardDescription class="text-base text-foreground">
+        <CardDescription class="~text-[14px]/[16px] text-foreground">
           {{ article.annotation }}
         </CardDescription>
       </CardContent>

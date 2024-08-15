@@ -1,6 +1,22 @@
 <script
   setup
   lang="ts">
+import type { ProductCard } from '~/types'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '~/components/ui/table'
+
+const product: ProductCard = {
+  id: 1,
+  title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+  preview_img: 'https://telvla.ru/upload/image/products/previews/leica_vt1200_s.webp',
+  url: '/catalog/diagnosis-oncological-diseases/gistologiya/vibratomy/poluavtomaticheskij-mikrotom-s-vibriruyushchim-lezviem-leica-vt1200-s',
+  sort: 500,
+  is_favourites: 1,
+  is_comparison: 0,
+  description: '',
+  is_published: 1,
+  keywords: '',
+  tag: ''
+}
 </script>
 
 <template>
@@ -74,9 +90,33 @@
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-16 pt-14">
+    <section class="mb-12 xl:mb-16">
+      <div class="container grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+        <BaseProductCard
+          v-for="(_, index) in 8"
+          :key="index"
+          :product="product" />
+      </div>
+    </section>
+
+    <section class="mb-12 xl:mb-16">
       <div class="container">
-        content
+        <Table class="mb-6 w-full">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Артикул / №</TableHead>
+              <TableHead>Название</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow
+              v-for="(_, index) in 8"
+              :key="index">
+              <TableCell>DS153769</TableCell>
+              <TableCell>Стереомикроскоп Nexcope NSZ-810</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </div>
     </section>
 

@@ -27,7 +27,7 @@ defineProps<{
       </CardHeader>
       <CardContent class="flex flex-col p-0 flex-auto">
         <Separator class="w-full mb-6" />
-        <h3 class="font-semibold ~text-[18px]/[20px] line-clamp-3">
+        <h3 class="font-semibold ~text-[16px]/[18px] line-clamp-3">
           {{ product.title }}
         </h3>
       </CardContent>

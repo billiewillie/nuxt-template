@@ -243,7 +243,6 @@ function setSearchSubCategory(item): void {
             <TableBody>
               <TableRow
                 v-for="item in expendableMaterialOutput"
-                :to="item.url"
                 :key="item.id">
                 <TableCell>DS153769</TableCell>
                 <TableCell>{{ item.title }}</TableCell>
