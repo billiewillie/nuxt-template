@@ -32,19 +32,33 @@ const route = useRoute()
           <div>связаться с нами</div>
         </div>
         <div class="hidden xl:flex">
-          <NuxtLink
-            to="/comparison"
-            class="hover:underline underline-offset-4">Сравнение (0)
-          </NuxtLink>
+          <div class="flex items-center gap-2 cursor-pointer group">
+            <Icon
+              name="solar:round-transfer-horizontal-linear"
+              width="18"
+              height="18"
+              color="#3BA3A3" />
+            <NuxtLink
+              to="/comparison"
+              class="group-hover:underline underline-offset-4">Сравнение (0)
+            </NuxtLink>
+          </div>
           <span class="flex mx-4">|</span>
-          <NuxtLink
-            to="/wishlist"
-            class="hover:underline underline-offset-4">Избранное (0)
-          </NuxtLink>
+          <div class="flex items-center gap-2 cursor-pointer group">
+            <Icon
+              name="lets-icons:star"
+              width="18"
+              height="18"
+              color="#3BA3A3" />
+            <NuxtLink
+              to="/wishlist"
+              class="group-hover:underline underline-offset-4">Избранное (0)
+            </NuxtLink>
+          </div>
           <span class="flex mx-4">|</span>
           <LazyAppSearch
             side="bottom"
-            trigger="поиск" />
+            trigger="search" />
         </div>
       </div>
     </div>

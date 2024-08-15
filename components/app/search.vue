@@ -93,15 +93,17 @@ function setSearchCategory(item): void {
 <template>
   <Sheet v-model:open="isOpen">
     <SheetTrigger as-child>
-      <Icon
-        v-if="props.trigger === 'icon'"
-        name="mingcute:search-line"
-        width="32"
-        height="32"
-        color="#3BA3A3" />
-      <p
-        v-else
-        class='cursor-pointer hover:underline underline-offset-4'>Поиск</p>
+      <div class="flex items-center gap-2 cursor-pointer group">
+        <Icon
+          name="mingcute:search-line"
+          width="32"
+          height="32"
+          class="xl:w-[18px] xl:h-[18px]"
+          color="#3BA3A3" />
+        <p
+          v-if="props.trigger === 'search'"
+          class='group-hover:underline underline-offset-4'>Поиск</p>
+      </div>
     </SheetTrigger>
     <SheetContent
       :side="props.side === 'left' ? 'left' : 'bottom'"
