@@ -128,8 +128,7 @@ const route = useRoute()
           </ul>
         </nav>
         <div class="flex basis-1/3 justify-end xl:hidden">
-          <LazyAppSearch
-            side="left" />
+          <LazyAppSearch side="left" />
         </div>
       </div>
     </div>

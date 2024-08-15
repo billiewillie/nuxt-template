@@ -6,6 +6,15 @@ import { VisuallyHidden } from 'radix-vue'
 import { SEARCH_CATEGORIES, SEARCH_LENGTH, SEARCH_RESULT_LENGTH } from '~/data/constants'
 import type { SearchCategory } from '~/types'
 import { setResultOutput } from '~/utils/setResultOutput'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/components/ui/table'
 
 const props = withDefaults(defineProps<{
   side?: string
@@ -64,6 +73,8 @@ async function search(): Promise<void> {
 
       expendableMaterial.value = response.expendable_material ?? []
       expendableMaterialOutput.value = setResultOutput(expendableMaterial.value, SEARCH_RESULT_LENGTH) ?? []
+
+      console.log(response)
 
     } catch (error) {
       news.value = []
@@ -183,17 +194,10 @@ function setSearchSubCategory(item): void {
         </div>
       </section>
       <section
-        class="mb-20"
+        class="mb-12 md:mb-16 xl:mb-20"
         v-if="products.length">
         <div class="container">
-          <div class="flex justify-between">
-            <h3 class="title text-2xl font-semibold">Продукция</h3>
-            <Button
-              as-child
-              @click="closeDialog">
-              <NuxtLink to="/catalog">Все товары</NuxtLink>
-            </Button>
-          </div>
+          <h3 class="title text-2xl font-semibold">Продукция</h3>
           <Separator class="mt-4 mb-6" />
           <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
             <BaseProductCard
@@ -202,6 +206,51 @@ function setSearchSubCategory(item): void {
               :product="item" />
           </div>
           <Button @click="productsOutput = setResultOutput(products, productsOutput.length + SEARCH_RESULT_LENGTH)">
+            Загрузить еще
+          </Button>
+        </div>
+      </section>
+      <section
+        class="mb-12 md:mb-16 xl:mb-20"
+        v-if="stock.length">
+        <div class="container">
+          <h3 class="title text-2xl font-semibold">На складе</h3>
+          <Separator class="mt-4 mb-6" />
+          <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+            <BaseProductCard
+              v-for="item in stockOutput"
+              :key="item.id"
+              :product="item" />
+          </div>
+          <Button @click="productsOutput = setResultOutput(products, productsOutput.length + SEARCH_RESULT_LENGTH)">
+            Загрузить еще
+          </Button>
+        </div>
+      </section>
+      <section
+        class="mb-12 md:mb-16 xl:mb-20"
+        v-if="expendableMaterial.length">
+        <div class="container">
+          <h3 class="title text-2xl font-semibold">Расходные материалы</h3>
+          <Separator class="mt-4 mb-6" />
+          <Table class="mb-6">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Артикул / №</TableHead>
+                <TableHead>Название</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow
+                v-for="item in expendableMaterialOutput"
+                :to="item.url"
+                :key="item.id">
+                <TableCell>DS153769</TableCell>
+                <TableCell>{{ item.title }}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+          <Button @click="expendableMaterialOutput = setResultOutput(expendableMaterial, expendableMaterialOutput.length + SEARCH_RESULT_LENGTH)">
             Загрузить еще
           </Button>
         </div>
