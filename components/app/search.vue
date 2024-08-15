@@ -6,7 +6,6 @@ import { VisuallyHidden } from 'radix-vue'
 import { SEARCH_CATEGORIES, SEARCH_LENGTH, SEARCH_RESULT_LENGTH } from '~/data/constants'
 import type { SearchCategory } from '~/types'
 import { setResultOutput } from '~/utils/setResultOutput'
-import { cn } from '~/lib/utils'
 
 const props = withDefaults(defineProps<{
   side?: string
@@ -20,51 +19,69 @@ const inputValue = ref<string>('')
 const category = ref<SearchCategory>(SEARCH_CATEGORIES[0])
 const subcategories = ref<Array<{ title: string, value: string }> | []>(category.value.subCategories ?? [])
 const subcategory = ref<{ title: string, value: string } | null>(null)
-const products = ref([])
-const productsOutput = ref([])
-const stock = ref([])
-const stockOutput = ref([])
-const manufacturers = ref([])
-const manufacturersOutput = ref([])
-const news = ref([])
-const newsOutput = ref([])
-const expendableMaterial = ref([])
-const expendableMaterialOutput = ref([])
+const products = ref<any>([])
+const productsOutput = ref<any>([])
+const stock = ref<any>([])
+const stockOutput = ref<any>([])
+const manufacturers = ref<any>([])
+const manufacturersOutput = ref<any>([])
+const news = ref<any>([])
+const newsOutput = ref<any>([])
+const expendableMaterial = ref<any>([])
+const expendableMaterialOutput = ref<any>([])
 
 const [isOpen, closeDialog] = dialogState()
 
 async function search(): Promise<void> {
   if (inputValue.value.length >= SEARCH_LENGTH) {
-    const response = await $fetch(
-      'https://search.telvla.ru/search/show',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: {
-          search: inputValue.value.trim(),
-          category: category.value.value,
-          subcategory: subcategory.value ?? ''
-        }
-      })
+    try {
+      const response = await $fetch(
+        'https://search.telvla.ru/search/show',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: {
+            search: inputValue.value.trim(),
+            category: category.value.value,
+            subcategory: subcategory.value ?? ''
+          }
+        })
 
-    news.value = response.news ?? []
-    newsOutput.value = setResultOutput(news.value, SEARCH_RESULT_LENGTH) ?? []
 
-    stock.value = response.stock ?? []
-    stockOutput.value = setResultOutput(stock.value, SEARCH_RESULT_LENGTH) ?? []
+      news.value = response.news ?? []
+      newsOutput.value = setResultOutput(news.value, SEARCH_RESULT_LENGTH) ?? []
 
-    products.value = response.products ?? []
-    productsOutput.value = setResultOutput(products.value, SEARCH_RESULT_LENGTH) ?? []
+      stock.value = response.stock ?? []
+      stockOutput.value = setResultOutput(stock.value, SEARCH_RESULT_LENGTH) ?? []
 
-    manufacturers.value = response.manufacturers ?? []
-    manufacturersOutput.value = setResultOutput(manufacturers.value, SEARCH_RESULT_LENGTH) ?? []
+      products.value = response.products ?? []
+      productsOutput.value = setResultOutput(products.value, SEARCH_RESULT_LENGTH) ?? []
 
-    expendableMaterial.value = response.expendable_material ?? []
-    expendableMaterialOutput.value = setResultOutput(expendableMaterial.value, SEARCH_RESULT_LENGTH) ?? []
+      manufacturers.value = response.manufacturers ?? []
+      manufacturersOutput.value = setResultOutput(manufacturers.value, SEARCH_RESULT_LENGTH) ?? []
 
-    console.log(response)
+      expendableMaterial.value = response.expendable_material ?? []
+      expendableMaterialOutput.value = setResultOutput(expendableMaterial.value, SEARCH_RESULT_LENGTH) ?? []
+
+    } catch (error) {
+      news.value = []
+      newsOutput.value = []
+
+      stock.value = []
+      stockOutput.value = []
+
+      products.value = []
+      productsOutput.value = []
+
+      manufacturers.value = []
+      manufacturersOutput.value = []
+
+      expendableMaterial.value = []
+      expendableMaterialOutput.value = []
+    }
+
   } else {
     news.value = []
     newsOutput.value = []
@@ -84,8 +101,13 @@ async function search(): Promise<void> {
 }
 
 function setSearchCategory(item): void {
+  subcategory.value = null
   category.value = item
   subcategories.value = item.subCategories ?? []
+}
+
+function setSearchSubCategory(item): void {
+  subcategory.value = item
 }
 
 </script>
@@ -132,8 +154,9 @@ function setSearchCategory(item): void {
                 v-for="item in subcategories"
                 :key="item.value">
                 <Button
-                  variant="outline"
-                  class="rounded-full text-sm p-2 h-8 md:h-10 md:p-4">
+                  :variant="subcategory?.value === item.value ? 'secondary' : 'outline'"
+                  @click="setSearchSubCategory(item)"
+                  class="rounded-full text-sm p-2 h-8 md:h-10 md:p-4 border">
                   {{ item.title }}
                 </Button>
               </div>
