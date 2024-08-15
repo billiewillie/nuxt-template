@@ -95,10 +95,10 @@ function setSearchCategory(item): void {
     <SheetTrigger as-child>
       <Icon
         v-if="props.trigger === 'icon'"
-        name="carbon:search"
-        width="24"
-        height="24"
-        color="#575757" />
+        name="mingcute:search-line"
+        width="32"
+        height="32"
+        color="#3BA3A3" />
       <p
         v-else
         class='cursor-pointer hover:underline underline-offset-4'>Поиск</p>

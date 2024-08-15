@@ -42,7 +42,9 @@ const route = useRoute()
             class="hover:underline underline-offset-4">Избранное (0)
           </NuxtLink>
           <span class="flex mx-4">|</span>
-          <LazyAppSearch side="bottom" trigger="поиск" />
+          <LazyAppSearch
+            side="bottom"
+            trigger="поиск" />
         </div>
       </div>
     </div>
@@ -51,11 +53,11 @@ const route = useRoute()
         <div class="basis-1/3 xl:hidden">
           <Sheet>
             <SheetTrigger as-child>
-              <Button
-                variant="outline"
-                class="xl:hidden">
-                Open
-              </Button>
+              <Icon
+                name="icon-park-outline:application-menu"
+                width="32"
+                height="32"
+                color="#3BA3A3" />
             </SheetTrigger>
             <SheetContent class="xl:hidden">
               <SheetHeader>
@@ -82,7 +84,7 @@ const route = useRoute()
             </SheetContent>
           </Sheet>
         </div>
-        <div class="basis-1/3 xl:basis-auto">
+        <div class="basis-1/3 flex xl:basis-auto justify-center">
           <NuxtLink
             to="/"
             class="flex h-full w-[110px]">
