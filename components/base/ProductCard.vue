@@ -37,7 +37,7 @@ defineProps<{
             name="mdi:compare-horizontal"
             width="18"
             height="18"
-            @click="console.log('compare')"
+            @click="console.log('compare1')"
             color="#575757" />
           <Icon
             name="cil:star"
