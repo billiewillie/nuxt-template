@@ -37,13 +37,19 @@ defineProps<{
             name="mdi:compare-horizontal"
             width="18"
             height="18"
-            @click="console.log('compare1')"
+            @click="((e) => {
+              e.preventDefault();
+              console.log('compare')
+            })"
             color="#575757" />
           <Icon
             name="cil:star"
             width="18"
             height="18"
-            @click="console.log('like')"
+            @click="((e) => {
+              e.preventDefault();
+              console.log('like')
+            })"
             color="#575757" />
         </div>
         <Icon
