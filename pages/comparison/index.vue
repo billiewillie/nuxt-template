@@ -1,34 +1,18 @@
 <script
   setup
   lang="ts">
-
-import type { ProductCard } from '~/types'
 import { X } from 'lucide-vue-next'
+import { watchOnce } from '@vueuse/core'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import type { CarouselApi } from '~/components/ui/carousel'
 
-const activeList = ref([
-  {
-    id: 1,
-    title: 'товар 1',
-    characteristic_groups: [
-      {
-        id: 1,
-        title: 'Объектив',
-        value: '40x'
-      },
-      {
-        id: 1,
-        title: 'Объектив',
-        value: '40x'
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: 'товар 2'
-  }
-])
+const api = ref<CarouselApi>()
+const totalCount = ref(0)
+const current = ref(0)
 
-const activeCategory = ref('микроскопы')
+function setApi(val: CarouselApi) {
+  api.value = val
+}
 
 const categories = ref([
   {
@@ -60,20 +44,6 @@ const categories = ref([
           {
             id: 1234,
             value: 'MacOS'
-          }
-        ]
-      },
-      {
-        id: 11,
-        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
-        characteristics: [
-          {
-            id: 123,
-            value: 'Большой'
-          },
-          {
-            id: 1234,
-            value: 'Windows'
           }
         ]
       }
@@ -149,28 +119,30 @@ const categories = ref([
   }
 ])
 
-const product: ProductCard = {
-  id: 1,
-  title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
-  preview_img: 'https://telvla.ru/upload/image/products/previews/leica_vt1200_s.webp',
-  url: '/catalog/diagnosis-oncological-diseases/gistologiya/vibratomy/poluavtomaticheskij-mikrotom-s-vibriruyushchim-lezviem-leica-vt1200-s',
-  sort: 500,
-  is_favourites: 1,
-  is_comparison: 0,
-  description: '',
-  is_published: 1,
-  keywords: '',
-  tag: ''
+const activeCategory = ref({})
+
+function setActiveCategory(id: number): void {
+  activeCategory.value = categories.value.filter(category => category.id === id)[0]
 }
 
-// function setActiveCategory(category: string) {
-//   activeCategory.value = category
-// }
-//
-// function removeCategory(category: string) {
-//   categories.value = categories.value.filter(item => item !== category)
-//   console.log(categories)
-// }
+function removeCategory(): void {
+  console.log('remove')
+}
+
+onMounted((): void => {
+  setActiveCategory(categories.value[0].id)
+})
+
+watchOnce(api, (api) => {
+  if (!api) return
+
+  totalCount.value = api.scrollSnapList().length
+  current.value = api.selectedScrollSnap() + 1
+
+  api.on('select', () => {
+    current.value = api.selectedScrollSnap() + 1
+  })
+})
 </script>
 
 <template>
@@ -244,43 +216,63 @@ const product: ProductCard = {
         <h1 class="section-title mb-12">Сравнение</h1>
 
         <div class="flex flex-wrap gap-4">
-          <!--          <Button-->
-          <!--            :variant="activeCategory === category ? 'secondary' : 'outline'"-->
-          <!--            v-for="category in categories"-->
-          <!--            :key="category"-->
-          <!--            class="rounded-full text-sm p-2 h-8 md:h-10 md:p-4 border"-->
-          <!--            @click="setActiveCategory(category)">-->
-          <!--            {{ category }} {{ activeList.length }} -->
-          <!--            <X-->
-          <!--              v-show="activeCategory === category"-->
-          <!--              @click="(e) => {-->
-          <!--                e.preventDefault();-->
-          <!--                removeCategory(category);-->
-          <!--              }"-->
-          <!--              class="w-4 h-4 text-muted-foreground" />-->
-          <!--          </Button>-->
+          <Button
+            :variant="activeCategory.id === category.id ? 'secondary' : 'outline'"
+            v-for="category in categories"
+            :key="category.title"
+            class="rounded-full text-sm p-2 h-8 md:h-10 md:p-4 border"
+            @click="setActiveCategory(category.id)"
+          >
+            {{ category.title }} {{ category.products.length }} 
+            <X
+              v-show="activeCategory === category.title"
+              @click="(e) => {
+                e.preventDefault();
+                console.log('remove category')
+              }"
+              class="w-4 h-4 text-muted-foreground" />
+          </Button>
         </div>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <Carousel>
+        <Carousel
+          class="relative w-full max-w-xs"
+          @init-api="setApi">
           <CarouselContent>
             <CarouselItem
-              v-for="product in activeList"
-              class="basis-1/4"
-              :key="product.id">
-              <p>{{ product.title }}</p>
+              v-for="(_, index) in 5"
+              :key="index">
+              <div class="p-1">
+                <Card>
+                  <CardContent class="flex aspect-square items-center justify-center p-6">
+                    <span class="text-4xl font-semibold">{{ index + 1 }}</span>
+                  </CardContent>
+                </Card>
+              </div>
             </CarouselItem>
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
-        <!--        <BaseProductCard-->
-        <!--          v-for="(_, index) in 3"-->
-        <!--          :key="index"-->
-        <!--          :product="product" />-->
+
+
+        <div class="py-2 text-center text-sm text-muted-foreground">
+          Slide {{ current }} of {{ totalCount }}
+        </div>
+        <!--        <Carousel @init-api="setApi">-->
+        <!--          <CarouselContent>-->
+        <!--            <CarouselItem-->
+        <!--              v-for="product in activeCategory.products"-->
+        <!--              :key="product.id">-->
+        <!--              <p>{{ product.title }}</p>-->
+        <!--            </CarouselItem>-->
+        <!--          </CarouselContent>-->
+        <!--          <CarouselPrevious />-->
+        <!--          <CarouselNext />-->
+        <!--        </Carousel>-->
       </div>
     </section>
 
