@@ -2,17 +2,6 @@
   setup
   lang="ts">
 import { X } from 'lucide-vue-next'
-import { watchOnce } from '@vueuse/core'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
-import type { CarouselApi } from '~/components/ui/carousel'
-
-const api = ref<CarouselApi>()
-const totalCount = ref(0)
-const current = ref(0)
-
-function setApi(val: CarouselApi) {
-  api.value = val
-}
 
 const categories = ref([
   {
@@ -92,16 +81,44 @@ const categories = ref([
         ]
       },
       {
-        id: 11,
+        id: 13,
         title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
         characteristics: [
           {
-            id: 123,
-            value: 'Большой'
+            id: 45,
+            value: 'ок. 20 км'
           },
           {
-            id: 1234,
-            value: 'Windows'
+            id: 56,
+            value: '0,5–60 мкм'
+          }
+        ]
+      },
+      {
+        id: 14,
+        title: 'Ротационный микротом Leica RM 2125 RTS',
+        characteristics: [
+          {
+            id: 45,
+            value: 'ок. 20 км'
+          },
+          {
+            id: 56,
+            value: '0,5–60 мкм'
+          }
+        ]
+      },
+      {
+        id: 15,
+        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        characteristics: [
+          {
+            id: 45,
+            value: 'ок. 20 км'
+          },
+          {
+            id: 56,
+            value: '0,5–60 мкм'
           }
         ]
       }
@@ -133,16 +150,19 @@ onMounted((): void => {
   setActiveCategory(categories.value[0].id)
 })
 
-watchOnce(api, (api) => {
-  if (!api) return
-
-  totalCount.value = api.scrollSnapList().length
-  current.value = api.selectedScrollSnap() + 1
-
-  api.on('select', () => {
-    current.value = api.selectedScrollSnap() + 1
-  })
-})
+function setTableWidth() {
+  if (activeCategory.value.products && activeCategory.value.products.length) {
+    if (activeCategory.value.products.length === 1) {
+      return 'w-1/4'
+    } else if (activeCategory.value.products.length === 2) {
+      return 'w-1/2'
+    } else if (activeCategory.value.products.length === 3) {
+      return 'w-3/4'
+    } else {
+      return 'w-[1470px]'
+    }
+  }
+}
 </script>
 
 <template>
@@ -238,41 +258,43 @@ watchOnce(api, (api) => {
 
     <section>
       <div class="container">
-        <Carousel
-          class="relative w-full max-w-xs"
-          @init-api="setApi">
-          <CarouselContent>
-            <CarouselItem
-              v-for="(_, index) in 5"
-              :key="index">
-              <div class="p-1">
-                <Card>
-                  <CardContent class="flex aspect-square items-center justify-center p-6">
-                    <span class="text-4xl font-semibold">{{ index + 1 }}</span>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-
-
-        <div class="py-2 text-center text-sm text-muted-foreground">
-          Slide {{ current }} of {{ totalCount }}
-        </div>
-        <!--        <Carousel @init-api="setApi">-->
-        <!--          <CarouselContent>-->
-        <!--            <CarouselItem-->
-        <!--              v-for="product in activeCategory.products"-->
-        <!--              :key="product.id">-->
-        <!--              <p>{{ product.title }}</p>-->
-        <!--            </CarouselItem>-->
-        <!--          </CarouselContent>-->
-        <!--          <CarouselPrevious />-->
-        <!--          <CarouselNext />-->
-        <!--        </Carousel>-->
+        <Table :class="setTableWidth()">
+          <TableHeader>
+            <TableRow>
+              <TableHead
+                v-for="(product, index) in activeCategory.products"
+                class="py-2 px-2 min-w-[315px]"
+                :key="product.id">
+                {{ product.title }}
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell
+                v-for="product in activeCategory.products"
+                :key="product.id">
+                {{ product.title }}
+              </TableCell>
+            </TableRow>
+            <template
+              v-for="item in activeCategory.characteristics"
+              :key="item.id">
+              <TableRow>
+                <TableCell class="font-semibold">
+                  {{ item.title }}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell
+                  v-for="product in activeCategory.products"
+                  :key="product.id">
+                  {{ product.characteristics.find(char => char.id === item.id)?.value }}
+                </TableCell>
+              </TableRow>
+            </template>
+          </TableBody>
+        </Table>
       </div>
     </section>
 
