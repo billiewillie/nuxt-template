@@ -12,7 +12,7 @@ const categories = ref([
     products: [
       {
         id: 11,
-        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        title: '11 Автоматизированная система для дезагрегации тканей BD Medimachine II',
         characteristics: [
           {
             id: 123,
@@ -42,7 +42,7 @@ const categories = ref([
     products: [
       {
         id: 21,
-        title: 'Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
+        title: '21 Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
         characteristics: [
           {
             id: 45,
@@ -56,7 +56,7 @@ const categories = ref([
       },
       {
         id: 22,
-        title: 'Ротационный микротом Leica RM 2125 RTS',
+        title: '22 Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
             id: 45,
@@ -86,7 +86,7 @@ const categories = ref([
     products: [
       {
         id: 31,
-        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        title: '31 Автоматизированная система для дезагрегации тканей BD Medimachine II',
         characteristics: [
           {
             id: 123,
@@ -100,7 +100,7 @@ const categories = ref([
       },
       {
         id: 32,
-        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        title: '32  Автоматизированная система для дезагрегации тканей BD Medimachine II',
         characteristics: [
           {
             id: 123,
@@ -114,7 +114,7 @@ const categories = ref([
       },
       {
         id: 33,
-        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        title: '33 Автоматизированная система для дезагрегации тканей BD Medimachine II',
         characteristics: [
           {
             id: 123,
@@ -144,7 +144,7 @@ const categories = ref([
     products: [
       {
         id: 41,
-        title: 'Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
+        title: '41 Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
         characteristics: [
           {
             id: 45,
@@ -158,7 +158,7 @@ const categories = ref([
       },
       {
         id: 42,
-        title: 'Ротационный микротом Leica RM 2125 RTS',
+        title: '42 Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
             id: 45,
@@ -172,7 +172,7 @@ const categories = ref([
       },
       {
         id: 43,
-        title: 'Ротационный микротом Leica RM 2125 RTS',
+        title: '43 Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
             id: 45,
@@ -186,7 +186,7 @@ const categories = ref([
       },
       {
         id: 44,
-        title: 'Ротационный микротом Leica RM 2125 RTS',
+        title: '44 Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
             id: 45,
@@ -216,7 +216,7 @@ const categories = ref([
     products: [
       {
         id: 51,
-        title: 'Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
+        title: '51 Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
         characteristics: [
           {
             id: 45,
@@ -230,7 +230,7 @@ const categories = ref([
       },
       {
         id: 52,
-        title: 'Ротационный микротом Leica RM 2125 RTS',
+        title: '52 Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
             id: 45,
@@ -244,7 +244,7 @@ const categories = ref([
       },
       {
         id: 53,
-        title: 'Ротационный микротом Leica RM 2125 RTS',
+        title: '53 Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
             id: 45,
@@ -258,7 +258,7 @@ const categories = ref([
       },
       {
         id: 54,
-        title: 'Ротационный микротом Leica RM 2125 RTS',
+        title: '54 Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
             id: 45,
@@ -272,7 +272,7 @@ const categories = ref([
       },
       {
         id: 55,
-        title: 'Ротационный микротом Leica RM 2125 RTS',
+        title: '55 Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
             id: 45,
@@ -303,8 +303,10 @@ const activeCategory = ref({})
 const table = ref<HTMLElement | null>(null)
 const tableWrapper = ref<HTMLElement | null>(null)
 const tableWrapperWidth = ref<number>(0)
+const tableTransition = ref<number>(0)
 
 function setActiveCategory(id: number): void {
+  tableTransition.value = 0
   activeCategory.value = categories.value.filter(category => {
     return category.id === id
   })[0]
@@ -323,10 +325,7 @@ watch(() => tableWrapper.value, () => {
 })
 
 function sliderRight(): void {
-  if (table.value) {
-    console.log(11)
-    // table.value.css = `transform: translateX(-${setColumnWidth(tableWrapperWidth.value)}px)`
-  }
+  tableTransition.value -= setColumnWidth(tableWrapperWidth.value)
 }
 </script>
 
@@ -382,7 +381,7 @@ function sliderRight(): void {
         content="summary_large_image" />
     </Head>
 
-    <section class="mb-12 xl:mb-16 pt-14">
+    <section class="mb-12 xl:mb-16 pt-6 xl:pt-14">
       <div class="container">
         <Breadcrumb class="mb-12">
           <BreadcrumbList>
@@ -427,7 +426,7 @@ function sliderRight(): void {
           ref="tableWrapper"
           class="relative">
           <Table
-            ref="table"
+            :transition="tableTransition"
             :class="setTableWidth(activeCategory, tableWrapperWidth)">
             <TableHeader>
               <TableRow>
