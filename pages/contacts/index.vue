@@ -11,8 +11,6 @@ import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, 
 
 const coordinates = ref(BRANCHES.spb.map) as Ref<number[]>
 
-const viewport = useViewport() as Ref<boolean>
-
 // create branches object without spb
 const branchesFiltered = Object.fromEntries(
   Object
@@ -120,11 +118,11 @@ const branchesFiltered = Object.fromEntries(
       <div class="container">
         <yandex-map
           :settings="{
-          location: {
-            center: coordinates,
-            zoom: 16,
-          },
-        }"
+            location: {
+              center: coordinates,
+              zoom: 16,
+            },
+          }"
           width="100%"
           :height="setMapHeight()"
         >

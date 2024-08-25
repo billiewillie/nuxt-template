@@ -2,11 +2,13 @@
   setup
   lang="ts">
 import { X } from 'lucide-vue-next'
+import { useElementSize } from '@vueuse/core'
+import { setColumnWidth, setTableWidth } from '~/composables/setTableWidth'
 
 const categories = ref([
   {
     id: 1,
-    title: 'микроскопы',
+    title: '1111',
     products: [
       {
         id: 11,
@@ -19,20 +21,6 @@ const categories = ref([
           {
             id: 1234,
             value: 'Windows'
-          }
-        ]
-      },
-      {
-        id: 12,
-        title: 'Автоматизированная лошадь BD 5',
-        characteristics: [
-          {
-            id: 123,
-            value: 'Маленький'
-          },
-          {
-            id: 1234,
-            value: 'MacOS'
           }
         ]
       }
@@ -50,10 +38,10 @@ const categories = ref([
   },
   {
     id: 2,
-    title: 'гистология',
+    title: '2222',
     products: [
       {
-        id: 11,
+        id: 21,
         title: 'Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
         characteristics: [
           {
@@ -67,7 +55,109 @@ const categories = ref([
         ]
       },
       {
-        id: 12,
+        id: 22,
+        title: 'Ротационный микротом Leica RM 2125 RTS',
+        characteristics: [
+          {
+            id: 45,
+            value: 'ок. 20 км'
+          },
+          {
+            id: 56,
+            value: '0,5–60 мкм'
+          }
+        ]
+      }
+    ],
+    characteristics: [
+      {
+        id: 45,
+        title: 'Шаг толщины среза'
+      },
+      {
+        id: 56,
+        title: 'Диапазон толщины среза'
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: '333333',
+    products: [
+      {
+        id: 31,
+        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        characteristics: [
+          {
+            id: 123,
+            value: 'Большой'
+          },
+          {
+            id: 1234,
+            value: 'Windows'
+          }
+        ]
+      },
+      {
+        id: 32,
+        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        characteristics: [
+          {
+            id: 123,
+            value: 'Большой'
+          },
+          {
+            id: 1234,
+            value: 'Windows'
+          }
+        ]
+      },
+      {
+        id: 33,
+        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        characteristics: [
+          {
+            id: 123,
+            value: 'Большой'
+          },
+          {
+            id: 1234,
+            value: 'Windows'
+          }
+        ]
+      }
+    ],
+    characteristics: [
+      {
+        id: 123,
+        title: 'Экран'
+      },
+      {
+        id: 1234,
+        title: 'Операционная система'
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: '444444',
+    products: [
+      {
+        id: 41,
+        title: 'Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
+        characteristics: [
+          {
+            id: 45,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 56,
+            value: '0,51–61 мкм'
+          }
+        ]
+      },
+      {
+        id: 42,
         title: 'Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
@@ -81,21 +171,7 @@ const categories = ref([
         ]
       },
       {
-        id: 13,
-        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
-        characteristics: [
-          {
-            id: 45,
-            value: 'ок. 20 км'
-          },
-          {
-            id: 56,
-            value: '0,5–60 мкм'
-          }
-        ]
-      },
-      {
-        id: 14,
+        id: 43,
         title: 'Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
@@ -109,8 +185,94 @@ const categories = ref([
         ]
       },
       {
-        id: 15,
-        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        id: 44,
+        title: 'Ротационный микротом Leica RM 2125 RTS',
+        characteristics: [
+          {
+            id: 45,
+            value: 'ок. 20 км'
+          },
+          {
+            id: 56,
+            value: '0,5–60 мкм'
+          }
+        ]
+      }
+    ],
+    characteristics: [
+      {
+        id: 45,
+        title: 'Шаг толщины среза'
+      },
+      {
+        id: 56,
+        title: 'Диапазон толщины среза'
+      }
+    ]
+  },
+  {
+    id: 5,
+    title: '55555',
+    products: [
+      {
+        id: 51,
+        title: 'Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
+        characteristics: [
+          {
+            id: 45,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 56,
+            value: '0,51–61 мкм'
+          }
+        ]
+      },
+      {
+        id: 52,
+        title: 'Ротационный микротом Leica RM 2125 RTS',
+        characteristics: [
+          {
+            id: 45,
+            value: 'ок. 20 км'
+          },
+          {
+            id: 56,
+            value: '0,5–60 мкм'
+          }
+        ]
+      },
+      {
+        id: 53,
+        title: 'Ротационный микротом Leica RM 2125 RTS',
+        characteristics: [
+          {
+            id: 45,
+            value: 'ок. 20 км'
+          },
+          {
+            id: 56,
+            value: '0,5–60 мкм'
+          }
+        ]
+      },
+      {
+        id: 54,
+        title: 'Ротационный микротом Leica RM 2125 RTS',
+        characteristics: [
+          {
+            id: 45,
+            value: 'ок. 20 км'
+          },
+          {
+            id: 56,
+            value: '0,5–60 мкм'
+          }
+        ]
+      },
+      {
+        id: 55,
+        title: 'Ротационный микротом Leica RM 2125 RTS',
         characteristics: [
           {
             id: 45,
@@ -138,8 +300,14 @@ const categories = ref([
 
 const activeCategory = ref({})
 
+const table = ref<HTMLElement | null>(null)
+const tableWrapper = ref<HTMLElement | null>(null)
+const tableWrapperWidth = ref<number>(0)
+
 function setActiveCategory(id: number): void {
-  activeCategory.value = categories.value.filter(category => category.id === id)[0]
+  activeCategory.value = categories.value.filter(category => {
+    return category.id === id
+  })[0]
 }
 
 function removeCategory(): void {
@@ -150,17 +318,14 @@ onMounted((): void => {
   setActiveCategory(categories.value[0].id)
 })
 
-function setTableWidth() {
-  if (activeCategory.value.products && activeCategory.value.products.length) {
-    if (activeCategory.value.products.length === 1) {
-      return 'w-1/4'
-    } else if (activeCategory.value.products.length === 2) {
-      return 'w-1/2'
-    } else if (activeCategory.value.products.length === 3) {
-      return 'w-3/4'
-    } else {
-      return 'w-[1470px]'
-    }
+watch(() => tableWrapper.value, () => {
+  tableWrapperWidth.value = useElementSize(tableWrapper).width.value
+})
+
+function sliderRight(): void {
+  if (table.value) {
+    console.log(11)
+    // table.value.css = `transform: translateX(-${setColumnWidth(tableWrapperWidth.value)}px)`
   }
 }
 </script>
@@ -258,45 +423,68 @@ function setTableWidth() {
 
     <section>
       <div class="container">
-        <Table :class="setTableWidth()">
-          <TableHeader>
-            <TableRow>
-              <TableHead
-                v-for="(product, index) in activeCategory.products"
-                class="py-2 px-2 min-w-[315px]"
-                :key="product.id">
-                {{ product.title }}
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell
-                v-for="product in activeCategory.products"
-                :key="product.id">
-                {{ product.title }}
-              </TableCell>
-            </TableRow>
-            <template
-              v-for="item in activeCategory.characteristics"
-              :key="item.id">
+        <div
+          ref="tableWrapper"
+          class="relative">
+          <Table
+            ref="table"
+            :class="setTableWidth(activeCategory, tableWrapperWidth)">
+            <TableHeader>
               <TableRow>
-                <TableCell class="font-semibold">
-                  {{ item.title }}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell
+                <TableHead
                   v-for="product in activeCategory.products"
+                  class="py-2 px-2 text-[13px]"
+                  :style="`min-width: ${setColumnWidth(tableWrapperWidth)}px; max-width: ${setColumnWidth(tableWrapperWidth)}px;`"
                   :key="product.id">
-                  {{ product.characteristics.find(char => char.id === item.id)?.value }}
-                </TableCell>
+                  {{ product.title }}
+                </TableHead>
               </TableRow>
-            </template>
-          </TableBody>
-        </Table>
+              <TableRow class="h-2 !border-b-0"></TableRow>
+            </TableHeader>
+            <TableBody>
+              <template
+                v-for="item in activeCategory.characteristics"
+                :key="item.id">
+                <TableRow>
+                  <TableCell
+                    class="font-semibold text-[12px] relative"
+                    colspan="10">
+                    <p>{{ item.title }}</p>
+                  </TableCell>
+                </TableRow>
+                <TableRow class="border-b-0">
+                  <TableCell
+                    v-for="product in activeCategory.products"
+                    :key="product.id">
+                    {{ product.characteristics.find(char => char.id === item.id)?.value }}
+                  </TableCell>
+                </TableRow>
+                <TableRow class="h-2 border-b-0"></TableRow>
+              </template>
+            </TableBody>
+          </Table>
+          <div
+            class="absolute right-0 -top-8 text-lg"
+            @click="sliderRight()">>
+          </div>
+          <div class="absolute left-0 -top-8 text-lg"><</div>
+        </div>
       </div>
     </section>
 
   </main>
 </template>
+
+<style>
+.table-one-element {
+  @apply w-1/2 md:w-1/3 xl:w-1/4;
+}
+
+.table-two-elements {
+  @apply w-full md:w-2/3 xl:w-1/2;
+}
+
+.table-three-elements {
+  @apply w-full xl:w-3/4;
+}
+</style>

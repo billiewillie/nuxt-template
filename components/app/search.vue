@@ -140,7 +140,7 @@ function setSearchSubCategory(item): void {
     </SheetTrigger>
     <SheetContent
       :side="props.side === 'left' ? 'left' : 'bottom'"
-      class="h-full w-full overflow-y-scroll px-0">
+      class="h-full w-full !max-w-full overflow-y-scroll px-0">
       <SheetHeader>
         <VisuallyHidden>
           <SheetTitle></SheetTitle>
