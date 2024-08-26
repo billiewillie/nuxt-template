@@ -102,4 +102,8 @@
   .active-link::before {
     @apply absolute block content-[''] left-0 top-full w-full h-0.5 rounded-full bg-gradient-to-l from-[#0AECEE] to-[#0B9798];
   }
+  
+  .sticky-header {
+    @apply fixed top-0 w-full;
+  }
 }

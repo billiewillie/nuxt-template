@@ -299,11 +299,12 @@ const categories = ref([
 ])
 
 const activeCategory = ref({})
-
 const table = ref<HTMLElement | null>(null)
 const tableWrapper = ref<HTMLElement | null>(null)
 const tableWrapperWidth = ref<number>(0)
 const tableTransition = ref<number>(0)
+const isAllowedToScrollRight = ref<boolean>(false)
+
 
 function setActiveCategory(id: number): void {
   tableTransition.value = 0
@@ -313,6 +314,7 @@ function setActiveCategory(id: number): void {
 }
 
 function removeCategory(): void {
+  tableTransition.value = 0
   console.log('remove')
 }
 
@@ -322,11 +324,39 @@ onMounted((): void => {
 
 watch(() => tableWrapper.value, () => {
   tableWrapperWidth.value = useElementSize(tableWrapper).width.value
+  setIsAllowedToScrollRight()
 })
 
 function sliderRight(): void {
   tableTransition.value -= setColumnWidth(tableWrapperWidth.value)
+  setIsAllowedToScrollRight()
 }
+
+function sliderLeft(): void {
+  if (tableTransition.value < 0) {
+    tableTransition.value += setColumnWidth(tableWrapperWidth.value)
+    setIsAllowedToScrollRight()
+  }
+}
+
+function setIsAllowedToScrollRight(): void {
+  if (activeCategory.value.products && activeCategory.value.products.length) {
+    isAllowedToScrollRight.value = (setColumnWidth(tableWrapperWidth.value) * activeCategory.value.products.length
+      - -tableTransition.value
+      - tableWrapperWidth.value) > 0
+  }
+
+}
+
+// function myFunction() {
+//   const sticky = table.value.getBoundingClientRect()
+//   console.log(sticky)
+//   // if (window.scrollY > sticky) {
+//   //   table.value.classList.add("sticky-header");
+//   // } else {
+//   //   table.value.classList.remove("sticky");
+//   // }
+// }
 </script>
 
 <template>
@@ -405,7 +435,7 @@ function sliderRight(): void {
             v-for="category in categories"
             :key="category.title"
             class="rounded-full text-sm p-2 h-8 md:h-10 md:p-4 border"
-            @click="setActiveCategory(category.id)"
+            @click="setActiveCategory(category.id); setIsAllowedToScrollRight()"
           >
             {{ category.title }} {{ category.products.length }} 
             <X
@@ -422,52 +452,80 @@ function sliderRight(): void {
 
     <section>
       <div class="container">
-        <div
-          ref="tableWrapper"
-          class="relative">
-          <Table
-            :transition="tableTransition"
-            :class="setTableWidth(activeCategory, tableWrapperWidth)">
-            <TableHeader>
-              <TableRow>
-                <TableHead
-                  v-for="product in activeCategory.products"
-                  class="py-2 px-2 text-[13px]"
-                  :style="`min-width: ${setColumnWidth(tableWrapperWidth)}px; max-width: ${setColumnWidth(tableWrapperWidth)}px;`"
-                  :key="product.id">
-                  {{ product.title }}
-                </TableHead>
-              </TableRow>
-              <TableRow class="h-2 !border-b-0"></TableRow>
-            </TableHeader>
-            <TableBody>
-              <template
-                v-for="item in activeCategory.characteristics"
-                :key="item.id">
+        <ClientOnly>
+          <div
+            ref="tableWrapper"
+            class="relative">
+            <Table
+              ref="table"
+              :transition="tableTransition"
+              :class="setTableWidth(activeCategory, tableWrapperWidth)">
+              <TableHeader>
                 <TableRow>
-                  <TableCell
-                    class="font-semibold text-[12px] relative"
-                    colspan="10">
-                    <p>{{ item.title }}</p>
-                  </TableCell>
+                  <TableHead
+                    v-for="product in activeCategory.products"
+                    class="py-2 px-2 text-[13px] sticky top-0"
+                    :style="`min-width: ${setColumnWidth(tableWrapperWidth)}px; max-width: ${setColumnWidth(tableWrapperWidth)}px;`"
+                    :key="product.id">
+                    {{ product.title }}
+                  </TableHead>
                 </TableRow>
-                <TableRow class="border-b-0">
+                <TableRow class="h-2 !border-b-0"></TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow class="hidden">
                   <TableCell
                     v-for="product in activeCategory.products"
+                    class="py-2 px-2 text-[13px] sticky top-0 text-red-500"
+                    :style="`min-width: ${setColumnWidth(tableWrapperWidth)}px; max-width: ${setColumnWidth(tableWrapperWidth)}px;`"
                     :key="product.id">
-                    {{ product.characteristics.find(char => char.id === item.id)?.value }}
+                    {{ product.title }}
                   </TableCell>
                 </TableRow>
-                <TableRow class="h-2 border-b-0"></TableRow>
-              </template>
-            </TableBody>
-          </Table>
-          <div
-            class="absolute right-0 -top-8 text-lg"
-            @click="sliderRight()">>
+
+                <template
+                  v-for="item in activeCategory.characteristics"
+                  :key="item.id">
+                  <TableRow>
+                    <TableCell
+                      class="font-semibold text-[12px] relative"
+                      colspan="10">
+                      <p>{{ item.title }}</p>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow class="border-b-0">
+                    <TableCell
+                      v-for="product in activeCategory.products"
+                      :key="product.id">
+                      {{ product.characteristics.find(char => char.id === item.id)?.value }}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow class="h-2 border-b-0"></TableRow>
+                </template>
+              </TableBody>
+            </Table>
+            <div
+              v-if="isAllowedToScrollRight"
+              class="absolute right-0 -top-8 text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
+              @click="sliderRight()">
+              <Icon
+                name="iconamoon:arrow-right-2-light"
+                width="18"
+                height="18"
+                style="color: #575757" />
+            </div>
+            <div
+              v-if="tableTransition < 0"
+              @click="sliderLeft()"
+              class="absolute left-0 -top-8 text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
+              <Icon
+                name="iconamoon:arrow-left-2-light"
+                width="18"
+                height="18"
+                style="color: #575757" />
+            </div>
           </div>
-          <div class="absolute left-0 -top-8 text-lg"><</div>
-        </div>
+        </ClientOnly>
       </div>
     </section>
 

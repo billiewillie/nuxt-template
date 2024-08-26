@@ -62,7 +62,7 @@ const route = useRoute()
         </div>
       </div>
     </div>
-    <div class="py-4 bg-background">
+    <div class="py-2 bg-background">
       <div class="container relative flex items-center gap-8 justify-between">
         <div class="basis-1/3 xl:hidden">
           <Sheet>
@@ -90,6 +90,15 @@ const route = useRoute()
                         :to="item.href"
                         :aria-label="item.title">
                         {{ item.title }}
+                      </NuxtLink>
+                    </SheetClose>
+                  </li>
+                  <li>
+                    <SheetClose as-child>
+                      <NuxtLink
+                        to="/comparison"
+                        aria-label="comparison">
+                        Сравнение (0)
                       </NuxtLink>
                     </SheetClose>
                   </li>

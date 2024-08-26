@@ -2,13 +2,12 @@ export function setColumnWidth(tableWrapperWidth: any) {
   const viewport = useViewport()
 
   if (viewport.matches('mobile', 'mobileWide', 'mobileMedium')) {
-    return tableWrapperWidth / 2;
+    return tableWrapperWidth / 2
   } else if (viewport.matches('tablet', 'tabletWide', 'tabletMedium')) {
-    return tableWrapperWidth / 3;
-  } else {
-    return tableWrapperWidth / 4;
+    return tableWrapperWidth / 3
   }
 
+  return tableWrapperWidth / 4
 }
 
 export function setTableWidth(activeCategory: any, tableWrapperWidth: number) {
