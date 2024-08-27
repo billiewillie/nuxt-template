@@ -62,7 +62,7 @@ const route = useRoute()
         </div>
       </div>
     </div>
-    <div class="py-2 bg-background">
+    <div class="py-2 xl:py-4 bg-background">
       <div class="container relative flex items-center gap-8 justify-between">
         <div class="basis-1/3 xl:hidden">
           <Sheet>

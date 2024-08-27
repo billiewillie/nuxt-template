@@ -336,12 +336,26 @@ function removeProduct(productId: number, categoryId: number): void {
 
 onMounted((): void => {
   setActiveCategory(categories.value[0].id)
+  console.log(table.value)
+  // window.addEventListener('scroll', handleScroll)
 })
 
 watch(() => tableWrapper.value, () => {
   tableWrapperWidth.value = useElementSize(tableWrapper).width.value
   setIsAllowedToScrollRight()
 })
+
+// onActivated((): void => {
+//   const table = document.querySelector('table');
+//   console.log(document.querySelector('table'))
+// })
+
+// function handleScroll() {
+//
+//   const currentScrollPosition = window.scrollY
+//
+//   console.log(currentScrollPosition, table.value.getBoundingClientRect())
+// }
 
 function sliderRight(): void {
   tableTransition.value -= setColumnWidth(tableWrapperWidth.value)
@@ -466,6 +480,7 @@ function setIsAllowedToScrollRight(): void {
             class="relative">
             <Table
               ref="table"
+
               :transition="tableTransition"
               :class="setTableWidth(activeCategory, tableWrapperWidth)">
               <TableHeader>

@@ -1,4 +1,4 @@
-export function setColumnWidth(tableWrapperWidth: any) {
+export function setColumnWidth(tableWrapperWidth: number) {
   const viewport = useViewport()
 
   if (viewport.matches('mobile', 'mobileWide', 'mobileMedium')) {
