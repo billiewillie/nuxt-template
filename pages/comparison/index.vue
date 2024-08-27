@@ -307,14 +307,31 @@ const isAllowedToScrollRight = ref<boolean>(false)
 
 function setActiveCategory(id: number): void {
   tableTransition.value = 0
-  activeCategory.value = categories.value.filter(category => {
+  activeCategory.value = categories.value.find(category => {
     return category.id === id
-  })[0]
+  })
 }
 
-function removeCategory(): void {
+function removeCategory(categoryId: number): void {
   tableTransition.value = 0
-  console.log('remove')
+
+  categories.value = categories.value.filter(category => {
+    return category.id !== categoryId
+  })
+
+  if (categories.value && categories.value.length) {
+    setActiveCategory(categories.value[0].id)
+  }
+}
+
+function removeProduct(productId: number, categoryId: number): void {
+  activeCategory.value.products = activeCategory.value.products.filter(product => {
+    return product.id !== productId
+  })
+  if (tableTransition.value < 0) {
+    tableTransition.value += setColumnWidth(tableWrapperWidth.value)
+  }
+  setIsAllowedToScrollRight()
 }
 
 onMounted((): void => {
@@ -346,16 +363,6 @@ function setIsAllowedToScrollRight(): void {
   }
 
 }
-
-// function myFunction() {
-//   const sticky = table.value.getBoundingClientRect()
-//   console.log(sticky)
-//   // if (window.scrollY > sticky) {
-//   //   table.value.classList.add("sticky-header");
-//   // } else {
-//   //   table.value.classList.remove("sticky");
-//   // }
-// }
 </script>
 
 <template>
@@ -429,22 +436,24 @@ function setIsAllowedToScrollRight(): void {
         <h1 class="section-title mb-12">Сравнение</h1>
 
         <div class="flex flex-wrap gap-4">
-          <Button
-            :variant="activeCategory.id === category.id ? 'secondary' : 'outline'"
-            v-for="category in categories"
-            :key="category.title"
-            class="rounded-full text-sm p-2 h-8 md:h-10 md:p-4 border"
-            @click="setActiveCategory(category.id); setIsAllowedToScrollRight()"
-          >
-            {{ category.title }} {{ category.products.length }} 
-            <X
-              v-show="activeCategory === category.title"
-              @click="(e) => {
-                e.preventDefault();
-                console.log('remove category')
-              }"
-              class="w-4 h-4 text-muted-foreground" />
-          </Button>
+          <ClientOnly>
+            <Button
+              :variant="activeCategory.id === category.id ? 'secondary' : 'outline'"
+              v-for="category in categories"
+              :key="category.id"
+              class="rounded-full text-sm p-2 h-8 md:h-10 md:p-4 border"
+              @click="setActiveCategory(category.id); setIsAllowedToScrollRight()"
+            >
+              {{ category.title }} {{ category.products.length }} 
+              <X
+                v-show="activeCategory.title === category.title"
+                @click="(e) => {
+                  e.stopPropagation();
+                  removeCategory(category.id);
+                }"
+                class="w-4 h-4 text-muted-foreground" />
+            </Button>
+          </ClientOnly>
         </div>
       </div>
     </section>
@@ -463,13 +472,15 @@ function setIsAllowedToScrollRight(): void {
                 <TableRow>
                   <TableHead
                     v-for="product in activeCategory.products"
-                    class="py-2 px-2 text-[13px] sticky top-0"
+                    class="py-2 px-2 text-[13px]"
                     :style="`min-width: ${setColumnWidth(tableWrapperWidth)}px; max-width: ${setColumnWidth(tableWrapperWidth)}px;`"
                     :key="product.id">
                     {{ product.title }}
+                    <br><br>
+                    <p @click="removeProduct(product.id, activeCategory.id)">remove</p>
                   </TableHead>
                 </TableRow>
-                <TableRow class="h-2 !border-b-0" />
+                <TableRow class="h-8 !border-b-0" />
               </TableHeader>
               <TableBody>
                 <TableRow class="hidden">
@@ -491,7 +502,7 @@ function setIsAllowedToScrollRight(): void {
                       colspan="10">
                       <p
                         :style="`left: ${-tableTransition}px;`"
-                        class="absolute top-0 bottom-0 m-auto transition-left duration-500">{{ item.title }}</p>
+                        class="absolute top-0 bottom-0 m-auto transition-all duration-700">{{ item.title }}</p>
                     </TableCell>
                   </TableRow>
                   <TableRow class="border-b-0">

@@ -93,7 +93,8 @@ module.exports = {
         '100': '100'
       },
       transitionProperty: {
-        left: 'left'
+        left: 'left',
+        right: 'right',
       },
       screens: {
         xs: '360px',
