@@ -92,6 +92,9 @@ module.exports = {
       zIndex: {
         '100': '100'
       },
+      transitionProperty: {
+        left: 'left'
+      },
       screens: {
         xs: '360px',
         '2xl': '1440px',

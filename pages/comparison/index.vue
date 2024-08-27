@@ -305,7 +305,6 @@ const tableWrapperWidth = ref<number>(0)
 const tableTransition = ref<number>(0)
 const isAllowedToScrollRight = ref<boolean>(false)
 
-
 function setActiveCategory(id: number): void {
   tableTransition.value = 0
   activeCategory.value = categories.value.filter(category => {
@@ -470,7 +469,7 @@ function setIsAllowedToScrollRight(): void {
                     {{ product.title }}
                   </TableHead>
                 </TableRow>
-                <TableRow class="h-2 !border-b-0"></TableRow>
+                <TableRow class="h-2 !border-b-0" />
               </TableHeader>
               <TableBody>
                 <TableRow class="hidden">
@@ -490,7 +489,9 @@ function setIsAllowedToScrollRight(): void {
                     <TableCell
                       class="font-semibold text-[12px] relative"
                       colspan="10">
-                      <p>{{ item.title }}</p>
+                      <p
+                        :style="`left: ${-tableTransition}px;`"
+                        class="absolute top-0 bottom-0 m-auto transition-left duration-500">{{ item.title }}</p>
                     </TableCell>
                   </TableRow>
                   <TableRow class="border-b-0">
@@ -500,7 +501,7 @@ function setIsAllowedToScrollRight(): void {
                       {{ product.characteristics.find(char => char.id === item.id)?.value }}
                     </TableCell>
                   </TableRow>
-                  <TableRow class="h-2 border-b-0"></TableRow>
+                  <TableRow class="h-2 border-b-0" />
                 </template>
               </TableBody>
             </Table>
