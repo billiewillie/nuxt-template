@@ -304,6 +304,7 @@ const tableWrapper = ref<HTMLElement | null>(null)
 const tableWrapperWidth = ref<number>(0)
 const tableTransition = ref<number>(0)
 const isAllowedToScrollRight = ref<boolean>(false)
+const isTableHeaderVisible = ref<boolean>(false)
 
 function setActiveCategory(id: number): void {
   tableTransition.value = 0
@@ -334,29 +335,6 @@ function removeProduct(productId: number, categoryId: number): void {
   setIsAllowedToScrollRight()
 }
 
-onMounted((): void => {
-  setActiveCategory(categories.value[0].id)
-  console.log(table.value)
-  // window.addEventListener('scroll', handleScroll)
-})
-
-watch(() => tableWrapper.value, () => {
-  tableWrapperWidth.value = useElementSize(tableWrapper).width.value
-  setIsAllowedToScrollRight()
-})
-
-// onActivated((): void => {
-//   const table = document.querySelector('table');
-//   console.log(document.querySelector('table'))
-// })
-
-// function handleScroll() {
-//
-//   const currentScrollPosition = window.scrollY
-//
-//   console.log(currentScrollPosition, table.value.getBoundingClientRect())
-// }
-
 function sliderRight(): void {
   tableTransition.value -= setColumnWidth(tableWrapperWidth.value)
   setIsAllowedToScrollRight()
@@ -377,6 +355,32 @@ function setIsAllowedToScrollRight(): void {
   }
 
 }
+
+watch(() => tableWrapper.value, () => {
+  tableWrapperWidth.value = useElementSize(tableWrapper).width.value
+  setIsAllowedToScrollRight()
+})
+
+onMounted(async (): Promise<void> => {
+  await setActiveCategory(categories.value[0].id)
+
+  await nextTick()
+  await nextTick()
+  const table = document.getElementById('table')
+  const windowHeight = window.innerHeight
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      isTableHeaderVisible.value = entries[0].isIntersecting
+    },
+    {
+      threshold: 0,
+      rootMargin: `0px 0px -${windowHeight}px 0px`
+    }
+  )
+
+  observer.observe(table)
+})
 </script>
 
 <template>
@@ -480,7 +484,7 @@ function setIsAllowedToScrollRight(): void {
             class="relative">
             <Table
               ref="table"
-
+              id="table"
               :transition="tableTransition"
               :class="setTableWidth(activeCategory, tableWrapperWidth)">
               <TableHeader>
@@ -533,7 +537,7 @@ function setIsAllowedToScrollRight(): void {
             </Table>
             <div
               v-if="isAllowedToScrollRight"
-              class="absolute right-0 -top-8 text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
+              class="absolute right-0 bottom-8 text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
               @click="sliderRight()">
               <Icon
                 name="iconamoon:arrow-right-2-light"
@@ -544,13 +548,44 @@ function setIsAllowedToScrollRight(): void {
             <div
               v-if="tableTransition < 0"
               @click="sliderLeft()"
-              class="absolute left-0 -top-8 text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
+              class="absolute left-0 bottom-8 text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
               <Icon
                 name="iconamoon:arrow-left-2-light"
                 width="18"
                 height="18"
                 style="color: #575757" />
             </div>
+          </div>
+        </ClientOnly>
+      </div>
+    </section>
+
+    <section
+      class="fixed top-0 left-0 w-full bg-background"
+      :class="{'hidden' : !isTableHeaderVisible}">
+      <div class="container">
+        <ClientOnly>
+          <div
+            class="relative">
+            <Table
+              id="table"
+              :transition="tableTransition"
+              :class="setTableWidth(activeCategory, tableWrapperWidth)">
+              <TableHeader>
+                <TableRow>
+                  <TableHead
+                    v-for="product in activeCategory.products"
+                    class="py-2 px-2 text-[13px]"
+                    :style="`min-width: ${setColumnWidth(tableWrapperWidth)}px; max-width: ${setColumnWidth(tableWrapperWidth)}px;`"
+                    :key="product.id">
+                    {{ product.title }}
+                    <br><br>
+                    <p @click="removeProduct(product.id, activeCategory.id)">remove</p>
+                  </TableHead>
+                </TableRow>
+                <TableRow class="h-8 !border-b-0" />
+              </TableHeader>
+            </Table>
           </div>
         </ClientOnly>
       </div>
