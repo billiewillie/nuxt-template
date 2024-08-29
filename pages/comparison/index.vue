@@ -226,7 +226,7 @@ const categories = ref([
   },
   {
     id: 5,
-    title: 'Иммуногистохимия',
+    title: 'Жидкостная цитология',
     products: [
       {
         id: 51,
@@ -557,7 +557,7 @@ onMounted(async (): Promise<void> => {
             </Table>
             <div
               v-if="isAllowedToScrollRight"
-              class="absolute -right-3 bg-background top-[160px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
+              class="absolute -right-3 bg-background top-[168px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
               @click="sliderRight()">
               <Icon
                 name="iconamoon:arrow-right-2-light"
@@ -568,7 +568,7 @@ onMounted(async (): Promise<void> => {
             <div
               v-if="tableTransition < 0"
               @click="sliderLeft()"
-              class="absolute -left-3 bg-background top-[160px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
+              class="absolute -left-3 bg-background top-[168px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
               <Icon
                 name="iconamoon:arrow-left-2-light"
                 width="18"
