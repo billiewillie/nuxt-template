@@ -581,8 +581,9 @@ onMounted(async (): Promise<void> => {
     </section>
 
     <section
-      class="fixed left-0 w-full bg-background transition-all duration-300 z-10"
-      :class="{'-top-[600px]' : !isTableHeaderVisible}">
+      :class="{'-top-[600px]' : !isTableHeaderVisible}"
+      class="fixed top-0 left-0 w-full bg-background transition-all duration-300 z-10"
+    >
       <div class="container">
         <ClientOnly>
           <div
