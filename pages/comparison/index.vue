@@ -489,13 +489,15 @@ onMounted(async (): Promise<void> => {
               @click="setActiveCategory(category.id); setIsAllowedToScrollRight()"
             >
               {{ category.title }} 
-              <X
+              <div
                 v-show="activeCategory.title === category.title"
                 @click="(e) => {
                   e.stopPropagation();
                   removeCategory(category.id);
                 }"
-                class="w-4 h-4 text-muted-foreground" />
+                class="w-5 h-5 rounded-full bg-background-dark flex items-center justify-center">
+                <X class="w-4 h-4 text-background" />
+              </div>
             </Button>
           </ClientOnly>
         </div>
@@ -534,11 +536,11 @@ onMounted(async (): Promise<void> => {
                   :key="item.id">
                   <TableRow>
                     <TableCell
-                      class="font-semibold text-[12px] relative"
+                      class="relative"
                       colspan="10">
                       <p
                         :style="`left: ${-tableTransition}px;`"
-                        class="absolute flex items-center ~text-[12px]/[16px] top-0 bottom-0 m-auto transition-all duration-700 p-2">
+                        class="absolute flex items-center ~text-[12px]/[16px] font-semibold text-gray-400 top-0 bottom-0 m-auto transition-all duration-700 p-2">
                         {{ item.title }}
                       </p>
                     </TableCell>
