@@ -538,7 +538,9 @@ onMounted(async (): Promise<void> => {
                       colspan="10">
                       <p
                         :style="`left: ${-tableTransition}px;`"
-                        class="absolute flex items-center ~text-[12px]/[16px] top-0 bottom-0 m-auto transition-all duration-700">{{ item.title }}</p>
+                        class="absolute flex items-center ~text-[12px]/[16px] top-0 bottom-0 m-auto transition-all duration-700 p-2">
+                        {{ item.title }}
+                      </p>
                     </TableCell>
                   </TableRow>
                   <TableRow class="border-b-0">
@@ -555,7 +557,7 @@ onMounted(async (): Promise<void> => {
             </Table>
             <div
               v-if="isAllowedToScrollRight"
-              class="absolute right-0 top-[330px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
+              class="absolute -right-3 bg-background top-[160px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
               @click="sliderRight()">
               <Icon
                 name="iconamoon:arrow-right-2-light"
@@ -566,7 +568,7 @@ onMounted(async (): Promise<void> => {
             <div
               v-if="tableTransition < 0"
               @click="sliderLeft()"
-              class="absolute left-0 top-[330px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
+              class="absolute -left-3 bg-background top-[160px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
               <Icon
                 name="iconamoon:arrow-left-2-light"
                 width="18"
@@ -580,7 +582,7 @@ onMounted(async (): Promise<void> => {
 
     <section
       class="fixed top-0 left-0 w-full bg-background transition-all duration-300 z-10"
-      :class="{'-top-[357px]' : !isTableHeaderVisible}">
+      :class="{'-top-[600px]' : !isTableHeaderVisible}">
       <div class="container">
         <ClientOnly>
           <div
@@ -604,6 +606,26 @@ onMounted(async (): Promise<void> => {
                 </TableRow>
               </TableHeader>
             </Table>
+            <div
+              v-if="isAllowedToScrollRight"
+              class="absolute -right-3 bg-background top-[160px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none z-20"
+              @click="sliderRight()">
+              <Icon
+                name="iconamoon:arrow-right-2-light"
+                width="18"
+                height="18"
+                style="color: #575757" />
+            </div>
+            <div
+              v-if="tableTransition < 0"
+              @click="sliderLeft()"
+              class="absolute -left-3 bg-background top-[160px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none z-20">
+              <Icon
+                name="iconamoon:arrow-left-2-light"
+                width="18"
+                height="18"
+                style="color: #575757" />
+            </div>
           </div>
         </ClientOnly>
       </div>
