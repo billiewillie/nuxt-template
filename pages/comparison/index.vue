@@ -8,11 +8,16 @@ import { setColumnWidth, setTableWidth } from '~/composables/setTableWidth'
 const categories = ref([
   {
     id: 1,
-    title: '1111',
+    title: 'Гистология',
     products: [
       {
         id: 11,
-        title: '11 Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        preview_img: '/img/items/item-1.jpg',
+        url: '/',
+        sort: 500,
+        is_favourites: 1,
+        is_comparison: 1,
         characteristics: [
           {
             id: 123,
@@ -38,11 +43,12 @@ const categories = ref([
   },
   {
     id: 2,
-    title: '2222',
+    title: 'Иммуногистохимия',
     products: [
       {
         id: 21,
         title: '21 Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -57,6 +63,7 @@ const categories = ref([
       {
         id: 22,
         title: '22 Ротационный микротом Leica RM 2125 RTS',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -82,11 +89,12 @@ const categories = ref([
   },
   {
     id: 3,
-    title: '333333',
+    title: 'Микроскопы',
     products: [
       {
         id: 31,
         title: '31 Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 123,
@@ -101,6 +109,7 @@ const categories = ref([
       {
         id: 32,
         title: '32  Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 123,
@@ -115,6 +124,7 @@ const categories = ref([
       {
         id: 33,
         title: '33 Автоматизированная система для дезагрегации тканей BD Medimachine II',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 123,
@@ -140,11 +150,12 @@ const categories = ref([
   },
   {
     id: 4,
-    title: '444444',
+    title: 'Проточная цитометрия',
     products: [
       {
         id: 41,
         title: '41 Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -159,6 +170,7 @@ const categories = ref([
       {
         id: 42,
         title: '42 Ротационный микротом Leica RM 2125 RTS',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -173,6 +185,7 @@ const categories = ref([
       {
         id: 43,
         title: '43 Ротационный микротом Leica RM 2125 RTS',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -187,6 +200,7 @@ const categories = ref([
       {
         id: 44,
         title: '44 Ротационный микротом Leica RM 2125 RTS',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -212,11 +226,12 @@ const categories = ref([
   },
   {
     id: 5,
-    title: '55555',
+    title: 'Иммуногистохимия',
     products: [
       {
         id: 51,
         title: '51 Ротационный микротом Leica HistoCore BIOCUT с ручным приводом',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -231,6 +246,7 @@ const categories = ref([
       {
         id: 52,
         title: '52 Ротационный микротом Leica RM 2125 RTS',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -245,6 +261,7 @@ const categories = ref([
       {
         id: 53,
         title: '53 Ротационный микротом Leica RM 2125 RTS',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -259,6 +276,7 @@ const categories = ref([
       {
         id: 54,
         title: '54 Ротационный микротом Leica RM 2125 RTS',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -273,6 +291,7 @@ const categories = ref([
       {
         id: 55,
         title: '55 Ротационный микротом Leica RM 2125 RTS',
+        preview_img: '/img/items/item-1.jpg',
         characteristics: [
           {
             id: 45,
@@ -297,7 +316,6 @@ const categories = ref([
     ]
   }
 ])
-
 const activeCategory = ref({})
 const table = ref<HTMLElement | null>(null)
 const tableWrapper = ref<HTMLElement | null>(null)
@@ -322,16 +340,24 @@ function removeCategory(categoryId: number): void {
 
   if (categories.value && categories.value.length) {
     setActiveCategory(categories.value[0].id)
+  } else {
+    activeCategory.value = {}
   }
 }
 
-function removeProduct(productId: number, categoryId: number): void {
+function removeFromCompare(productId: number): void {
   activeCategory.value.products = activeCategory.value.products.filter(product => {
     return product.id !== productId
   })
+
+  if (!activeCategory.value.products || !activeCategory.value.products.length) {
+    removeCategory(activeCategory.value.id)
+  }
+
   if (tableTransition.value < 0) {
     tableTransition.value += setColumnWidth(tableWrapperWidth.value)
   }
+
   setIsAllowedToScrollRight()
 }
 
@@ -379,7 +405,7 @@ onMounted(async (): Promise<void> => {
     }
   )
 
-  observer.observe(table)
+  observer.observe(table as HTMLElement)
 })
 </script>
 
@@ -462,7 +488,7 @@ onMounted(async (): Promise<void> => {
               class="rounded-full text-sm p-2 h-8 md:h-10 md:p-4 border"
               @click="setActiveCategory(category.id); setIsAllowedToScrollRight()"
             >
-              {{ category.title }} {{ category.products.length }} 
+              {{ category.title }} 
               <X
                 v-show="activeCategory.title === category.title"
                 @click="(e) => {
@@ -476,7 +502,7 @@ onMounted(async (): Promise<void> => {
       </div>
     </section>
 
-    <section>
+    <section class="mb-12 xl:mb-16">
       <div class="container">
         <ClientOnly>
           <div
@@ -488,30 +514,21 @@ onMounted(async (): Promise<void> => {
               :transition="tableTransition"
               :class="setTableWidth(activeCategory, tableWrapperWidth)">
               <TableHeader>
-                <TableRow>
+                <TableRow class="!border-b-0">
                   <TableHead
                     v-for="product in activeCategory.products"
-                    class="py-2 px-2 text-[13px]"
+                    class="p-1"
                     :style="`min-width: ${setColumnWidth(tableWrapperWidth)}px; max-width: ${setColumnWidth(tableWrapperWidth)}px;`"
                     :key="product.id">
-                    {{ product.title }}
-                    <br><br>
-                    <p @click="removeProduct(product.id, activeCategory.id)">remove</p>
+                    <BaseProductCard
+                      :product="product"
+                      is-compared
+                      @removeFromCompare="removeFromCompare(product.id)" />
                   </TableHead>
                 </TableRow>
                 <TableRow class="h-8 !border-b-0" />
               </TableHeader>
               <TableBody>
-                <TableRow class="hidden">
-                  <TableCell
-                    v-for="product in activeCategory.products"
-                    class="py-2 px-2 text-[13px] sticky top-0 text-red-500"
-                    :style="`min-width: ${setColumnWidth(tableWrapperWidth)}px; max-width: ${setColumnWidth(tableWrapperWidth)}px;`"
-                    :key="product.id">
-                    {{ product.title }}
-                  </TableCell>
-                </TableRow>
-
                 <template
                   v-for="item in activeCategory.characteristics"
                   :key="item.id">
@@ -521,11 +538,12 @@ onMounted(async (): Promise<void> => {
                       colspan="10">
                       <p
                         :style="`left: ${-tableTransition}px;`"
-                        class="absolute top-0 bottom-0 m-auto transition-all duration-700">{{ item.title }}</p>
+                        class="absolute flex items-center ~text-[12px]/[16px] top-0 bottom-0 m-auto transition-all duration-700">{{ item.title }}</p>
                     </TableCell>
                   </TableRow>
                   <TableRow class="border-b-0">
                     <TableCell
+                      class="p-2"
                       v-for="product in activeCategory.products"
                       :key="product.id">
                       {{ product.characteristics.find(char => char.id === item.id)?.value }}
@@ -537,7 +555,7 @@ onMounted(async (): Promise<void> => {
             </Table>
             <div
               v-if="isAllowedToScrollRight"
-              class="absolute right-0 bottom-8 text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
+              class="absolute right-0 top-[330px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
               @click="sliderRight()">
               <Icon
                 name="iconamoon:arrow-right-2-light"
@@ -548,7 +566,7 @@ onMounted(async (): Promise<void> => {
             <div
               v-if="tableTransition < 0"
               @click="sliderLeft()"
-              class="absolute left-0 bottom-8 text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
+              class="absolute left-0 top-[330px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
               <Icon
                 name="iconamoon:arrow-left-2-light"
                 width="18"
@@ -561,8 +579,8 @@ onMounted(async (): Promise<void> => {
     </section>
 
     <section
-      class="fixed top-0 left-0 w-full bg-background"
-      :class="{'hidden' : !isTableHeaderVisible}">
+      class="fixed top-0 left-0 w-full bg-background transition-all duration-300 z-10"
+      :class="{'-top-[357px]' : !isTableHeaderVisible}">
       <div class="container">
         <ClientOnly>
           <div
@@ -572,25 +590,24 @@ onMounted(async (): Promise<void> => {
               :transition="tableTransition"
               :class="setTableWidth(activeCategory, tableWrapperWidth)">
               <TableHeader>
-                <TableRow>
+                <TableRow class="!border-b-0">
                   <TableHead
                     v-for="product in activeCategory.products"
-                    class="py-2 px-2 text-[13px]"
+                    class="p-1"
                     :style="`min-width: ${setColumnWidth(tableWrapperWidth)}px; max-width: ${setColumnWidth(tableWrapperWidth)}px;`"
                     :key="product.id">
-                    {{ product.title }}
-                    <br><br>
-                    <p @click="removeProduct(product.id, activeCategory.id)">remove</p>
+                    <BaseProductCard
+                      :product="product"
+                      is-compared
+                      @removeFromCompare="removeFromCompare(product.id)" />
                   </TableHead>
                 </TableRow>
-                <TableRow class="h-8 !border-b-0" />
               </TableHeader>
             </Table>
           </div>
         </ClientOnly>
       </div>
     </section>
-
   </main>
 </template>
 
