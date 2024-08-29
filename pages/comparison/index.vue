@@ -540,7 +540,7 @@ onMounted(async (): Promise<void> => {
                       colspan="10">
                       <p
                         :style="`left: ${-tableTransition}px;`"
-                        class="absolute flex items-center ~text-[12px]/[16px] font-semibold text-gray-400 top-0 bottom-0 m-auto transition-all duration-700 p-2">
+                        class="absolute flex items-center ~text-[12px]/[16px] font-semibold text-gray-500 top-0 bottom-0 m-auto transition-all duration-700 p-2">
                         {{ item.title }}
                       </p>
                     </TableCell>
