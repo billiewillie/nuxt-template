@@ -490,7 +490,7 @@ onMounted(async (): Promise<void> => {
   await nextTick()
   await nextTick()
 
-  const table = document.querySelectorAll('table thead tr')[0]
+  const table = document.getElementById('table')
   productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
   const windowHeight = window.innerHeight
 
