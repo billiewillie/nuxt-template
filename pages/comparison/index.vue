@@ -490,7 +490,7 @@ onMounted(async (): Promise<void> => {
   await nextTick()
   await nextTick()
 
-  const table = document.getElementById('table')
+  const table = document.getElementById('table-body')
   productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
   const windowHeight = window.innerHeight
 
@@ -500,7 +500,7 @@ onMounted(async (): Promise<void> => {
       console.log(entries[0])
     },
     {
-      rootMargin: `300px 0px -1100px 0px`,
+      rootMargin: `0px 0px -${windowHeight}px 0px`,
       threshold: 0
     }
   )
@@ -632,7 +632,7 @@ onMounted(async (): Promise<void> => {
                 </TableRow>
                 <TableRow class="h-8 !border-b-0" />
               </TableHeader>
-              <TableBody>
+              <TableBody id="table-body">
                 <template
                   v-for="item in activeCategory.characteristics"
                   :key="item.id">
