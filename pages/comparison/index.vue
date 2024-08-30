@@ -490,12 +490,7 @@ onMounted(async (): Promise<void> => {
   await nextTick()
   await nextTick()
 
-  someHeight.value = String(/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
-  if (someHeight.value) {
-    someHeight.value = `iphone ${document.documentElement.clientHeight}px`
-  } else {
-    someHeight.value = `android ${document.documentElement.clientHeight}px`
-  }
+  someHeight.value = `${navigator.platform} ${navigator.userAgent}`
 
   const table = document.getElementById('table')
   productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
@@ -512,6 +507,7 @@ onMounted(async (): Promise<void> => {
   )
 
   observer.observe(table as HTMLElement)
+
 
 })
 </script>
