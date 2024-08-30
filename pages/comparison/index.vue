@@ -500,8 +500,8 @@ onMounted(async (): Promise<void> => {
       console.log(entries[0])
     },
     {
-      rootMargin: `100px 0px -1100px 0px`,
-      threshold: 0,
+      rootMargin: `0px 0px -1200px 0px`,
+      threshold: 0
     }
   )
 
