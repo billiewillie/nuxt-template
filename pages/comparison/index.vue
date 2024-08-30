@@ -490,7 +490,7 @@ onMounted(async (): Promise<void> => {
   await nextTick()
   await nextTick()
   const table = document.getElementById('table')
-  const productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
+  productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
   const windowHeight = document.documentElement.clientHeight
 
   const observer = new IntersectionObserver(
