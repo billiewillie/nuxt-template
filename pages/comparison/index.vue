@@ -4,7 +4,6 @@
 import { X } from 'lucide-vue-next'
 import { useElementSize } from '@vueuse/core'
 import { setColumnWidth, setTableWidth } from '~/composables/setTableWidth'
-import type { Ref, UnwrapRef } from 'vue'
 
 const categories = ref([
   {
@@ -257,7 +256,7 @@ const categories = ref([
           {
             id: 564,
             value: '0,51–61 мкм'
-          },
+          }
         ]
       },
       {
@@ -288,7 +287,7 @@ const categories = ref([
           {
             id: 564,
             value: '0,51–61 мкм'
-          },
+          }
         ]
       },
       {
@@ -319,7 +318,7 @@ const categories = ref([
           {
             id: 564,
             value: '0,51–61 мкм'
-          },
+          }
         ]
       },
       {
@@ -350,7 +349,7 @@ const categories = ref([
           {
             id: 564,
             value: '0,51–61 мкм'
-          },
+          }
         ]
       },
       {
@@ -381,7 +380,7 @@ const categories = ref([
           {
             id: 564,
             value: '0,51–61 мкм'
-          },
+          }
         ]
       }
     ],
@@ -409,7 +408,7 @@ const categories = ref([
       {
         id: 564,
         title: 'Диапазон толщины среза'
-      },
+      }
     ]
   }
 ])
@@ -421,6 +420,7 @@ const tableTransition = ref<number>(0)
 const isAllowedToScrollRight = ref<boolean>(false)
 const isTableHeaderVisible = ref<boolean>(false)
 let productImageHeight = ref<number>(0)
+let someHeight = ref<string>('')
 
 function setActiveCategory(id: number): void {
   tableTransition.value = 0
@@ -489,6 +489,14 @@ onMounted(async (): Promise<void> => {
 
   await nextTick()
   await nextTick()
+
+  someHeight.value = String(/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
+  if (someHeight.value) {
+    someHeight.value = `iphone ${document.documentElement.clientHeight}px`
+  } else {
+    someHeight.value = `android ${document.documentElement.clientHeight}px`
+  }
+
   const table = document.getElementById('table')
   productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
   const windowHeight = document.documentElement.clientHeight
@@ -504,6 +512,7 @@ onMounted(async (): Promise<void> => {
   )
 
   observer.observe(table as HTMLElement)
+
 })
 </script>
 
@@ -558,6 +567,8 @@ onMounted(async (): Promise<void> => {
         name="twitter:card"
         content="summary_large_image" />
     </Head>
+
+    <p>{{ someHeight }}</p>
 
     <section class="mb-12 xl:mb-16 pt-6 xl:pt-14">
       <div class="container">
