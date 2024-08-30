@@ -21,7 +21,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <header class="flex flex-col shadow-lg z-10">
+  <header class="header flex flex-col shadow-lg z-10">
     <div class="hidden xl:flex bg-background-dark py-4 text-foreground-dark">
       <div class="container flex justify-between text-[14px]">
         <div class="flex">

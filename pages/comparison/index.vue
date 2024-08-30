@@ -490,25 +490,24 @@ onMounted(async (): Promise<void> => {
   await nextTick()
   await nextTick()
 
-  // someHeight.value = `${window.visualViewport.height} ${navigator.userAgent}`
-
-  const table = document.getElementById('table')
+  const table = document.querySelectorAll('table thead tr')[0]
   productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
-  const windowHeight = window.visualViewport.height
+  const windowHeight = window.innerHeight
 
   const observer = new IntersectionObserver(
     (entries) => {
       isTableHeaderVisible.value = entries[0].isIntersecting
+      console.log(entries[0])
     },
     {
+      rootMargin: `300px 0px -1100px 0px`,
       threshold: 0,
-      rootMargin: `0px 0px -${windowHeight}px 0px`
     }
   )
 
   observer.observe(table as HTMLElement)
 
-
+  console.log(windowHeight, productImageHeight)
 })
 </script>
 
@@ -689,14 +688,13 @@ onMounted(async (): Promise<void> => {
 
     <section
       :class="isTableHeaderVisible ? 'top-0' : '-top-[600px]'"
-      class="fixed left-0 w-full bg-background z-10"
+      class="fixed left-0 w-full bg-background z-10 transition-all duration-500"
     >
       <div class="container">
         <ClientOnly>
           <div
             class="relative">
             <Table
-              id="table"
               :transition="tableTransition"
               :class="setTableWidth(activeCategory, tableWrapperWidth)">
               <TableHeader>
