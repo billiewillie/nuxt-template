@@ -240,7 +240,23 @@ const categories = ref([
           {
             id: 56,
             value: '0,51–61 мкм'
-          }
+          },
+          {
+            id: 451,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 562,
+            value: '0,51–61 мкм'
+          },
+          {
+            id: 453,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 564,
+            value: '0,51–61 мкм'
+          },
         ]
       },
       {
@@ -255,7 +271,23 @@ const categories = ref([
           {
             id: 56,
             value: '0,5–60 мкм'
-          }
+          },
+          {
+            id: 451,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 562,
+            value: '0,51–61 мкм'
+          },
+          {
+            id: 453,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 564,
+            value: '0,51–61 мкм'
+          },
         ]
       },
       {
@@ -270,7 +302,23 @@ const categories = ref([
           {
             id: 56,
             value: '0,5–60 мкм'
-          }
+          },
+          {
+            id: 451,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 562,
+            value: '0,51–61 мкм'
+          },
+          {
+            id: 453,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 564,
+            value: '0,51–61 мкм'
+          },
         ]
       },
       {
@@ -285,7 +333,23 @@ const categories = ref([
           {
             id: 56,
             value: '0,5–60 мкм'
-          }
+          },
+          {
+            id: 451,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 562,
+            value: '0,51–61 мкм'
+          },
+          {
+            id: 453,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 564,
+            value: '0,51–61 мкм'
+          },
         ]
       },
       {
@@ -300,7 +364,23 @@ const categories = ref([
           {
             id: 56,
             value: '0,5–60 мкм'
-          }
+          },
+          {
+            id: 451,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 562,
+            value: '0,51–61 мкм'
+          },
+          {
+            id: 453,
+            value: 'ок. 20 мкм'
+          },
+          {
+            id: 564,
+            value: '0,51–61 мкм'
+          },
         ]
       }
     ],
@@ -312,7 +392,23 @@ const categories = ref([
       {
         id: 56,
         title: 'Диапазон толщины среза'
-      }
+      },
+      {
+        id: 451,
+        title: 'Шаг толщины среза'
+      },
+      {
+        id: 562,
+        title: 'Диапазон толщины среза'
+      },
+      {
+        id: 453,
+        title: 'Шаг толщины среза'
+      },
+      {
+        id: 564,
+        title: 'Диапазон толщины среза'
+      },
     ]
   }
 ])
@@ -323,6 +419,7 @@ const tableWrapperWidth = ref<number>(0)
 const tableTransition = ref<number>(0)
 const isAllowedToScrollRight = ref<boolean>(false)
 const isTableHeaderVisible = ref<boolean>(false)
+let productImageHeight = ref<number>(0)
 
 function setActiveCategory(id: number): void {
   tableTransition.value = 0
@@ -379,7 +476,6 @@ function setIsAllowedToScrollRight(): void {
       - -tableTransition.value
       - tableWrapperWidth.value) > 0
   }
-
 }
 
 watch(() => tableWrapper.value, () => {
@@ -393,6 +489,7 @@ onMounted(async (): Promise<void> => {
   await nextTick()
   await nextTick()
   const table = document.getElementById('table')
+  productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
   const windowHeight = window.innerHeight
 
   const observer = new IntersectionObserver(
@@ -479,7 +576,7 @@ onMounted(async (): Promise<void> => {
 
         <h1 class="section-title mb-12">Сравнение</h1>
 
-        <div class="flex flex-wrap gap-4">
+        <div class="flex flex-wrap gap-2">
           <ClientOnly>
             <Button
               :variant="activeCategory.id === category.id ? 'secondary' : 'outline'"
@@ -536,18 +633,18 @@ onMounted(async (): Promise<void> => {
                   :key="item.id">
                   <TableRow>
                     <TableCell
-                      class="relative"
+                      class="relative xl:p-4"
                       colspan="10">
                       <p
                         :style="`left: ${-tableTransition}px;`"
-                        class="absolute flex items-center ~text-[12px]/[16px] font-semibold text-gray-500 top-0 bottom-0 m-auto transition-all duration-700 p-2">
+                        class="absolute flex items-center ~text-[14px]/[18px] font-semibold text-gray-500 top-0 bottom-0 m-auto transition-all duration-700 p-2">
                         {{ item.title }}
                       </p>
                     </TableCell>
                   </TableRow>
                   <TableRow class="border-b-0">
                     <TableCell
-                      class="p-2"
+                      class="p-2 xl:p-4 text-center"
                       v-for="product in activeCategory.products"
                       :key="product.id">
                       {{ product.characteristics.find(char => char.id === item.id)?.value }}
@@ -559,7 +656,8 @@ onMounted(async (): Promise<void> => {
             </Table>
             <div
               v-if="isAllowedToScrollRight"
-              class="absolute -right-3 bg-background top-[168px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
+              :style="`top: ${productImageHeight + 20}px;`"
+              class="absolute -right-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
               @click="sliderRight()">
               <Icon
                 name="iconamoon:arrow-right-2-light"
@@ -570,7 +668,8 @@ onMounted(async (): Promise<void> => {
             <div
               v-if="tableTransition < 0"
               @click="sliderLeft()"
-              class="absolute -left-3 bg-background top-[168px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
+              :style="`top: ${productImageHeight + 20}px;`"
+              class="absolute -left-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
               <Icon
                 name="iconamoon:arrow-left-2-light"
                 width="18"
@@ -584,7 +683,7 @@ onMounted(async (): Promise<void> => {
 
     <section
       :class="isTableHeaderVisible ? 'top-0' : '-top-[600px]'"
-      class="fixed left-0 w-full bg-background transition-all duration-300 z-10"
+      class="fixed left-0 w-full bg-background z-10"
     >
       <div class="container">
         <ClientOnly>
@@ -611,7 +710,8 @@ onMounted(async (): Promise<void> => {
             </Table>
             <div
               v-if="isAllowedToScrollRight"
-              class="absolute -right-3 bg-background top-[160px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none z-20"
+              :style="`top: ${productImageHeight + 20}px;`"
+              class="absolute -right-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none z-20"
               @click="sliderRight()">
               <Icon
                 name="iconamoon:arrow-right-2-light"
@@ -622,7 +722,8 @@ onMounted(async (): Promise<void> => {
             <div
               v-if="tableTransition < 0"
               @click="sliderLeft()"
-              class="absolute -left-3 bg-background top-[160px] md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none z-20">
+              :style="`top: ${productImageHeight + 20}px;`"
+              class="absolute -left-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none z-20">
               <Icon
                 name="iconamoon:arrow-left-2-light"
                 width="18"

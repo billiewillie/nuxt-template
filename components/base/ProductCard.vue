@@ -37,8 +37,7 @@ defineProps<{
         <Separator class="w-full mb-6" />
         <h3
           class="font-semibold ~text-[16px]/[18px] line-clamp-3"
-          :class="{'~text-[12px]/[18px]' : isCompared}"
-        >
+          :class="{'~text-[12px]/[18px]' : isCompared}">
           {{ product.title }}
         </h3>
       </CardContent>
