@@ -490,11 +490,11 @@ onMounted(async (): Promise<void> => {
   await nextTick()
   await nextTick()
 
-  someHeight.value = `${navigator.platform} ${navigator.userAgent}`
+  // someHeight.value = `${window.visualViewport.height} ${navigator.userAgent}`
 
   const table = document.getElementById('table')
   productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
-  const windowHeight = document.documentElement.clientHeight
+  const windowHeight = window.visualViewport.height
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -563,8 +563,6 @@ onMounted(async (): Promise<void> => {
         name="twitter:card"
         content="summary_large_image" />
     </Head>
-
-    <p>{{ someHeight }}</p>
 
     <section class="mb-12 xl:mb-16 pt-6 xl:pt-14">
       <div class="container">
