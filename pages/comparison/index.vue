@@ -4,6 +4,7 @@
 import { X } from 'lucide-vue-next'
 import { useElementSize } from '@vueuse/core'
 import { setColumnWidth, setTableWidth } from '~/composables/setTableWidth'
+import type { Ref, UnwrapRef } from 'vue'
 
 const categories = ref([
   {
@@ -489,8 +490,8 @@ onMounted(async (): Promise<void> => {
   await nextTick()
   await nextTick()
   const table = document.getElementById('table')
-  productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
-  const windowHeight = window.innerHeight
+  const productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
+  const windowHeight = document.documentElement.clientHeight
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -637,7 +638,7 @@ onMounted(async (): Promise<void> => {
                       colspan="10">
                       <p
                         :style="`left: ${-tableTransition}px;`"
-                        class="absolute flex items-center ~text-[14px]/[18px] font-semibold text-gray-500 top-0 bottom-0 m-auto transition-all duration-700 p-2">
+                        class="absolute flex items-center ~text-[12px]/[16px] font-semibold text-gray-500 top-0 bottom-0 m-auto transition-all duration-700 p-2">
                         {{ item.title }}
                       </p>
                     </TableCell>
