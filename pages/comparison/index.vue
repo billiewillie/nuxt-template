@@ -420,7 +420,6 @@ const tableTransition = ref<number>(0)
 const isAllowedToScrollRight = ref<boolean>(false)
 const isTableHeaderVisible = ref<boolean>(false)
 let productImageHeight = ref<number>(0)
-let someHeight = ref<string>('')
 
 function setActiveCategory(id: number): void {
   tableTransition.value = 0
@@ -492,12 +491,11 @@ onMounted(async (): Promise<void> => {
 
   const table = document.getElementById('table-body')
   productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
-  const windowHeight = window.innerHeight
+  const windowHeight = document.documentElement.clientHeight
 
   const observer = new IntersectionObserver(
     (entries) => {
       isTableHeaderVisible.value = entries[0].isIntersecting
-      console.log(entries[0])
     },
     {
       rootMargin: `0px 0px -${windowHeight}px 0px`,
@@ -506,8 +504,6 @@ onMounted(async (): Promise<void> => {
   )
 
   observer.observe(table as HTMLElement)
-
-  console.log(windowHeight, productImageHeight)
 })
 </script>
 
