@@ -25,7 +25,7 @@ const { orientation, canScrollPrev, scrollPrev } = useCarousel()
     aria-label="previous"
   >
     <slot>
-      <ArrowLeft class="h-4 w-4 text-current" />
+      <ArrowLeft class="h-4 w-4 text-primary" />
     </slot>
   </Button>
 </template>

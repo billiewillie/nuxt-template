@@ -68,8 +68,8 @@ activeCategory.value = data.value[0]
     </Head>
 
     <section class="mb-12 xl:mb-16 pt-14">
-      <div class="container mb-12">
-        <Breadcrumb>
+      <div class="container">
+        <Breadcrumb class="mb-12">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink as-child>
@@ -82,17 +82,17 @@ activeCategory.value = data.value[0]
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-      </div>
-      <div class="container flex justify-between items-center">
-        <h1 class="section-title">На складе</h1>
-        <div class="flex gap-4">
-          <Button
-            v-for="category in data"
-            :key="category.id"
-            :variant="category.id === activeCategory?.id ? 'default' : 'outline'"
-            @click="activeCategory = category">
-            {{ category.title }}
-          </Button>
+        <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-8">
+          <h1 class="section-title">На складе</h1>
+          <div class="flex flex-col md:flex-row gap-4">
+            <Button
+              v-for="category in data"
+              :key="category.id"
+              :variant="category.id === activeCategory?.id ? 'default' : 'outline'"
+              @click="activeCategory = category">
+              {{ category.title }}
+            </Button>
+          </div>
         </div>
       </div>
     </section>
@@ -125,18 +125,22 @@ activeCategory.value = data.value[0]
                   class="text-left"></div>
               </div>
             </CardContent>
-            <CardFooter class="flex flex-col xl:flex-row gap-4 justify-between w-full p-0">
-              <div class="flex">
+            <CardFooter class="flex flex-col md:flex-row gap-4 justify-between w-full p-0">
+              <div class="flex basis-1/3">
                 <Icon
                   name="iconoir:star"
                   width="24"
                   height="24"
                   color="#575757" />
               </div>
-              <Button variant="outline">
-                Отправить запрос
-              </Button>
-              <span>Перейти на страницу</span>
+              <div class="flex basis-1/3 justify-center">
+                <Button variant="outline">
+                  Отправить запрос
+                </Button>
+              </div>
+              <div class="flex basis-1/3 justify-end">
+                <span>Перейти на страницу</span>
+              </div>
             </CardFooter>
           </Card>
         </div>

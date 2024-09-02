@@ -5,6 +5,8 @@ import { Card, CardContent } from '~/components/ui/card'
 import { Separator } from '~/components/ui/separator'
 import type { ProductCard } from '~/types'
 
+const compareList = useCookie('compare')
+
 defineEmits<{
   (f: 'removeFromCompare', id: number): void
 }>()
@@ -21,8 +23,7 @@ defineProps<{
     class="flex h-full">
     <Card
       class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full transition-shadow"
-      :class="{'gap-4 p-4' : isCompared}"
-    >
+      :class="{'gap-4 p-4' : isCompared}">
       <CardHeader class="p-0">
         <NuxtPicture
           :src="product.preview_img"
@@ -38,33 +39,34 @@ defineProps<{
         <h3
           class="font-semibold ~text-[16px]/[18px] line-clamp-3"
           :class="{'~text-[12px]/[18px]' : isCompared}">
-          {{ product.title }}
-        </h3>
+          {{ product.title }}</h3>
       </CardContent>
       <CardFooter class="flex items-center justify-between p-0">
         <div class="flex gap-4 items-center">
-          <Icon
-            v-if="isCompared"
-            name="iconoir:trash"
-            class="cursor-pointer"
-            width="18"
-            height="18"
-            @click="((e) => {
-              e.preventDefault();
-              $emit('removeFromCompare', product.id);
-            })"
-            color="#575757" />
-          <Icon
-            v-else
-            name="mdi:compare-horizontal"
-            class="cursor-pointer"
-            width="18"
-            height="18"
-            @click="((e) => {
-              e.preventDefault();
-              console.log('compare')
-            })"
-            color="#575757" />
+          <div>
+            <Icon
+              v-if="isCompared"
+              name="iconoir:trash"
+              class="cursor-pointer"
+              width="18"
+              height="18"
+              @click="((e) => {
+                e.preventDefault();
+                $emit('removeFromCompare', product.id);
+              })"
+              color="#575757" />
+            <Icon
+              v-else
+              name="mdi:compare-horizontal"
+              class="cursor-pointer"
+              width="18"
+              height="18"
+              @click="((e) => {
+                e.preventDefault();
+                console.log('compare')
+              })"
+              color="#575757" />
+          </div>
           <Icon
             name="cil:star"
             class="cursor-pointer"

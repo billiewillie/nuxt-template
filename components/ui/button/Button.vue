@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
   <Primitive
     :as="as"
     :as-child="<boolean>asChild"
-    :class="cn(buttonVariants({ variant, size }), props.class)"
+    :class="cn(buttonVariants({ class: undefined ,className: undefined, variant, size }), props.class)"
   >
     <slot />
   </Primitive>

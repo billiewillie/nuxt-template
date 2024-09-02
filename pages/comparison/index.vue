@@ -657,24 +657,24 @@ onMounted(async (): Promise<void> => {
             </Table>
             <div
               v-if="isAllowedToScrollRight"
-              :style="`top: ${productImageHeight + 20}px;`"
-              class="absolute -right-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none"
+              :style="`top: ${productImageHeight + 16}px;`"
+              class="absolute -right-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-10 h-10 flex items-center justify-center leading-none"
               @click="sliderRight()">
               <Icon
                 name="iconamoon:arrow-right-2-light"
-                width="18"
-                height="18"
+                width="20"
+                height="20"
                 style="color: #575757" />
             </div>
             <div
               v-if="tableTransition < 0"
               @click="sliderLeft()"
-              :style="`top: ${productImageHeight + 20}px;`"
-              class="absolute -left-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none">
+              :style="`top: ${productImageHeight + 16}px;`"
+              class="absolute -left-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-10 h-10 flex items-center justify-center leading-none">
               <Icon
                 name="iconamoon:arrow-left-2-light"
-                width="18"
-                height="18"
+                width="20"
+                height="20"
                 style="color: #575757" />
             </div>
           </div>

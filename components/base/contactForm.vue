@@ -18,8 +18,6 @@ const emailId = useId()
 const phoneId = useId()
 const cityId = useId()
 const messageId = useId()
-const jobId = useId()
-const labId = useId()
 const checkId = useId()
 
 const formSchema = toTypedSchema(z.object({
@@ -32,11 +30,6 @@ const formSchema = toTypedSchema(z.object({
     .email({ message: 'Некорректная почта' })
     .min(2, { message: 'Минимальная длина 2 символа' })
     .max(50, { message: 'Максимальная длина 50 символов' }),
-  job: z
-    .string()
-    .min(2, { message: 'Минимальная длина 2 символа' })
-    .max(50, { message: 'Максимальная длина 50 символов' })
-    .optional(),
   phone: z
     .string({ message: 'Обязательное поле' })
     .min(2, { message: 'Минимальная длина 2 символа' })
@@ -45,11 +38,6 @@ const formSchema = toTypedSchema(z.object({
     .string()
     .min(2, { message: 'Минимальная длина 2 символа' })
     .max(20, { message: 'Максимальная длина 20 символов' })
-    .optional(),
-  lab: z
-    .string()
-    .min(2, { message: 'Минимальная длина 2 символа' })
-    .max(50, { message: 'Максимальная длина 50 символов' })
     .optional(),
   message: z
     .string()
@@ -70,10 +58,8 @@ const onSubmit = form.handleSubmit((values) => {
     name: values.name,
     phone: values.phone,
     city: values.city,
-    job: values.job,
-    lab: values.lab,
     message: values.message,
-    token: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
+    token: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`
   }
   console.log(data)
   setTimeout(() => {
@@ -137,7 +123,7 @@ const onSubmit = form.handleSubmit((values) => {
             <FormField
               v-slot="{ componentField }"
               name="message">
-              <FormItem class="row-span-3 order-7 lg:order-3">
+              <FormItem class="row-span-2 order-7 lg:order-3">
                 <FormControl>
                   <Textarea
                     placeholder="Сообщение"
@@ -175,36 +161,6 @@ const onSubmit = form.handleSubmit((values) => {
                     name="city"
                     :id="cityId"
                     placeholder="Город"
-                    v-bind="componentField" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-            <FormField
-              v-slot="{ componentField }"
-              name="job">
-              <FormItem class="order-5 lg:order-6">
-                <FormControl>
-                  <Input
-                    type="text"
-                    name="job"
-                    :id="jobId"
-                    placeholder="Место работы"
-                    v-bind="componentField" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-            <FormField
-              v-slot="{ componentField }"
-              name="lab">
-              <FormItem class="order-6 lg:order-7">
-                <FormControl>
-                  <Input
-                    type="text"
-                    name="lab"
-                    :id="labId"
-                    placeholder="Лаборатория"
                     v-bind="componentField" />
                 </FormControl>
                 <FormMessage />

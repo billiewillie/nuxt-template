@@ -25,7 +25,7 @@ const { orientation, canScrollNext, scrollNext } = useCarousel()
     aria-label="next"
   >
     <slot>
-      <ArrowRight class="h-4 w-4 text-current" />
+      <ArrowRight class="h-4 w-4 text-primary" />
     </slot>
   </Button>
 </template>
