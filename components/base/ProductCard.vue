@@ -5,7 +5,33 @@ import { Card, CardContent } from '~/components/ui/card'
 import { Separator } from '~/components/ui/separator'
 import type { ProductCard } from '~/types'
 
-const compareList = useCookie('compare')
+const compareList = useCookie('compareList')
+
+function addToCompareList(id: number) {
+
+  // compareList.value = JSON.stringify([])
+  const currentList = compareList.value ? compareList.value : [];
+  if (currentList.includes(id)) {
+    return
+  }
+  compareList.value = JSON.stringify([...currentList, id])
+}
+
+function removeFromCompareList(id: number) {
+  const currentList = compareList.value ? JSON.parse(compareList.value) : [];
+  compareList.value = JSON.stringify(currentList.filter((item: number) => item !== id));
+}
+
+// function addToWishList(id: number) {
+//   const currentList = wishList.value ? JSON.parse(wishList.value) : [];
+//   wishList.value = JSON.stringify([...currentList, id]);
+//   console.log(wishList.value);
+// }
+
+// function removeFromWishList(id: number) {
+//   const currentList = wishList.value ? JSON.parse(wishList.value) : [];
+//   wishList.value = JSON.stringify(currentList.filter((item: number) => item !== id));
+// }
 
 defineEmits<{
   (f: 'removeFromCompare', id: number): void
@@ -39,7 +65,8 @@ defineProps<{
         <h3
           class="font-semibold ~text-[16px]/[18px] line-clamp-3"
           :class="{'~text-[12px]/[18px]' : isCompared}">
-          {{ product.title }}</h3>
+          {{ product.title }}
+        </h3>
       </CardContent>
       <CardFooter class="flex items-center justify-between p-0">
         <div class="flex gap-4 items-center">
@@ -50,8 +77,9 @@ defineProps<{
               class="cursor-pointer"
               width="18"
               height="18"
-              @click="((e) => {
+              @click="((e: Event) => {
                 e.preventDefault();
+                removeFromCompareList(product.id);
                 $emit('removeFromCompare', product.id);
               })"
               color="#575757" />
@@ -61,9 +89,9 @@ defineProps<{
               class="cursor-pointer"
               width="18"
               height="18"
-              @click="((e) => {
+              @click="((e: Event) => {
                 e.preventDefault();
-                console.log('compare')
+                addToCompareList(product.id)
               })"
               color="#575757" />
           </div>
@@ -72,9 +100,8 @@ defineProps<{
             class="cursor-pointer"
             width="18"
             height="18"
-            @click="((e) => {
+            @click="((e: Event) => {
               e.preventDefault();
-              console.log('like')
             })"
             color="#575757" />
         </div>
