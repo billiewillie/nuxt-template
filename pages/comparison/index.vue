@@ -498,7 +498,7 @@ onMounted(async (): Promise<void> => {
       isTableHeaderVisible.value = entries[0].isIntersecting
     },
     {
-      rootMargin: `0px 0px -${windowHeight}px 0px`,
+      rootMargin: `0px 0px -${windowHeight - productImageHeight}px 0px`,
       threshold: 0
     }
   )
