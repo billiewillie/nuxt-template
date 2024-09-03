@@ -52,9 +52,9 @@ export interface ProductCard {
   title: string
   preview_img: string
   url: string
-  sort: number
-  is_favourites: 1 | 0
-  is_comparison: 1 | 0
+  sort?: number
+  is_favourites?: 1 | 0
+  is_comparison?: 1 | 0
   description?: string,
   is_published?: number,
   keywords?: string,

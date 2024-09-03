@@ -6,10 +6,10 @@ import { Separator } from '~/components/ui/separator'
 import type { ProductCard } from '~/types'
 
 const compareList = useCookie('compareList')
+const wishList = useCookie('wishList')
 
 function addToCompareList(id: number) {
 
-  // compareList.value = JSON.stringify([])
   const currentList = compareList.value ? compareList.value : [];
   if (currentList.includes(id)) {
     return
@@ -18,20 +18,22 @@ function addToCompareList(id: number) {
 }
 
 function removeFromCompareList(id: number) {
-  const currentList = compareList.value ? JSON.parse(compareList.value) : [];
+  const currentList = compareList.value ? compareList.value : [];
   compareList.value = JSON.stringify(currentList.filter((item: number) => item !== id));
 }
 
-// function addToWishList(id: number) {
-//   const currentList = wishList.value ? JSON.parse(wishList.value) : [];
-//   wishList.value = JSON.stringify([...currentList, id]);
-//   console.log(wishList.value);
-// }
+function addToWishList(id: number) {
+  const currentList = wishList.value ? wishList.value : [];
+  if (currentList.includes(id)) {
+    return
+  }
+  wishList.value = JSON.stringify([...currentList, id])
+}
 
-// function removeFromWishList(id: number) {
-//   const currentList = wishList.value ? JSON.parse(wishList.value) : [];
-//   wishList.value = JSON.stringify(currentList.filter((item: number) => item !== id));
-// }
+function removeFromWishList(id: number) {
+  const currentList = wishList.value ? wishList.value : [];
+  wishList.value = JSON.stringify(currentList.filter((item: number) => item !== id));
+}
 
 defineEmits<{
   (f: 'removeFromCompare', id: number): void
@@ -77,12 +79,12 @@ defineProps<{
               class="cursor-pointer"
               width="18"
               height="18"
+              color="#575757"
               @click="((e: Event) => {
                 e.preventDefault();
                 removeFromCompareList(product.id);
                 $emit('removeFromCompare', product.id);
-              })"
-              color="#575757" />
+              })"/>
             <Icon
               v-else
               name="mdi:compare-horizontal"

@@ -17,6 +17,17 @@ import {
   SheetTrigger
 } from '@/components/ui/sheet'
 
+const compareList = useCookie('compareList')
+const wishList = useCookie('wishList')
+
+function getCompareListCount() {
+  return compareList.value ? compareList.value.length : 0
+}
+
+function getWishListCount() {
+  return wishList.value ? wishList.value.length : 0
+}
+
 const route = useRoute()
 </script>
 
@@ -40,7 +51,8 @@ const route = useRoute()
               color="#3BA3A3" />
             <NuxtLink
               to="/comparison"
-              class="group-hover:underline underline-offset-4">Сравнение (0)
+              class="group-hover:underline underline-offset-4">
+              Сравнение ({{ getCompareListCount() }})
             </NuxtLink>
           </div>
           <span class="flex mx-4">|</span>
@@ -52,7 +64,8 @@ const route = useRoute()
               color="#3BA3A3" />
             <NuxtLink
               to="/wishlist"
-              class="group-hover:underline underline-offset-4">Избранное (0)
+              class="group-hover:underline underline-offset-4">
+              Избранное ({{ getWishListCount() }})
             </NuxtLink>
           </div>
           <span class="flex mx-4">|</span>
