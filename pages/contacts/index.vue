@@ -1,6 +1,4 @@
-<script
-  setup
-  lang="ts">
+<script setup lang="ts">
 import { type Ref, ref } from 'vue'
 import { SERVICE } from '~/data/constants'
 import { Card, CardContent } from '~/components/ui/card'
@@ -12,64 +10,73 @@ import { YandexMap, YandexMapDefaultFeaturesLayer, YandexMapDefaultSchemeLayer, 
 const coordinates = ref(BRANCHES.spb.map) as Ref<number[]>
 
 // create branches object without spb
-const branchesFiltered = Object.fromEntries(
-  Object
-    .entries(BRANCHES)
-    .filter(([key, _]): boolean => key !== 'spb')
-)
+const branchesFiltered = Object.fromEntries(Object.entries(BRANCHES).filter(([key, _]): boolean => key !== 'spb'))
 </script>
 
 <template>
-
   <main>
-
     <Head>
       <Title>Контакты | Группа компаний ООО «БиоЛайн»</Title>
       <Meta
         name="description"
-        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля."
+      />
       <Meta
         name="og:image"
-        content="/img/og-logo.jpg" />
+        content="/img/og-logo.jpg"
+      />
       <Meta
         name="twitter:image"
-        content="/img/og-logo.jpg" />
+        content="/img/og-logo.jpg"
+      />
       <Meta
         name="og:title"
-        content="Контакты | Группа компаний ООО «БиоЛайн»" />
+        content="Контакты | Группа компаний ООО «БиоЛайн»"
+      />
       <Meta
         name="og:description"
-        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля."
+      />
       <Meta
         name="og:site_name"
-        content="bioline.vercel.app" />
+        content="bioline.vercel.app"
+      />
       <Meta
         name="og:url"
-        content="https://bioline.vercel.app/contacts" />
+        content="https://bioline.vercel.app/contacts"
+      />
       <Meta
         name="og:image:width"
-        content="1200" />
+        content="1200"
+      />
       <Meta
         name="og:image:height"
-        content="630" />
+        content="630"
+      />
       <Meta
         name="og:type"
-        content="article" />
+        content="article"
+      />
       <Meta
         name="og:locale"
-        content="ru_RU" />
+        content="ru_RU"
+      />
       <Meta
         name="twitter:title"
-        content="Контакты | Группа компаний ООО «БиоЛайн»" />
+        content="Контакты | Группа компаний ООО «БиоЛайн»"
+      />
       <Meta
         name="twitter:description"
-        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля."
+      />
       <Meta
         name="twitter:site"
-        content="bioline.vercel.app" />
+        content="bioline.vercel.app"
+      />
       <Meta
         name="twitter:card"
-        content="summary_large_image" />
+        content="summary_large_image"
+      />
     </Head>
 
     <section class="mb-12 xl:mb-16 pt-14">
@@ -103,7 +110,7 @@ const branchesFiltered = Object.fromEntries(
           placeholder="bg-[#2264B4]"
         />
         <div class="basis-full md:basis-1/2 lg:basis-1/3">
-          <h2 class="font-bold mb-2">Центральный офис</h2>
+          <h2 class="font-bold mb-2">Центральный офис:</h2>
           <span>{{ BRANCHES.spb.index }}, </span>
           <span>{{ BRANCHES.spb.country }}, </span>
           <span>{{ BRANCHES.spb.city }}</span>
@@ -131,8 +138,9 @@ const branchesFiltered = Object.fromEntries(
           <yandex-map-marker
             :settings="{
               hintContent: 'Центральный офис',
-              coordinates: coordinates
-            }">
+              coordinates: coordinates,
+            }"
+          >
             <div class="marker" />
           </yandex-map-marker>
         </yandex-map>
@@ -166,11 +174,14 @@ const branchesFiltered = Object.fromEntries(
     <section class="mb-12">
       <div class="container">
         <h2 class="section-title mb-12">Филиалы</h2>
-        <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
+        <div
+          class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4"
+        >
           <Card
             v-for="branch in branchesFiltered"
             :key="branch.id"
-            class="flex flex-col gap-6 p-4">
+            class="flex flex-col gap-6 p-4"
+          >
             <CardHeader class="p-0 font-medium">
               <CardTitle>{{ branch.title }}</CardTitle>
             </CardHeader>
@@ -190,11 +201,14 @@ const branchesFiltered = Object.fromEntries(
 
     <section class="mb-24 xl:mb-32">
       <div class="container">
-        <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
+        <div
+          class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4"
+        >
           <Card
             v-for="branch in BRANCH_PARTNERS"
             :key="branch.id"
-            class="flex flex-col gap-6 p-4">
+            class="flex flex-col gap-6 p-4"
+          >
             <CardHeader class="p-0 font-medium">
               <CardTitle class="leading-7">
                 {{ branch.title }}
@@ -202,7 +216,8 @@ const branchesFiltered = Object.fromEntries(
             </CardHeader>
             <Separator />
             <CardContent class="p-0 font-medium">
-              <span>{{ branch.index }}</span>,
+              <span>{{ branch.index }}</span
+              >,
               <span>{{ branch.country }}</span>
               <p>{{ branch.city }}</p>
               <p>{{ branch.address }}</p>
@@ -215,7 +230,5 @@ const branchesFiltered = Object.fromEntries(
     </section>
 
     <BaseContactForm />
-
   </main>
-
 </template>
