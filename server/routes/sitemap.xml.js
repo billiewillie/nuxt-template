@@ -1,8 +1,8 @@
 export default defineEventHandler(async (event) => {
   event.node.res.setHeader('Content-Type', 'text/xml')
-  const config = useRuntimeConfig(event)
+  const { API_ENDPOINT } = useRuntimeConfig().public
 
-  const data = await $fetch('https://telvla.ru/sitemap/generate')
+  const data = await $fetch(`${API_ENDPOINT}/sitemap/generate`)
 
   return data
 })
