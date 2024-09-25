@@ -8,21 +8,21 @@ const wishList = useCookie('wishList')
 
 const wishListData = ref([])
 
-const product: ProductCard = {
+const product: ProductCard =  {
   id: 1,
   title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
-  preview_img: 'https://telvla.ru/upload/image/products/previews/leica_vt1200_s.webp',
+  preview_img: '/img/items/item-1.jpg',
   url: '/catalog/diagnosis-oncological-diseases/gistologiya/vibratomy/poluavtomaticheskij-mikrotom-s-vibriruyushchim-lezviem-leica-vt1200-s',
 }
 
-async function getWishList() {
-  const { data } = await useFetch('', {
-    method: 'POST',
-    body: {
-      products: wishListData.value
-    }
-  })
-}
+// async function getWishList() {
+//   const { data } = await useFetch('', {
+//     method: 'POST',
+//     body: {
+//       products: wishListData.value
+//     }
+//   })
+// }
 </script>
 
 <template>

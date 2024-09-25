@@ -14,13 +14,15 @@ const tableWrapperWidth = ref<number>(0)
 const tableTransition = ref<number>(0)
 const isAllowedToScrollRight = ref<boolean>(false)
 const isTableHeaderVisible = ref<boolean>(false)
-let productImageHeight = ref<number>(0)
+const productImageHeight = ref<number>(0)
 
 function setActiveCategory(id: number): void {
   tableTransition.value = 0
-  activeCategory.value = categories.value.find(category => {
-    return category.id === id
-  })
+  if (categories.value && categories.value.length) {
+    activeCategory.value = categories.value.find(category => {
+      return category.id === id
+    })
+  }
 }
 
 function removeCategory(categoryId: number): void {
@@ -79,26 +81,28 @@ watch(() => tableWrapper.value, () => {
 })
 
 onMounted(async (): Promise<void> => {
-  await setActiveCategory(categories.value[0].id)
+  if (categories.value && categories.value.length) {
+    await setActiveCategory(categories.value[0].id)
 
-  await nextTick()
-  await nextTick()
+    await nextTick()
+    await nextTick()
 
-  const table = document.getElementById('table-body')
-  productImageHeight = document.querySelectorAll('table img')[0].getBoundingClientRect().height
-  const windowHeight = document.documentElement.clientHeight
+    productImageHeight.value = document.querySelectorAll('table img')[0].getBoundingClientRect().height
+    const table = document.getElementById('table-body')
+    const windowHeight = document.documentElement.clientHeight
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      isTableHeaderVisible.value = entries[0].isIntersecting
-    },
-    {
-      rootMargin: `0px 0px -${windowHeight - productImageHeight}px 0px`,
-      threshold: 0
-    }
-  )
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isTableHeaderVisible.value = entries[0].isIntersecting
+      },
+      {
+        rootMargin: `0px 0px -${windowHeight - productImageHeight.value}px 0px`,
+        threshold: 0
+      }
+    )
 
-  observer.observe(table as HTMLElement)
+    observer.observe(table as HTMLElement)
+  }
 })
 </script>
 
@@ -243,7 +247,7 @@ onMounted(async (): Promise<void> => {
                       class="p-2 xl:p-4 text-center"
                       v-for="product in activeCategory.products"
                       :key="product.id">
-                      {{ product.characteristics.find(({id}) => id === item.id)?.value }}
+                      {{ product.characteristics.find(({ id }) => id === item.id)?.value }}
                     </TableCell>
                   </TableRow>
                   <TableRow class="h-2 border-b-0" />

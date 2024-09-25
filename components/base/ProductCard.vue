@@ -11,7 +11,7 @@ const wishList = useCookie('wishList')
 function addToCompareList(id: number) {
 
   const currentList = compareList.value ? compareList.value : [];
-  if (currentList.includes(id)) {
+  if (currentList?.includes(id)) {
     return
   }
   compareList.value = JSON.stringify([...currentList, id])
@@ -24,7 +24,7 @@ function removeFromCompareList(id: number) {
 
 function addToWishList(id: number) {
   const currentList = wishList.value ? wishList.value : [];
-  if (currentList.includes(id)) {
+  if (currentList?.includes(id)) {
     return
   }
   wishList.value = JSON.stringify([...currentList, id])

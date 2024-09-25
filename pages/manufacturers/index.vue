@@ -12,7 +12,9 @@ const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const { data: categories }: { data: Ref<ManufacturersPageApi> } = await useFetch(`${API_ENDPOINT}${URLs.manufacturers}`)
 
-activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory
+if (categories.value && categories.value.manufacturers.length) {
+  activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory
+}
 </script>
 
 <template>
@@ -86,13 +88,15 @@ activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory
         <div class="flex flex-col lg:flex-row justify-between lg:items-center gap-8">
           <h1 class="section-title">Производители</h1>
           <div class="flex flex-col md:flex-row gap-4">
-            <Button
-              v-for="manufacturer in MANUFACTURER_BUTTONS"
-              :variant="manufacturer.value === activeCategory?.url ? 'default' : 'outline'"
-              @click="activeCategory = categories.manufacturers.find(({url}) => url ===  manufacturer.value) as ManufacturerCategory"
-              :key="manufacturer.value">
-              {{ manufacturer.title }}
-            </Button>
+            <template v-if="categories">
+              <Button
+                v-for="manufacturer in MANUFACTURER_BUTTONS"
+                :variant="manufacturer.value === activeCategory?.url ? 'default' : 'outline'"
+                @click="activeCategory = categories.manufacturers.find(({url}) => url ===  manufacturer.value) as ManufacturerCategory"
+                :key="manufacturer.value">
+                {{ manufacturer.title }}
+              </Button>
+            </template>
           </div>
         </div>
       </div>

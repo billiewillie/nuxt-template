@@ -2,10 +2,9 @@
 export default defineNuxtConfig({
   devtools: {
     enabled: true,
-
     timeline: {
-      enabled: true
-    }
+      enabled: true,
+    },
   },
   modules: [
     '@nuxt/image',
@@ -16,108 +15,115 @@ export default defineNuxtConfig({
     'nuxt-icon',
     'nuxt-marquee',
     'vue-yandex-maps/nuxt',
-    'nuxt-viewport'
+    'nuxt-viewport',
   ],
   image: {
     inject: true,
-    format: ['webp']
+    format: ['webp'],
   },
   tailwindcss: {
     cssPath: ['~/assets/css/main.css', { injectPosition: 'first' }],
     configPath: 'tailwind.config',
     exposeConfig: {
-      level: 2
+      level: 2,
     },
     config: {},
-    viewer: true
+    viewer: true,
   },
   googleFonts: {
     families: {
-      Inter: '400..700'
+      Inter: '400..700',
     },
     display: 'fallback',
     subsets: ['cyrillic', 'latin'],
     preload: true,
     prefetch: true,
     useStylesheet: true,
-    preconnect: true
+    preconnect: true,
   },
   typescript: {
     tsConfig: {
       compilerOptions: {
-        baseUrl: '.'
-      }
-    }
+        baseUrl: '.',
+      },
+    },
   },
   app: {
     head: {
       title: 'Группа компаний ООО «БиоЛайн»',
       htmlAttrs: {
-        lang: 'ru'
+        lang: 'ru',
       },
       meta: [
         {
           name: 'description',
-          content: 'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.'
+          content:
+            'Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля.',
         },
         {
           name: 'keywords',
-          content: 'цитометр, цитофлюориметр, цитофлуориметр, проточный, Бектон Дикинсон, BD, Becton Dickinson, FACS, Calibur, Canto, CantoII, Accuri, Verse, Aria, цитометрия, проточник, сортировщик, сортер, Euroflow, ISHAGE, фенотипирование, иммунофенотипирование, FACS  Count, мониторинг CD4, стволовые клетки, онкогематология, диагностика ВИЧ, диагностика лейкозов'
+          content:
+            'цитометр, цитофлюориметр, цитофлуориметр, проточный, Бектон Дикинсон, BD, Becton Dickinson, FACS, Calibur, Canto, CantoII, Accuri, Verse, Aria, цитометрия, проточник, сортировщик, сортер, Euroflow, ISHAGE, фенотипирование, иммунофенотипирование, FACS  Count, мониторинг CD4, стволовые клетки, онкогематология, диагностика ВИЧ, диагностика лейкозов',
         },
         {
           name: 'robots',
-          content: 'noindex, nofollow'
+          content: 'noindex, nofollow',
         },
         {
           name: 'msapplication-TileColor',
-          content: '#da532c'
+          content: '#da532c',
         },
         {
           name: 'theme-color',
-          content: '#ffffff'
+          content: '#ffffff',
         },
         {
           name: 'viewport',
-          content: 'width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no'
-        }
+          content: 'width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no',
+        },
       ],
       link: [
         {
           rel: 'apple-touch-icon',
           sizes: '180x180',
-          href: '/apple-touch-icon.png'
+          href: '/apple-touch-icon.png',
         },
         {
           rel: 'icon',
           sizes: '32x32',
           type: 'image/png',
-          href: '/favicon-32x32.png'
+          href: '/favicon-32x32.png',
         },
         {
           rel: 'icon',
           sizes: '16x16',
           type: 'image/png',
-          href: '/favicon-16x16.png'
+          href: '/favicon-16x16.png',
         },
         {
           rel: 'manifest',
-          href: '/site.webmanifest'
+          href: '/site.webmanifest',
         },
         {
           rel: 'mask-icon',
           href: '/safari-pinned-tab.svg',
-          color: '#5bbad5'
-        }
-      ]
+          color: '#5bbad5',
+        },
+      ],
     },
-    pageTransition: { name: 'page', mode: 'out-in' }
+    pageTransition: { name: 'page', mode: 'out-in' },
   },
   runtimeConfig: {
     public: {
-      API_ENDPOINT: ''
-    }
+      API_ENDPOINT: '',
+    },
   },
   yandexMaps: {
-    apikey: '3c059258-c2fe-4ad1-85b6-f124123aa8e1'
+    apikey: '3c059258-c2fe-4ad1-85b6-f124123aa8e1',
+  },
+  nitro: {
+    prerender: {
+      routes: ['/sitemap.xml'],
+    },
   },
 })
