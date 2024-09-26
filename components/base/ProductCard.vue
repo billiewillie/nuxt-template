@@ -1,7 +1,4 @@
-<script
-  setup
-  lang="ts">
-import { Card, CardContent } from '~/components/ui/card'
+<script setup lang="ts">
 import { Separator } from '~/components/ui/separator'
 import type { ProductCard } from '~/types'
 
@@ -9,8 +6,7 @@ const compareList = useCookie('compareList')
 const wishList = useCookie('wishList')
 
 function addToCompareList(id: number) {
-
-  const currentList = compareList.value ? compareList.value : [];
+  const currentList = compareList.value ? compareList.value : []
   if (currentList?.includes(id)) {
     return
   }
@@ -18,12 +14,12 @@ function addToCompareList(id: number) {
 }
 
 function removeFromCompareList(id: number) {
-  const currentList = compareList.value ? compareList.value : [];
-  compareList.value = JSON.stringify(currentList.filter((item: number) => item !== id));
+  const currentList = compareList.value ? compareList.value : []
+  compareList.value = JSON.stringify(currentList.filter((item: number) => item !== id))
 }
 
 function addToWishList(id: number) {
-  const currentList = wishList.value ? wishList.value : [];
+  const currentList = wishList.value ? wishList.value : []
   if (currentList?.includes(id)) {
     return
   }
@@ -31,8 +27,8 @@ function addToWishList(id: number) {
 }
 
 function removeFromWishList(id: number) {
-  const currentList = wishList.value ? wishList.value : [];
-  wishList.value = JSON.stringify(currentList.filter((item: number) => item !== id));
+  const currentList = wishList.value ? wishList.value : []
+  wishList.value = JSON.stringify(currentList.filter((item: number) => item !== id))
 }
 
 defineEmits<{
@@ -48,15 +44,17 @@ defineProps<{
 <template>
   <NuxtLink
     :to="product.url"
-    class="flex h-full">
+    class="flex h-full"
+  >
     <Card
       class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full transition-shadow"
-      :class="{'gap-4 p-4' : isCompared}">
+      :class="{ 'gap-4 p-4': isCompared }"
+    >
       <CardHeader class="p-0">
         <NuxtPicture
           :src="product.preview_img"
           :alt="product.title"
-          :img-attrs="{class:'w-full h-full object-scale-down object-center'}"
+          :img-attrs="{ class: 'w-full h-full object-scale-down object-center' }"
           class="aspect-square"
           width="253"
           height="253"
@@ -66,7 +64,8 @@ defineProps<{
         <Separator class="w-full mb-6" />
         <h3
           class="font-semibold ~text-[16px]/[18px] line-clamp-3"
-          :class="{'~text-[12px]/[18px]' : isCompared}">
+          :class="{ '~text-[12px]/[18px]': isCompared }"
+        >
           {{ product.title }}
         </h3>
       </CardContent>
@@ -84,7 +83,8 @@ defineProps<{
                 e.preventDefault();
                 removeFromCompareList(product.id);
                 $emit('removeFromCompare', product.id);
-              })"/>
+              })"
+            />
             <Icon
               v-else
               name="mdi:compare-horizontal"
@@ -95,7 +95,8 @@ defineProps<{
                 e.preventDefault();
                 addToCompareList(product.id)
               })"
-              color="#575757" />
+              color="#575757"
+            />
           </div>
           <Icon
             name="cil:star"
@@ -104,14 +105,17 @@ defineProps<{
             height="18"
             @click="((e: Event) => {
               e.preventDefault();
+              
             })"
-            color="#575757" />
+            color="#575757"
+          />
         </div>
         <Icon
           name="iconamoon:arrow-right-2-light"
           width="18"
           height="18"
-          style="color: #575757" />
+          style="color: #575757"
+        />
       </CardFooter>
     </Card>
   </NuxtLink>

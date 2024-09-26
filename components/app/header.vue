@@ -1,31 +1,25 @@
-<script
-  setup
-  lang="ts">
+<script setup lang="ts">
 import { VisuallyHidden } from 'radix-vue'
 import NAVIGATION from '~/data/navigation'
 import BRANCHES from '~/data/branches'
 import { isRouteActive } from '~/utils/isRouteActive'
 import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from '@/components/ui/sheet'
 
 const compareList = useCookie('compareList')
 const wishList = useCookie('wishList')
+const wishListExpandableMaterials = useCookie('wishListExpendableMaterials')
 
 function getCompareListCount() {
   return compareList.value ? compareList.value.length : 0
 }
 
 function getWishListCount() {
-  return wishList.value ? wishList.value.length : 0
+  const wishListLength = wishList.value ? wishList.value.length : 0
+  const wishListExpandableMaterialsLength = wishListExpandableMaterials.value
+    ? wishListExpandableMaterials.value.length
+    : 0
+  return wishListLength + wishListExpandableMaterialsLength
 }
 
 const route = useRoute()
@@ -48,10 +42,12 @@ const route = useRoute()
               name="solar:round-transfer-horizontal-linear"
               width="18"
               height="18"
-              color="#3BA3A3" />
+              color="#3BA3A3"
+            />
             <NuxtLink
               to="/comparison"
-              class="group-hover:underline underline-offset-4">
+              class="group-hover:underline underline-offset-4"
+            >
               Сравнение ({{ getCompareListCount() }})
             </NuxtLink>
           </div>
@@ -61,17 +57,20 @@ const route = useRoute()
               name="lets-icons:star"
               width="18"
               height="18"
-              color="#3BA3A3" />
+              color="#3BA3A3"
+            />
             <NuxtLink
               to="/wishlist"
-              class="group-hover:underline underline-offset-4">
+              class="group-hover:underline underline-offset-4"
+            >
               Избранное ({{ getWishListCount() }})
             </NuxtLink>
           </div>
           <span class="flex mx-4">|</span>
           <LazyAppSearch
             side="bottom"
-            trigger="search" />
+            trigger="search"
+          />
         </div>
       </div>
     </div>
@@ -84,7 +83,8 @@ const route = useRoute()
                 name="icon-park-outline:application-menu"
                 width="32"
                 height="32"
-                color="#3BA3A3" />
+                color="#3BA3A3"
+              />
             </SheetTrigger>
             <SheetContent class="xl:hidden">
               <SheetHeader>
@@ -97,11 +97,13 @@ const route = useRoute()
                 <ul class="flex flex-col gap-4">
                   <li
                     v-for="item in NAVIGATION"
-                    :key="item.id">
+                    :key="item.id"
+                  >
                     <SheetClose as-child>
                       <NuxtLink
                         :to="item.href"
-                        :aria-label="item.title">
+                        :aria-label="item.title"
+                      >
                         {{ item.title }}
                       </NuxtLink>
                     </SheetClose>
@@ -110,7 +112,8 @@ const route = useRoute()
                     <SheetClose as-child>
                       <NuxtLink
                         to="/comparison"
-                        aria-label="comparison">
+                        aria-label="comparison"
+                      >
                         Сравнение (0)
                       </NuxtLink>
                     </SheetClose>
@@ -123,7 +126,8 @@ const route = useRoute()
         <div class="basis-1/3 flex xl:basis-auto justify-center">
           <NuxtLink
             to="/"
-            class="flex h-full w-[110px]">
+            class="flex h-full w-[110px]"
+          >
             <NuxtImg
               src="/img/logo.svg"
               alt="logo"
@@ -136,13 +140,16 @@ const route = useRoute()
           <ul class="flex gap-2">
             <li
               v-for="item in NAVIGATION"
-              :key="item.id">
+              :key="item.id"
+            >
               <Button
                 :variant="isRouteActive(item.slug, route) ? 'default' : 'ghost'"
-                as-child>
+                as-child
+              >
                 <NuxtLink
                   :to="item.href"
-                  :aria-label="item.title">
+                  :aria-label="item.title"
+                >
                   {{ item.title }}
                 </NuxtLink>
               </Button>

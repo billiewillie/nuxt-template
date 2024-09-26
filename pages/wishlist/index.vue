@@ -1,80 +1,107 @@
-<script
-  setup
-  lang="ts">
+<script setup lang="ts">
 import type { ProductCard } from '~/types'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '~/components/ui/table'
 
 const wishList = useCookie('wishList')
+const wishListExpandableMaterials = useCookie('wishListExpendableMaterials')
 
 const wishListData = ref([])
+const wishListExpandableMaterialsData = ref([])
 
-const product: ProductCard =  {
+const product: ProductCard = {
   id: 1,
   title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
   preview_img: '/img/items/item-1.jpg',
   url: '/catalog/diagnosis-oncological-diseases/gistologiya/vibratomy/poluavtomaticheskij-mikrotom-s-vibriruyushchim-lezviem-leica-vt1200-s',
 }
 
-// async function getWishList() {
-//   const { data } = await useFetch('', {
-//     method: 'POST',
-//     body: {
-//       products: wishListData.value
-//     }
-//   })
-// }
+const expendableMaterial: ProductCard = {
+  id: 1,
+  articule: 'DS153769',
+  title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
+}
+async function getWishList() {
+  const wishlistValue = wishList.value ? wishList.value : []
+  const wishlistExpandableMaterialsValue = wishListExpandableMaterials.value ? wishListExpandableMaterials.value : []
+
+  const { data } = await useFetch('https://telvla.ru/wishlist/list', {
+    method: 'POST',
+    body: {
+      products: wishlistValue,
+      expendableMaterials: wishlistExpandableMaterialsValue,
+    },
+  })
+
+  wishListData.value = data.value.products
+  wishListExpandableMaterialsData.value = data.value.expendable_material
+}
+
+getWishList()
 </script>
 
 <template>
   <main>
-
     <Head>
       <Title>Избранное | Группа компаний ООО «БиоЛайн»</Title>
       <Meta
         name="description"
-        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля."
+      />
       <Meta
         name="og:image"
-        content="/img/og-logo.jpg" />
+        content="/img/og-logo.jpg"
+      />
       <Meta
         name="twitter:image"
-        content="/img/og-logo.jpg" />
+        content="/img/og-logo.jpg"
+      />
       <Meta
         name="og:title"
-        content="Избранное | Группа компаний ООО «БиоЛайн»" />
+        content="Избранное | Группа компаний ООО «БиоЛайн»"
+      />
       <Meta
         name="og:description"
-        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля."
+      />
       <Meta
         name="og:site_name"
-        content="bioline.vercel.app" />
+        content="bioline.vercel.app"
+      />
       <Meta
         name="og:url"
-        content="https://bioline.vercel.app/wishlist" />
+        content="https://bioline.vercel.app/wishlist"
+      />
       <Meta
         name="og:image:width"
-        content="1200" />
+        content="1200"
+      />
       <Meta
         name="og:image:height"
-        content="630" />
+        content="630"
+      />
       <Meta
         name="og:type"
-        content="article" />
+        content="article"
+      />
       <Meta
         name="og:locale"
-        content="ru_RU" />
+        content="ru_RU"
+      />
       <Meta
         name="twitter:title"
-        content="Избранное | Группа компаний ООО «БиоЛайн»" />
+        content="Избранное | Группа компаний ООО «БиоЛайн»"
+      />
       <Meta
         name="twitter:description"
-        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля."
+      />
       <Meta
         name="twitter:site"
-        content="bioline.vercel.app" />
+        content="bioline.vercel.app"
+      />
       <Meta
         name="twitter:card"
-        content="summary_large_image" />
+        content="summary_large_image"
+      />
     </Head>
 
     <section class="mb-12 xl:mb-16 pt-14">
@@ -96,35 +123,40 @@ const product: ProductCard =  {
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-16">
-      <div class="container grid md:grid-cols-2 xl:grid-cols-4 gap-4">
-        <BaseProductCard
-          v-for="(_, index) in 8"
-          :key="index"
-          :product="product" />
-      </div>
-    </section>
+    <ClientOnly>
+      <section class="mb-12 xl:mb-16">
+        <div class="container grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+          <BaseProductCard
+            v-for="product in wishListData"
+            :key="product.id"
+            :product="product"
+          />
+        </div>
+      </section>
+    </ClientOnly>
 
-    <section class="mb-12 xl:mb-16">
-      <div class="container">
-        <Table class="mb-6 w-full">
-          <TableHeader>
-            <TableRow>
-              <TableHead>Артикул / №</TableHead>
-              <TableHead>Название</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow
-              v-for="(_, index) in 8"
-              :key="index">
-              <TableCell>DS153769</TableCell>
-              <TableCell>Стереомикроскоп Nexcope NSZ-810</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </div>
-    </section>
-
+    <ClientOnly v-if="wishListExpandableMaterialsData.length">
+      <section class="mb-12 xl:mb-16">
+        <div class="container">
+          <Table class="mb-6 w-full">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Артикул / №</TableHead>
+                <TableHead>Название</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow
+                v-for="product in wishListExpandableMaterialsData"
+                :key="product.id"
+              >
+                <TableCell>{{ product.articule }}</TableCell>
+                <TableCell>{{ product.title }}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+    </ClientOnly>
   </main>
 </template>

@@ -50,26 +50,27 @@ interface BreadCrumb {
 export interface ProductCard {
   id: number
   title: string
-  preview_img: string
-  url: string
+  preview_img?: string
+  url?: string
   sort?: number
   is_favourites?: 1 | 0
   is_comparison?: 1 | 0
-  description?: string,
-  is_published?: number,
-  keywords?: string,
-  tag?: string,
+  description?: string
+  is_published?: number
+  keywords?: string
+  tag?: string
+  articule?: string
 }
 
 export interface News {
-  annotation: string,
-  created_at: string,
-  id: number,
-  preview_img: string,
-  title: string,
-  url: string,
-  section: Array<Section>,
-  content: HTMLElement,
+  annotation: string
+  created_at: string
+  id: number
+  preview_img: string
+  title: string
+  url: string
+  section: Array<Section>
+  content: HTMLElement
   year: number
   recommendations: Array<Recommendation>
   banner: string
@@ -149,25 +150,25 @@ export interface Article {
   id: number
   title: string
   url: string
-  preview_img: string,
-  created_at: string,
+  preview_img: string
+  created_at: string
   annotation: string
 }
 
 export interface IndexPageApi {
   catalog: Array<string>
   calendar: Events
-  content: string,
-  created_at: string,
-  id: number,
-  title: string,
-  template: string,
-  url: string,
-  manufacturers: Array<Manufacturer>,
-  news: Array<Omit<News, 'year' | 'content' | 'recommendations' | 'banner'>>,
-  metadata: Metadata,
+  content: string
+  created_at: string
+  id: number
+  title: string
+  template: string
+  url: string
+  manufacturers: Array<Manufacturer>
+  news: Array<Omit<News, 'year' | 'content' | 'recommendations' | 'banner'>>
+  metadata: Metadata
   new_products: {
-    title: Array<NewProductTitle>,
+    title: Array<NewProductTitle>
     list: Array<NewProductList>
   }
 }
