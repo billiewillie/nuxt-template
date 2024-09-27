@@ -4,21 +4,9 @@ import type { ProductCard } from '~/types'
 const wishList = useCookie('wishList')
 const wishListExpandableMaterials = useCookie('wishListExpendableMaterials')
 
-const wishListData = ref([])
-const wishListExpandableMaterialsData = ref([])
+const wishListData = ref<ProductCard[] | null>(null)
+const wishListExpandableMaterialsData = ref<ProductCard[] | null>(null)
 
-const product: ProductCard = {
-  id: 1,
-  title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
-  preview_img: '/img/items/item-1.jpg',
-  url: '/catalog/diagnosis-oncological-diseases/gistologiya/vibratomy/poluavtomaticheskij-mikrotom-s-vibriruyushchim-lezviem-leica-vt1200-s',
-}
-
-const expendableMaterial: ProductCard = {
-  id: 1,
-  articule: 'DS153769',
-  title: 'Автоматизированная система для дезагрегации тканей BD Medimachine II',
-}
 async function getWishList() {
   const wishlistValue = wishList.value ? wishList.value : []
   const wishlistExpandableMaterialsValue = wishListExpandableMaterials.value ? wishListExpandableMaterials.value : []
@@ -123,7 +111,7 @@ getWishList()
       </div>
     </section>
 
-    <ClientOnly>
+    <ClientOnly v-if="">
       <section class="mb-12 xl:mb-16">
         <div class="container grid md:grid-cols-2 xl:grid-cols-4 gap-4">
           <BaseProductCard
@@ -135,7 +123,7 @@ getWishList()
       </section>
     </ClientOnly>
 
-    <ClientOnly v-if="wishListExpandableMaterialsData.length">
+    <ClientOnly v-if="wishListExpandableMaterialsData && wishListExpandableMaterialsData.length">
       <section class="mb-12 xl:mb-16">
         <div class="container">
           <Table class="mb-6 w-full">
