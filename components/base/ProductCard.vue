@@ -1,44 +1,48 @@
 <script setup lang="ts">
-import { Separator } from '~/components/ui/separator'
-import type { ProductCard } from '~/types'
+import { Separator } from '~/components/ui/separator';
+import type { ProductCard } from '~/types';
 
-const compareList = useCookie('compareList')
-const wishList = useCookie('wishList')
+const compareList = useCookie('compareList');
+const wishList = useCookie('wishList');
 
 function addToCompareList(id: number) {
-  const currentList = compareList.value ? compareList.value : []
+  const currentList = compareList.value ? compareList.value : [];
   if (currentList?.includes(id)) {
-    return
+    return;
   }
-  compareList.value = JSON.stringify([...currentList, id])
+  compareList.value = JSON.stringify([...currentList, id]);
 }
 
 function removeFromCompareList(id: number) {
-  const currentList = compareList.value ? compareList.value : []
-  compareList.value = JSON.stringify(currentList.filter((item: number) => item !== id))
+  const currentList = compareList.value ? compareList.value : [];
+  compareList.value = JSON.stringify(
+    currentList.filter((item: number) => item !== id)
+  );
 }
 
 function addToWishList(id: number) {
-  const currentList = wishList.value ? wishList.value : []
+  const currentList = wishList.value ? wishList.value : [];
   if (currentList?.includes(id)) {
-    return
+    return;
   }
-  wishList.value = JSON.stringify([...currentList, id])
+  wishList.value = JSON.stringify([...currentList, id]);
 }
 
 function removeFromWishList(id: number) {
-  const currentList = wishList.value ? wishList.value : []
-  wishList.value = JSON.stringify(currentList.filter((item: number) => item !== id))
+  const currentList = wishList.value ? wishList.value : [];
+  wishList.value = JSON.stringify(
+    currentList.filter((item: number) => item !== id)
+  );
 }
 
 defineEmits<{
-  (f: 'removeFromCompare', id: number): void
-}>()
+  (f: 'removeFromCompare', id: number): void;
+}>();
 
 defineProps<{
-  product: ProductCard
-  isCompared?: boolean
-}>()
+  product: ProductCard;
+  isCompared?: boolean;
+}>();
 </script>
 
 <template>
@@ -54,7 +58,9 @@ defineProps<{
         <NuxtPicture
           :src="product.preview_img"
           :alt="product.title"
-          :img-attrs="{ class: 'w-full h-full object-scale-down object-center' }"
+          :img-attrs="{
+            class: 'w-full h-full object-scale-down object-center',
+          }"
           class="aspect-square"
           width="253"
           height="253"
@@ -101,8 +107,8 @@ defineProps<{
           <Icon
             name="cil:star"
             class="cursor-pointer"
-            width="18"
-            height="18"
+            width="19"
+            height="19"
             @click="((e: Event) => {
               e.preventDefault();
               

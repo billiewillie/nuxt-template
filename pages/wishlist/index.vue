@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import type { ProductCard } from '~/types'
+import type { ProductCard } from '~/types';
 
-const wishList = useCookie('wishList')
-const wishListExpandableMaterials = useCookie('wishListExpendableMaterials')
+const wishList = useCookie('wishList');
+const wishListExpandableMaterials = useCookie('wishListExpendableMaterials');
 
-const wishListData = ref<ProductCard[] | null>(null)
-const wishListExpandableMaterialsData = ref<ProductCard[] | null>(null)
+const wishListData = ref<ProductCard[] | null>(null);
+const wishListExpandableMaterialsData = ref<ProductCard[] | null>(null);
 
 async function getWishList() {
-  const wishlistValue = wishList.value ? wishList.value : []
-  const wishlistExpandableMaterialsValue = wishListExpandableMaterials.value ? wishListExpandableMaterials.value : []
+  const wishlistValue = wishList.value ? wishList.value : [];
+  const wishlistExpandableMaterialsValue = wishListExpandableMaterials.value
+    ? wishListExpandableMaterials.value
+    : [];
 
   const { data } = await useFetch('https://telvla.ru/wishlist/list', {
     method: 'POST',
@@ -17,13 +19,13 @@ async function getWishList() {
       products: wishlistValue,
       expendableMaterials: wishlistExpandableMaterialsValue,
     },
-  })
+  });
 
-  wishListData.value = data.value.products
-  wishListExpandableMaterialsData.value = data.value.expendable_material
+  wishListData.value = data.value.products;
+  wishListExpandableMaterialsData.value = data.value.expendable_material;
 }
 
-getWishList()
+getWishList();
 </script>
 
 <template>
@@ -111,7 +113,7 @@ getWishList()
       </div>
     </section>
 
-    <ClientOnly v-if="">
+    <ClientOnly>
       <section class="mb-12 xl:mb-16">
         <div class="container grid md:grid-cols-2 xl:grid-cols-4 gap-4">
           <BaseProductCard
@@ -123,7 +125,12 @@ getWishList()
       </section>
     </ClientOnly>
 
-    <ClientOnly v-if="wishListExpandableMaterialsData && wishListExpandableMaterialsData.length">
+    <ClientOnly
+      v-if="
+        wishListExpandableMaterialsData &&
+        wishListExpandableMaterialsData.length
+      "
+    >
       <section class="mb-12 xl:mb-16">
         <div class="container">
           <Table class="mb-6 w-full">
