@@ -1,27 +1,31 @@
 <script setup lang="ts">
-import { useFetch, useRuntimeConfig } from '#app'
-import { Separator } from '~/components/ui/separator'
-import URLs from '~/data/urls'
-import CATEGORIES from '~/data/categories'
-import type { IndexPageApi } from '~/types'
-import { type Ref, ref } from 'vue'
-import { ChevronRight } from 'lucide-vue-next'
-import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
-import EventCardSkeleton from '~/components/base/EventCardSkeleton.vue'
+import { useFetch, useRuntimeConfig } from '#app';
+import { Separator } from '~/components/ui/separator';
+import URLs from '~/data/urls';
+import CATEGORIES from '~/data/categories';
+import type { IndexPageApi } from '~/types';
+import { type Ref, ref } from 'vue';
+import { ChevronRight } from 'lucide-vue-next';
+import {
+  type DateValue,
+  getLocalTimeZone,
+  today,
+} from '@internationalized/date';
+import EventCardSkeleton from '~/components/base/EventCardSkeleton.vue';
 
-const date = ref<Date>(new Date())
+const date = ref<Date>(new Date());
 
-const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public;
 
-const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
+const value = ref(today(getLocalTimeZone())) as Ref<DateValue>;
 
 const {
   data,
   error,
 }: {
-  data: Ref<IndexPageApi> | undefined
-  error: Ref<any>
-} = await useFetch(`${API_ENDPOINT}${URLs.index}`)
+  data: Ref<IndexPageApi> | undefined;
+  error: Ref<any>;
+} = await useFetch(`${API_ENDPOINT}${URLs.index}`);
 </script>
 
 <template>
@@ -114,12 +118,15 @@ const {
 
             <div class="container">
               <div class="relative py-20 xl:pt-40 max-w-[620px]">
-                <h2 class="uppercase font-semibold ~text-[28px]/[33px]">операционное и госпитальное оборудование</h2>
+                <h2 class="uppercase font-semibold ~text-[28px]/[33px]">
+                  операционное и госпитальное оборудование
+                </h2>
                 <Separator class="my-4" />
                 <p class="~text-[16px]/[18px]">
-                  метод исследования тканей при их значительном увеличении под микроскопом. Это один из наиболее
-                  распространённых способов в медицине, он позволяет увидеть структуру тканей, процессы происходящие
-                  в ней и патологические нарушения.
+                  метод исследования тканей при их значительном увеличении
+                  под микроскопом. Это один из наиболее распространённых
+                  способов в медицине, он позволяет увидеть структуру тканей,
+                  процессы происходящие в ней и патологические нарушения.
                 </p>
               </div>
             </div>
@@ -198,7 +205,9 @@ const {
             </template>
           </CarouselContent>
 
-          <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
+          <div
+            class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center"
+          >
             <div class="flex gap-4">
               <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
               <CarouselNext class="relative left-0 top-0 translate-y-0" />
@@ -252,7 +261,9 @@ const {
               </CarouselItem>
             </template>
           </CarouselContent>
-          <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
+          <div
+            class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center"
+          >
             <div class="flex gap-4">
               <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
               <CarouselNext class="relative left-0 top-0 translate-y-0" />
@@ -298,7 +309,9 @@ const {
         <h2 class="section-title">Календарь событий</h2>
       </div>
 
-      <div class="container relative flex flex-col md:flex-row gap-4 calendar-backdrop">
+      <div
+        class="container relative flex flex-col md:flex-row gap-4 calendar-backdrop"
+      >
         <LazyAppCalendar class="md:w-1/2 relative z-20 bg-background" />
 
         <Carousel
@@ -330,7 +343,9 @@ const {
               </CarouselItem>
             </template>
           </CarouselContent>
-          <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
+          <div
+            class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center"
+          >
             <div class="flex gap-4">
               <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
               <CarouselNext class="relative left-0 top-0 translate-y-0" />
@@ -363,7 +378,7 @@ const {
             v-for="manufacturer in data.manufacturers"
             :key="manufacturer.id"
             :to="manufacturer.url"
-            class="h-[70px] mr-10 grayscale transition hover:grayscale-0"
+            class="h-[40px] mr-20 grayscale transition hover:grayscale-0"
           >
             <NuxtImg
               loading="lazy"

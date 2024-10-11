@@ -1,5 +1,6 @@
 <template>
   <NuxtLayout>
+    <NuxtLoadingIndicator />
     <NuxtPage />
   </NuxtLayout>
 </template>
@@ -23,4 +24,3 @@
   transform: translate(0, 10px);
 }
 </style>
-
