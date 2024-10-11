@@ -105,7 +105,7 @@ const { data: manufacturer }: { data: Ref<Manufacturer> } = await useFetch(`${AP
           :alt="manufacturer.title"
         />
         <div
-          class="col-span-2 flex flex-col gap-4 text-base"
+          class="col-span-2 flex flex-col gap-4 text-base [&_a]:underline [&_a]:underline-offset-4"
           v-html="manufacturer.content"
         ></div>
       </div>
