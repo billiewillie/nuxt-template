@@ -7,8 +7,7 @@ export const SERVICE: Service = {
 
 export const YEARS: number[] = [
   new Date().getFullYear(),
-  new Date().getFullYear() - 1,
-  new Date().getFullYear() - 2
+  new Date().getFullYear() - 1
 ]
 
 export const MANUFACTURER_BUTTONS: ManufacturerButton[] = [
@@ -56,7 +55,7 @@ export const SEARCH_RESULT = {
   manufacturers: [],
   news: [],
   products: [],
-  stock: [],
+  stock: []
 }
 
 export const SEARCH_LENGTH = 3

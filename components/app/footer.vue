@@ -20,13 +20,20 @@ import BRANCHES from '~/data/branches'
       </div>
       <div class="flex flex-col items-start text-left">
         <h3 class="text-primary font-semibold mb-4">Центральный офис:</h3>
-        {{ BRANCHES.spb.index }}, {{ BRANCHES.spb.country }}, {{ BRANCHES.spb.city }},
-        <br>
-        {{ BRANCHES.spb.address }}
-        <br />
-        {{ BRANCHES.spb.phone }}
-        <br />
-        {{ BRANCHES.spb.email }}
+        <p class="leading-8 flex flex-col items-start text-left">
+          {{ BRANCHES.spb.index }}, {{ BRANCHES.spb.country }}, {{ BRANCHES.spb.city }},
+          {{ BRANCHES.spb.address }}
+          <a
+            :href="`tel:${BRANCHES.spb.phone}`"
+            class="underline underline-offset-4">
+            {{ BRANCHES.spb.phone }}
+          </a>
+          <a
+            :href="`mailto:${BRANCHES.spb.email}`"
+            class="underline underline-offset-4">
+            {{ BRANCHES.spb.email }}
+          </a>
+        </p>
       </div>
     </div>
   </footer>

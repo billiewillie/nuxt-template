@@ -1,31 +1,81 @@
-<script setup lang="ts">
-import type { ProductCard } from '~/types';
+<script
+  setup
+  lang="ts">
+import type { ProductCard } from '~/types'
+import { toTypedSchema } from '@vee-validate/zod'
+import * as z from 'zod'
+import { useForm } from 'vee-validate'
+import URLs from '~/data/urls'
+import { toast } from '~/components/ui/toast'
+import { useId, useRuntimeConfig } from '#app'
+import { FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form'
 
-const wishList = useCookie('wishList');
-const wishListExpandableMaterials = useCookie('wishListExpendableMaterials');
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
-const wishListData = ref<ProductCard[] | null>(null);
-const wishListExpandableMaterialsData = ref<ProductCard[] | null>(null);
+const wishList = useCookie('wishList')
+const wishListExpandableMaterials = useCookie('wishListExpendableMaterials')
+
+const wishListData = ref<ProductCard[] | null>(null)
+const wishListExpandableMaterialsData = ref<ProductCard[] | null>(null)
+
+const contactId = useId()
 
 async function getWishList() {
-  const wishlistValue = wishList.value ? wishList.value : [];
+  const wishlistValue = wishList.value ? wishList.value : []
   const wishlistExpandableMaterialsValue = wishListExpandableMaterials.value
     ? wishListExpandableMaterials.value
-    : [];
+    : []
 
   const { data } = await useFetch('https://telvla.ru/wishlist/list', {
     method: 'POST',
     body: {
       products: wishlistValue,
-      expendableMaterials: wishlistExpandableMaterialsValue,
-    },
-  });
+      expendableMaterials: wishlistExpandableMaterialsValue
+    }
+  })
 
-  wishListData.value = data.value.products;
-  wishListExpandableMaterialsData.value = data.value.expendable_material;
+  wishListData.value = data.value.products
+  wishListExpandableMaterialsData.value = data.value.expendable_material
 }
 
-getWishList();
+getWishList()
+
+const formSchema = toTypedSchema(z.object({
+  contact: z
+    .string({ message: 'Обязательное поле' })
+    .min(2, { message: 'Минимальная длина 7 символа' })
+    .max(50, { message: 'Максимальная длина 50 символов' })
+}))
+
+const form = useForm({
+  validationSchema: formSchema
+})
+
+const onSubmit = form.handleSubmit(async (values) => {
+  const data = {
+    contact: values.contact,
+    token: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`
+  }
+  console.log(data)
+  const responseData = await $fetch(
+    `${API_ENDPOINT}${URLs.wishlistPageForm}`,
+    {
+      method: 'POST',
+      body: data
+    }
+  )
+  if (responseData === '200') {
+    form.resetForm()
+    toast({
+      title: 'Заявка отправлена!'
+    })
+  } else {
+    toast({
+      title: 'Произошла ошибка!',
+      variant: 'destructive'
+    })
+  }
+})
 </script>
 
 <template>
@@ -153,5 +203,39 @@ getWishList();
         </div>
       </section>
     </ClientOnly>
+
+    <section>
+      <div class="container">
+        <form
+          @submit="onSubmit"
+          class="flex flex-col gap-4">
+          <div class="grid gap-16">
+            <FormField
+              v-slot="{ componentField }"
+              name="contact">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    name="contact"
+                    :id="contactId"
+                    placeholder="Телефон или почта"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+          </div>
+          <div class="grid gap-4">
+            <Button
+              type="submit"
+              aria-label="submit"
+              class="uppercase">
+              отправить
+            </Button>
+          </div>
+        </form>
+      </div>
+    </section>
   </main>
 </template>

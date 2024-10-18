@@ -1,25 +1,49 @@
 <script
   setup
   lang="ts">
-import URLs from '~/data/urls'
 import { useFetch, useRuntimeConfig } from '#app'
-import type { News } from '~/types'
-import { YEARS } from '~/data/constants'
 import type { Ref } from 'vue'
+import type { News } from '~/types'
+import URLs from '~/data/urls'
+
+interface NewsRelevantItem {
+  year: number
+  list: News[]
+}
+
+interface NewsPageApi {
+  relevant: NewsRelevantItem[],
+  archive: News[]
+}
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
-const newsByYear = ref<News[]>([])
-const activeYear = ref<number>(YEARS[0])
+const newsData = ref<NewsPageApi | null>(null)
+const newsFilteredByYear = ref<News[] | null>(null)
+const years = ref<number[] | 'archive' | null>(null)
+const activeYear = ref<number | 'archive' | null>(null)
 
-const { data: news }: { news: Ref<News[]> } = await useFetch(`${API_ENDPOINT}${URLs.news}`)
+const { data: news }: { news: Ref<NewsPageApi> } = await useFetch(`${API_ENDPOINT}${URLs.news}`)
 
-function getNewsByYear() {
-  newsByYear.value = news.value.filter((article: News): boolean => article.year === activeYear.value)
+function getNews() {
+  newsData.value = news.value
+  years.value = news.value.relevant.map((item) => item.year)
+  setYear(years.value[0])
+}
+
+function setYear(year: number | 'archive'): void {
+  if (year === 'archive') {
+    activeYear.value = 'archive'
+    newsFilteredByYear.value = news.value.archive
+    return
+  }
+  activeYear.value = year
+  newsFilteredByYear.value = news.value.relevant.find(item => item.year === activeYear.value).list
+  console.log(activeYear.value)
 }
 
 onMounted(() => {
-  getNewsByYear()
+  getNews()
 })
 </script>
 
@@ -97,12 +121,14 @@ onMounted(() => {
         <div class="flex gap-4">
           <Button
             :key="year"
-            v-for="year in YEARS"
-            @click="activeYear = year; getNewsByYear()"
+            v-for="year in years"
+            @click="activeYear = year; setYear(year)"
             :variant="activeYear === year ? 'default' : 'ghost'">
             {{ year }}
           </Button>
-          <Button variant="ghost">
+          <Button
+            :variant="activeYear === 'archive' ? 'default' : 'ghost'"
+            @click="setYear('archive')">
             Архив
           </Button>
         </div>
@@ -112,15 +138,17 @@ onMounted(() => {
     <section class="mb-16">
       <div class="container">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 items-stretch">
-          <template v-if="newsByYear.length">
+          <template v-if="newsFilteredByYear">
             <BaseNewsCard
-              v-for="article in newsByYear"
+              v-for="article in newsFilteredByYear"
               :key="article.id"
               image-loading="lazy"
               :article="article" />
           </template>
           <template v-else>
-            <BaseNewsCardSkeleton v-for="i in 8" :key="i" />
+            <BaseNewsCardSkeleton
+              v-for="i in 8"
+              :key="i" />
           </template>
         </div>
       </div>

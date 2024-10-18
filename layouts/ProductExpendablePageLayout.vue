@@ -19,5 +19,12 @@ const props = defineProps<{
       </div>
     </section>
 
+    <section class="mb-16">
+      <div class="container">
+        <p>dfsdfsd</p>
+        <BaseProductsExpandableOrderForm />
+      </div>
+    </section>
+
   </main>
 </template>

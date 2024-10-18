@@ -11,7 +11,10 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import * as z from 'zod'
-import { useId } from '#app'
+import { useId, useRuntimeConfig } from '#app'
+import URLs from '~/data/urls'
+
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const nameId = useId()
 const emailId = useId()
@@ -51,9 +54,8 @@ const form = useForm({
   validationSchema: formSchema
 })
 
-const onSubmit = form.handleSubmit((values) => {
+const onSubmit = form.handleSubmit(async (values) => {
   const data = {
-    check: values.checkbox,
     email: values.email,
     name: values.name,
     phone: values.phone,
@@ -62,12 +64,24 @@ const onSubmit = form.handleSubmit((values) => {
     token: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`
   }
   console.log(data)
-  setTimeout(() => {
+  const responseData = await $fetch(
+    `${API_ENDPOINT}${URLs.indexPageForm}`,
+    {
+      method: 'POST',
+      body: data
+    }
+  )
+  if (responseData === '200') {
     form.resetForm()
     toast({
       description: 'Заявка отправлена!'
     })
-  }, 500)
+  } else {
+    toast({
+      description: 'Произошла ошибка!',
+      variant: 'destructive'
+    })
+  }
 })
 </script>
 

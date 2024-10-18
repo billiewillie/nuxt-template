@@ -4,6 +4,12 @@
 import type { InStockCategory } from '~/types'
 import URLs from '~/data/urls'
 import type { Ref } from 'vue'
+import { useId, useRuntimeConfig } from '#app'
+import { toTypedSchema } from '@vee-validate/zod'
+import * as z from 'zod'
+import { useForm } from 'vee-validate'
+import { toast } from '~/components/ui/toast'
+import { FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form'
 
 const activeCategory = ref<InStockCategory | null>(null)
 
@@ -12,6 +18,61 @@ const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 const { data }: { data: Ref<InStockCategory[]> } = await useFetch(`${API_ENDPOINT}${URLs.inStock}`)
 
 activeCategory.value = data.value[0]
+
+const nameId = useId()
+const contactId = useId()
+const messageId = useId()
+const checkId = useId()
+
+const formSchema = toTypedSchema(z.object({
+  name: z
+    .string({ message: 'Обязательное поле' })
+    .min(2, { message: 'Минимальная длина 2 символа' })
+    .max(50, { message: 'Максимальная длина 50 символов' }),
+  contact: z
+    .string({ message: 'Обязательное поле' })
+    .min(2, { message: 'Минимальная длина 7 символа' })
+    .max(50, { message: 'Максимальная длина 50 символов' }),
+  message: z
+    .string()
+    .min(10, { message: 'Минимальная длина сообщения 10 символов' })
+    .max(160, { message: 'Максимальная длина сообщения 160 символов' })
+    .optional(),
+  checkbox: z.boolean({ message: 'Подтвердите согласие' })
+}))
+
+const form = useForm({
+  validationSchema: formSchema
+})
+
+const onSubmit = form.handleSubmit(async (values) => {
+  const data = {
+    stock_id: 1,
+    contact: values.contact,
+    name: values.name,
+    message: values.message,
+    token: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`
+  }
+  console.log(data)
+  const responseData = await $fetch(
+    `${API_ENDPOINT}${URLs.inStockPageForm}`,
+    {
+      method: 'POST',
+      body: data
+    }
+  )
+  if (responseData === '200') {
+    form.resetForm()
+    toast({
+      title: 'Заявка отправлена!'
+    })
+  } else {
+    toast({
+      title: 'Произошла ошибка!',
+      variant: 'destructive'
+    })
+  }
+})
 </script>
 
 <template>
@@ -144,6 +205,88 @@ activeCategory.value = data.value[0]
             </CardFooter>
           </Card>
         </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <form
+          @submit="onSubmit"
+          class="flex flex-col gap-4">
+          <div class="grid gap-16">
+            <FormField
+              v-slot="{ componentField }"
+              name="name">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    name="name"
+                    :id="nameId"
+                    placeholder="ФИО"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="contact">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    name="contact"
+                    :id="contactId"
+                    placeholder="Телефон или почта"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="message">
+              <FormItem>
+                <FormControl>
+            <Textarea
+              name="message"
+              :id="messageId"
+              placeholder="Сообщение"
+              v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+          </div>
+          <div class="grid gap-4">
+            <Button
+              type="submit"
+              aria-label="submit"
+              class="uppercase">
+              отправить
+            </Button>
+            <FormField
+              v-slot="{ value, handleChange }"
+              type="checkbox"
+              name="checkbox">
+              <FormItem class="flex items-start lg:col-span-2 gap-x-2 space-y-0 rounded-md">
+                <FormControl :id="checkId">
+                  <Checkbox
+                    :checked="value"
+                    @update:checked="handleChange" />
+                </FormControl>
+                <div class="space-y-1 leading-none">
+                  <FormLabel :forId="checkId">
+                    Я согласен(на) на обработку персональных данных.
+                    ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.
+                  </FormLabel>
+                  <FormMessage />
+                </div>
+              </FormItem>
+            </FormField>
+          </div>
+        </form>
       </div>
     </section>
 

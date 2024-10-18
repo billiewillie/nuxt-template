@@ -11,9 +11,13 @@ import ProductExpendablePageLayout from '~/layouts/ProductExpendablePageLayout.v
 const route = useRoute()
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
-const { data }: {
+const {
+  data
+}: {
   data: Ref<ProductCategoryPageApi | ProductPageApi>
 } = await useFetch(`${API_ENDPOINT}${route.fullPath}`)
+
+console.log(data.value)
 
 const page = {
   catalog: ProductCategoryPageLayout,

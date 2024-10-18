@@ -1,4 +1,6 @@
-<script setup lang="ts">
+<script
+  setup
+  lang="ts">
 import { VisuallyHidden } from 'radix-vue'
 import NAVIGATION from '~/data/navigation'
 import BRANCHES from '~/data/branches'
@@ -42,13 +44,11 @@ const route = useRoute()
               name="solar:round-transfer-horizontal-linear"
               width="18"
               height="18"
-              color="#3BA3A3"
-            />
+              color="#3BA3A3" />
             <NuxtLink
               to="/comparison"
-              class="group-hover:underline underline-offset-4"
-            >
-              Сравнение ({{ getCompareListCount() }})
+              class="group-hover:underline underline-offset-4">
+              Сравнение <span class="tracking-widest">({{ getCompareListCount() }})</span>
             </NuxtLink>
           </div>
           <span class="flex mx-4">|</span>
@@ -61,9 +61,8 @@ const route = useRoute()
             />
             <NuxtLink
               to="/wishlist"
-              class="group-hover:underline underline-offset-4"
-            >
-              Избранное ({{ getWishListCount() }})
+              class="group-hover:underline underline-offset-4">
+              Избранное <span class="tracking-widest">({{ getWishListCount() }})</span>
             </NuxtLink>
           </div>
           <span class="flex mx-4">|</span>

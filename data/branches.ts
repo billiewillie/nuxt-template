@@ -7,7 +7,7 @@ const BRANCHES: Record<string, Branch> = {
     index: '197022',
     title: 'Санкт-Петербург',
     city: 'Санкт-Петербург',
-    address: 'ул. Профессора Попова, д. 23, лит. Е',
+    address: 'ул. Профессора Попова, д. 23, лит. Е',
     phone: '+7 (812) 320 49 49',
     email: 'main@bioline.ru',
     map: [30.3136, 59.972014]

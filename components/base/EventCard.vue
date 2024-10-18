@@ -51,12 +51,6 @@ const props = defineProps<{
           <br>
           Московская обл., Красногорск, Международная ул., 16
         </p>
-        <Icon
-          name="iconamoon:arrow-right-2-light"
-          class="flex self-end"
-          width="18"
-          height="18"
-          color="#575757" />
       </CardContent>
     </Card>
   </div>

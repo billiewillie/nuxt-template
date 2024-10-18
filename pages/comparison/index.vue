@@ -1,78 +1,90 @@
-<script setup lang="ts">
-import { X } from 'lucide-vue-next';
-import { useElementSize } from '@vueuse/core';
-import { setColumnWidth, setTableWidth } from '~/composables/setTableWidth';
-import { useFetch, useRuntimeConfig } from '#app';
-import URLs from '~/data/urls';
+<script
+  setup
+  lang="ts">
+import { X } from 'lucide-vue-next'
+import { useElementSize } from '@vueuse/core'
+import { setColumnWidth, setTableWidth } from '~/composables/setTableWidth'
+import { useFetch, useRuntimeConfig } from '#app'
+import URLs from '~/data/urls'
 
-const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public;
-const compareList = useCookie('compareList');
-const categories = ref([]);
-const activeCategory = ref({});
-const table = ref<HTMLElement | null>(null);
-const tableWrapper = ref<HTMLElement | null>(null);
-const tableWrapperWidth = ref<number>(0);
-const tableTransition = ref<number>(0);
-const isAllowedToScrollRight = ref<boolean>(false);
-const isTableHeaderVisible = ref<boolean>(false);
-const productImageHeight = ref<number>(0);
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
+const compareList = useCookie('compareList')
+const categories = ref([])
+const activeCategory = ref({})
+const table = ref<HTMLElement | null>(null)
+const tableWrapper = ref<HTMLElement | null>(null)
+const tableWrapperWidth = ref<number>(0)
+const tableTransition = ref<number>(0)
+const isAllowedToScrollRight = ref<boolean>(false)
+const isTableHeaderVisible = ref<boolean>(false)
+const productImageHeight = ref<number>(0)
 
-const { data } = await useFetch(`${API_ENDPOINT}${URLs.comparison}`);
+console.log(compareList.value)
+
+const { data } = await useFetch(
+  `${API_ENDPOINT}${URLs.comparison}`,
+  {
+    method: 'POST',
+    body: {
+      products: compareList.value
+    }
+  }
+)
 
 if (data.value) {
-  categories.value = data.value;
+  categories.value = data.value
 }
 
 function setActiveCategory(id: number): void {
-  tableTransition.value = 0;
+  tableTransition.value = 0
   if (categories.value && categories.value.length) {
     activeCategory.value = categories.value.find((category) => {
-      return category.id === id;
-    });
+      return category.id === id
+    })
   }
 }
 
 function removeCategory(categoryId: number): void {
-  tableTransition.value = 0;
+  tableTransition.value = 0
 
   categories.value = categories.value.filter((category) => {
-    return category.id !== categoryId;
-  });
+    return category.id !== categoryId
+  })
 
   if (categories.value && categories.value.length) {
-    setActiveCategory(categories.value[0].id);
+    setActiveCategory(categories.value[0].id)
   } else {
-    activeCategory.value = {};
+    activeCategory.value = {}
   }
 }
 
 function removeFromCompare(productId: number): void {
   activeCategory.value.products = activeCategory.value.products.filter(
     (product) => {
-      return product.id !== productId;
+      return product.id !== productId
     }
-  );
+  )
 
   if (!activeCategory.value.products || !activeCategory.value.products.length) {
-    removeCategory(activeCategory.value.id);
+    removeCategory(activeCategory.value.id)
   }
 
   if (tableTransition.value < 0) {
-    tableTransition.value += setColumnWidth(tableWrapperWidth.value);
+    tableTransition.value += setColumnWidth(tableWrapperWidth.value)
   }
 
-  setIsAllowedToScrollRight();
+  setIsAllowedToScrollRight()
 }
 
 function sliderRight(): void {
-  tableTransition.value -= setColumnWidth(tableWrapperWidth.value);
-  setIsAllowedToScrollRight();
+  tableTransition.value -= setColumnWidth(tableWrapperWidth.value)
+  setIsAllowedToScrollRight()
 }
 
 function sliderLeft(): void {
   if (tableTransition.value < 0) {
-    tableTransition.value += setColumnWidth(tableWrapperWidth.value);
-    setIsAllowedToScrollRight();
+    tableTransition.value += setColumnWidth(tableWrapperWidth.value)
+    setIsAllowedToScrollRight()
   }
 }
 
@@ -80,47 +92,47 @@ function setIsAllowedToScrollRight(): void {
   if (activeCategory.value.products && activeCategory.value.products.length) {
     isAllowedToScrollRight.value =
       setColumnWidth(tableWrapperWidth.value) *
-        activeCategory.value.products.length -
-        -tableTransition.value -
-        tableWrapperWidth.value >
-      0;
+      activeCategory.value.products.length -
+      -tableTransition.value -
+      tableWrapperWidth.value >
+      0
   }
 }
 
 watch(
   () => tableWrapper.value,
   () => {
-    tableWrapperWidth.value = useElementSize(tableWrapper).width.value;
-    setIsAllowedToScrollRight();
+    tableWrapperWidth.value = useElementSize(tableWrapper).width.value
+    setIsAllowedToScrollRight()
   }
-);
+)
 
 onMounted(async (): Promise<void> => {
   if (categories.value && categories.value.length) {
-    await setActiveCategory(categories.value[0].id);
+    await setActiveCategory(categories.value[0].id)
 
-    await nextTick();
-    await nextTick();
+    await nextTick()
+    await nextTick()
 
     productImageHeight.value = document
       .querySelectorAll('table img')[0]
-      .getBoundingClientRect().height;
-    const table = document.getElementById('table-body');
-    const windowHeight = document.documentElement.clientHeight;
+      .getBoundingClientRect().height
+    const table = document.getElementById('table-body')
+    const windowHeight = document.documentElement.clientHeight
 
     const observer = new IntersectionObserver(
       (entries) => {
-        isTableHeaderVisible.value = entries[0].isIntersecting;
+        isTableHeaderVisible.value = entries[0].isIntersecting
       },
       {
         rootMargin: `0px 0px -${windowHeight - productImageHeight.value}px 0px`,
-        threshold: 0,
+        threshold: 0
       }
-    );
+    )
 
-    observer.observe(table as HTMLElement);
+    observer.observe(table as HTMLElement)
   }
-});
+})
 </script>
 
 <template>
