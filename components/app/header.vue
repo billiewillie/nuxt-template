@@ -32,11 +32,19 @@ const route = useRoute()
     <div class="hidden xl:flex bg-background-dark py-4 text-foreground-dark">
       <div class="container flex justify-between text-[14px]">
         <div class="flex">
-          <div class="text-primary">{{ BRANCHES.spb.email }}</div>
+          <a
+            :href="`mailto:${BRANCHES.spb.email}`"
+            class="underline-offset-4 hover:underline">
+            {{ BRANCHES.spb.email }}
+          </a>
           <span class="flex mx-4">|</span>
           <div>{{ BRANCHES.spb.phone }}</div>
           <span class="flex mx-4">|</span>
-          <div>связаться с нами</div>
+          <a
+            class="hover:underline underline-offset-4"
+            :href="`mailto:${BRANCHES.spb.email}`">
+            связаться с нами
+          </a>
         </div>
         <div class="hidden xl:flex">
           <div class="flex items-center gap-2 cursor-pointer group">

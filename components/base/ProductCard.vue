@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Separator } from '~/components/ui/separator';
 import type { ProductCard } from '~/types';
+import { Badge } from '~/components/ui/badge'
 
 const compareList = useCookie('compareList');
 const wishList = useCookie('wishList');
@@ -48,13 +49,15 @@ defineProps<{
 <template>
   <NuxtLink
     :to="product.url"
-    class="flex h-full"
-  >
+    class="flex h-full">
     <Card
       class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full transition-shadow"
       :class="{ 'gap-4 p-4': isCompared }"
     >
-      <CardHeader class="p-0">
+      <CardHeader class="p-0 relative">
+        <Badge class="absolute uppercase -left-4 -top-4 rounded-tl rounded-tr-none rounded-br rounded-bl-none">
+          New
+        </Badge>
         <NuxtPicture
           :src="product.preview_img"
           :alt="product.title"

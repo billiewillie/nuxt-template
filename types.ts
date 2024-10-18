@@ -50,7 +50,7 @@ interface BreadCrumb {
 export interface ProductCard {
   id: number;
   title: string;
-  preview_img?: string;
+  preview_img: string;
   url?: string;
   sort?: number;
   is_favourites?: 1 | 0;
@@ -60,6 +60,7 @@ export interface ProductCard {
   keywords?: string;
   tag?: string;
   articule?: string;
+  is_new?: boolean;
 }
 
 export interface News {
