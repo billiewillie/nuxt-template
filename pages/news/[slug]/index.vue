@@ -17,7 +17,7 @@ const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const { data: article, error }: { data: Ref<News> } = await useAsyncData(
   'article',
-  () => $fetch(`${API_ENDPOINT}${URLs.news}/${slug}`)
+  () => $fetch(`${API_ENDPOINT}${URLs.newsArticle}/${slug}`)
 )
 
 if (article.value) {
@@ -120,14 +120,14 @@ if (article.value) {
         <h1 class="section-title mb-12">
           {{ article.title }}
         </h1>
-        <div class="mb-10 flex items-center gap-2">
+        <div class="mb-10 flex items-center gap-4">
           <Icon
             name="solar:calendar-linear"
             width="18"
             height="18"
             color="#575757" />
           <time
-            class="text-[#575757]"
+            class="text-[#575757] leading-none"
             :datetime="article.created_at">
             {{ article.created_at }}
           </time>

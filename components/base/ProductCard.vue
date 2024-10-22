@@ -1,49 +1,50 @@
-<script setup lang="ts">
-import { Separator } from '~/components/ui/separator';
-import type { ProductCard } from '~/types';
+<script
+  setup
+  lang="ts">
+import { Separator } from '~/components/ui/separator'
+import type { ProductCard } from '~/types'
 import { Badge } from '~/components/ui/badge'
 
-const compareList = useCookie('compareList');
-const wishList = useCookie('wishList');
-
-function addToCompareList(id: number) {
-  const currentList = compareList.value ? compareList.value : [];
-  if (currentList?.includes(id)) {
-    return;
+const compareList = useCookie(
+  'compareList',
+  {
+    default: () => [],
+    watch: true
   }
-  compareList.value = JSON.stringify([...currentList, id]);
-}
+)
 
-function removeFromCompareList(id: number) {
-  const currentList = compareList.value ? compareList.value : [];
-  compareList.value = JSON.stringify(
-    currentList.filter((item: number) => item !== id)
-  );
-}
-
-function addToWishList(id: number) {
-  const currentList = wishList.value ? wishList.value : [];
-  if (currentList?.includes(id)) {
-    return;
+const wishList = useCookie(
+  'wishList',
+  {
+    default: () => [],
+    watch: true
   }
-  wishList.value = JSON.stringify([...currentList, id]);
+)
+
+function setCompareList(id: number) {
+  if (compareList.value.includes(id)) {
+    compareList.value = compareList.value.filter((item: number) => item !== id)
+  } else {
+    compareList.value = [...compareList.value, id]
+  }
 }
 
-function removeFromWishList(id: number) {
-  const currentList = wishList.value ? wishList.value : [];
-  wishList.value = JSON.stringify(
-    currentList.filter((item: number) => item !== id)
-  );
+function setWishList(id: number) {
+  if (wishList.value.includes(id)) {
+    wishList.value = wishList.value.filter((item: number) => item !== id)
+  } else {
+    wishList.value = [...wishList.value, id]
+  }
 }
 
 defineEmits<{
   (f: 'removeFromCompare', id: number): void;
-}>();
+}>()
 
 defineProps<{
   product: ProductCard;
   isCompared?: boolean;
-}>();
+}>()
 </script>
 
 <template>
@@ -52,8 +53,7 @@ defineProps<{
     class="flex h-full">
     <Card
       class="flex flex-col gap-6 p-6 shadow-md hover:shadow-lg w-full transition-shadow"
-      :class="{ 'gap-4 p-4': isCompared }"
-    >
+      :class="{ 'gap-4 p-4': isCompared }">
       <CardHeader class="p-0 relative">
         <Badge class="absolute uppercase -left-4 -top-4 rounded-tl rounded-tr-none rounded-br rounded-bl-none">
           New
@@ -73,58 +73,35 @@ defineProps<{
         <Separator class="w-full mb-6" />
         <h3
           class="font-semibold ~text-[16px]/[18px] line-clamp-3"
-          :class="{ '~text-[12px]/[18px]': isCompared }"
-        >
-          {{ product.title }}
+          :class="{ '~text-[12px]/[18px]': isCompared }">
+          {{ product.title }} {{ product.id }}
         </h3>
       </CardContent>
       <CardFooter class="flex items-center justify-between p-0">
-        <div class="flex gap-4 items-center">
-          <div>
+        <div
+          v-if="!isCompared"
+          class="flex items-center gap-2">
+          <div
+            @click="(e) => {
+              e.preventDefault();
+              setCompareList(product.id);
+            }"
+            class="relative z-10 grid place-content-center rounded-full w-7 h-7 p-0.5 border-2 border-foreground hover:border-primary transition-colors group"
+            :class="{ 'bg-primary !border-primary hover:bg-white': compareList.includes(product.id) }"
+          >
             <Icon
-              v-if="isCompared"
-              name="iconoir:trash"
-              class="cursor-pointer"
-              width="18"
-              height="18"
-              color="#575757"
-              @click="((e: Event) => {
-                e.preventDefault();
-                removeFromCompareList(product.id);
-                $emit('removeFromCompare', product.id);
-              })"
-            />
-            <Icon
-              v-else
-              name="mdi:compare-horizontal"
-              class="cursor-pointer"
-              width="18"
-              height="18"
-              @click="((e: Event) => {
-                e.preventDefault();
-                addToCompareList(product.id)
-              })"
-              color="#575757"
-            />
+              name="material-symbols:compare-arrows-rounded"
+              width="20"
+              height="20"
+              :color="compareList.includes(product.id) ? 'white' : 'black'"
+              class="transition-all group-hover:*:fill-primary" />
           </div>
           <Icon
-            name="cil:star"
-            class="cursor-pointer"
-            width="19"
-            height="19"
-            @click="((e: Event) => {
-              e.preventDefault();
-              
-            })"
-            color="#575757"
-          />
+            name="mdi:heart-outline"
+            width="18"
+            height="18"
+            @click="setWishList(product.id)" />
         </div>
-        <Icon
-          name="iconamoon:arrow-right-2-light"
-          width="18"
-          height="18"
-          style="color: #575757"
-        />
       </CardFooter>
     </Card>
   </NuxtLink>

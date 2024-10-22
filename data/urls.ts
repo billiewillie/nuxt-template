@@ -1,6 +1,7 @@
 type Key =
   'index'
   | 'news'
+  | 'newsArticle'
   | 'events'
   | 'inStock'
   | 'catalog'
@@ -15,6 +16,7 @@ type Key =
 const URLs: Record<Key, string> = {
   index: `/index`,
   news: '/news/all',
+  newsArticle: '/news',
   events: '/events/index',
   inStock: '/stock/show/all',
   catalog: '/catalog',

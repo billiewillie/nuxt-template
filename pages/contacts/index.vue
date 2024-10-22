@@ -1,4 +1,6 @@
-<script setup lang="ts">
+<script
+  setup
+  lang="ts">
 import { type Ref, ref } from 'vue'
 import { SERVICE } from '~/data/constants'
 import { Card, CardContent } from '~/components/ui/card'
@@ -163,9 +165,19 @@ const branchesFiltered = Object.fromEntries(Object.entries(BRANCHES).filter(([ke
             <h2 class="~text-[18px]/[22px]">Сервисная служба для всех регионов России</h2>
           </CardHeader>
           <Separator class="my-2" />
-          <CardContent class="p-0">
-            <p>Телефон: {{ SERVICE.phone }}</p>
-            <p>Email: {{ SERVICE.email }}</p>
+          <CardContent class="p-0 leading-8">
+            <p>
+              Телефон: <a
+              :href="`tel:${SERVICE.phone}`"
+              class="underline underline-offset-4 hover:no-underline">
+              {{ SERVICE.phone }}</a>
+            </p>
+            <p>
+              Email: <a
+              :href="`mailto:${SERVICE.email}`"
+              class="underline underline-offset-4 hover:no-underline">
+              {{ SERVICE.email }}</a>
+            </p>
           </CardContent>
         </Card>
       </div>

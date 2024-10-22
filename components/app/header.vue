@@ -8,8 +8,20 @@ import { isRouteActive } from '~/utils/isRouteActive'
 import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 
-const compareList = useCookie('compareList')
-const wishList = useCookie('wishList')
+const compareList = useCookie(
+  'compareList',
+  {
+    default: () => [],
+    watch: true
+  }
+)
+const wishList = useCookie(
+  'wishList',
+  {
+    default: () => [],
+    watch: true
+  }
+)
 const wishListExpandableMaterials = useCookie('wishListExpendableMaterials')
 
 function getCompareListCount() {
