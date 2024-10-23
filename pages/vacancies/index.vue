@@ -1,6 +1,15 @@
 <script
   setup
   lang="ts">
+import { useRuntimeConfig } from '#app'
+import type { Ref } from 'vue'
+import URLs from '~/data/urls'
+
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
+
+const { data }: { data: Ref<any> } = await useFetch(`${API_ENDPOINT}${URLs.vacancies}`)
+
+console.log(data.value)
 
 </script>
 
@@ -75,11 +84,20 @@
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-16">
-      <div class="container">
-        <h2 class="section-title">Основные направления кадровой политики «БиоЛайн»</h2>
+    <section class="mb-12 xl:mb-16 group">
+      <div
+        class="container vacancies-page flex flex-col gap-2"
+        v-html="data.content">
       </div>
     </section>
 
   </main>
 </template>
+
+<style>
+.vacancies-page ul {
+  padding-left: 2rem;
+  list-style: disc;
+  margin-top: -8px;
+}
+</style>

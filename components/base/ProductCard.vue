@@ -4,6 +4,12 @@
 import { Separator } from '~/components/ui/separator'
 import type { ProductCard } from '~/types'
 import { Badge } from '~/components/ui/badge'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from '~/components/ui/tooltip'
 
 const compareList = useCookie(
   'compareList',
@@ -78,29 +84,54 @@ defineProps<{
         </h3>
       </CardContent>
       <CardFooter class="flex items-center justify-between p-0">
-        <div
-          v-if="!isCompared"
-          class="flex items-center gap-2">
-          <div
-            @click="(e) => {
-              e.preventDefault();
-              setCompareList(product.id);
-            }"
-            class="relative z-10 grid place-content-center rounded-full w-7 h-7 p-0.5 border-2 border-foreground hover:border-primary transition-colors group"
-            :class="{ 'bg-primary !border-primary hover:bg-white': compareList.includes(product.id) }"
-          >
-            <Icon
-              name="material-symbols:compare-arrows-rounded"
-              width="20"
-              height="20"
-              :color="compareList.includes(product.id) ? 'white' : 'black'"
-              class="transition-all group-hover:*:fill-primary" />
-          </div>
-          <Icon
-            name="mdi:heart-outline"
-            width="18"
-            height="18"
-            @click="setWishList(product.id)" />
+        <div class="flex items-center gap-2">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <div
+                  @click="(e) => {
+                    e.preventDefault();
+                    setCompareList(product.id);
+                  }"
+                  class="relative z-10 grid place-content-center w-7 h-7 transition-colors group">
+                  <Icon
+                    name="mynaui:chart-bar-one-solid"
+                    width="24"
+                    height="24"
+                    :color="compareList.includes(product.id) ? '#298687' : 'black'"
+                    class="transition-all group-hover:*:fill-primary" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p v-if="compareList.includes(product.id)">Убрать из сравнения</p>
+                <p v-else>Добавить в сравнение</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <div
+                  @click="(e) => {
+                    e.preventDefault();
+                    setWishList(product.id);
+                  }"
+                  class="relative z-10 grid place-content-center w-7 h-7 transition-colors group">
+                  <Icon
+                    name="lets-icons:star"
+                    width="24"
+                    height="24"
+                    class="transition-all group-hover:*:fill-primary"
+                    :class="wishList.includes(product.id) ? '*:stroke-[#298687]' : '*:stroke-black group-hover:*:stroke-[#298687]'"
+                  />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p v-if="compareList.includes(product.id)">Убрать из избранного</p>
+                <p v-else>Добавить в избранное</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </CardFooter>
     </Card>
