@@ -27,7 +27,7 @@ watch(() => props.transition, scrollTable)
 <template>
   <div
     ref="table"
-    class="relative w-full scroll-smooth overflow-hidden">
+    class="relative w-full scroll-smooth overflow-hidden rounded-lg">
     <table :class="cn('w-full caption-bottom text-sm', props.class)">
       <slot />
     </table>

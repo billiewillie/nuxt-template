@@ -9,7 +9,6 @@ import { setResultOutput } from '~/utils/setResultOutput'
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -236,8 +235,8 @@ function setSearchSubCategory(item): void {
           <Table class="mb-6">
             <TableHeader>
               <TableRow>
-                <TableHead>Артикул / №</TableHead>
-                <TableHead>Название</TableHead>
+                <TableHead class="text-white">Артикул / №</TableHead>
+                <TableHead class="text-white">Название</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

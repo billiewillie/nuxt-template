@@ -6,6 +6,7 @@ import type { News } from '~/types'
 import { useAsyncData, useRuntimeConfig } from '#app'
 import { useRoute } from 'vue-router'
 import { type Ref, ref } from 'vue'
+import dateFormatter from '~/utils/dateFormatter'
 
 const title = ref<string>('Новости | Группа компаний ООО «БиоЛайн»')
 const banner = ref<string>('/img/og-logo.jpg')
@@ -129,7 +130,7 @@ if (article.value) {
           <time
             class="text-[#575757] leading-none"
             :datetime="article.created_at">
-            {{ article.created_at }}
+            {{ dateFormatter(article.created_at) }}
           </time>
         </div>
         <article v-html="article.content" />

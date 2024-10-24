@@ -8,7 +8,6 @@ import { useForm } from 'vee-validate'
 import URLs from '~/data/urls'
 import { toast } from '~/components/ui/toast'
 import { useId, useRuntimeConfig } from '#app'
-import { FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form'
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
@@ -26,13 +25,16 @@ async function getWishList() {
     ? wishListExpandableMaterials.value
     : []
 
-  const { data } = await useFetch('https://telvla.ru/wishlist/list', {
-    method: 'POST',
-    body: {
-      products: wishlistValue,
-      expendableMaterials: wishlistExpandableMaterialsValue
+  const { data } = await useFetch(
+    'https://telvla.ru/wishlist/list',
+    {
+      method: 'POST',
+      body: {
+        products: wishlistValue,
+        expendableMaterials: wishlistExpandableMaterialsValue
+      }
     }
-  })
+  )
 
   wishListData.value = data.value.products
   wishListExpandableMaterialsData.value = data.value.expendable_material
@@ -204,38 +206,38 @@ const onSubmit = form.handleSubmit(async (values) => {
       </section>
     </ClientOnly>
 
-    <section>
-      <div class="container">
-        <form
-          @submit="onSubmit"
-          class="flex flex-col gap-4">
-          <div class="grid gap-16">
-            <FormField
-              v-slot="{ componentField }"
-              name="contact">
-              <FormItem>
-                <FormControl>
-                  <Input
-                    type="text"
-                    name="contact"
-                    :id="contactId"
-                    placeholder="Телефон или почта"
-                    v-bind="componentField" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-          </div>
-          <div class="grid gap-4">
-            <Button
-              type="submit"
-              aria-label="submit"
-              class="uppercase">
-              отправить
-            </Button>
-          </div>
-        </form>
-      </div>
-    </section>
+    <!--    <section>-->
+    <!--      <div class="container">-->
+    <!--        <form-->
+    <!--          @submit="onSubmit"-->
+    <!--          class="flex flex-col gap-4">-->
+    <!--          <div class="grid gap-16">-->
+    <!--            <FormField-->
+    <!--              v-slot="{ componentField }"-->
+    <!--              name="contact">-->
+    <!--              <FormItem>-->
+    <!--                <FormControl>-->
+    <!--                  <Input-->
+    <!--                    type="text"-->
+    <!--                    name="contact"-->
+    <!--                    :id="contactId"-->
+    <!--                    placeholder="Телефон или почта"-->
+    <!--                    v-bind="componentField" />-->
+    <!--                </FormControl>-->
+    <!--                <FormMessage />-->
+    <!--              </FormItem>-->
+    <!--            </FormField>-->
+    <!--          </div>-->
+    <!--          <div class="grid gap-4">-->
+    <!--            <Button-->
+    <!--              type="submit"-->
+    <!--              aria-label="submit"-->
+    <!--              class="uppercase">-->
+    <!--              отправить-->
+    <!--            </Button>-->
+    <!--          </div>-->
+    <!--        </form>-->
+    <!--      </div>-->
+    <!--    </section>-->
   </main>
 </template>
