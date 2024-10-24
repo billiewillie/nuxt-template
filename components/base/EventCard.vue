@@ -4,6 +4,7 @@
 import { Card, CardContent } from '~/components/ui/card'
 import { Separator } from '~/components/ui/separator'
 import type { Event } from '~/types'
+import dateFormatter from '../../utils/dateFormatter'
 
 const props = defineProps<{
   event: Event
@@ -30,16 +31,19 @@ const props = defineProps<{
             width="18"
             height="18"
             color="#575757" />
+          <div>
+
+          </div>
           <time
             class="text-[#575757] leading-none text-sm"
             :datetime="event.date_start">
-            {{ event.date_start }}
+            {{ dateFormatter(event.date_start) }}
           </time>
           <time
             v-if="event.date_end && event.date_end !== event.date_start"
             class="text-[#575757] leading-none text-sm"
             :datetime="event.date_end">
-             - {{ event.date_end }}
+             - {{ dateFormatter(event.date_end) }}
           </time>
         </div>
         <h3 class="text-[18px] font-semibold line-clamp-3">

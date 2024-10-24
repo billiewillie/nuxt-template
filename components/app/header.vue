@@ -8,6 +8,7 @@ import { isRouteActive } from '~/utils/isRouteActive'
 import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 
+const isAllowedToBeFixed = ref<boolean>(false)
 const compareList = useCookie(
   'compareList',
   {
@@ -61,7 +62,7 @@ const route = useRoute()
         <div class="hidden xl:flex">
           <div class="flex items-center gap-2 cursor-pointer group">
             <Icon
-              name="solar:round-transfer-horizontal-linear"
+              name="mynaui:chart-bar-one-solid"
               width="18"
               height="18"
               color="#3BA3A3" />

@@ -2,6 +2,7 @@
   setup
   lang="ts">
 import type { Article } from '~/types'
+import dateFormatter from '../../utils/dateFormatter'
 
 defineProps<{
   article: Article
@@ -42,7 +43,7 @@ defineProps<{
           <time
             class="text-[#575757]"
             :datetime="article.created_at">
-            {{ article.created_at }}
+            {{ dateFormatter(article.created_at) }}
           </time>
         </div>
         <Icon

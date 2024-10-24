@@ -93,13 +93,12 @@ defineProps<{
                     e.preventDefault();
                     setCompareList(product.id);
                   }"
-                  class="relative z-10 grid place-content-center w-7 h-7 transition-colors group">
+                  class="relative z-10 grid place-content-center w-7 h-7 transition-opacity group opacity-60 hover:opacity-100">
                   <Icon
                     name="mynaui:chart-bar-one-solid"
                     width="24"
                     height="24"
-                    :color="compareList.includes(product.id) ? '#298687' : 'black'"
-                    class="transition-all group-hover:*:fill-primary" />
+                    :color="compareList.includes(product.id) ? '#298687' : 'black'" />
                 </div>
               </TooltipTrigger>
               <TooltipContent>
@@ -116,13 +115,12 @@ defineProps<{
                     e.preventDefault();
                     setWishList(product.id);
                   }"
-                  class="relative z-10 grid place-content-center w-7 h-7 transition-colors group">
+                  class="relative z-10 grid place-content-center w-7 h-7 transition-opacity group opacity-60 hover:opacity-100">
                   <Icon
                     name="lets-icons:star"
                     width="24"
                     height="24"
-                    class="transition-all group-hover:*:fill-primary"
-                    :class="wishList.includes(product.id) ? '*:stroke-[#298687]' : '*:stroke-black group-hover:*:stroke-[#298687]'"
+                    :class="wishList.includes(product.id) ? '*:stroke-[#298687]' : '*:stroke-black'"
                   />
                 </div>
               </TooltipTrigger>
@@ -133,6 +131,23 @@ defineProps<{
             </Tooltip>
           </TooltipProvider>
         </div>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <div
+                class="relative z-10 grid place-content-center w-7 h-7 transition-opacity group opacity-60 hover:opacity-100">
+                <Icon
+                  name="iconamoon:arrow-right-2-light"
+                  width="28"
+                  height="28"
+                  color="black" />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Перейти</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </CardFooter>
     </Card>
   </NuxtLink>

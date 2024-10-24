@@ -111,6 +111,11 @@ interface NewProductTitle {
   title: string;
 }
 
+interface EventType {
+  id: number;
+  title: string;
+}
+
 export type NavigationItem = {
   id: number;
   title: string;
@@ -133,6 +138,7 @@ export interface Events {
   all_events_month: Array<Event>;
   countries: Array<Country>;
   categories: Array<Category>;
+  type_events: Array<EventType>;
 }
 
 export interface Branch {

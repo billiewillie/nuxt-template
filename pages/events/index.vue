@@ -21,16 +21,16 @@ const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 
 const date = ref<Date>(new Date())
-
 const month = date.value.getMonth() + 1
 
-const { data: events }: {
-  data: Ref<Events> | undefined
+const {
+  data: events
+}: {
+  data: Ref<Events>
 } = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/10`)
 </script>
 
 <template>
-
   <main>
 
     <Head>
@@ -115,7 +115,7 @@ const { data: events }: {
             <SelectContent>
               <SelectGroup>
                 <SelectItem
-                  v-for="category in events?.categories"
+                  v-for="category in events.categories"
                   :key="category.id"
                   :value="category.title">
                   {{ category.title }}
@@ -125,37 +125,36 @@ const { data: events }: {
           </Select>
           <Select>
             <SelectTrigger class="w-full">
-              <SelectValue placeholder="Категория" />
+              <SelectValue placeholder="Страна" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectItem
-                  v-for="category in events?.categories"
-                  :key="category.id"
-                  :value="category.title">
-                  {{ category.title }}
+                  v-for="country in events.countries"
+                  :key="country.id"
+                  :value="country.title">
+                  {{ country.title }}
                 </SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
           <Select>
             <SelectTrigger class="w-full">
-              <SelectValue placeholder="Категория" />
+              <SelectValue placeholder="Тип мероприятия" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectItem
-                  v-for="category in events?.categories"
-                  :key="category.id"
-                  :value="category.title">
-                  {{ category.title }}
+                  v-for="type in events.type_events"
+                  :key="type.id"
+                  :value="type.title">
+                  {{ type.title }}
                 </SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
           <Button>Применить</Button>
         </div>
-
       </div>
     </section>
 
@@ -181,5 +180,4 @@ const { data: events }: {
     </section>
 
   </main>
-
 </template>
