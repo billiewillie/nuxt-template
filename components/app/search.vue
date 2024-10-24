@@ -139,7 +139,7 @@ function setSearchSubCategory(item): void {
     </SheetTrigger>
     <SheetContent
       :side="props.side === 'left' ? 'left' : 'bottom'"
-      class="h-full w-full !max-w-full overflow-y-scroll px-0">
+      class="h-full w-full !max-w-full overflow-y-scroll px-0 bg-background-main">
       <SheetHeader>
         <VisuallyHidden>
           <SheetTitle></SheetTitle>
@@ -233,8 +233,8 @@ function setSearchSubCategory(item): void {
           <h3 class="title text-2xl font-semibold">Расходные материалы</h3>
           <Separator class="mt-4 mb-6" />
           <Table class="mb-6">
-            <TableHeader>
-              <TableRow>
+            <TableHeader class="bg-foreground">
+              <TableRow class="hover:bg-foreground">
                 <TableHead class="text-white">Артикул / №</TableHead>
                 <TableHead class="text-white">Название</TableHead>
               </TableRow>

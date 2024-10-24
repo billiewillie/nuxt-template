@@ -11,11 +11,11 @@ module.exports = {
     container: {
       padding: {
         DEFAULT: '1rem',
-        '3xl': '180px'
+        '2xl': '1rem'
       }
     },
     fontFamily: {
-      sans: ['Inter', 'sans-serif']
+      sans: ['Roboto', 'sans-serif']
     },
     extend: {
       colors: {
@@ -24,7 +24,8 @@ module.exports = {
         ring: 'hsl(var(--ring))',
         background: {
           DEFAULT: 'hsl(var(--background))',
-          dark: 'hsl(var(--background-dark))'
+          dark: 'hsl(var(--background-dark))',
+          main: 'hsl(var(--main))'
         },
         foreground: {
           DEFAULT: 'hsl(var(--foreground))',
@@ -99,7 +100,6 @@ module.exports = {
       screens: {
         xs: '360px',
         '2xl': '1440px',
-        '3xl': '1800px'
       }
     }
   },
@@ -120,10 +120,6 @@ module.exports = {
             maxWidth: '1440px',
             padding: '0 2rem'
           },
-          '@screen 3xl': {
-            maxWidth: '1620px',
-            padding: '0 180px'
-          }
         }
       })
     }

@@ -86,7 +86,7 @@ import CATEGORIES from '~/data/categories'
             :key="item.id"
             class="aspect-video xl:aspect-square"
             :to="`/catalog/${item.slug}`">
-            <Card class="flex flex-col gap-6 p-4 items-center justify-between text-center shadow-md square hover:shadow-lg transition-shadow h-full w-full">
+            <Card class="flex flex-col gap-6 p-4 xl:p-8 items-center justify-between text-center shadow-md square hover:shadow-lg transition-shadow h-full w-full">
               <div class="flex items-center h-1/2">
                 <NuxtImg
                   :src="item.icon"

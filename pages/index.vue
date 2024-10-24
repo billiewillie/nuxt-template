@@ -150,9 +150,7 @@ const {
             class="aspect-video xl:aspect-square"
             :key="item.id"
           >
-            <Card
-              class="flex flex-col gap-6 p-4 items-center justify-between text-center shadow-md square hover:shadow-lg transition-shadow h-full w-full"
-            >
+            <Card class="flex flex-col gap-6 p-4 xl:p-8 items-center justify-between text-center shadow-md square hover:shadow-lg transition-shadow h-full w-full">
               <div class="flex items-center h-1/2">
                 <NuxtImg
                   :src="item.icon"
@@ -402,7 +400,7 @@ const {
   left: -50%;
   width: calc(100% - 8px);
   height: 108%;
-  background: #fff;
+  background: hsl(225, 67%, 99%);
   z-index: 1;
 }
 
