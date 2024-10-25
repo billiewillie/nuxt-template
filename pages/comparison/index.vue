@@ -257,14 +257,12 @@ onMounted(async (): Promise<void> => {
         <ClientOnly>
           <div
             ref="tableWrapper"
-            class="relative"
-          >
+            class="relative">
             <Table
               ref="table"
               id="table"
               :transition="tableTransition"
-              :class="setTableWidth(activeCategory, tableWrapperWidth)"
-            >
+              :class="setTableWidth(activeCategory, tableWrapperWidth)">
               <TableHeader>
                 <TableRow class="!border-b-0">
                   <TableHead
@@ -284,11 +282,12 @@ onMounted(async (): Promise<void> => {
                 </TableRow>
                 <TableRow class="h-8 !border-b-0" />
               </TableHeader>
-              <TableBody id="table-body">
+              <TableBody
+                id="table-body"
+                class="bg-background shadow rounded-xl border">
                 <template
                   v-for="item in activeCategory.characteristics"
-                  :key="item.id"
-                >
+                  :key="item.id">
                   <TableRow>
                     <TableCell
                       class="relative xl:p-4"
@@ -306,8 +305,7 @@ onMounted(async (): Promise<void> => {
                     <TableCell
                       class="p-2 xl:p-4 text-center"
                       v-for="product in activeCategory.products"
-                      :key="product.id"
-                    >
+                      :key="product.id">
                       <template
                         v-if="
                           product.characteristics.find(
@@ -329,7 +327,26 @@ onMounted(async (): Promise<void> => {
                       </template>
                     </TableCell>
                   </TableRow>
-                  <TableRow class="h-2 border-b-0" />
+                  <TableRow class="h-2 border-b-0 bg-background">
+                    <TableCell
+                      class="p-2 xl:p-4 text-center"
+                      v-for="product in activeCategory.products"
+                      :key="product.id">
+                      <template
+                        v-if="product.characteristics.find(({ id }) => id === item.id).value.length">
+                        <div
+                          v-for="value in product.characteristics.find(
+                            ({ id }) => id === item.id
+                          ).value"
+                          :key="product.id"
+                        >
+                        </div>
+                      </template>
+                      <template v-else>
+                        <p>-</p>
+                      </template>
+                    </TableCell>
+                  </TableRow>
                 </template>
               </TableBody>
             </Table>
@@ -337,8 +354,7 @@ onMounted(async (): Promise<void> => {
               v-if="isAllowedToScrollRight"
               :style="`top: ${productImageHeight + 16}px;`"
               class="absolute -right-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-10 h-10 flex items-center justify-center leading-none"
-              @click="sliderRight()"
-            >
+              @click="sliderRight()">
               <Icon
                 name="iconamoon:arrow-right-2-light"
                 width="20"
@@ -350,8 +366,7 @@ onMounted(async (): Promise<void> => {
               v-if="tableTransition < 0"
               @click="sliderLeft()"
               :style="`top: ${productImageHeight + 16}px;`"
-              class="absolute -left-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-10 h-10 flex items-center justify-center leading-none"
-            >
+              class="absolute -left-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-10 h-10 flex items-center justify-center leading-none">
               <Icon
                 name="iconamoon:arrow-left-2-light"
                 width="20"
@@ -366,15 +381,13 @@ onMounted(async (): Promise<void> => {
 
     <section
       :class="isTableHeaderVisible ? 'top-0' : '-top-[600px]'"
-      class="fixed left-0 w-full bg-background z-10 transition-all duration-500"
-    >
+      class="fixed left-0 w-full z-10 transition-all duration-500 bg-transparent">
       <div class="container">
         <ClientOnly>
           <div class="relative">
             <Table
               :transition="tableTransition"
-              :class="setTableWidth(activeCategory, tableWrapperWidth)"
-            >
+              :class="setTableWidth(activeCategory, tableWrapperWidth)">
               <TableHeader>
                 <TableRow class="!border-b-0">
                   <TableHead
@@ -398,8 +411,7 @@ onMounted(async (): Promise<void> => {
               v-if="isAllowedToScrollRight"
               :style="`top: ${productImageHeight + 20}px;`"
               class="absolute -right-3 bg-background md:top-[220px] xl:top-[292px] text-lg cursor-pointer rounded-full border w-8 h-8 flex items-center justify-center leading-none z-20"
-              @click="sliderRight()"
-            >
+              @click="sliderRight()">
               <Icon
                 name="iconamoon:arrow-right-2-light"
                 width="18"

@@ -128,13 +128,15 @@ function setSearchSubCategory(item): void {
       <div class="flex items-center gap-2 cursor-pointer group">
         <Icon
           name="mingcute:search-line"
-          width="16"
-          height="16"
-          class="xl:w-[16px] xl:h-[16px]"
+          width="32"
+          height="32"
+          class="w-[32px] h-[32px] xl:w-[16px] xl:h-[16px]"
           color="#3BA3A3" />
         <p
           v-if="props.trigger === 'search'"
-          class='group-hover:underline underline-offset-4'>Поиск</p>
+          class='group-hover:underline underline-offset-4'>
+          Поиск
+        </p>
       </div>
     </SheetTrigger>
     <SheetContent

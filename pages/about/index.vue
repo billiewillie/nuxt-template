@@ -77,28 +77,7 @@ import { Card, CardContent } from '~/components/ui/card'
 
     <section class="mb-16">
       <div class="container">
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          <Card
-            v-for="(item, index) in 6"
-            :key="index"
-            class="flex flex-col gap-6 p-4 items-center text-center">
-
-            <CardHeader class="flex flex-row gap-8 items-center">
-              <NuxtImg
-                src="/img/categories/icons/1.svg"
-                class="w-[50px] object-contain object-center"
-                alt="alt" />
-              <CardTitle class="text-left">Удобство работы с нами</CardTitle>
-            </CardHeader>
-            <Separator />
-            <CardContent class="p-0 font-medium text-left">
-              <p class="text-xl">
-                Мы признательны всем, кто ежедневно делает свой вклад в сохранение здоровья людей,
-                мы восхищаемся вашим трудолюбием
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+        <p>Content</p>
       </div>
     </section>
 

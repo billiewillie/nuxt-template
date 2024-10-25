@@ -206,6 +206,21 @@ const onSubmit = form.handleSubmit(async (values) => {
       </section>
     </ClientOnly>
 
+    <section class="mb-12 xl:mb-16">
+      <div class="container flex flex-col justify-between md:flex-row gap-4">
+        <Card class="bg-background-dark md:w-1/2 text-white p-4">
+          <h3 class="font-bold ~text-[22px]/[28px]">Не нашли что искали? Наш специалист свяжется с Вами:</h3>
+          <p class="~text-[12px]/[14px]">Я согласен(на) на обработку персональных данных. ООО "БиоЛайн" гарантирует конфиденциальность получаемой
+            информации.</p>
+        </Card>
+        <Card class="bg-background-dark md:w-1/2 text-white p-4 ">
+          <h3 class="font-bold ~text-[22px]/[28px]">Отправьте список из избранного себе на почту!</h3>
+          <p class="~text-[12px]/[14px]">Нажимая стрелку «Далее», я даю согласие на получение рекламной рассылки и обработку персональных
+            данных.</p>
+        </Card>
+      </div>
+    </section>
+
     <!--    <section>-->
     <!--      <div class="container">-->
     <!--        <form-->
