@@ -1,8 +1,30 @@
-<script setup lang="ts">
-import { MANUFACTURER_BUTTONS } from '~/data/constants';
-import type { ManufacturerCategory, Manufacturer } from '~/types';
-import type { Ref } from 'vue';
-import URLs from '~/data/urls';
+<script
+  setup
+  lang="ts">
+import { MANUFACTURER_BUTTONS } from '~/data/constants'
+import type { Ref } from 'vue'
+import URLs from '~/data/urls'
+
+interface Manufacturer {
+  id: number;
+  title: string;
+  logo: string;
+  url: string;
+  article: string;
+  sort: number;
+  created_at: string;
+}
+
+interface ManufacturerCategory {
+  id: number;
+  lang_id: number;
+  title: string;
+  url: string;
+  logo: string;
+  sort: number;
+  created_at: string;
+  list: Array<Manufacturer>;
+}
 
 interface ManufacturersPageApi {
   id: number;
@@ -15,18 +37,24 @@ interface ManufacturersPageApi {
   sort: number;
   lang_id: number;
   created_at: string;
-  list: Array<Manufacturer>;
+  manufacturers: Array<ManufacturerCategory>;
 }
 
-const activeCategory = ref<ManufacturerCategory | null>(null);
+const activeCategory = ref<ManufacturerCategory | null>(null) as Ref<ManufacturerCategory>
 
-const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public;
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
-const { data: categories }: { data: Ref<ManufacturersPageApi> } = await useFetch(`${API_ENDPOINT}${URLs.manufacturers}`);
+const {
+  data: categories
+}: {
+  data: Ref<ManufacturersPageApi>
+} = await useFetch(`${API_ENDPOINT}${URLs.manufacturers}`)
 
 if (categories.value && categories.value.manufacturers.length) {
-  activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory;
+  activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory
 }
+
+console.log(categories.value)
 </script>
 
 <template>
@@ -95,7 +123,7 @@ if (categories.value && categories.value.manufacturers.length) {
       />
     </Head>
 
-    <section class="mb-12 xl:mb-16 pt-14">
+    <section class="mb-12 xl:mb-16 pt-8">
       <div class="container">
         <Breadcrumb class="mb-12">
           <BreadcrumbList>
@@ -132,16 +160,15 @@ if (categories.value && categories.value.manufacturers.length) {
     <section>
       <div class="container grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] md:grid-cols-2 xl:grid-cols-3 gap-4 mb-16">
         <NuxtLink
-          v-for="manufacturer in activeCategory?.list"
+          v-for="manufacturer in activeCategory.list"
           :key="manufacturer.id"
-          :to="manufacturer.url"
-        >
-          <Card class="flex flex-col gap-4 h-full">
+          :to="manufacturer.url">
+          <Card class="flex flex-col gap-4 h-full shadow-md hover:shadow-lg transition-shadow">
             <CardHeader class="flex flex-col flex-start gap-4">
               <NuxtImg
                 :src="manufacturer.logo"
-                height="60"
-                class="h-[60px] flex self-start"
+                height="50"
+                class="h-[50px] flex self-start"
                 :alt="manufacturer.title"
               />
               <h2 class="font-bold ~text-[20px]/[24px]">
@@ -149,7 +176,8 @@ if (categories.value && categories.value.manufacturers.length) {
               </h2>
             </CardHeader>
             <CardContent>
-              <p class="text-xl"><b>Leica Biosystems</b> - разработчик решений и средств автоматизации рабочих процессов для проведения патогистологических исследований.</p>
+              <p class="text-xl"><b>Leica Biosystems</b> - разработчик решений и средств автоматизации рабочих процессов
+                для проведения патогистологических исследований.</p>
             </CardContent>
           </Card>
         </NuxtLink>

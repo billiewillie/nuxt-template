@@ -56,7 +56,7 @@ import { Card, CardContent } from '~/components/ui/card'
         content="summary_large_image" />
     </Head>
 
-    <section class="mb-16 pt-14">
+    <section class="mb-16 pt-8">
       <div class="container">
         <Breadcrumb class="mb-12">
           <BreadcrumbList>

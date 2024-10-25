@@ -97,7 +97,7 @@ const onSubmit = form.handleSubmit(async (values) => {
     />
     <div class="container flex justify-end items-center h-full">
       <div class="bg-background relative p-10 rounded w-full xl:w-1/2 shadow-lg">
-        <h2 class="xl:text-center text-2xl mb-4">
+        <h2 class="text-2xl mb-4">
           Заполните форму с контактными данными и наш специалист свяжется с Вами:
         </h2>
         <form

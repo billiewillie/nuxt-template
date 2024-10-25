@@ -63,8 +63,8 @@ const route = useRoute()
           <div class="flex items-center gap-2 cursor-pointer group">
             <Icon
               name="mynaui:chart-bar-one-solid"
-              width="18"
-              height="18"
+              width="16"
+              height="16"
               color="#3BA3A3" />
             <NuxtLink
               to="/comparison"
@@ -76,10 +76,9 @@ const route = useRoute()
           <div class="flex items-center gap-2 cursor-pointer group">
             <Icon
               name="lets-icons:star"
-              width="18"
-              height="18"
-              color="#3BA3A3"
-            />
+              width="16"
+              height="16"
+              color="#3BA3A3" />
             <NuxtLink
               to="/wishlist"
               class="group-hover:underline underline-offset-4">
@@ -89,8 +88,7 @@ const route = useRoute()
           <span class="flex mx-4">|</span>
           <LazyAppSearch
             side="bottom"
-            trigger="search"
-          />
+            trigger="search" />
         </div>
       </div>
     </div>
@@ -122,8 +120,7 @@ const route = useRoute()
                     <SheetClose as-child>
                       <NuxtLink
                         :to="item.href"
-                        :aria-label="item.title"
-                      >
+                        :aria-label="item.title">
                         {{ item.title }}
                       </NuxtLink>
                     </SheetClose>
@@ -146,30 +143,27 @@ const route = useRoute()
         <div class="basis-1/3 flex xl:basis-auto justify-center">
           <NuxtLink
             to="/"
-            class="flex h-full w-[110px]"
-          >
+            class="flex h-full w-[110px]">
             <NuxtImg
               src="/img/logo.svg"
               alt="logo"
               height="59"
-              width="110"
-            />
+              width="110" />
           </NuxtLink>
         </div>
         <nav class="hidden xl:flex -mr-4">
           <ul class="flex gap-2">
             <li
               v-for="item in NAVIGATION"
-              :key="item.id"
-            >
+              :key="item.id">
               <Button
                 :variant="isRouteActive(item.slug, route) ? 'default' : 'ghost'"
-                as-child
-              >
+                class="text-base"
+
+                as-child>
                 <NuxtLink
                   :to="item.href"
-                  :aria-label="item.title"
-                >
+                  :aria-label="item.title">
                   {{ item.title }}
                 </NuxtLink>
               </Button>

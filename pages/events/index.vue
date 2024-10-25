@@ -82,7 +82,7 @@ const {
         content="summary_large_image" />
     </Head>
 
-    <section class="mb-12 xl:mb-16 pt-14">
+    <section class="mb-12 xl:mb-16 pt-8">
       <div class="container">
         <Breadcrumb class="mb-12">
           <BreadcrumbList>
@@ -103,11 +103,11 @@ const {
     </section>
 
     <section class="mb-4">
-      <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-4 xl:gap-y-0 gap-x-4">
+      <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-4 xl:gap-y-0 gap-x-4">
 
-        <AppCalendar class="xl:col-span-2 bg-background relative z-10" />
+        <AppCalendar class="xl:col-span-3 bg-background relative z-10" />
 
-        <div class="flex flex-col border rounded justify-between p-4">
+        <div class="flex flex-col border rounded justify-between p-4 bg-background">
           <Select>
             <SelectTrigger class="w-full">
               <SelectValue placeholder="Категория" />
@@ -119,21 +119,6 @@ const {
                   :key="category.id"
                   :value="category.title">
                   {{ category.title }}
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger class="w-full">
-              <SelectValue placeholder="Страна" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem
-                  v-for="country in events.countries"
-                  :key="country.id"
-                  :value="country.title">
-                  {{ country.title }}
                 </SelectItem>
               </SelectGroup>
             </SelectContent>
@@ -160,9 +145,9 @@ const {
 
     <section class="mb-16">
       <div class="container">
-        <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-3 gap-4">
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
 
-          <template v-if="events?.list.length">
+          <template v-if="events.list.length">
             <BaseEventCard
               v-for="event in events.list"
               :key="event.id"

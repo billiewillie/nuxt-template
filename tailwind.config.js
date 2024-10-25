@@ -15,7 +15,7 @@ module.exports = {
       }
     },
     fontFamily: {
-      sans: ['Roboto', 'sans-serif']
+      sans: ['Inter', 'sans-serif']
     },
     extend: {
       colors: {

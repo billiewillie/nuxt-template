@@ -6,6 +6,8 @@ import type { ProductCategoryPageApi } from '~/types'
 const props = defineProps<{
   data: ProductCategoryPageApi
 }>()
+
+console.log(props.data)
 </script>
 
 <template>
@@ -61,7 +63,7 @@ const props = defineProps<{
         content="summary_large_image" />
     </Head>
 
-    <section class="mb-16 pt-14">
+    <section class="mb-16 pt-8">
       <div class="container">
         <Breadcrumb class="mb-12">
           <BreadcrumbList>
@@ -70,19 +72,25 @@ const props = defineProps<{
                 <NuxtLink to="/">Главная</NuxtLink>
               </BreadcrumbLink>
             </BreadcrumbItem>
+            <template
+              v-for="(item, index) in props.data.bread_crumbs"
+              :key="item.slug">
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink as-child>
+                  <NuxtLink :to="item.url">
+                    {{ item.title }}
+                  </NuxtLink>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </template>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink as-child>
-                <NuxtLink to="/catalog">Каталог</NuxtLink>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{{ props.data?.title }}</BreadcrumbPage>
+              <BreadcrumbPage>{{ props.data.title }}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <h1 class="section-title">{{ props.data?.title }}</h1>
+        <h1 class="section-title">{{ props.data.title }}</h1>
       </div>
     </section>
 

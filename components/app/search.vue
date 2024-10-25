@@ -128,9 +128,9 @@ function setSearchSubCategory(item): void {
       <div class="flex items-center gap-2 cursor-pointer group">
         <Icon
           name="mingcute:search-line"
-          width="32"
-          height="32"
-          class="xl:w-[18px] xl:h-[18px]"
+          width="16"
+          height="16"
+          class="xl:w-[16px] xl:h-[16px]"
           color="#3BA3A3" />
         <p
           v-if="props.trigger === 'search'"

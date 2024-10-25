@@ -128,7 +128,7 @@ const onSubmit = form.handleSubmit(async (values) => {
         content="summary_large_image" />
     </Head>
 
-    <section class="mb-12 xl:mb-16 pt-14">
+    <section class="mb-12 xl:mb-16 pt-8">
       <div class="container">
         <Breadcrumb class="mb-12">
           <BreadcrumbList>
@@ -208,87 +208,87 @@ const onSubmit = form.handleSubmit(async (values) => {
       </div>
     </section>
 
-    <section>
-      <div class="container">
-        <form
-          @submit="onSubmit"
-          class="flex flex-col gap-4">
-          <div class="grid gap-16">
-            <FormField
-              v-slot="{ componentField }"
-              name="name">
-              <FormItem>
-                <FormControl>
-                  <Input
-                    type="text"
-                    name="name"
-                    :id="nameId"
-                    placeholder="ФИО"
-                    v-bind="componentField" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-            <FormField
-              v-slot="{ componentField }"
-              name="contact">
-              <FormItem>
-                <FormControl>
-                  <Input
-                    type="text"
-                    name="contact"
-                    :id="contactId"
-                    placeholder="Телефон или почта"
-                    v-bind="componentField" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-            <FormField
-              v-slot="{ componentField }"
-              name="message">
-              <FormItem>
-                <FormControl>
-            <Textarea
-              name="message"
-              :id="messageId"
-              placeholder="Сообщение"
-              v-bind="componentField" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-          </div>
-          <div class="grid gap-4">
-            <Button
-              type="submit"
-              aria-label="submit"
-              class="uppercase">
-              отправить
-            </Button>
-            <FormField
-              v-slot="{ value, handleChange }"
-              type="checkbox"
-              name="checkbox">
-              <FormItem class="flex items-start lg:col-span-2 gap-x-2 space-y-0 rounded-md">
-                <FormControl :id="checkId">
-                  <Checkbox
-                    :checked="value"
-                    @update:checked="handleChange" />
-                </FormControl>
-                <div class="space-y-1 leading-none">
-                  <FormLabel :forId="checkId">
-                    Я согласен(на) на обработку персональных данных.
-                    ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.
-                  </FormLabel>
-                  <FormMessage />
-                </div>
-              </FormItem>
-            </FormField>
-          </div>
-        </form>
-      </div>
-    </section>
+<!--    <section>-->
+<!--      <div class="container">-->
+<!--        <form-->
+<!--          @submit="onSubmit"-->
+<!--          class="flex flex-col gap-4">-->
+<!--          <div class="grid gap-16">-->
+<!--            <FormField-->
+<!--              v-slot="{ componentField }"-->
+<!--              name="name">-->
+<!--              <FormItem>-->
+<!--                <FormControl>-->
+<!--                  <Input-->
+<!--                    type="text"-->
+<!--                    name="name"-->
+<!--                    :id="nameId"-->
+<!--                    placeholder="ФИО"-->
+<!--                    v-bind="componentField" />-->
+<!--                </FormControl>-->
+<!--                <FormMessage />-->
+<!--              </FormItem>-->
+<!--            </FormField>-->
+<!--            <FormField-->
+<!--              v-slot="{ componentField }"-->
+<!--              name="contact">-->
+<!--              <FormItem>-->
+<!--                <FormControl>-->
+<!--                  <Input-->
+<!--                    type="text"-->
+<!--                    name="contact"-->
+<!--                    :id="contactId"-->
+<!--                    placeholder="Телефон или почта"-->
+<!--                    v-bind="componentField" />-->
+<!--                </FormControl>-->
+<!--                <FormMessage />-->
+<!--              </FormItem>-->
+<!--            </FormField>-->
+<!--            <FormField-->
+<!--              v-slot="{ componentField }"-->
+<!--              name="message">-->
+<!--              <FormItem>-->
+<!--                <FormControl>-->
+<!--            <Textarea-->
+<!--              name="message"-->
+<!--              :id="messageId"-->
+<!--              placeholder="Сообщение"-->
+<!--              v-bind="componentField" />-->
+<!--                </FormControl>-->
+<!--                <FormMessage />-->
+<!--              </FormItem>-->
+<!--            </FormField>-->
+<!--          </div>-->
+<!--          <div class="grid gap-4">-->
+<!--            <Button-->
+<!--              type="submit"-->
+<!--              aria-label="submit"-->
+<!--              class="uppercase">-->
+<!--              отправить-->
+<!--            </Button>-->
+<!--            <FormField-->
+<!--              v-slot="{ value, handleChange }"-->
+<!--              type="checkbox"-->
+<!--              name="checkbox">-->
+<!--              <FormItem class="flex items-start lg:col-span-2 gap-x-2 space-y-0 rounded-md">-->
+<!--                <FormControl :id="checkId">-->
+<!--                  <Checkbox-->
+<!--                    :checked="value"-->
+<!--                    @update:checked="handleChange" />-->
+<!--                </FormControl>-->
+<!--                <div class="space-y-1 leading-none">-->
+<!--                  <FormLabel :forId="checkId">-->
+<!--                    Я согласен(на) на обработку персональных данных.-->
+<!--                    ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.-->
+<!--                  </FormLabel>-->
+<!--                  <FormMessage />-->
+<!--                </div>-->
+<!--              </FormItem>-->
+<!--            </FormField>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </section>-->
 
   </main>
 

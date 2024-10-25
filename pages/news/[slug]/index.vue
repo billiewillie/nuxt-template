@@ -81,7 +81,7 @@ if (article.value) {
         content="summary_large_image" />
     </Head>
 
-    <section class="mb-12 xl:mb-16 pt-14">
+    <section class="mb-12 xl:mb-16 pt-8">
       <div class="container">
 
         <Breadcrumb class="mb-12">

@@ -28,6 +28,8 @@ const {
   data: Ref<IndexPageApi> | undefined;
   error: Ref<any>;
 } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
+
+console.log(data?.value)
 </script>
 
 <template>
@@ -238,15 +240,13 @@ const {
       <div class="container">
         <Carousel
           class="relative w-full"
-          :opts="{ align: 'start' }"
-        >
+          :opts="{ align: 'start' }">
           <CarouselContent :is-visible="true">
             <template v-if="data?.new_products">
               <CarouselItem
                 v-for="product in data.new_products.list"
                 :key="product.id"
-                class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4"
-              >
+                class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
                 <BaseProductCard :product="product" />
               </CarouselItem>
             </template>
@@ -261,9 +261,7 @@ const {
               </CarouselItem>
             </template>
           </CarouselContent>
-          <div
-            class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center"
-          >
+          <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[120px] flex gap-4 items-center">
             <div class="flex gap-4">
               <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
               <CarouselNext class="relative left-0 top-0 translate-y-0" />
@@ -278,26 +276,13 @@ const {
                     <SelectItem
                       v-for="category in data.new_products.title"
                       :key="category.id"
-                      :value="category.title"
-                    >
+                      :value="category.title">
                       {{ category.title }}
                     </SelectItem>
                   </template>
                 </SelectGroup>
               </SelectContent>
             </Select>
-            <Button
-              as-child
-              class="hidden md:flex"
-            >
-              <NuxtLink
-                to="/news"
-                class="flex gap-2 items-center"
-              >
-                Все новинки
-                <ChevronRight class="w-4 h-4 -mr-[6px]" />
-              </NuxtLink>
-            </Button>
           </div>
         </Carousel>
       </div>

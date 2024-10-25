@@ -45,6 +45,7 @@ interface Metadata {
 interface BreadCrumb {
   slug: string;
   title: string;
+  url: string;
 }
 
 export interface ProductCard {
