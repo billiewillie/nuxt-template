@@ -77,23 +77,7 @@ import { Card, CardContent } from '~/components/ui/card'
 
     <section class="mb-12 xl:mb-16">
       <div class="container">
-        <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
-          <Card
-            v-for="(_,index) in 5"
-            :key="index"
-            class="flex flex-col gap-6 p-4 items-center text-center">
-            <NuxtImg
-              src="/img/categories/icons/1.svg"
-              class="w-[80px] object-contain object-center"
-              alt="alt" />
-            <CardContent class="p-0 font-medium">
-              <p>
-                Четкое планирование и прогнозирование профессиональной подготовки персонала и обеспечение современной
-                системы корпоративного обучения
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+        <p>content</p>
       </div>
     </section>
 

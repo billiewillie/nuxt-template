@@ -39,6 +39,7 @@ let isLoaded = ref<boolean>(false)
 
 function onLoad(): void {
   isLoaded.value = true
+  console.log(isLoaded.value)
 }
 
 onMounted(async (): Promise<void> => {

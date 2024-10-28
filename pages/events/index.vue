@@ -28,6 +28,8 @@ const {
 }: {
   data: Ref<Events>
 } = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/10`)
+
+console.log(events.value)
 </script>
 
 <template>

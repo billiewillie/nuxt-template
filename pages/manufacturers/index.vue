@@ -54,6 +54,15 @@ if (categories.value && categories.value.manufacturers.length) {
   activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory
 }
 
+function setImage(img) {
+  if (img) {
+    console.log(img)
+    return img
+  } else {
+    return '/img/logo.svg'
+  }
+}
+
 console.log(categories.value)
 </script>
 
@@ -165,12 +174,17 @@ console.log(categories.value)
           :to="manufacturer.url">
           <Card class="flex flex-col gap-4 h-full shadow-md hover:shadow-lg transition-shadow">
             <CardHeader class="flex flex-col flex-start gap-4">
-              <NuxtImg
+<!--              <NuxtImg-->
+<!--                :src="manufacturer.logo"-->
+<!--                height="50"-->
+<!--                class="h-[50px] flex self-start"-->
+<!--                :alt="manufacturer.title" />-->
+              <CustomNuxtImg
                 :src="manufacturer.logo"
                 height="50"
                 class="h-[50px] flex self-start"
-                :alt="manufacturer.title"
-              />
+                :fallback="`img/logo.svg`"
+                :alt="manufacturer.title" />
               <h2 class="font-bold ~text-[20px]/[24px]">
                 {{ manufacturer.title }}
               </h2>

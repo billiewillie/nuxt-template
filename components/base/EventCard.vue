@@ -32,7 +32,6 @@ const props = defineProps<{
             height="18"
             color="#575757" />
           <div>
-
           </div>
           <time
             class="text-[#575757] leading-none text-sm"
@@ -47,13 +46,11 @@ const props = defineProps<{
           </time>
         </div>
         <h3 class="text-[18px] font-semibold line-clamp-3">
-          НПК "Новые медицинские технологии в оториноларингологии. Прошлое, настоящее и будущее".
+          {{ event.title }}
         </h3>
         <Separator class="w-full my-4" />
         <p class="text-base mb-4">
-          Крокус Экспо
-          <br>
-          Московская обл., Красногорск, Международная ул., 16
+          {{ event.annotation }}
         </p>
       </CardContent>
     </Card>
