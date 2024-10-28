@@ -174,17 +174,14 @@ console.log(categories.value)
           :to="manufacturer.url">
           <Card class="flex flex-col gap-4 h-full shadow-md hover:shadow-lg transition-shadow">
             <CardHeader class="flex flex-col flex-start gap-4">
-<!--              <NuxtImg-->
-<!--                :src="manufacturer.logo"-->
-<!--                height="50"-->
-<!--                class="h-[50px] flex self-start"-->
-<!--                :alt="manufacturer.title" />-->
-              <CustomNuxtImg
-                :src="manufacturer.logo"
-                height="50"
-                class="h-[50px] flex self-start"
-                :fallback="`img/logo.svg`"
-                :alt="manufacturer.title" />
+              <ClientOnly>
+                <NuxtImg
+                  :src="manufacturer.logo"
+                  height="50"
+                  class="h-[50px] flex self-start"
+                  @error="manufacturer.logo = `img/logo-placeholder.svg`"
+                  :alt="manufacturer.title" />
+              </ClientOnly>
               <h2 class="font-bold ~text-[20px]/[24px]">
                 {{ manufacturer.title }}
               </h2>

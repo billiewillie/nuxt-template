@@ -42,7 +42,7 @@ const handleError = (data: any) => {
 </script>
 
 <template>
-  <nuxt-img
+  <NuxtImg
     v-if="!hasError || !fallback"
     v-bind="propsWithoutFallbackAndSrc"
     :src="src"
