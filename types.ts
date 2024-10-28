@@ -97,7 +97,7 @@ interface Recommendation {
   created_at: string;
 }
 
-interface NewProductList {
+export interface NewProductList {
   id: number;
   title: string;
   url: string;
@@ -128,6 +128,7 @@ export interface Event {
   id: number;
   title: string;
   url: string;
+  link?: string;
   annotation: string;
   preview_img: string;
   date_end: string;

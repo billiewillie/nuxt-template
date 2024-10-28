@@ -13,6 +13,7 @@ type Key =
   | 'wishlistPageForm'
   | 'inStockPageForm'
   | 'vacancies'
+  | 'newProducts'
 
 const URLs: Record<Key, string> = {
   index: `/index`,
@@ -28,7 +29,8 @@ const URLs: Record<Key, string> = {
   indexPageForm: '/feedback/index',
   inStockPageForm: '/feedback/in-stock',
   wishlistPageForm: '/feedback/find-nothing',
-  productsExpandableOrderForm: '/feedback/expendable-material'
+  productsExpandableOrderForm: '/feedback/expendable-material',
+  newProducts: '/new-products/section',
 }
 
 export default URLs

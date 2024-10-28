@@ -22,12 +22,13 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 
 const date = ref<Date>(new Date())
 const month = date.value.getMonth() + 1
+const day = date.value.getDate()
 
 const {
   data: events
 }: {
   data: Ref<Events>
-} = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/10`)
+} = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/${day}`)
 
 console.log(events.value)
 </script>
@@ -149,9 +150,9 @@ console.log(events.value)
       <div class="container">
         <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
 
-          <template v-if="events.list.length">
+          <template v-if="events.all_events_month && events.all_events_month.length">
             <BaseEventCard
-              v-for="event in events.list"
+              v-for="event in events.all_events_month"
               :key="event.id"
               :event="event" />
           </template>

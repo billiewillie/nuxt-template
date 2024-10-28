@@ -1,11 +1,11 @@
 <script
   setup
   lang="ts">
-import { useFetch, useRuntimeConfig } from '#app'
+import { useAsyncData, useFetch, useRuntimeConfig } from '#app'
 import { Separator } from '~/components/ui/separator'
 import URLs from '~/data/urls'
 import CATEGORIES from '~/data/categories'
-import type { IndexPageApi } from '~/types'
+import type { IndexPageApi, NewProductList } from '~/types'
 import { type Ref, ref } from 'vue'
 import { ChevronRight } from 'lucide-vue-next'
 import {
@@ -21,6 +21,9 @@ const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 
+const newProductsCategory = ref<string>('')
+const newProducts = ref<Array<NewProductList>>([]) as Ref<Array<NewProductList>>
+
 const {
   data,
   error
@@ -29,7 +32,18 @@ const {
   error: Ref<any>;
 } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
 
-console.log(data?.value)
+if (data?.value) {
+  newProducts.value = data.value.new_products.list
+}
+
+async function setNewProductsCategory(category: string) {
+  newProductsCategory.value = category
+  const { data } = await useFetch(`${API_ENDPOINT}${URLs.newProducts}/${category}`)
+  if (data?.value) {
+    console.log(data.value)
+    newProducts.value = data.value
+  }
+}
 </script>
 
 <template>
@@ -244,7 +258,7 @@ console.log(data?.value)
           <CarouselContent :is-visible="true">
             <template v-if="data?.new_products">
               <CarouselItem
-                v-for="product in data.new_products.list"
+                v-for="product in newProducts"
                 :key="product.id"
                 class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
                 <BaseProductCard :product="product" />
@@ -266,7 +280,9 @@ console.log(data?.value)
               <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
               <CarouselNext class="relative left-0 top-0 translate-y-0" />
             </div>
-            <Select>
+            <Select
+              :model-value="newProductsCategory"
+              @update:model-value="setNewProductsCategory($event)">
               <SelectTrigger class="w-[180px] hidden md:flex">
                 <SelectValue placeholder="Категория" />
               </SelectTrigger>
@@ -276,7 +292,7 @@ console.log(data?.value)
                     <SelectItem
                       v-for="category in data.new_products.title"
                       :key="category.id"
-                      :value="category.title">
+                      :value="`${category.id}`">
                       {{ category.title }}
                     </SelectItem>
                   </template>
