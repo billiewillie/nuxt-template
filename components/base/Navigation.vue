@@ -4,11 +4,10 @@
 
 import NAVIGATION from '~/data/navigation'
 
-defineProps({
-  ulClass: {
-    type: String
-  }
-})
+defineProps<{
+  ulClass?: string
+  linkClass?: string
+}>()
 </script>
 
 <template>
@@ -19,6 +18,7 @@ defineProps({
         :key="item.id">
         <NuxtLink
           :to="item.href"
+          :class="linkClass"
           :aria-label="item.title">
           {{ item.title }}
         </NuxtLink>

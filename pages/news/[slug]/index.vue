@@ -108,10 +108,10 @@ if (article.value) {
           :src="article.banner"
           aspect-ratio="aspect-[4/1]"
           placeholder="bg-[#e4e7ef]"
+          class="rounded overflow-hidden"
           width="1413"
           height="332"
-          alt="alt"
-        />
+          :alt="article.title" />
 
       </div>
     </section>
@@ -121,7 +121,7 @@ if (article.value) {
         <h1 class="section-title mb-12">
           {{ article.title }}
         </h1>
-        <div class="mb-10 flex items-center gap-4">
+        <div class="mb-10 flex items-center gap-3 ">
           <Icon
             name="solar:calendar-linear"
             width="18"

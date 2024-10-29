@@ -7,7 +7,9 @@ import BRANCHES from '~/data/branches'
 <template>
   <footer class="bg-background-dark py-12 text-foreground-dark">
     <div class="container grid grid-cols-1 lg:grid-cols-3 text-center gap-12">
-      <BaseNavigation ul-class="grid gap-4 grid-cols-2 text-left" />
+      <BaseNavigation
+        ul-class="grid gap-4 grid-cols-2 text-left"
+        link-class="hover:underline underline-offset-4" />
       <div>
         <NuxtLink to="/">
           <NuxtImg

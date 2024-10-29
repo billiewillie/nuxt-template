@@ -8,7 +8,6 @@ import { isRouteActive } from '~/utils/isRouteActive'
 import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
 
-const isAllowedToBeFixed = ref<boolean>(false)
 const compareList = useCookie(
   'compareList',
   {
@@ -53,11 +52,7 @@ const route = useRoute()
           <span class="flex mx-4">|</span>
           <div>{{ BRANCHES.spb.phone }}</div>
           <span class="flex mx-4">|</span>
-          <a
-            class="hover:underline underline-offset-4"
-            :href="`mailto:${BRANCHES.spb.email}`">
-            связаться с нами
-          </a>
+          <BaseContactUsForm />
         </div>
         <div class="hidden xl:flex">
           <div class="flex items-center gap-2 cursor-pointer group">

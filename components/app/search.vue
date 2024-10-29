@@ -38,7 +38,7 @@ const newsOutput = ref<any>([])
 const expendableMaterial = ref<any>([])
 const expendableMaterialOutput = ref<any>([])
 
-const [isOpen, closeDialog] = dialogState()
+const [isOpen, _] = dialogState()
 
 async function search(): Promise<void> {
   if (inputValue.value.length >= SEARCH_LENGTH) {
