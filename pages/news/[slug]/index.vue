@@ -30,6 +30,8 @@ if (article.value) {
   banner.value = article.value.banner
   description.value = article.value.annotation
 }
+
+console.log(article.value)
 </script>
 
 <template>
