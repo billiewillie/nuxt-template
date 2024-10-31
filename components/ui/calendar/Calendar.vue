@@ -34,16 +34,16 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 <template>
   <CalendarRoot
     v-slot="{ grid, weekDays }"
-    :class="cn('flex flex-col p-0', props.class)"
+    :class="cn('flex flex-col p-0 shadow-md rounded-lg', props.class)"
     v-bind="forwarded"
   >
-    <CalendarHeader class="bg-background-dark pt-0 rounded-t-md">
+    <CalendarHeader class="bg-background-dark pt-0 rounded-t-lg">
       <CalendarPrevButton />
       <CalendarHeading />
       <CalendarNextButton />
     </CalendarHeader>
 
-    <div class="flex flex-auto gap-y-4 mt-4 p-4 sm:flex-row sm:gap-x-4 sm:gap-y-0">
+    <div class="flex flex-auto gap-y-4 mt-4 p-4 sm:flex-row sm:gap-x-4 sm:gap-y-0 rounded-b-lg">
       <CalendarGrid
         v-for="month in grid"
         class="flex flex-col flex-auto overflow-hidden gap-4"

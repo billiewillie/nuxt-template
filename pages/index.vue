@@ -311,7 +311,7 @@ async function setNewProductsCategory(category: string) {
       </div>
 
       <div class="container relative flex flex-col md:flex-row gap-4 calendar-backdrop">
-        <LazyAppCalendar class="md:w-1/2 relative z-20 bg-background" />
+        <LazyAppCalendar class="md:w-1/2 relative z-[1] bg-background" />
 
         <Carousel
           class="h-[inherit] md:w-1/2 relative"

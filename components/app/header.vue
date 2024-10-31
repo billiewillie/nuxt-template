@@ -41,7 +41,7 @@ const route = useRoute()
 
 <template>
   <header class="header flex flex-col shadow-lg z-10">
-    <div class="hidden xl:flex bg-background-dark py-4 text-foreground-dark">
+    <div class="hidden xl:flex xl:fixed xl:w-full xl:z-100 xl:top-0 xl:left-0 bg-background-dark py-4 text-foreground-dark">
       <div class="container flex justify-between text-[14px]">
         <div class="flex">
           <a
@@ -126,7 +126,16 @@ const route = useRoute()
                         to="/comparison"
                         aria-label="comparison"
                       >
-                        Сравнение (0)
+                        Сравнение <span class="tracking-widest">({{ getCompareListCount() }})</span>
+                      </NuxtLink>
+                    </SheetClose>
+                  </li>
+                  <li>
+                    <SheetClose as-child>
+                      <NuxtLink
+                        to="/wishlist"
+                        aria-label="wishlist">
+                        Избранное <span class="tracking-widest">({{ getWishListCount() }})</span>
                       </NuxtLink>
                     </SheetClose>
                   </li>
@@ -153,8 +162,7 @@ const route = useRoute()
               :key="item.id">
               <Button
                 :variant="isRouteActive(item.slug, route) ? 'default' : 'ghost'"
-                class="text-base"
-
+                class="text-sm 2xl:text-base"
                 as-child>
                 <NuxtLink
                   :to="item.href"

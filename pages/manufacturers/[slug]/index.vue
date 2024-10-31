@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Manufacturer } from '~/types';
+import type { Ref } from 'vue'
 const route = useRoute();
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public;
 

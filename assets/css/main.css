@@ -81,7 +81,7 @@
   }
   
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground !overflow-visible !p-0;
   }
   
   .section-title {

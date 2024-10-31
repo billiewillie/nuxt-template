@@ -14,20 +14,31 @@ defineProps<{
   <NuxtLink
     :to="article.url"
     class="flex h-full">
-    <Card class="flex flex-col gap-6 pb-6 shadow-md hover:shadow-lg transition-shadow">
+    <Card class="flex flex-col gap-6 pb-6 shadow-md hover:shadow-lg transition-shadow w-full">
       <CardHeader class="p-0">
-        <BaseImage
-          :src="article.preview_img"
-          :alt="article.title"
-          class="w-full h-[226px] object-cover object-center aspect-auto"
-          :img-attrs="{class:'w-full h-full object-cover object-center'}"
-          width="350"
-          height="226"
-          :loading="imageLoading"
-        />
+<!--        <BaseImage-->
+<!--          :src="article.preview_img"-->
+<!--          :alt="article.title"-->
+<!--          class="w-full h-[226px] object-cover object-center aspect-auto"-->
+<!--          :img-attrs="{class:'w-full h-full object-cover object-center'}"-->
+<!--          width="350"-->
+<!--          height="226"-->
+<!--          :loading="imageLoading"-->
+<!--        />-->
+        <ClientOnly>
+          <NuxtImg
+            :src="article.preview_img"
+            width="350"
+            height="226"
+            class="w-full h-[226px] object-cover object-center aspect-auto"
+            @error="article.preview_img = `img/news-placeholder.jpg`"
+            :alt="article.title" />
+        </ClientOnly>
       </CardHeader>
       <CardContent class="flex flex-col gap-4 p-0 px-6 flex-auto">
-        <CardTitle class="~text-[16px]/[18px]">{{ article.title }}</CardTitle>
+        <CardTitle class="~text-[16px]/[18px]">
+          {{ article.title }}
+        </CardTitle>
         <Separator />
         <CardDescription class="~text-[14px]/[16px] text-foreground">
           {{ article.annotation }}

@@ -86,6 +86,7 @@ export interface Manufacturer {
   article?: string;
   sort?: number;
   created_at?: string;
+  content?: string;
 }
 
 interface Recommendation {

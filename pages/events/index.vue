@@ -23,6 +23,8 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 const date = ref<Date>(new Date())
 const month = date.value.getMonth() + 1
 const day = date.value.getDate()
+const activeEventTypes = ref<Array<{ id: number }>>([])
+const activeEventCategory = ref<string | null>(null)
 
 const {
   data: events
@@ -31,6 +33,14 @@ const {
 } = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/${day}`)
 
 console.log(events.value)
+
+function setActiveEventTypes() {
+  console.log(value)
+}
+
+function setActiveEventCategory(value: string) {
+  console.log(value)
+}
 </script>
 
 <template>
@@ -108,10 +118,12 @@ console.log(events.value)
     <section class="mb-4">
       <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-4 xl:gap-y-0 gap-x-4">
 
-        <AppCalendar class="xl:col-span-3 bg-background relative z-10" />
+        <AppCalendar class="xl:col-span-3 bg-background relative" />
 
-        <div class="flex flex-col border rounded justify-between p-4 bg-background">
-          <Select>
+        <div class="flex flex-col border rounded-lg justify-between p-4 bg-background shadow-md gap-4">
+          <Select
+            v-model="activeEventCategory"
+            @update:model-value="setActiveEventCategory($event)">
             <SelectTrigger class="w-full">
               <SelectValue placeholder="Категория" />
             </SelectTrigger>

@@ -95,90 +95,91 @@ const onSubmit = form.handleSubmit(async (values) => {
 </script>
 
 <template>
-  <Dialog v-model:open="isOpen">
-    <DialogTrigger as-child>
-      <Button
-        variant="link"
-        class="underline-offset-4 hover:underline p-0 h-auto text-white font-normal">
-        связаться с нами
-      </Button>
-    </DialogTrigger>
-    <DialogContent class="sm:max-w-[425px]">
-      <DialogHeader>
-        <DialogTitle class="text-center">Связаться с нами</DialogTitle>
-        <VisuallyHidden>
-          <DialogDescription></DialogDescription>
-        </VisuallyHidden>
-      </DialogHeader>
-      <form
-        @submit="onSubmit"
-        class="flex flex-col gap-4">
-        <div class="flex flex-col gap-4">
-          <FormField
-            v-slot="{ componentField }"
-            name="name">
-            <FormItem>
-              <FormControl>
-                <Input
-                  type="text"
-                  name="name"
-                  :id="nameId"
-                  placeholder="ФИО"
-                  v-bind="componentField" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
-          <FormField
-            v-slot="{ componentField }"
-            name="phone">
-            <FormItem>
-              <FormControl>
-                <Input
-                  type="tel"
-                  name="phone"
-                  :id="phoneId"
-                  placeholder="Телефон"
-                  v-bind="componentField" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
-          <FormField
-            v-slot="{ componentField }"
-            name="email">
-            <FormItem>
-              <FormControl>
-                <Input
-                  type="email"
-                  name="email"
-                  :id="emailId"
-                  placeholder="E-mail"
-                  v-bind="componentField" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
-          <FormField
-            v-slot="{ componentField }"
-            name="city">
-            <FormItem>
-              <FormControl>
-                <Input
-                  type="text"
-                  name="city"
-                  :id="cityId"
-                  placeholder="Город"
-                  v-bind="componentField" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
-          <FormField
-            v-slot="{ componentField }"
-            name="message">
-            <FormItem>
-              <FormControl>
+  <div>
+    <Dialog v-model:open="isOpen">
+      <DialogTrigger as-child>
+        <Button
+          variant="link"
+          class="underline-offset-4 hover:underline p-0 h-auto text-white font-normal">
+          связаться с нами
+        </Button>
+      </DialogTrigger>
+      <DialogContent class="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle class="text-center">Связаться с нами</DialogTitle>
+          <VisuallyHidden>
+            <DialogDescription></DialogDescription>
+          </VisuallyHidden>
+        </DialogHeader>
+        <form
+          @submit="onSubmit"
+          class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4">
+            <FormField
+              v-slot="{ componentField }"
+              name="name">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    name="name"
+                    :id="nameId"
+                    placeholder="ФИО"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="phone">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="tel"
+                    name="phone"
+                    :id="phoneId"
+                    placeholder="Телефон"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="email">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="email"
+                    name="email"
+                    :id="emailId"
+                    placeholder="E-mail"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="city">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    name="city"
+                    :id="cityId"
+                    placeholder="Город"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="message">
+              <FormItem>
+                <FormControl>
                   <Textarea
                     placeholder="Сообщение"
                     name="message"
@@ -186,37 +187,38 @@ const onSubmit = form.handleSubmit(async (values) => {
                     class="resize-none h-full"
                     v-bind="componentField"
                   />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
-          <Button
-            type="submit"
-            aria-label="submit"
-            class="uppercase">
-            отправить
-          </Button>
-          <FormField
-            v-slot="{ value, handleChange }"
-            type="checkbox"
-            name="checkbox">
-            <FormItem class="flex items-start lg:col-span-2 gap-x-2 space-y-0 rounded-md">
-              <FormControl :id="checkId">
-                <Checkbox
-                  :checked="value"
-                  @update:checked="handleChange" />
-              </FormControl>
-              <div class="space-y-1 leading-none">
-                <FormLabel :forId="checkId">
-                  Я согласен(на) на обработку персональных данных.
-                  ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.
-                </FormLabel>
+                </FormControl>
                 <FormMessage />
-              </div>
-            </FormItem>
-          </FormField>
-        </div>
-      </form>
-    </DialogContent>
-  </Dialog>
+              </FormItem>
+            </FormField>
+            <Button
+              type="submit"
+              aria-label="submit"
+              class="uppercase">
+              отправить
+            </Button>
+            <FormField
+              v-slot="{ value, handleChange }"
+              type="checkbox"
+              name="checkbox">
+              <FormItem class="flex items-start lg:col-span-2 gap-x-2 space-y-0 rounded-md">
+                <FormControl :id="checkId">
+                  <Checkbox
+                    :checked="value"
+                    @update:checked="handleChange" />
+                </FormControl>
+                <div class="space-y-1 leading-none">
+                  <FormLabel :forId="checkId">
+                    Я согласен(на) на обработку персональных данных.
+                    ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.
+                  </FormLabel>
+                  <FormMessage />
+                </div>
+              </FormItem>
+            </FormField>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
+  </div>
 </template>

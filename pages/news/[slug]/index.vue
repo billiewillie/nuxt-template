@@ -16,7 +16,11 @@ const { slug }: { slug: string } = useRoute().params
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
-const { data: article, error }: { data: Ref<News> } = await useAsyncData(
+const {
+  data: article
+}: {
+  data: Ref<News>
+} = await useAsyncData(
   'article',
   () => $fetch(`${API_ENDPOINT}${URLs.newsArticle}/${slug}`)
 )
@@ -104,14 +108,25 @@ if (article.value) {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <BaseImage
-          :src="article.banner"
-          aspect-ratio="aspect-[4/1]"
-          placeholder="bg-[#e4e7ef]"
-          class="rounded overflow-hidden"
-          width="1413"
-          height="332"
-          :alt="article.title" />
+        <!--        <BaseImage-->
+        <!--          :src="article.banner"-->
+        <!--          aspect-ratio="aspect-[4/1]"-->
+        <!--          placeholder="bg-[#e4e7ef]"-->
+        <!--          class="rounded overflow-hidden"-->
+        <!--          width="1413"-->
+        <!--          height="332"-->
+        <!--          :alt="article.title" />-->
+
+        <ClientOnly>
+          <NuxtImg
+            :src="article.banner"
+            width="1413"
+            height="332"
+            aspect-ratio="aspect-[4/1]"
+            class="rounded overflow-hidden"
+            @error="article.banner = `img/news-placeholder.jpg`"
+            :alt="article.title" />
+        </ClientOnly>
 
       </div>
     </section>

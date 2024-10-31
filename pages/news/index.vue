@@ -6,6 +6,8 @@ import type { Ref } from 'vue'
 import type { News } from '~/types'
 import URLs from '~/data/urls'
 
+const nuxt = useNuxtApp()
+
 interface NewsRelevantItem {
   year: number
   list: News[]
@@ -23,10 +25,36 @@ const newsFilteredByYear = ref<News[] | null>(null)
 const years = ref<number[] | 'archive' | null>(null)
 const activeYear = ref<number | 'archive' | null>(null)
 
-const { data: news }: { news: Ref<NewsPageApi> } = await useFetch(`${API_ENDPOINT}${URLs.news}`)
+const {
+  data: news
+}: {
+  news: Ref<NewsPageApi>,
+} = await useFetch(
+  `${API_ENDPOINT}${URLs.news}`,
+  {
+    transform(input) {
+      return {
+        ...input,
+        fetchedAt: Date.now()
+      }
+    },
+    getCachedData: (key) => {
+      const data = nuxt.payload.data[key] || nuxt.static.data[key]
+      if (!data) return
+
+      const expirationDate = new Date(data.fetchedAt)
+      expirationDate.setTime(expirationDate.getDate() + 10 * 1000)
+      const isExpired = expirationDate.getTime() < Date.now()
+      if (!isExpired) return
+
+      return data
+    }
+  }
+)
 
 function getNews() {
   newsData.value = news.value
+  console.log(newsData.value)
   years.value = news.value.relevant.map((item) => item.year)
   setYear(years.value[0])
 }
