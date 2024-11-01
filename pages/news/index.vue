@@ -54,7 +54,6 @@ const {
 
 function getNews() {
   newsData.value = news.value
-  console.log(newsData.value)
   years.value = news.value.relevant.map((item) => item.year)
   setYear(years.value[0])
 }

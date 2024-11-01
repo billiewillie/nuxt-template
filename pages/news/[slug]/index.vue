@@ -30,8 +30,6 @@ if (article.value) {
   banner.value = article.value.banner
   description.value = article.value.annotation
 }
-
-console.log(article.value)
 </script>
 
 <template>
@@ -45,10 +43,10 @@ console.log(article.value)
         :content="article.annotation" />
       <Meta
         name="og:image"
-        :content="article.banner" />
+        :content="article.preview_img" />
       <Meta
         name="twitter:image"
-        :content="article.banner" />
+        :content="article.preview_img" />
       <Meta
         name="og:title"
         :content="article.title" />
@@ -110,25 +108,33 @@ console.log(article.value)
           </BreadcrumbList>
         </Breadcrumb>
 
-        <!--        <BaseImage-->
-        <!--          :src="article.banner"-->
-        <!--          aspect-ratio="aspect-[4/1]"-->
-        <!--          placeholder="bg-[#e4e7ef]"-->
-        <!--          class="rounded overflow-hidden"-->
-        <!--          width="1413"-->
-        <!--          height="332"-->
-        <!--          :alt="article.title" />-->
+        <div class="aspect-[3/2] md:hidden">
+          <ClientOnly>
+            <NuxtImg
+              :src="article.preview_img"
+              width="300"
+              height="200"
+              aspect-ratio="aspect-[3/2]"
+              class="rounded overflow-hidden w-full h-full object-cover"
+              @error="article.preview_img = `img/news-placeholder.jpg`"
+              :alt="article.title" />
+          </ClientOnly>
+        </div>
 
-        <ClientOnly>
-          <NuxtImg
-            :src="article.banner"
-            width="1413"
-            height="332"
-            aspect-ratio="aspect-[4/1]"
-            class="rounded overflow-hidden"
-            @error="article.banner = `img/news-placeholder.jpg`"
-            :alt="article.title" />
-        </ClientOnly>
+        <div
+          v-if="article.banner"
+          class="hidden aspect-[4/1] md:flex">
+          <ClientOnly>
+            <NuxtImg
+              :src="article.banner"
+              width="300"
+              height="200"
+              aspect-ratio="aspect-[4/1]"
+              class="rounded overflow-hidden w-full h-full object-cover"
+              @error="article.banner = `img/news-placeholder.jpg`"
+              :alt="article.title" />
+          </ClientOnly>
+        </div>
 
       </div>
     </section>
