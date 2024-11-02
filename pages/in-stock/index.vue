@@ -10,6 +10,28 @@ import * as z from 'zod'
 import { useForm } from 'vee-validate'
 import { toast } from '~/components/ui/toast'
 import { FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '~/components/ui/tooltip'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '~/components/ui/dialog'
+import { Button } from '~/components/ui/button'
+import { Input } from '~/components/ui/input'
+import { VisuallyHidden } from 'radix-vue'
+
+const route = useRoute()
+
+const wishList = useCookie(
+  'wishList',
+  {
+    default: () => [],
+    watch: true
+  }
+)
 
 const activeCategory = ref<InStockCategory | null>(null)
 
@@ -20,7 +42,15 @@ const {
 }: {
   data: Ref<InStockCategory[]>
 } = await useFetch(`${API_ENDPOINT}${URLs.inStock}`)
-activeCategory.value = data.value[2]
+
+if (route.query.category) {
+  activeCategory.value = data.value.find((category) => category.id === Number(route.query.category))
+} else {
+  activeCategory.value = data.value[0]
+}
+
+const isDialogOpen = ref(false)
+const orderingProductId = ref<number | null>(null)
 
 const nameId = useId()
 const contactId = useId()
@@ -50,7 +80,7 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit(async (values) => {
   const data = {
-    stock_id: 1,
+    stock_id: orderingProductId.value,
     contact: values.contact,
     name: values.name,
     message: values.message,
@@ -66,6 +96,7 @@ const onSubmit = form.handleSubmit(async (values) => {
   )
   if (responseData === '200') {
     form.resetForm()
+    isDialogOpen.value = false
     toast({
       title: 'Заявка отправлена!'
     })
@@ -84,9 +115,32 @@ function setActiveCategory(category: string) {
   console.log(activeCategory.value)
 }
 
+function setWishList(id: number) {
+  if (wishList.value.includes(id)) {
+    wishList.value = wishList.value.filter((item: number) => item !== id)
+  } else {
+    wishList.value = [...wishList.value, id]
+  }
+}
+
+function orderProduct(id: number) {
+  isDialogOpen.value = true
+  orderingProductId.value = id
+}
+
+function copyLink(id: number) {
+  navigator.clipboard.writeText(`${window.location.origin}/in-stock?category=${activeCategory?.value?.id}&id=${id}`)
+  toast({
+    title: 'Ссылка скопирована!'
+  })
+}
+
 onMounted(() => {
-  if (data.value.length) {
-    activeCategory.value = data.value[2]
+  if (document.getElementById(String(route.query.id))) {
+    document.getElementById(String(route.query.id)).scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    })
   }
 })
 </script>
@@ -164,7 +218,7 @@ onMounted(() => {
             <Select
               :model-value="activeCategory?.title"
               @update:model-value="setActiveCategory($event)">
-              <SelectTrigger class="w-[300px]">
+              <SelectTrigger class="w-[300px] focus:ring-1">
                 <SelectValue placeholder="Категория" />
               </SelectTrigger>
               <SelectContent>
@@ -189,11 +243,13 @@ onMounted(() => {
           <Card
             v-for="product in activeCategory?.list"
             :key="product.id"
-            class="flex flex-col gap-6 p-4 lg:p-8 items-center text-center">
-            <CardContent class="flex flex-col xl:flex-row w-full p-0 gap-8">
+            :id="product.id"
+            class="flex flex-col gap-12 p-4 lg:p-8 items-center text-center shadow-md hover:shadow-lg transition-shadow">
+            <CardContent class="flex flex-col xl:flex-row w-full p-0 gap-12 items-start">
               <div class="flex basis-full xl:basis-1/3 justify-center">
                 <BaseImage
-                  class="w-full xl:w-[390]"
+                  class="w-full"
+                  :img-attrs="{ class: 'w-full h-full object-scale-down object-center' }"
                   :src="product.preview_img"
                   :alt="product.title"
                   aspect-ratio="aspect-square"
@@ -202,9 +258,8 @@ onMounted(() => {
                   height="390"
                 />
               </div>
-
               <div class="basis-2/3 flex flex-col items-start gap-6">
-                <h2 class="font-bold text-2xl">{{ product.title }}</h2>
+                <h2 class="font-bold text-2xl text-left">{{ product.title }}</h2>
                 <Separator />
                 <div
                   v-html="product.content"
@@ -212,20 +267,67 @@ onMounted(() => {
               </div>
             </CardContent>
             <CardFooter class="flex flex-col md:flex-row gap-4 justify-between w-full p-0">
-              <div class="flex basis-1/3">
-                <Icon
-                  name="iconoir:star"
-                  width="24"
-                  height="24"
-                  color="#575757" />
+              <div class="flex basis-1/3 gap-4">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <div
+                        @click="(e) => {
+                          e.preventDefault();
+                          setWishList(product.id);
+                        }"
+                        class="relative z-10 grid place-content-center w-7 h-7 transition-opacity group opacity-60 hover:opacity-100">
+                        <Icon
+                          name="lets-icons:star"
+                          width="24"
+                          height="24"
+                          :class="wishList.includes(product.id) ? '*:stroke-[#298687]' : '*:stroke-black'" />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p v-if="wishList.includes(product.id)">Убрать из избранного</p>
+                      <p v-else>Добавить в избранное</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <div
+                        @click="copyLink(product.id)"
+                        class="relative z-10 grid place-content-center w-7 h-7 transition-opacity group opacity-60 hover:opacity-100">
+                        <Icon
+                          name="lucide:share-2"
+                          width="24"
+                          height="24"
+                          class="*:stroke-black" />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Копировать</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
               <div class="flex basis-1/3 justify-center">
-                <Button variant="outline">
+                <Button
+                  variant="outline"
+                  @click="orderProduct(product.id)">
                   Отправить запрос
                 </Button>
               </div>
               <div class="flex basis-1/3 justify-end">
-                <span>Перейти на страницу</span>
+                <NuxtLink
+                  v-if="product.url.length"
+                  :to="product.url"
+                  class="relative z-10 flex items-center transition-opacity group opacity-60 hover:opacity-100">
+                  <span>перейти</span>
+                  <Icon
+                    name="iconamoon:arrow-right-2-light"
+                    width="28"
+                    height="28"
+                    color="black" />
+                </NuxtLink>
               </div>
             </CardFooter>
           </Card>
@@ -233,87 +335,93 @@ onMounted(() => {
       </div>
     </section>
 
-    <!--              <section>-->
-    <!--                <div class="container">-->
-    <!--                  <form-->
-    <!--                    @submit="onSubmit"-->
-    <!--                    class="flex flex-col gap-4">-->
-    <!--                    <div class="grid gap-16">-->
-    <!--                      <FormField-->
-    <!--                        v-slot="{ componentField }"-->
-    <!--                        name="name">-->
-    <!--                        <FormItem>-->
-    <!--                          <FormControl>-->
-    <!--                            <Input-->
-    <!--                              type="text"-->
-    <!--                              name="name"-->
-    <!--                              :id="nameId"-->
-    <!--                              placeholder="ФИО"-->
-    <!--                              v-bind="componentField" />-->
-    <!--                          </FormControl>-->
-    <!--                          <FormMessage />-->
-    <!--                        </FormItem>-->
-    <!--                      </FormField>-->
-    <!--                      <FormField-->
-    <!--                        v-slot="{ componentField }"-->
-    <!--                        name="contact">-->
-    <!--                        <FormItem>-->
-    <!--                          <FormControl>-->
-    <!--                            <Input-->
-    <!--                              type="text"-->
-    <!--                              name="contact"-->
-    <!--                              :id="contactId"-->
-    <!--                              placeholder="Телефон или почта"-->
-    <!--                              v-bind="componentField" />-->
-    <!--                          </FormControl>-->
-    <!--                          <FormMessage />-->
-    <!--                        </FormItem>-->
-    <!--                      </FormField>-->
-    <!--                      <FormField-->
-    <!--                        v-slot="{ componentField }"-->
-    <!--                        name="message">-->
-    <!--                        <FormItem>-->
-    <!--                          <FormControl>-->
-    <!--            <Textarea-->
-    <!--              name="message"-->
-    <!--              :id="messageId"-->
-    <!--              placeholder="Сообщение"-->
-    <!--              v-bind="componentField" />-->
-    <!--                          </FormControl>-->
-    <!--                          <FormMessage />-->
-    <!--                        </FormItem>-->
-    <!--                      </FormField>-->
-    <!--                    </div>-->
-    <!--                    <div class="grid gap-4">-->
-    <!--                      <Button-->
-    <!--                        type="submit"-->
-    <!--                        aria-label="submit"-->
-    <!--                        class="uppercase">-->
-    <!--                        отправить-->
-    <!--                      </Button>-->
-    <!--                      <FormField-->
-    <!--                        v-slot="{ value, handleChange }"-->
-    <!--                        type="checkbox"-->
-    <!--                        name="checkbox">-->
-    <!--                        <FormItem class="flex items-start lg:col-span-2 gap-x-2 space-y-0 rounded-md">-->
-    <!--                          <FormControl :id="checkId">-->
-    <!--                            <Checkbox-->
-    <!--                              :checked="value"-->
-    <!--                              @update:checked="handleChange" />-->
-    <!--                          </FormControl>-->
-    <!--                          <div class="space-y-1 leading-none">-->
-    <!--                            <FormLabel :forId="checkId">-->
-    <!--                              Я согласен(на) на обработку персональных данных.-->
-    <!--                              ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.-->
-    <!--                            </FormLabel>-->
-    <!--                            <FormMessage />-->
-    <!--                          </div>-->
-    <!--                        </FormItem>-->
-    <!--                      </FormField>-->
-    <!--                    </div>-->
-    <!--                  </form>-->
-    <!--                </div>-->
-    <!--              </section>-->
+    <Dialog v-model:open="isDialogOpen">
+      <DialogContent class="sm:max-w-[425px]">
+        <DialogHeader class="mb-4">
+          <DialogTitle class="text-center">Заявка</DialogTitle>
+          <VisuallyHidden>
+            <DialogDescription></DialogDescription>
+          </VisuallyHidden>
+        </DialogHeader>
+        <form
+          @submit="onSubmit"
+          class="flex flex-col gap-4">
+          <div class="grid gap-4">
+            <FormField
+              v-slot="{ componentField }"
+              name="name">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    name="name"
+                    :id="nameId"
+                    placeholder="ФИО"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="contact">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    name="contact"
+                    :id="contactId"
+                    placeholder="Телефон или почта"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="message">
+              <FormItem>
+                <FormControl>
+                <Textarea
+                  name="message"
+                  :id="messageId"
+                  placeholder="Сообщение"
+                  v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+          </div>
+          <div class="grid gap-4">
+            <Button
+              type="submit"
+              aria-label="submit"
+              class="uppercase">
+              отправить
+            </Button>
+            <FormField
+              v-slot="{ value, handleChange }"
+              type="checkbox"
+              name="checkbox">
+              <FormItem class="flex items-start lg:col-span-2 gap-x-2 space-y-0 rounded-md">
+                <FormControl :id="checkId">
+                  <Checkbox
+                    :checked="value"
+                    @update:checked="handleChange" />
+                </FormControl>
+                <div class="space-y-1 leading-none">
+                  <FormLabel :forId="checkId">
+                    Я согласен(на) на обработку персональных данных.
+                    ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.
+                  </FormLabel>
+                  <FormMessage />
+                </div>
+              </FormItem>
+            </FormField>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
 
   </main>
 
