@@ -11,7 +11,7 @@ import { useForm } from 'vee-validate'
 import { toast } from '~/components/ui/toast'
 import { FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form'
 
-const activeCategory = ref<string>('')
+const activeCategory = ref<InStockCategory | null>(null)
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
@@ -19,11 +19,8 @@ const {
   data
 }: {
   data: Ref<InStockCategory[]>
-} = await useFetch(`${API_ENDPOINT}${URLs.inStock}`, {
-  onResponse({ context, response }): Promise<void> | void {
-    setActiveCategory(response._data[0].title)
-  }
-})
+} = await useFetch(`${API_ENDPOINT}${URLs.inStock}`)
+activeCategory.value = data.value[2]
 
 const nameId = useId()
 const contactId = useId()
@@ -81,12 +78,20 @@ const onSubmit = form.handleSubmit(async (values) => {
 })
 
 function setActiveCategory(category: string) {
-  activeCategory.value = category
+  activeCategory.value = <InStockCategory>data.value.find((item) => {
+    return item.title === category
+  })
+  console.log(activeCategory.value)
 }
+
+onMounted(() => {
+  if (data.value.length) {
+    activeCategory.value = data.value[2]
+  }
+})
 </script>
 
 <template>
-
   <main>
 
     <Head>
@@ -157,7 +162,7 @@ function setActiveCategory(category: string) {
           <h1 class="section-title">На складе</h1>
           <div class="flex flex-col md:flex-row gap-4">
             <Select
-              :model-value="activeCategory"
+              :model-value="activeCategory?.title"
               @update:model-value="setActiveCategory($event)">
               <SelectTrigger class="w-[300px]">
                 <SelectValue placeholder="Категория" />
@@ -178,137 +183,137 @@ function setActiveCategory(category: string) {
       </div>
     </section>
 
-    <!--    <section class="mb-16">-->
-    <!--      <div class="container">-->
-    <!--        <div class="flex flex-col gap-4">-->
-    <!--          <Card-->
-    <!--            v-for="product in activeCategory.list"-->
-    <!--            :key="product.id"-->
-    <!--            class="flex flex-col gap-6 p-4 lg:p-8 items-center text-center">-->
-    <!--            <CardContent class="flex flex-col xl:flex-row w-full p-0 gap-8">-->
-    <!--              <div class="flex basis-full xl:basis-1/3 justify-center">-->
-    <!--                <BaseImage-->
-    <!--                  class="w-full xl:w-[390]"-->
-    <!--                  :src="product.preview_img"-->
-    <!--                  :alt="product.title"-->
-    <!--                  aspect-ratio="aspect-square"-->
-    <!--                  placeholder="bg-white"-->
-    <!--                  width="390"-->
-    <!--                  height="390"-->
-    <!--                />-->
-    <!--              </div>-->
-
-    <!--              <div class="basis-2/3 flex flex-col items-start gap-6">-->
-    <!--                <h2 class="font-bold text-2xl">{{ product.title }}</h2>-->
-    <!--                <Separator />-->
-    <!--                <div-->
-    <!--                  v-html="product.content"-->
-    <!--                  class="text-left"></div>-->
-    <!--              </div>-->
-    <!--            </CardContent>-->
-    <!--            <CardFooter class="flex flex-col md:flex-row gap-4 justify-between w-full p-0">-->
-    <!--              <div class="flex basis-1/3">-->
-    <!--                <Icon-->
-    <!--                  name="iconoir:star"-->
-    <!--                  width="24"-->
-    <!--                  height="24"-->
-    <!--                  color="#575757" />-->
-    <!--              </div>-->
-    <!--              <div class="flex basis-1/3 justify-center">-->
-    <!--                <Button variant="outline">-->
-    <!--                  Отправить запрос-->
-    <!--                </Button>-->
-    <!--              </div>-->
-    <!--              <div class="flex basis-1/3 justify-end">-->
-    <!--                <span>Перейти на страницу</span>-->
-    <!--              </div>-->
-    <!--            </CardFooter>-->
-    <!--          </Card>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </section>-->
-
-    <section>
+    <section class="mb-16">
       <div class="container">
-        <form
-          @submit="onSubmit"
-          class="flex flex-col gap-4">
-          <div class="grid gap-16">
-            <FormField
-              v-slot="{ componentField }"
-              name="name">
-              <FormItem>
-                <FormControl>
-                  <Input
-                    type="text"
-                    name="name"
-                    :id="nameId"
-                    placeholder="ФИО"
-                    v-bind="componentField" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-            <FormField
-              v-slot="{ componentField }"
-              name="contact">
-              <FormItem>
-                <FormControl>
-                  <Input
-                    type="text"
-                    name="contact"
-                    :id="contactId"
-                    placeholder="Телефон или почта"
-                    v-bind="componentField" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-            <FormField
-              v-slot="{ componentField }"
-              name="message">
-              <FormItem>
-                <FormControl>
-            <Textarea
-              name="message"
-              :id="messageId"
-              placeholder="Сообщение"
-              v-bind="componentField" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-          </div>
-          <div class="grid gap-4">
-            <Button
-              type="submit"
-              aria-label="submit"
-              class="uppercase">
-              отправить
-            </Button>
-            <FormField
-              v-slot="{ value, handleChange }"
-              type="checkbox"
-              name="checkbox">
-              <FormItem class="flex items-start lg:col-span-2 gap-x-2 space-y-0 rounded-md">
-                <FormControl :id="checkId">
-                  <Checkbox
-                    :checked="value"
-                    @update:checked="handleChange" />
-                </FormControl>
-                <div class="space-y-1 leading-none">
-                  <FormLabel :forId="checkId">
-                    Я согласен(на) на обработку персональных данных.
-                    ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.
-                  </FormLabel>
-                  <FormMessage />
-                </div>
-              </FormItem>
-            </FormField>
-          </div>
-        </form>
+        <div class="flex flex-col gap-4">
+          <Card
+            v-for="product in activeCategory?.list"
+            :key="product.id"
+            class="flex flex-col gap-6 p-4 lg:p-8 items-center text-center">
+            <CardContent class="flex flex-col xl:flex-row w-full p-0 gap-8">
+              <div class="flex basis-full xl:basis-1/3 justify-center">
+                <BaseImage
+                  class="w-full xl:w-[390]"
+                  :src="product.preview_img"
+                  :alt="product.title"
+                  aspect-ratio="aspect-square"
+                  placeholder="bg-white"
+                  width="390"
+                  height="390"
+                />
+              </div>
+
+              <div class="basis-2/3 flex flex-col items-start gap-6">
+                <h2 class="font-bold text-2xl">{{ product.title }}</h2>
+                <Separator />
+                <div
+                  v-html="product.content"
+                  class="text-left"></div>
+              </div>
+            </CardContent>
+            <CardFooter class="flex flex-col md:flex-row gap-4 justify-between w-full p-0">
+              <div class="flex basis-1/3">
+                <Icon
+                  name="iconoir:star"
+                  width="24"
+                  height="24"
+                  color="#575757" />
+              </div>
+              <div class="flex basis-1/3 justify-center">
+                <Button variant="outline">
+                  Отправить запрос
+                </Button>
+              </div>
+              <div class="flex basis-1/3 justify-end">
+                <span>Перейти на страницу</span>
+              </div>
+            </CardFooter>
+          </Card>
+        </div>
       </div>
     </section>
+
+    <!--              <section>-->
+    <!--                <div class="container">-->
+    <!--                  <form-->
+    <!--                    @submit="onSubmit"-->
+    <!--                    class="flex flex-col gap-4">-->
+    <!--                    <div class="grid gap-16">-->
+    <!--                      <FormField-->
+    <!--                        v-slot="{ componentField }"-->
+    <!--                        name="name">-->
+    <!--                        <FormItem>-->
+    <!--                          <FormControl>-->
+    <!--                            <Input-->
+    <!--                              type="text"-->
+    <!--                              name="name"-->
+    <!--                              :id="nameId"-->
+    <!--                              placeholder="ФИО"-->
+    <!--                              v-bind="componentField" />-->
+    <!--                          </FormControl>-->
+    <!--                          <FormMessage />-->
+    <!--                        </FormItem>-->
+    <!--                      </FormField>-->
+    <!--                      <FormField-->
+    <!--                        v-slot="{ componentField }"-->
+    <!--                        name="contact">-->
+    <!--                        <FormItem>-->
+    <!--                          <FormControl>-->
+    <!--                            <Input-->
+    <!--                              type="text"-->
+    <!--                              name="contact"-->
+    <!--                              :id="contactId"-->
+    <!--                              placeholder="Телефон или почта"-->
+    <!--                              v-bind="componentField" />-->
+    <!--                          </FormControl>-->
+    <!--                          <FormMessage />-->
+    <!--                        </FormItem>-->
+    <!--                      </FormField>-->
+    <!--                      <FormField-->
+    <!--                        v-slot="{ componentField }"-->
+    <!--                        name="message">-->
+    <!--                        <FormItem>-->
+    <!--                          <FormControl>-->
+    <!--            <Textarea-->
+    <!--              name="message"-->
+    <!--              :id="messageId"-->
+    <!--              placeholder="Сообщение"-->
+    <!--              v-bind="componentField" />-->
+    <!--                          </FormControl>-->
+    <!--                          <FormMessage />-->
+    <!--                        </FormItem>-->
+    <!--                      </FormField>-->
+    <!--                    </div>-->
+    <!--                    <div class="grid gap-4">-->
+    <!--                      <Button-->
+    <!--                        type="submit"-->
+    <!--                        aria-label="submit"-->
+    <!--                        class="uppercase">-->
+    <!--                        отправить-->
+    <!--                      </Button>-->
+    <!--                      <FormField-->
+    <!--                        v-slot="{ value, handleChange }"-->
+    <!--                        type="checkbox"-->
+    <!--                        name="checkbox">-->
+    <!--                        <FormItem class="flex items-start lg:col-span-2 gap-x-2 space-y-0 rounded-md">-->
+    <!--                          <FormControl :id="checkId">-->
+    <!--                            <Checkbox-->
+    <!--                              :checked="value"-->
+    <!--                              @update:checked="handleChange" />-->
+    <!--                          </FormControl>-->
+    <!--                          <div class="space-y-1 leading-none">-->
+    <!--                            <FormLabel :forId="checkId">-->
+    <!--                              Я согласен(на) на обработку персональных данных.-->
+    <!--                              ООО "БиоЛайн" гарантирует конфиденциальность получаемой информации.-->
+    <!--                            </FormLabel>-->
+    <!--                            <FormMessage />-->
+    <!--                          </div>-->
+    <!--                        </FormItem>-->
+    <!--                      </FormField>-->
+    <!--                    </div>-->
+    <!--                  </form>-->
+    <!--                </div>-->
+    <!--              </section>-->
 
   </main>
 
