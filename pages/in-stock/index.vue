@@ -298,8 +298,8 @@ onMounted(() => {
                         class="relative z-10 grid place-content-center w-7 h-7 transition-opacity group opacity-60 hover:opacity-100">
                         <Icon
                           name="lucide:share-2"
-                          width="24"
-                          height="24"
+                          width="20"
+                          height="20"
                           class="*:stroke-black" />
                       </div>
                     </TooltipTrigger>
