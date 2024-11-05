@@ -1,21 +1,6 @@
-type Key =
-  'index'
-  | 'news'
-  | 'newsArticle'
-  | 'events'
-  | 'inStock'
-  | 'catalog'
-  | 'manufacturers'
-  | 'comparison'
-  | 'productsOrderForm'
-  | 'productsExpandableOrderForm'
-  | 'indexPageForm'
-  | 'wishlistPageForm'
-  | 'inStockPageForm'
-  | 'vacancies'
-  | 'newProducts'
+type KeyTitle = keyof typeof URLs
 
-const URLs: Record<Key, string> = {
+const URLs = {
   index: `/index`,
   news: '/news/all',
   newsArticle: '/news',
@@ -31,6 +16,6 @@ const URLs: Record<Key, string> = {
   wishlistPageForm: '/feedback/find-nothing',
   productsExpandableOrderForm: '/feedback/expendable-material',
   newProducts: '/new-products/section',
-}
+} satisfies Record<string, string>
 
 export default URLs

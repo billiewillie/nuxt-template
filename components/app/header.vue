@@ -7,6 +7,22 @@ import BRANCHES from '~/data/branches'
 import { isRouteActive } from '~/utils/isRouteActive'
 import { useRoute } from 'vue-router'
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+
+const route = useRoute()
 
 const compareList = useCookie(
   'compareList',
@@ -35,8 +51,6 @@ function getWishListCount() {
     : 0
   return wishListLength + wishListExpandableMaterialsLength
 }
-
-const route = useRoute()
 </script>
 
 <template>
@@ -160,7 +174,39 @@ const route = useRoute()
             <li
               v-for="item in NAVIGATION"
               :key="item.id">
+              <DropdownMenu v-if="item.list">
+                <DropdownMenuTrigger as-child>
+                  <Button
+                    :variant="isRouteActive(item.slug, route) ? 'default' : 'ghost'"
+                    class="text-sm 2xl:text-base">
+                    {{ item.title }}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent class="w-96">
+                  <DropdownMenuGroup>
+                    <DropdownMenuSub
+                      v-for="subItem in item.list"
+                      :key="subItem.id">
+                      <DropdownMenuSubTrigger>
+                        <span>{{ subItem.title }}</span>
+                      </DropdownMenuSubTrigger>
+                      <DropdownMenuPortal>
+                        <DropdownMenuSubContent>
+                          <DropdownMenuItem
+                            v-for="subSubItem in subItem.list"
+                            :key="subSubItem">
+                            <NuxtLink :to="subSubItem.href">
+                              {{ subSubItem.title}}
+                            </NuxtLink>
+                          </DropdownMenuItem>
+                        </DropdownMenuSubContent>
+                      </DropdownMenuPortal>
+                    </DropdownMenuSub>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Button
+                v-else
                 :variant="isRouteActive(item.slug, route) ? 'default' : 'ghost'"
                 class="text-sm 2xl:text-base"
                 as-child>

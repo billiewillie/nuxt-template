@@ -28,7 +28,7 @@ const {
   data,
   error
 }: {
-  data: Ref<IndexPageApi> | undefined;
+  data: Ref<IndexPageApi>;
   error: Ref<any>;
 } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
 

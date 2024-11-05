@@ -15,6 +15,15 @@ import {
   SelectValue
 } from '@/components/ui/select'
 import EventCardSkeleton from '~/components/base/EventCardSkeleton.vue'
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { ChevronDown } from 'lucide-vue-next'
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
@@ -23,8 +32,8 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 const date = ref<Date>(new Date())
 const month = date.value.getMonth() + 1
 const day = date.value.getDate()
-const activeEventTypes = ref<Array<{ id: number }>>([])
-const activeEventCategory = ref<string | null>(null)
+const activeEventCategories = ref<Array<{ id: number }>>([])
+const activeEventType = ref<string | null>(null)
 
 const {
   data: events
@@ -121,38 +130,43 @@ function setActiveEventCategory(value: string) {
         <AppCalendar class="xl:col-span-3 bg-background relative" />
 
         <div class="flex flex-col border rounded-lg justify-between p-4 bg-background shadow-md gap-4">
-          <Select
-            v-model="activeEventCategory"
-            @update:model-value="setActiveEventCategory($event)">
-            <SelectTrigger class="w-full">
-              <SelectValue placeholder="Категория" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem
+          <div class="flex flex-col gap-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger as-child>
+                <Button
+                  variant="outline"
+                  class="w-full font-normal justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 [&>span]:line-clamp-1 text-left hover:bg-transparent">
+                  Категории
+                  <ChevronDown class="w-4 h-4 opacity-50" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-[298px]">
+                <DropdownMenuLabel>Можно выбрать несколько</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuCheckboxItem
                   v-for="category in events.categories"
                   :key="category.id"
                   :value="category.title">
                   {{ category.title }}
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger class="w-full">
-              <SelectValue placeholder="Тип мероприятия" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem
-                  v-for="type in events.type_events"
-                  :key="type.id"
-                  :value="type.title">
-                  {{ type.title }}
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+                </DropdownMenuCheckboxItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Select>
+              <SelectTrigger class="w-full">
+                <SelectValue placeholder="Тип мероприятия" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem
+                    v-for="type in events.type_events"
+                    :key="type.id"
+                    :value="type.title">
+                    {{ type.title }}
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
           <Button>Применить</Button>
         </div>
       </div>

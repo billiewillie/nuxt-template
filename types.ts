@@ -123,6 +123,7 @@ export type NavigationItem = {
   title: string;
   slug: string;
   href: string;
+  list?: Array<NavigationItem>;
 };
 
 export interface Event {
