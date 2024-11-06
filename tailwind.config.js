@@ -61,10 +61,10 @@ module.exports = {
         }
       },
       borderRadius: {
-        xl: 'calc(var(--radius) + 4px)',
+        xl: 'var(--radius)',
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
+        md: 'var(--radius)',
+        sm: 'var(--radius)'
       },
       keyframes: {
         'accordion-down': {
@@ -95,11 +95,11 @@ module.exports = {
       },
       transitionProperty: {
         left: 'left',
-        right: 'right',
+        right: 'right'
       },
       screens: {
         xs: '360px',
-        '2xl': '1440px',
+        '2xl': '1440px'
       }
     }
   },
@@ -119,7 +119,7 @@ module.exports = {
           '@screen 2xl': {
             maxWidth: '1440px',
             padding: '0 2rem'
-          },
+          }
         }
       })
     }

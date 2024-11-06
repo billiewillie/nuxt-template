@@ -189,7 +189,7 @@ console.log(categories.value)
             <CardContent>
               <p
                 class="text-xl"
-                v-html="manufacturer.article"></p>
+                v-html="manufacturer.article" />
             </CardContent>
           </Card>
         </NuxtLink>

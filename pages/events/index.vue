@@ -136,8 +136,7 @@ function setActiveEventCategory(value: string) {
                 <Button
                   variant="outline"
                   class="w-full font-normal justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 [&>span]:line-clamp-1 text-left hover:bg-transparent">
-                  Категории
-                  <ChevronDown class="w-4 h-4 opacity-50" />
+                  Категории <ChevronDown class="w-4 h-4 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent class="w-[298px]">
