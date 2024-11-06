@@ -172,7 +172,7 @@ console.log(categories.value)
           v-for="manufacturer in activeCategory.list"
           :key="manufacturer.id"
           :to="manufacturer.url">
-          <Card class="flex flex-col gap-4 h-full shadow-md hover:shadow-lg transition-shadow">
+          <Card class="flex flex-col h-full shadow-md hover:shadow-lg transition-shadow">
             <CardHeader class="flex flex-col flex-start gap-4">
               <ClientOnly>
                 <NuxtImg
@@ -187,8 +187,9 @@ console.log(categories.value)
               </h2>
             </CardHeader>
             <CardContent>
-              <p class="text-xl"><b>Leica Biosystems</b> - разработчик решений и средств автоматизации рабочих процессов
-                для проведения патогистологических исследований.</p>
+              <p
+                class="text-xl"
+                v-html="manufacturer.article"></p>
             </CardContent>
           </Card>
         </NuxtLink>
