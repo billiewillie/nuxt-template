@@ -2,6 +2,7 @@
   setup
   lang="ts">
 import { VisuallyHidden } from 'radix-vue'
+import { ChevronDown } from 'lucide-vue-next'
 import NAVIGATION from '~/data/navigation'
 import BRANCHES from '~/data/branches'
 import { isRouteActive } from '~/utils/isRouteActive'
@@ -179,7 +180,7 @@ function getWishListCount() {
                   <Button
                     :variant="isRouteActive(item.slug, route) ? 'default' : 'ghost'"
                     class="text-sm 2xl:text-base">
-                    {{ item.title }}
+                    {{ item.title }} <ChevronDown class="w-4 h-4 opacity-50" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent class="w-96">
