@@ -32,6 +32,7 @@ const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
 const date = ref<Date>(new Date())
 const month = date.value.getMonth() + 1
 const day = date.value.getDate()
+const categories = ref([])
 const activeEventCategories = ref<Array<{ id: number }>>([])
 const activeEventType = ref<string | null>(null)
 
@@ -41,7 +42,15 @@ const {
   data: Ref<Events>
 } = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/${day}`)
 
-console.log(events.value)
+categories.value = events.value.categories.map((category) => {
+  return {
+    id: category.id,
+    title: category.title,
+    isChecked: false
+  }
+})
+
+console.log(categories.value)
 
 function setActiveEventTypes() {
   console.log(value)
@@ -136,15 +145,17 @@ function setActiveEventCategory(value: string) {
                 <Button
                   variant="outline"
                   class="w-full font-normal justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 [&>span]:line-clamp-1 text-left hover:bg-transparent">
-                  Категории <ChevronDown class="w-4 h-4 opacity-50" />
+                  Категории 
+                  <ChevronDown class="w-4 h-4 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent class="w-[298px]">
+              <DropdownMenuContent class=" w-[298px]">
                 <DropdownMenuLabel>Можно выбрать несколько</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuCheckboxItem
                   v-for="category in events.categories"
                   :key="category.id"
+                  v-model:checked="categories.find(item => item.id === category.id)!.isChecked"
                   :value="category.title">
                   {{ category.title }}
                 </DropdownMenuCheckboxItem>

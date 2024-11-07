@@ -367,24 +367,26 @@ async function setNewProductsCategory(category: string) {
         <h2 class="section-title">Партнёры</h2>
       </div>
       <template v-if="data?.manufacturers">
-        <NuxtMarquee
-          :auto-fill="true"
-          :pause-on-hover="true"
-        >
-          <NuxtLink
-            v-for="manufacturer in data.manufacturers"
-            :key="manufacturer.id"
-            :to="manufacturer.url"
-            class="h-[40px] mr-20 grayscale transition hover:grayscale-0"
+        <ClientOnly>
+          <NuxtMarquee
+            :auto-fill="true"
+            :pause-on-hover="true"
           >
-            <NuxtImg
-              loading="lazy"
-              :src="manufacturer.logo"
-              :alt="manufacturer.title"
-              class="w-full h-full object-contain object-center"
-            />
-          </NuxtLink>
-        </NuxtMarquee>
+            <NuxtLink
+              v-for="manufacturer in data.manufacturers"
+              :key="manufacturer.id"
+              :to="manufacturer.url"
+              class="h-[40px] mr-20 grayscale transition hover:grayscale-0"
+            >
+              <NuxtImg
+                loading="lazy"
+                :src="manufacturer.logo"
+                :alt="manufacturer.title"
+                class="w-full h-full object-contain object-center"
+              />
+            </NuxtLink>
+          </NuxtMarquee>
+        </ClientOnly>
       </template>
     </section>
 
