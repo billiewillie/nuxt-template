@@ -4,16 +4,9 @@
 import { type Ref, ref } from 'vue'
 import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 import type { Events } from '~/types'
-import { useFetch, useRuntimeConfig } from '#app'
+import { useFetch, useId, useRuntimeConfig } from '#app'
 import URLs from '~/data/urls'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import EventCardSkeleton from '~/components/base/EventCardSkeleton.vue'
 import {
   DropdownMenu,
@@ -27,20 +20,29 @@ import { ChevronDown } from 'lucide-vue-next'
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
-const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
+interface CategoryType {
+  id: number,
+  title: string,
+  isChecked: boolean
+}
 
+const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
+const dropdownMenuId = useId()
 const date = ref<Date>(new Date())
 const month = date.value.getMonth() + 1
 const day = date.value.getDate()
-const categories = ref([])
-const activeEventCategories = ref<Array<{ id: number }>>([])
-const activeEventType = ref<string | null>(null)
+const categories = ref<CategoryType[]>([])
+const activeEventType = ref<number | null>(null)
+const activeEvents = ref([])
+const typeIds = ref<number[]>([])
 
 const {
   data: events
 }: {
   data: Ref<Events>
 } = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/${day}`)
+
+setActiveEvents(events.value.all_events_month)
 
 categories.value = events.value.categories.map((category) => {
   return {
@@ -50,14 +52,30 @@ categories.value = events.value.categories.map((category) => {
   }
 })
 
-console.log(categories.value)
+typeIds.value = events.value.type_events.map((type) => {
+  return type.id
+})
 
-function setActiveEventTypes() {
-  console.log(value)
+console.log(events.value)
+
+function setActiveType(e): void {
+  let filteredEvents
+  console.log(e)
+  const id = events.value.type_events.find((type) => {
+    return type.title === e
+  })?.id
+  filteredEvents = events.value.all_events_month.filter((event) => {
+    return event.type_id === id
+  })
+  setActiveEvents(filteredEvents)
 }
 
-function setActiveEventCategory(value: string) {
-  console.log(value)
+function setActiveCategory(id: number): void {
+
+}
+
+function setActiveEvents(events) {
+  activeEvents.value = events
 }
 </script>
 
@@ -144,12 +162,13 @@ function setActiveEventCategory(value: string) {
               <DropdownMenuTrigger as-child>
                 <Button
                   variant="outline"
+                  :id="dropdownMenuId"
                   class="w-full font-normal justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 [&>span]:line-clamp-1 text-left hover:bg-transparent">
                   Категории 
                   <ChevronDown class="w-4 h-4 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent class=" w-[298px]">
+              <DropdownMenuContent class="w-[298px]">
                 <DropdownMenuLabel>Можно выбрать несколько</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuCheckboxItem
@@ -161,7 +180,7 @@ function setActiveEventCategory(value: string) {
                 </DropdownMenuCheckboxItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Select>
+            <Select @update:model-value="setActiveType($event)">
               <SelectTrigger class="w-full">
                 <SelectValue placeholder="Тип мероприятия" />
               </SelectTrigger>
@@ -177,7 +196,6 @@ function setActiveEventCategory(value: string) {
               </SelectContent>
             </Select>
           </div>
-          <Button>Применить</Button>
         </div>
       </div>
     </section>
@@ -188,7 +206,7 @@ function setActiveEventCategory(value: string) {
 
           <template v-if="events.all_events_month && events.all_events_month.length">
             <BaseEventCard
-              v-for="event in events.all_events_month"
+              v-for="event in activeEvents"
               :key="event.id"
               :event="event" />
           </template>

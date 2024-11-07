@@ -370,8 +370,7 @@ async function setNewProductsCategory(category: string) {
         <ClientOnly>
           <NuxtMarquee
             :auto-fill="true"
-            :pause-on-hover="true"
-          >
+            :pause-on-hover="true">
             <NuxtLink
               v-for="manufacturer in data.manufacturers"
               :key="manufacturer.id"

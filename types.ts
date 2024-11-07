@@ -135,6 +135,8 @@ export interface Event {
   preview_img: string;
   date_end: string;
   date_start: string;
+  categories_id: Array<{ id: number; }>;
+  type_id: number;
 }
 
 export interface Events {

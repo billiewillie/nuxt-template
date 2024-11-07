@@ -22,8 +22,10 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { useId } from '#app'
 
 const route = useRoute()
+const dropdownMenuId = useId()
 
 const compareList = useCookie(
   'compareList',
@@ -178,9 +180,11 @@ function getWishListCount() {
               <DropdownMenu v-if="item.list">
                 <DropdownMenuTrigger as-child>
                   <Button
+                    :id="dropdownMenuId"
                     :variant="isRouteActive(item.slug, route) ? 'default' : 'ghost'"
                     class="text-sm 2xl:text-base">
-                    {{ item.title }} <ChevronDown class="w-4 h-4 -mb-0.5" />
+                    {{ item.title }} 
+                    <ChevronDown class="w-4 h-4 -mb-0.5" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent class="w-96">
@@ -197,7 +201,7 @@ function getWishListCount() {
                             v-for="subSubItem in subItem.list"
                             :key="subSubItem">
                             <NuxtLink :to="subSubItem.href">
-                              {{ subSubItem.title}}
+                              {{ subSubItem.title }}
                             </NuxtLink>
                           </DropdownMenuItem>
                         </DropdownMenuSubContent>
