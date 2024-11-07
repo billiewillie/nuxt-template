@@ -117,8 +117,20 @@ const branchesFiltered = Object.fromEntries(Object.entries(BRANCHES).filter(([ke
           <span>{{ BRANCHES.spb.country }}, </span>
           <span>{{ BRANCHES.spb.city }}</span>
           <p class="mb-2">{{ BRANCHES.spb.address }}</p>
-          <p class="mb-2">{{ BRANCHES.spb.phone }}</p>
-          <p class="mb-2">{{ BRANCHES.spb.email }}</p>
+          <p class="mb-2">
+            <a
+              :href="`tel:${BRANCHES.spb.phone}`"
+              class="inline-flex underline underline-offset-4 hover:no-underline">
+              {{ BRANCHES.spb.phone }}
+            </a>
+          </p>
+          <p>
+            <a
+              :href="`mailto:${BRANCHES.spb.email}`"
+              class="inline-flex underline underline-offset-4 hover:no-underline mb-2">
+              {{ BRANCHES.spb.email }}
+            </a>
+          </p>
         </div>
       </div>
     </section>
@@ -160,7 +172,7 @@ const branchesFiltered = Object.fromEntries(Object.entries(BRANCHES).filter(([ke
           quality="90"
           placeholder="bg-[#DDDED9]"
         />
-        <Card class="basis-full md:basis-1/2 lg:basis-1/3 p-4">
+        <Card class="basis-full md:basis-1/2 lg:basis-1/3 p-4 shadow-md hover:shadow-lg transition-shadow">
           <CardHeader class="font-medium p-0">
             <h2 class="~text-[18px]/[22px]">Сервисная служба для всех регионов России</h2>
           </CardHeader>
@@ -186,25 +198,34 @@ const branchesFiltered = Object.fromEntries(Object.entries(BRANCHES).filter(([ke
     <section class="mb-12">
       <div class="container">
         <h2 class="section-title mb-12">Филиалы</h2>
-        <div
-          class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4"
-        >
+        <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
           <Card
             v-for="branch in branchesFiltered"
             :key="branch.id"
-            class="flex flex-col gap-6 p-4"
-          >
+            class="flex flex-col gap-6 p-4 shadow-md hover:shadow-lg transition-shadow">
             <CardHeader class="p-0 font-medium">
               <CardTitle>{{ branch.title }}</CardTitle>
             </CardHeader>
             <Separator />
-            <CardContent class="p-0 font-medium">
+            <CardContent class="p-0 font-medium leading-6">
               <span v-if="branch.index">{{ branch.index }}, </span>
               <span v-if="branch.country">{{ branch.country }}, </span>
               <span v-if="branch.city">{{ branch.city }}, </span>
               <p v-if="branch.address">{{ branch.address }}</p>
-              <p>{{ branch.phone }}</p>
-              <p v-if="branch.email">{{ branch.email }}</p>
+              <p>
+                <a
+                  :href="`tel:${branch.phone}`"
+                  class="inline-flex underline underline-offset-4 hover:no-underline">
+                  {{ branch.phone }}
+                </a>
+              </p>
+              <p v-if="branch.email">
+                <a
+                  :href="`mailto:${branch.email}`"
+                  class="inline-flex underline underline-offset-4 hover:no-underline mb-2">
+                  {{ branch.email }}
+                </a>
+              </p>
             </CardContent>
           </Card>
         </div>
@@ -213,28 +234,36 @@ const branchesFiltered = Object.fromEntries(Object.entries(BRANCHES).filter(([ke
 
     <section class="mb-24 xl:mb-32">
       <div class="container">
-        <div
-          class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4"
-        >
+        <div class="grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] xl:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-4">
           <Card
             v-for="branch in BRANCH_PARTNERS"
             :key="branch.id"
-            class="flex flex-col gap-6 p-4"
-          >
+            class="flex flex-col gap-6 p-4 shadow-md hover:shadow-lg transition-shadow">
             <CardHeader class="p-0 font-medium">
               <CardTitle class="leading-7">
                 {{ branch.title }}
               </CardTitle>
             </CardHeader>
             <Separator />
-            <CardContent class="p-0 font-medium">
-              <span>{{ branch.index }}</span
-              >,
+            <CardContent class="p-0 font-medium leading-6">
+              <span>{{ branch.index }}</span>,
               <span>{{ branch.country }}</span>
               <p>{{ branch.city }}</p>
               <p>{{ branch.address }}</p>
-              <p>{{ branch.phone }}</p>
-              <p>{{ branch.email }}</p>
+              <p>
+                <a
+                  :href="`tel:${branch.phone}`"
+                  class="inline-flex underline underline-offset-4 hover:no-underline">
+                  {{ branch.phone }}
+                </a>
+              </p>
+              <p>
+                <a
+                  :href="`mailto:${branch.email}`"
+                  class="inline-flex underline underline-offset-4 hover:no-underline mb-2">
+                  {{ BRANCHES.spb.email }}
+                </a>
+              </p>
             </CardContent>
           </Card>
         </div>
