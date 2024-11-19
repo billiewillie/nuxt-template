@@ -32,7 +32,7 @@ const date = ref<Date>(new Date())
 const month = date.value.getMonth() + 1
 const day = date.value.getDate()
 const categories = ref<CategoryType[]>([])
-const activeEventType = ref<number | null>(null)
+const activeEventType = ref<string | null>(null)
 const activeEvents = ref([])
 const typeIds = ref<number[]>([])
 
@@ -41,8 +41,6 @@ const {
 }: {
   data: Ref<Events>
 } = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/${day}`)
-
-setActiveEvents(events.value.all_events_month)
 
 categories.value = events.value.categories.map((category) => {
   return {
@@ -58,25 +56,32 @@ typeIds.value = events.value.type_events.map((type) => {
 
 console.log(events.value)
 
-function setActiveType(e): void {
+function setActiveEvents() {
   let filteredEvents
-  console.log(e)
-  const id = events.value.type_events.find((type) => {
-    return type.title === e
-  })?.id
-  filteredEvents = events.value.all_events_month.filter((event) => {
-    return event.type_id === id
-  })
-  setActiveEvents(filteredEvents)
+
+  if (categories.value.length > 0 && categories.value.some((category) => category.isChecked)) {
+    filteredEvents = events.value.all_events_month.filter(event => {
+      return event.categories_id.some(item => {
+        return categories.value.find(category => category.id === item.id)?.isChecked
+      })
+    })
+  } else {
+    filteredEvents = events.value.all_events_month
+  }
+
+  if (activeEventType.value !== null) {
+    const id = events.value.type_events.find((type) => {
+      return type.title === activeEventType.value
+    })?.id
+    filteredEvents = filteredEvents.filter(({ type_id }) => {
+      return type_id === id
+    })
+  }
+
+  activeEvents.value = filteredEvents
 }
 
-function setActiveCategory(id: number): void {
-
-}
-
-function setActiveEvents(events) {
-  activeEvents.value = events
-}
+setActiveEvents()
 </script>
 
 <template>
@@ -154,7 +159,7 @@ function setActiveEvents(events) {
     <section class="mb-4">
       <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-4 xl:gap-y-0 gap-x-4">
 
-        <AppCalendar class="xl:col-span-3 bg-background relative" />
+        <AppCalendar class="xl:col-span-3 pt-0 bg-background relative" />
 
         <div class="flex flex-col border rounded-lg justify-between p-4 bg-background shadow-md gap-4">
           <div class="flex flex-col gap-4">
@@ -173,14 +178,15 @@ function setActiveEvents(events) {
                 <DropdownMenuSeparator />
                 <DropdownMenuCheckboxItem
                   v-for="category in events.categories"
+                  @click="setActiveEvents()"
+                  v-model:checked="categories.find((item: CategoryType) => item.id === category.id)!.isChecked"
                   :key="category.id"
-                  v-model:checked="categories.find(item => item.id === category.id)!.isChecked"
                   :value="category.title">
                   {{ category.title }}
                 </DropdownMenuCheckboxItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Select @update:model-value="setActiveType($event)">
+            <Select @update:model-value="activeEventType = $event; setActiveEvents()">
               <SelectTrigger class="w-full">
                 <SelectValue placeholder="Тип мероприятия" />
               </SelectTrigger>

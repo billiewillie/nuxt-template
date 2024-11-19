@@ -1,10 +1,14 @@
-<script setup lang="ts">
-import type { Manufacturer } from '~/types';
+<script
+  setup
+  lang="ts">
+import type { Manufacturer } from '~/types'
 import type { Ref } from 'vue'
-const route = useRoute();
-const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public;
+import ProductCard from '~/components/base/ProductCard.vue'
 
-const { data: manufacturer }: { data: Ref<Manufacturer> } = await useFetch(`${API_ENDPOINT}${route.fullPath}`);
+const route = useRoute()
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
+
+const { data: manufacturer }: { data: Ref<Manufacturer> } = await useFetch(`${API_ENDPOINT}${route.fullPath}`)
 </script>
 
 <template>
@@ -97,7 +101,7 @@ const { data: manufacturer }: { data: Ref<Manufacturer> } = await useFetch(`${AP
       </div>
     </section>
 
-    <section>
+    <section class="mb-16">
       <div class="container grid grid-cols-4 gap-4">
         <NuxtImg
           :src="manufacturer.logo"
@@ -109,6 +113,15 @@ const { data: manufacturer }: { data: Ref<Manufacturer> } = await useFetch(`${AP
           class="col-span-2 flex flex-col gap-4 text-base [&_a]:underline [&_a]:underline-offset-4"
           v-html="manufacturer.content"
         ></div>
+      </div>
+    </section>
+
+    <section class="mb-16" v-if="manufacturer.list.length">
+      <div class="container grid grid-cols-4 gap-4">
+        <ProductCard
+          v-for="product in manufacturer.list"
+          :product="product"
+          :key="product.id" />
       </div>
     </section>
   </main>

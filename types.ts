@@ -87,6 +87,7 @@ export interface Manufacturer {
   sort?: number;
   created_at?: string;
   content?: string;
+  list: Array<ProductCard>;
 }
 
 interface Recommendation {
