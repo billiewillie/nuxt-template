@@ -116,7 +116,9 @@ const { data: manufacturer }: { data: Ref<Manufacturer> } = await useFetch(`${AP
       </div>
     </section>
 
-    <section class="mb-16" v-if="manufacturer.list.length">
+    <section
+      class="mb-16"
+      v-if="manufacturer.list.length">
       <div class="container grid grid-cols-4 gap-4">
         <ProductCard
           v-for="product in manufacturer.list"

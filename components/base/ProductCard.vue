@@ -80,7 +80,7 @@ defineProps<{
         <h3
           class="font-semibold ~text-[16px]/[18px] line-clamp-3"
           :class="{ '~text-[12px]/[18px]': isCompared }">
-          {{ product.title }} {{ product.id }}
+          {{ product.title }}
         </h3>
       </CardContent>
       <CardFooter class="flex items-center justify-between p-0">
