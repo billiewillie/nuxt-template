@@ -177,8 +177,8 @@ console.log(categories.value)
               <ClientOnly>
                 <NuxtImg
                   :src="manufacturer.logo"
-                  height="50"
-                  class="h-[50px] flex self-start"
+
+                  class="max-h-[40px] max-w-[200px] flex self-start"
                   @error="manufacturer.logo = `img/logo-placeholder.svg`"
                   :alt="manufacturer.title" />
               </ClientOnly>
