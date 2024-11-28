@@ -21,12 +21,6 @@ function setNewDate() {
 </script>
 
 <template>
-  <!--  <Calendar-->
-  <!--    v-model="value"-->
-  <!--    locale="ru"-->
-  <!--    weekday-format="short"-->
-  <!--    :class="cn('rounded-md border', props.class)">-->
-  <!--  </Calendar>-->
   <CalendarRoot
     v-slot="{ weekDays, grid }"
     locale="ru"
@@ -37,11 +31,11 @@ function setNewDate() {
         <ChevronLeft class="w-4 h-4" />
       </CalendarPrev>
       <CalendarHeading class="text-[15px] text-black font-medium" />
-        <CalendarNext class="inline-flex items-center cursor-pointer text-white justify-center rounded-[9px] bg-transparent w-8 h-8 active:scale-98 active:transition-all focus:shadow-none">
+      <CalendarNext class="inline-flex items-center cursor-pointer text-white justify-center rounded-[9px] bg-transparent w-8 h-8 active:scale-98 active:transition-all focus:shadow-none">
         <ChevronRight class="w-4 h-4" />
       </CalendarNext>
     </CalendarHeader>
-    <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+    <div class="flex flex-col space-y-4 p-4 sm:flex-row sm:space-x-4 sm:space-y-0">
       <CalendarGrid
         v-for="month in grid"
         :key="month.value.toString()"
@@ -56,20 +50,34 @@ function setNewDate() {
             </CalendarHeadCell>
           </CalendarGridRow>
         </CalendarGridHead>
-        <CalendarGridBody class="grid">
+        <CalendarGridBody class="grid border-l border-t border-gray-400">
           <CalendarGridRow
             v-for="(weekDates, index) in month.rows"
             :key="`weekDate-${index}`"
-            class="grid grid-cols-7">
+            class="grid grid-cols-7 border-b border-gray-400">
             <CalendarCell
               v-for="weekDate in weekDates"
               :key="weekDate.toString()"
               :date="weekDate"
-              class="relative text-center text-sm">
+              class="relative text-sm border-r border-gray-400 h-14">
               <CalendarCellTrigger
                 :day="weekDate"
                 :month="month.value"
-                class="relative flex items-center justify-center rounded-full whitespace-nowrap text-sm font-normal text-black w-8 h-8 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[disabled]:text-black/30 data-[selected]:!bg-green10 data-[selected]:text-white hover:bg-green5 data-[highlighted]:bg-green5 data-[unavailable]:pointer-events-none data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-green9 " />
+                class="relative w-full h-full flex flex-col whitespace-nowrap text-sm font-normal text-black outline-none data-[disabled]:text-black/30 data-[selected]:!bg-green10 data-[selected]:text-white hover:bg-green5 data-[highlighted]:bg-green5 data-[unavailable]:pointer-events-none data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-green9">
+                <div class="text-left w-full basis-1/2 pt-2 pl-2">{{ weekDate.day }}</div>
+                <div class="hidden xl:flex items-end w-full justify-end basis-1/2 pb-2 pr-2">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger as-child>
+                        <div class="w-3 h-3 border-2 border-white rounded-full bg-primary hover:bg-white hover:border-primary transition-all"></div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Title</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+              </CalendarCellTrigger>
             </CalendarCell>
           </CalendarGridRow>
         </CalendarGridBody>

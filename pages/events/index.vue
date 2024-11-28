@@ -33,7 +33,7 @@ const month = date.value.getMonth() + 1
 const day = date.value.getDate()
 const categories = ref<CategoryType[]>([])
 const activeEventType = ref<string | null>(null)
-const activeEvents = ref([])
+const activeEvents = ref<Array<any>>([])
 const typeIds = ref<number[]>([])
 
 const {
@@ -79,6 +79,7 @@ function setActiveEvents() {
   }
 
   activeEvents.value = filteredEvents
+  console.log(activeEvents.value)
 }
 
 setActiveEvents()
