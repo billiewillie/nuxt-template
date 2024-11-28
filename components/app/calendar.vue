@@ -30,7 +30,7 @@ function setNewDate() {
       <CalendarPrev class="inline-flex items-center cursor-pointer text-white justify-center rounded-[9px] bg-transparent w-8 h-8 active:scale-98 active:transition-all focus:shadow-none">
         <ChevronLeft class="w-4 h-4" />
       </CalendarPrev>
-      <CalendarHeading class="text-[15px] text-black font-medium" />
+      <CalendarHeading class="text-[15px] text-white font-medium" />
       <CalendarNext class="inline-flex items-center cursor-pointer text-white justify-center rounded-[9px] bg-transparent w-8 h-8 active:scale-98 active:transition-all focus:shadow-none">
         <ChevronRight class="w-4 h-4" />
       </CalendarNext>
@@ -45,26 +45,28 @@ function setNewDate() {
             <CalendarHeadCell
               v-for="day in weekDays"
               :key="day"
-              class="rounded-md text-xs text-green8">
+              class="text-xs text-black font-bold">
               {{ day }}
             </CalendarHeadCell>
           </CalendarGridRow>
         </CalendarGridHead>
-        <CalendarGridBody class="grid border-l border-t border-gray-400">
+        <CalendarGridBody class="grid border-l border-t border-gray-300">
           <CalendarGridRow
             v-for="(weekDates, index) in month.rows"
             :key="`weekDate-${index}`"
-            class="grid grid-cols-7 border-b border-gray-400">
+            class="grid grid-cols-7 border-b border-gray-300">
             <CalendarCell
               v-for="weekDate in weekDates"
               :key="weekDate.toString()"
               :date="weekDate"
-              class="relative text-sm border-r border-gray-400 h-14">
+              class="relative text-sm border-r border-gray-300 h-14">
               <CalendarCellTrigger
                 :day="weekDate"
                 :month="month.value"
                 class="relative w-full h-full flex flex-col whitespace-nowrap text-sm font-normal text-black outline-none data-[disabled]:text-black/30 data-[selected]:!bg-green10 data-[selected]:text-white hover:bg-green5 data-[highlighted]:bg-green5 data-[unavailable]:pointer-events-none data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-green9">
-                <div class="text-left w-full basis-1/2 pt-2 pl-2">{{ weekDate.day }}</div>
+                <div class="text-left w-full basis-1/2 pt-2 pl-2">
+                  {{ weekDate.day }}
+                </div>
                 <div class="hidden xl:flex items-end w-full justify-end basis-1/2 pb-2 pr-2">
                   <TooltipProvider>
                     <Tooltip>

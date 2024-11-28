@@ -57,7 +57,7 @@ function getWishListCount() {
 </script>
 
 <template>
-  <header class="header flex flex-col shadow-lg z-10">
+  <header class="header flex flex-col shadow-lg z-20">
     <div class="hidden xl:flex xl:fixed xl:w-full xl:z-100 xl:top-0 xl:left-0 bg-background-dark py-4 text-foreground-dark">
       <div class="container flex justify-between text-[14px]">
         <div class="flex">

@@ -107,7 +107,7 @@ console.log(props.data)
                 height="36"
                 name="clarity:layers-line"
                 v-if="category.is_partition === 1"
-                class="absolute right-0 top-0 text-[#ccc] group-hover:text-black transition-colors" />
+                class="absolute right-0 top-0 text-[#ccc] z-10 group-hover:text-black transition-colors" />
               <BaseImage
                 width="269"
                 height="269"
