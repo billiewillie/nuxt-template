@@ -25,14 +25,6 @@ import { VisuallyHidden } from 'radix-vue'
 
 const route = useRoute()
 
-const wishList = useCookie(
-  'wishList',
-  {
-    default: () => [],
-    watch: true
-  }
-)
-
 const activeCategory = ref<InStockCategory | null>(null)
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
@@ -113,14 +105,6 @@ function setActiveCategory(category: string) {
     return item.title === category
   })
   console.log(activeCategory.value)
-}
-
-function setWishList(id: number) {
-  if (wishList.value.includes(id)) {
-    wishList.value = wishList.value.filter((item: number) => item !== id)
-  } else {
-    wishList.value = [...wishList.value, id]
-  }
 }
 
 function orderProduct(id: number) {
@@ -268,28 +252,6 @@ onMounted(() => {
             </CardContent>
             <CardFooter class="flex flex-col md:flex-row gap-4 justify-between w-full p-0">
               <div class="flex basis-1/3 gap-4">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <div
-                        @click="(e) => {
-                          e.preventDefault();
-                          setWishList(product.id);
-                        }"
-                        class="relative z-10 grid place-content-center w-7 h-7 transition-opacity group opacity-60 hover:opacity-100">
-                        <Icon
-                          name="lets-icons:star"
-                          width="24"
-                          height="24"
-                          :class="wishList.includes(product.id) ? '*:stroke-[#298687]' : '*:stroke-black'" />
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p v-if="wishList.includes(product.id)">Убрать из избранного</p>
-                      <p v-else>Добавить в избранное</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>

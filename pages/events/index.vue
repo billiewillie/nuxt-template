@@ -160,7 +160,9 @@ setActiveEvents()
     <section class="mb-4">
       <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-4 xl:gap-y-0 gap-x-4">
 
-        <AppCalendar class="xl:col-span-3 pt-0 bg-background relative" />
+        <div class="xl:col-span-3 pt-0 bg-background relative">
+          <AppCalendar />
+        </div>
 
         <div class="flex flex-col border rounded-lg justify-between p-4 bg-background shadow-md gap-4">
           <div class="flex flex-col gap-4">

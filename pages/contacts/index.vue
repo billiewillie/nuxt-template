@@ -169,7 +169,7 @@ const branchesFiltered = Object.fromEntries(Object.entries(BRANCHES).filter(([ke
           alt="сервисная служба"
           width="940"
           height="438"
-          quality="90"
+          quality="100"
           placeholder="bg-[#DDDED9]"
         />
         <Card class="basis-full md:basis-1/2 lg:basis-1/3 p-4 shadow-md hover:shadow-lg transition-shadow">

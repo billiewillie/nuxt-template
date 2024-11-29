@@ -2,6 +2,12 @@
   setup
   lang="ts">
 import type { ProductCategoryPageApi } from '~/types'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 const props = defineProps<{
   data: ProductCategoryPageApi
@@ -102,12 +108,21 @@ console.log(props.data)
           :key="category.id">
           <Card class="group h-full shadow-md hover:shadow-lg p-4 rounded transition-shadow">
             <CardHeader class="p-0 relative">
-              <Icon
-                width="36"
-                height="36"
-                name="clarity:layers-line"
-                v-if="category.is_partition === 1"
-                class="absolute right-0 top-0 text-[#ccc] z-10 group-hover:text-black transition-colors" />
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Icon
+                      width="36"
+                      height="36"
+                      name="clarity:layers-line"
+                      v-if="category.is_partition === 1"
+                      class="absolute right-0 top-0 text-[#ccc] z-10 group-hover:text-black transition-colors" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Данная страница является разделом</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
               <BaseImage
                 width="269"
                 height="269"
