@@ -54,7 +54,7 @@ if (categories.value && categories.value.manufacturers.length) {
   activeCategory.value = categories.value.manufacturers[0] as ManufacturerCategory
 }
 
-function setImage(img) {
+function setImage(img: string) {
   if (img) {
     console.log(img)
     return img
@@ -177,8 +177,7 @@ console.log(categories.value)
               <ClientOnly>
                 <NuxtImg
                   :src="manufacturer.logo"
-
-                  class="max-h-[40px] max-w-[200px] flex self-start"
+                  class="max-h-[40px] h-[40px] max-w-[200px] flex self-start"
                   @error="manufacturer.logo = `img/logo-placeholder.svg`"
                   :alt="manufacturer.title" />
               </ClientOnly>

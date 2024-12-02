@@ -28,8 +28,8 @@ const events = ref([
     description: 'Название события',
     isComplete: false,
     dates: {
-      start: '2024-11-01',
-      end: '2024-11-03'
+      start: '2024-12-11',
+      end: '2024-12-13'
     },
     color: 'green'
   },
@@ -37,8 +37,8 @@ const events = ref([
     description: 'Название события 34223423  2524',
     isComplete: false,
     dates: {
-      start: '2024-11-01',
-      end: '2024-11-03'
+      start: '2024-12-13',
+      end: '2024-12-13'
     },
     color: 'green'
   }
@@ -95,7 +95,7 @@ function setNewDate() {
   @apply flex flex-col h-[42px] top-0 items-center z-10;
 }
 
-.calendar-wrapper > div > div:first-child button {
+.calendar-wrapper .vc-header button {
   @apply opacity-100 bg-black text-white border-none;
 }
 
