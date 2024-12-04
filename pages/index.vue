@@ -1,38 +1,35 @@
 <script
   setup
   lang="ts">
-import { useAsyncData, useFetch, useRuntimeConfig } from '#app'
+import {
+  useFetch,
+  useRuntimeConfig
+} from '#app'
 import { Separator } from '~/components/ui/separator'
 import URLs from '~/data/urls'
 import CATEGORIES from '~/data/categories'
-import type { IndexPageApi, NewProductList } from '~/types'
-import { type Ref, ref } from 'vue'
-import { ChevronRight } from 'lucide-vue-next'
+import type {
+  IndexPageApi,
+  NewProductList
+} from '~/types'
 import {
-  type DateValue,
-  getLocalTimeZone,
-  today
-} from '@internationalized/date'
-import EventCardSkeleton from '~/components/base/EventCardSkeleton.vue'
-
-const date = ref<Date>(new Date())
+  type Ref,
+  ref
+} from 'vue'
+import { ChevronRight } from 'lucide-vue-next'
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
-
-const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
-
 const newProductsCategory = ref<string>('')
 const newProducts = ref<Array<NewProductList>>([]) as Ref<Array<NewProductList>>
 
 const {
-  data,
-  error
+  data
 }: {
   data: Ref<IndexPageApi>;
-  error: Ref<any>;
 } = await useFetch(`${API_ENDPOINT}${URLs.index}`)
 
 if (data?.value) {
+  console.log(data.value)
   newProducts.value = data.value.new_products.list
 }
 
@@ -305,66 +302,14 @@ async function setNewProductsCategory(category: string) {
     </section>
 
     <!--события-->
-    <section class="mb-24 xl:mb-32">
-      <div class="container mb-16">
-        <h2 class="section-title">Календарь событий</h2>
-      </div>
-
-      <div class="container relative flex flex-col md:flex-row gap-4 calendar-backdrop">
-        <LazyAppCalendar class="md:w-1/2 relative z-[1] bg-background" />
-
-        <Carousel
-          class="h-[inherit] md:w-1/2 relative"
-          :opts="{ align: 'start' }"
-        >
-          <CarouselContent
-            :is-visible="true"
-            :is-height-full="true"
-            class="h-full"
-          >
-            <template v-if="data?.calendar?.list.length">
-              <CarouselItem
-                v-for="event in data?.calendar.list"
-                :key="event.id"
-                class="lg:basis-1/2 h-full"
-              >
-                <BaseEventCard :event="event" />
-              </CarouselItem>
-            </template>
-
-            <template v-else>
-              <CarouselItem
-                v-for="(_, index) in 3"
-                :key="index"
-                class="lg:basis-1/2 h-full"
-              >
-                <EventCardSkeleton />
-              </CarouselItem>
-            </template>
-          </CarouselContent>
-          <div class="hidden md:flex absolute right-0 -top-[108px] xl:-top-[120px] gap-4 items-center">
-            <div class="flex gap-4">
-              <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
-              <CarouselNext class="relative left-0 top-0 translate-y-0" />
-            </div>
-            <Button as-child>
-              <NuxtLink
-                to="/events"
-                class="flex gap-2 items-center"
-              >
-                Все события
-                <ChevronRight class="w-4 h-4 -mr-[6px]" />
-              </NuxtLink>
-            </Button>
-          </div>
-        </Carousel>
-      </div>
-    </section>
+    <SectionEvents :data="data" />
 
     <!--партнёры-->
     <section class="mb-24 xl:mb-32">
       <div class="container mb-16">
-        <h2 class="section-title">Партнёры</h2>
+        <h2 class="section-title">
+          Партнёры
+        </h2>
       </div>
       <template v-if="data?.manufacturers">
         <ClientOnly>
@@ -392,27 +337,3 @@ async function setNewProductsCategory(category: string) {
     <BaseContactForm />
   </main>
 </template>
-
-<style>
-.calendar-backdrop::before {
-  display: none;
-  content: '';
-  position: absolute;
-  top: -4%;
-  left: -50%;
-  width: calc(100% - 8px);
-  height: 108%;
-  background: hsl(225, 67%, 99%);
-  z-index: 1;
-}
-
-.antialiased {
-  -webkit-font-smoothing: antialiased;
-}
-
-@media (min-width: 768px) {
-  .calendar-backdrop::before {
-    display: block;
-  }
-}
-</style>

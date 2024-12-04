@@ -2,69 +2,34 @@
   setup
   lang="ts">
 import { ref } from 'vue'
-import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
+import {
+  type DateValue,
+  getLocalTimeZone,
+  today
+} from '@internationalized/date'
 import { cn } from '@/lib/utils'
 
-const datesOfEvents = ref<Record<string, Array<string>>>({
-  '11-01': [
-    'Конференция «Инновационные технологии в диагностике и лечении патологии головы и шеи»',
-    'Опухоли ЖКТ (РООП)'
-  ],
-  '11-02': [
-    'Конференция «Инновационные технологии в диагностике и лечении патологии головы и шеи»'
-  ]
-})
 const date = ref<Date>(new Date())
-const value = ref<DateValue>(today(getLocalTimeZone()))
 
-const props = withDefaults(defineProps<{
-  class?: string
-}>(), {
-  class: ''
-})
-
-const events = ref([
-  {
-    description: 'Название события',
-    isComplete: false,
+defineProps<{
+  attributes?: {
     dates: {
-      start: '2024-12-11',
-      end: '2024-12-13'
+      start: string,
+      end: string
     },
-    color: 'green'
-  },
-  {
-    description: 'Название события 34223423  2524',
-    isComplete: false,
-    dates: {
-      start: '2024-12-13',
-      end: '2024-12-13'
-    },
-    color: 'green'
-  }
-])
-
-const attributes = computed(() => [
-  // Attributes for events
-  ...events.value.map(todo => ({
-    dates: todo.dates,
     dot: {
-      color: todo.color,
-      ...(todo.isComplete && { class: 'opacity-75' })
+      color: 'green',
+      class?: string | undefined
     },
     popover: {
-      label: todo.description
+      label: string
     }
-  }))
-])
-
-function setNewDate() {
-  console.log(value.value)
-}
+  }[]
+}>()
 </script>
 
 <template>
-  <div :class="cn('calendar-wrapper min-h-[400px] flex flex-col', props.class)">
+  <div class="calendar-wrapper min-h-[400px] h-full flex flex-col shadow-md border">
     <ClientOnly>
       <VDatePicker
         trim-weeks
@@ -79,6 +44,11 @@ function setNewDate() {
 .vc-popover-content-wrapper .vc-popover-content {
   @apply !h-auto;
 }
+
+.vc-popover-content-wrapper .vc-popover-content > div {
+  @apply max-w-[360px];
+}
+
 .calendar-wrapper > div:nth-child(1) {
   @apply flex flex-col h-full w-full flex-grow;
 }
@@ -105,6 +75,10 @@ function setNewDate() {
 
 .vc-header .vc-title-wrapper {
   @apply flex z-10 h-[42px];
+}
+
+.vc-container {
+  @apply border-none;
 }
 
 .vc-pane-container,
@@ -170,7 +144,7 @@ function setNewDate() {
 }
 
 .vc-dot {
-  @apply w-2 h-2;
+  @apply h-1.5 w-1.5;
 }
 
 .vc-header .vc-arrow:hover {

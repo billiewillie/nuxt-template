@@ -18,23 +18,53 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { ChevronDown } from 'lucide-vue-next'
 
-const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
-
 interface CategoryType {
   id: number,
   title: string,
   isChecked: boolean
 }
+interface Event {
+  id: number,
+  title: string,
+  url: string,
+  annotation: string,
+  preview_img: string,
+  description: string,
+  isComplete: boolean,
+  date_end: string,
+  date_start: string,
+  type_id: number,
+  categories_id: Array<{ id: number; }>
+  dates: {
+    start: string,
+    end: string
+  },
+  color: 'green'
+}
 
-const value = ref(today(getLocalTimeZone())) as Ref<DateValue>
+const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
+
 const dropdownMenuId = useId()
 const date = ref<Date>(new Date())
 const month = date.value.getMonth() + 1
 const day = date.value.getDate()
 const categories = ref<CategoryType[]>([])
 const activeEventType = ref<string | null>(null)
-const activeEvents = ref<Array<any>>([])
+const activeEvents = ref<Event[]>([])
 const typeIds = ref<number[]>([])
+
+const attributes = computed(() => [
+  ...activeEvents.value.map(todo => ({
+    dates: todo.dates,
+    dot: {
+      color: todo.color,
+      ...(todo.isComplete && { class: 'opacity-75' })
+    },
+    popover: {
+      label: todo.description
+    }
+  }))
+])
 
 const {
   data: events
@@ -53,8 +83,6 @@ categories.value = events.value.categories.map((category) => {
 typeIds.value = events.value.type_events.map((type) => {
   return type.id
 })
-
-console.log(events.value)
 
 function setActiveEvents() {
   let filteredEvents
@@ -78,8 +106,26 @@ function setActiveEvents() {
     })
   }
 
-  activeEvents.value = filteredEvents
-  console.log(activeEvents.value)
+  activeEvents.value = filteredEvents.map((event) => {
+    return {
+      id: event.id,
+      description: event.title,
+      annotation: event.annotation,
+      preview_img: event.preview_img,
+      categories_id: event.categories_id,
+      type_id: event.type_id,
+      title: event.title,
+      url: event.url,
+      isComplete: false,
+      dates: {
+        start: event.date_start,
+        end: event.date_end
+      },
+      color: 'green',
+      date_start: event.date_start,
+      date_end: event.date_end
+    }
+  })
 }
 
 setActiveEvents()
@@ -152,7 +198,6 @@ setActiveEvents()
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-
         <h1 class="section-title">Календарь мероприятий</h1>
       </div>
     </section>
@@ -161,7 +206,7 @@ setActiveEvents()
       <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-4 xl:gap-y-0 gap-x-4">
 
         <div class="xl:col-span-2 pt-0 bg-background relative">
-          <AppCalendar />
+          <AppCalendar :attributes="attributes" />
         </div>
 
         <div class="flex flex-col border rounded-lg justify-between p-4 bg-background shadow-md gap-4">
