@@ -23,6 +23,7 @@ interface CategoryType {
   title: string,
   isChecked: boolean
 }
+
 interface Event {
   id: number,
   title: string,
@@ -128,6 +129,18 @@ function setActiveEvents() {
   })
 }
 
+function dropFilter() {
+  categories.value = events.value.categories.map((category) => {
+    return {
+      id: category.id,
+      title: category.title,
+      isChecked: false
+    }
+  })
+  activeEventType.value = null
+  setActiveEvents()
+}
+
 setActiveEvents()
 </script>
 
@@ -135,7 +148,7 @@ setActiveEvents()
   <main>
 
     <Head>
-      <Title>Календарь | Группа компаний ООО «БиоЛайн»</Title>
+      <Title>События | Группа компаний ООО «БиоЛайн»</Title>
       <Meta
         name="description"
         content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -210,7 +223,7 @@ setActiveEvents()
         </div>
 
         <div class="flex flex-col border rounded-lg justify-between p-4 bg-background shadow-md gap-4">
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4 h-full">
             <DropdownMenu>
               <DropdownMenuTrigger as-child>
                 <Button
@@ -234,7 +247,9 @@ setActiveEvents()
                 </DropdownMenuCheckboxItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Select @update:model-value="activeEventType = $event; setActiveEvents()">
+            <Select
+              v-model="activeEventType"
+              @update:model-value="activeEventType = $event; setActiveEvents()">
               <SelectTrigger class="w-full">
                 <SelectValue placeholder="Тип мероприятия" />
               </SelectTrigger>
@@ -249,6 +264,11 @@ setActiveEvents()
                 </SelectGroup>
               </SelectContent>
             </Select>
+            <Button
+              @click="dropFilter"
+              class="mt-auto">
+              Сбросить фильтры
+            </Button>
           </div>
         </div>
       </div>

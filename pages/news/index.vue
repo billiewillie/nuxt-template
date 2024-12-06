@@ -28,7 +28,7 @@ const activeYear = ref<number | 'archive' | null>(null)
 const {
   data: news
 }: {
-  news: Ref<NewsPageApi>,
+  data: Ref<NewsPageApi>,
 } = await useFetch(
   `${API_ENDPOINT}${URLs.news}`,
   {

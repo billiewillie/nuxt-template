@@ -71,13 +71,55 @@ import { Card, CardContent } from '~/components/ui/card'
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <h1 class="section-title">Технический сервис</h1>
+        <div class="flex justify-between items-center">
+          <h1 class="section-title">Технический сервис</h1>
+          <div class="flex gap-4">
+            <Button class="rounded-full bg-background-dark border-2 shadow-md border-background-dark hover:bg-transparent hover:text-background-dark">
+              технический сервис
+            </Button>
+            <Button class="rounded-full bg-background-dark border-2 shadow-md border-background-dark hover:bg-transparent hover:text-background-dark">
+              методическая поддержка
+            </Button>
+            <Button class="rounded-full bg-background-dark border-2 shadow-md border-background-dark hover:bg-transparent hover:text-background-dark">
+              обучение
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="mb-12 xl:mb-16">
-      <div class="container">
-        <p>content</p>
+      <div class="container flex justify-between gap-4">
+        <div class="basis-1/2 flex flex-col gap-4">
+          <p>
+            Группа компаний БиоЛайн уделяет особое внимание развитию и оснащению собственного сервисного центра, чтобы
+            качественно и оперативно обслуживать многочисленные объекты на всей территории России, Беларуси, Казахстана
+            и Узбекистана.
+          </p>
+          <p>
+            Наши инженеры повышают уровень своей квалификации, а современные рабочие инструменты и собственный склад
+            запасных частей позволяют быстро реагировать на заявки, сводя к минимуму простои оборудования.
+          </p>
+        </div>
+        <div class="basis-1/2">
+          <NuxtImg
+            src="/img/support-page/tech-service.webp"
+            alt="tech-service"
+            width="820"
+            height="590" />
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 xl:mb-16">
+      <div class="container flex justify-between gap-4">
+        <div class="basis-1/3 flex flex-col gap-4">
+          <p>
+            Группа компаний БиоЛайн уделяет особое внимание развитию и оснащению собственного сервисного центра, чтобы
+            качественно и оперативно обслуживать многочисленные объекты на всей территории России, Беларуси, Казахстана
+            и Узбекистана.
+          </p>
+        </div>
       </div>
     </section>
 
