@@ -1,7 +1,47 @@
 <script
   setup
   lang="ts">
-import { Card, CardContent } from '~/components/ui/card'
+interface Topic {
+  id: number
+  title: string
+  slug: string
+  image: string
+  isActive: boolean
+}
+
+const topics = ref<Topic[]>([
+  {
+    id: 1,
+    title: 'Технический сервис',
+    slug: 'tech-service',
+    image: '/img/support-page/tech-service.webp',
+    isActive: true
+  },
+  {
+    id: 2,
+    title: 'Методическая поддержка',
+    slug: 'method-service',
+    image: '/img/support-page/method-service.webp',
+    isActive: false
+  },
+  {
+    id: 3,
+    title: 'Обучение',
+    slug: 'education',
+    image: '/img/support-page/education.webp',
+    isActive: false
+  }
+])
+
+function setActiveTopic(id: number): void {
+  if (id === topics.value.find(item => item.isActive)?.id) return
+  topics.value = topics.value.map((topic) => {
+    return {
+      ...topic,
+      isActive: topic.id === id
+    }
+  })
+}
 </script>
 
 <template>
@@ -71,17 +111,16 @@ import { Card, CardContent } from '~/components/ui/card'
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div class="flex justify-between items-center">
+        <div class="flex flex-col gap-8 justify-between xl:items-center xl:flex-row">
           <h1 class="section-title">Технический сервис</h1>
-          <div class="flex gap-4">
-            <Button class="rounded-full bg-background-dark border-2 shadow-md border-background-dark hover:bg-transparent hover:text-background-dark">
-              технический сервис
-            </Button>
-            <Button class="rounded-full bg-background-dark border-2 shadow-md border-background-dark hover:bg-transparent hover:text-background-dark">
-              методическая поддержка
-            </Button>
-            <Button class="rounded-full bg-background-dark border-2 shadow-md border-background-dark hover:bg-transparent hover:text-background-dark">
-              обучение
+          <div class="flex gap-4 flex-wrap">
+            <Button
+              v-for="topic in topics"
+              :key="topic.id"
+              @click="setActiveTopic(topic.id)"
+              class="rounded-full bg-background-dark border-2 shadow-md border-background-dark hover:shadow-xl hover:bg-background-dark hover:opacity-90 transition-all"
+              :class="{'bg-transparent text-background-dark hover:bg-transparent': topic.isActive }">
+              {{ topic.title }}
             </Button>
           </div>
         </div>
@@ -89,7 +128,7 @@ import { Card, CardContent } from '~/components/ui/card'
     </section>
 
     <section class="mb-12 xl:mb-16">
-      <div class="container flex justify-between gap-4">
+      <div class="container flex flex-col md:flex-row justify-between gap-4">
         <div class="basis-1/2 flex flex-col gap-4">
           <p>
             Группа компаний БиоЛайн уделяет особое внимание развитию и оснащению собственного сервисного центра, чтобы
@@ -103,8 +142,8 @@ import { Card, CardContent } from '~/components/ui/card'
         </div>
         <div class="basis-1/2">
           <NuxtImg
-            src="/img/support-page/tech-service.webp"
-            alt="tech-service"
+            :src="topics.find(topic => topic.isActive)?.image"
+            :alt="topics.find(topic => topic.isActive)?.title"
             width="820"
             height="590" />
         </div>
