@@ -24,8 +24,10 @@ const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const nameId = useId()
 const emailId = useId()
-const phoneId = useId()
 const cityId = useId()
+const companyId = useId()
+const lineOfWorkId = useId()
+const phoneId = useId()
 const messageId = useId()
 const checkId = useId()
 
@@ -212,8 +214,8 @@ function setActiveTopic(id: number): void {
               v-for="topic in topics"
               :key="topic.id"
               @click="setActiveTopic(topic.id)"
-              class="rounded-full bg-background-dark border-2 shadow-md border-background-dark hover:shadow-xl hover:bg-background-dark hover:opacity-90 transition-all"
-              :class="{'bg-transparent text-background-dark hover:bg-transparent': topic.isActive }">
+              class="rounded-full bg-transparent text-foreground shadow-tab hover:bg-transparent hover:text-foreground hover:shadow-tab-hover transition-all"
+              :class="{'bg-background-dark text-white hover:bg-transparent hover:text-foreground': topic.isActive }">
               {{ topic.title }}
             </Button>
           </div>
@@ -222,7 +224,7 @@ function setActiveTopic(id: number): void {
     </section>
 
     <section class="mb-12 xl:mb-20">
-      <div class="container flex flex-col md:flex-row justify-between gap-4">
+      <div class="container flex flex-col md:flex-row justify-between gap-8">
         <div class="basis-1/2 flex flex-col gap-4 md:pr-8 xl:pr-32">
           <template v-if="topics.find(item => item.isActive)?.id === 1">
             <div>
@@ -310,10 +312,11 @@ function setActiveTopic(id: number): void {
                 знаний, умений и навыков, а также углубленного освоения теоретических знаний по проточной цитометрии,
                 иммунодиагностики и патоморфологии.
               </p>
+              <br>
               <p>
                 Наша компания располагает собственным учебным центром, оснащенным современным аналитическим
                 оборудованием,
-                производства компаний Becton Dickinson, Leica, Akoya и др.
+                производства компаний <b class="underline underline-offset-4">Becton Dickinson</b>, <b class="underline underline-offset-4">Leica</b>, <b class="underline underline-offset-4">Akoya</b> и др.
               </p>
             </div>
             <div class="mt-auto">
@@ -452,20 +455,6 @@ function setActiveTopic(id: number): void {
             </FormField>
             <FormField
               v-slot="{ componentField }"
-              name="phone">
-              <FormItem>
-                <FormControl>
-                  <Input
-                    type="tel"
-                    :id="phoneId"
-                    placeholder="Телефон"
-                    v-bind="componentField" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            </FormField>
-            <FormField
-              v-slot="{ componentField }"
               name="email">
               <FormItem>
                 <FormControl>
@@ -487,6 +476,48 @@ function setActiveTopic(id: number): void {
                     type="text"
                     :id="cityId"
                     placeholder="Город"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="company">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    :id="companyId"
+                    placeholder="Организация"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="lineOfWork">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    :id="lineOfWorkId"
+                    placeholder="Вид работ"
+                    v-bind="componentField" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
+            <FormField
+              v-slot="{ componentField }"
+              name="phone">
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="tel"
+                    :id="phoneId"
+                    placeholder="Телефон"
                     v-bind="componentField" />
                 </FormControl>
                 <FormMessage />

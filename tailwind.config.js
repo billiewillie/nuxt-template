@@ -100,6 +100,10 @@ module.exports = {
       screens: {
         xs: '360px',
         '2xl': '1440px'
+      },
+      boxShadow: {
+        'tab': '0 3px 10px rgba(0, 0, 0, 0.2)',
+        'tab-hover': '0 3px 10px rgba(0, 0, 0, 0.3)',
       }
     }
   },
@@ -127,5 +131,8 @@ module.exports = {
   content: {
     files: [],
     extract
+  },
+  future: {
+    hoverOnlyWhenSupported: true
   }
 }
