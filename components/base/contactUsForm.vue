@@ -122,7 +122,6 @@ const onSubmit = form.handleSubmit(async (values) => {
                 <FormControl>
                   <Input
                     type="text"
-                    name="name"
                     :id="nameId"
                     placeholder="ФИО"
                     v-bind="componentField" />
@@ -137,7 +136,6 @@ const onSubmit = form.handleSubmit(async (values) => {
                 <FormControl>
                   <Input
                     type="tel"
-                    name="phone"
                     :id="phoneId"
                     placeholder="Телефон"
                     v-bind="componentField" />
@@ -152,7 +150,6 @@ const onSubmit = form.handleSubmit(async (values) => {
                 <FormControl>
                   <Input
                     type="email"
-                    name="email"
                     :id="emailId"
                     placeholder="E-mail"
                     v-bind="componentField" />
@@ -167,7 +164,6 @@ const onSubmit = form.handleSubmit(async (values) => {
                 <FormControl>
                   <Input
                     type="text"
-                    name="city"
                     :id="cityId"
                     placeholder="Город"
                     v-bind="componentField" />
@@ -182,7 +178,6 @@ const onSubmit = form.handleSubmit(async (values) => {
                 <FormControl>
                   <Textarea
                     placeholder="Сообщение"
-                    name="message"
                     :id="messageId"
                     class="resize-none h-full"
                     v-bind="componentField"

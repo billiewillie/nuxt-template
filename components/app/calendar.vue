@@ -66,7 +66,7 @@ defineProps<{
 }
 
 .calendar-wrapper .vc-header button {
-  @apply opacity-100 bg-black text-white border-none;
+  @apply opacity-100 bg-background-dark text-white border-none;
 }
 
 .vc-title-wrapper {
@@ -92,7 +92,7 @@ defineProps<{
 }
 
 .vc-header {
-  @apply flex items-center justify-between mt-0 bg-foreground h-[42px] rounded-t-lg;
+  @apply flex items-center justify-between mt-0 bg-background-dark h-[42px] rounded-t-lg;
 }
 
 .calendar-wrapper .vc-weekday {
