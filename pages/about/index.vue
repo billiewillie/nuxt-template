@@ -186,7 +186,7 @@ const directions = ref<direction[]>([
 
     <section class="mb-12 xl:mb-16 pt-8">
       <div class="container">
-        <Breadcrumb class="mb-12">
+        <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink as-child>
@@ -202,7 +202,7 @@ const directions = ref<direction[]>([
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-24">
+    <section class="mb-20 xl:mb-24">
       <div class="container flex flex-col xl:flex-row gap-8">
         <div class="xl:basis-1/2 xl:pr-32">
           <h1 class="section-title mb-12">О нас</h1>
@@ -230,23 +230,23 @@ const directions = ref<direction[]>([
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-24 bg-background-dark py-12 xl:py-16">
-      <div class="container grid md:grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-8 2xl:gap-16">
+    <section class="mb-20 xl:mb-24 bg-background-dark py-12 xl:py-16">
+      <div class="container grid grid-cols-2 xl:grid-cols-4 gap-8 2xl:gap-16">
         <div
           class="flex flex-col gap-4"
           v-for="item in statsData"
           :key="item.id">
           <p
             v-html="item.title"
-            class="text-primary font-bold ~text-[42px]/[56px] leading-none" />
+            class="text-primary font-bold ~text-[28px]/[56px] leading-none" />
           <p
             v-html="item.text"
-            class="text-white" />
+            class="text-white ~text-[14px]/[16px]" />
         </div>
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-24">
+    <section class="mb-20 xl:mb-24">
       <div class="container">
         <h2 class="section-title">
           Внутри группы компаний «БиоЛайн» четыре направления:
@@ -254,15 +254,15 @@ const directions = ref<direction[]>([
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-24">
-      <div class="container grid md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 xl:gap-16">
+    <section class="mb-20 xl:mb-24">
+      <div class="container grid md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-16">
         <div
           v-for="item in directions"
           :key="item.id"
           class="flex flex-col gap-4">
           <div>
             <NuxtImg
-              class="h-8 xl:h-10"
+              class="h-10"
               :src="item.logo" />
           </div>
           <p v-html="item.text" />
@@ -270,17 +270,18 @@ const directions = ref<direction[]>([
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-24">
-      <div class="container grid xl:grid-cols-2 gap-y-8 xl:gap-y-16 xl:gap-x-4">
+    <section class="mb-20 xl:mb-24">
+      <div class="container grid xl:grid-cols-2 gap-y-16 xl:gap-y-16 xl:gap-x-4">
         <div class="flex flex-col rounded overflow-hidden shadow-md">
           <BaseImage
+            class="h-full"
             src="/img/about/about-2.jpg"
             alt="sdf"
             placeholder="bg-[#EBEEF6]"
             quality="90" />
         </div>
         <div class="flex flex-col xl:pl-12 xl:pt-2">
-          <h2 class="section-title mb-12">Как мы работаем</h2>
+          <h2 class="section-title mb-8 xl:mb-12">Как мы работаем</h2>
           <p>
             Внимательно подбираем поставщиков, всегда лично знакомимся с командой и смотрим производство. Мы дорожим
             своей репутацией, и в том числе, поэтому лидеры мирового рынка доверяют нам своё имя на эксклюзивной основе.
@@ -293,7 +294,7 @@ const directions = ref<direction[]>([
           </p>
         </div>
         <div class="flex flex-col xl:pr-12 xl:pt-2">
-          <h2 class="section-title mb-12">Что мы предлагаем</h2>
+          <h2 class="section-title mb-8 xl:mb-12">Что мы предлагаем</h2>
           <p>
             С самого начала наша мотивация – эффективная и качественная работа лабораторий и медицинских учреждений.
             Благодаря экспертам с профильным образованием в сфере медицины
@@ -308,6 +309,7 @@ const directions = ref<direction[]>([
         </div>
         <div class="flex flex-col rounded overflow-hidden shadow-md">
           <BaseImage
+            class="h-full"
             src="/img/about/about-3.jpg"
             alt="sdf"
             placeholder="bg-[#EBEEF6]"
@@ -316,8 +318,8 @@ const directions = ref<direction[]>([
       </div>
     </section>
 
-    <section class="mb-24 xl:mb-32">
-      <div class="container mb-16">
+    <section class="mb-20 xl:mb-24">
+      <div class="container mb-12">
         <h2 class="section-title">Что нас отличает</h2>
       </div>
 
@@ -349,8 +351,8 @@ const directions = ref<direction[]>([
               </Card>
             </CarouselItem>
           </CarouselContent>
-          <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[114px] flex gap-4 items-center">
-            <div class="flex gap-4">
+          <div class="absolute -right-[3%] md:right-0 top-[48%] md:-top-[90px] xl:-top-[94px] flex gap-4 items-center w-[106%] md:w-auto">
+            <div class="flex gap-4 w-full md:w-auto justify-between">
               <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
               <CarouselNext class="relative left-0 top-0 translate-y-0" />
             </div>
