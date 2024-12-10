@@ -136,7 +136,7 @@ const directions = ref<direction[]>([
   <main>
 
     <Head>
-      <Title>О компании | Группа компаний ООО «БиоЛайн»</Title>
+      <Title>О нас | Группа компаний ООО «БиоЛайн»</Title>
       <Meta
         name="description"
         content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
@@ -202,7 +202,7 @@ const directions = ref<direction[]>([
       </div>
     </section>
 
-    <section class="mb-16">
+    <section class="mb-12 xl:mb-24">
       <div class="container flex flex-col xl:flex-row gap-8">
         <div class="xl:basis-1/2 xl:pr-32">
           <h1 class="section-title mb-12">О нас</h1>
@@ -230,7 +230,7 @@ const directions = ref<direction[]>([
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-16 bg-background-dark py-12 xl:py-16">
+    <section class="mb-12 xl:mb-24 bg-background-dark py-12 xl:py-16">
       <div class="container grid md:grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-8 2xl:gap-16">
         <div
           class="flex flex-col gap-4"
@@ -246,7 +246,7 @@ const directions = ref<direction[]>([
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-16">
+    <section class="mb-12 xl:mb-24">
       <div class="container">
         <h2 class="section-title">
           Внутри группы компаний «БиоЛайн» четыре направления:
@@ -254,7 +254,7 @@ const directions = ref<direction[]>([
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-16">
+    <section class="mb-12 xl:mb-24">
       <div class="container grid md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 xl:gap-16">
         <div
           v-for="item in directions"
@@ -262,7 +262,7 @@ const directions = ref<direction[]>([
           class="flex flex-col gap-4">
           <div>
             <NuxtImg
-              class="h-8"
+              class="h-8 xl:h-10"
               :src="item.logo" />
           </div>
           <p v-html="item.text" />
@@ -270,19 +270,48 @@ const directions = ref<direction[]>([
       </div>
     </section>
 
-    <section class="mb-12 xl:mb-16">
-      <div class="container grid xl:grid-cols-2">
-        <div class="flex flex-col">
-          <div>img</div>
+    <section class="mb-12 xl:mb-24">
+      <div class="container grid xl:grid-cols-2 gap-y-8 xl:gap-y-16 xl:gap-x-4">
+        <div class="flex flex-col rounded overflow-hidden shadow-md">
+          <BaseImage
+            src="/img/about/about-2.jpg"
+            alt="sdf"
+            placeholder="bg-[#EBEEF6]"
+            quality="90" />
         </div>
-        <div class="flex flex-col">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vel.</p>
+        <div class="flex flex-col xl:pl-12 xl:pt-2">
+          <h2 class="section-title mb-12">Как мы работаем</h2>
+          <p>
+            Внимательно подбираем поставщиков, всегда лично знакомимся с командой и смотрим производство. Мы дорожим
+            своей репутацией, и в том числе, поэтому лидеры мирового рынка доверяют нам своё имя на эксклюзивной основе.
+          </p>
+          <br>
+          <p>
+            Мы вкладываем серьёзные усилия во внедрение и адаптацию новых технологий в практику пользователей. Для того,
+            чтобы оставаться для вас навигатором в мире инноваций, наши специалисты регулярно проходят обучения
+            у производителей и экспертов международного уровня.
+          </p>
         </div>
-        <div class="flex flex-col">
-          <div>img</div>
+        <div class="flex flex-col xl:pr-12 xl:pt-2">
+          <h2 class="section-title mb-12">Что мы предлагаем</h2>
+          <p>
+            С самого начала наша мотивация – эффективная и качественная работа лабораторий и медицинских учреждений.
+            Благодаря экспертам с профильным образованием в сфере медицины
+            и биологии в штате мы понимаем, что для этого нужно.
+          </p>
+          <br>
+          <p>
+            С нами вы сможете почувствовать себя в безопасной среде - специалисты помогут выбрать всё необходимое
+            для решения именно ваших задач. Далее мы берём всю ответственность на себя - логистику, инсталляцию,
+            обучение персонала, методическую поддержку и техническое обслуживание.
+          </p>
         </div>
-        <div class="flex flex-col">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vel.</p>
+        <div class="flex flex-col rounded overflow-hidden shadow-md">
+          <BaseImage
+            src="/img/about/about-3.jpg"
+            alt="sdf"
+            placeholder="bg-[#EBEEF6]"
+            quality="90" />
         </div>
       </div>
     </section>
