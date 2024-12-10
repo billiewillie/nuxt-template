@@ -14,7 +14,7 @@ const { orientation, canScrollPrev, scrollPrev } = useCarousel()
   <Button
     :disabled="!canScrollPrev"
     :class="cn(
-      'touch-manipulation absolute h-8 w-8 rounded-full p-0 border-foreground bg-transparent',
+      'touch-manipulation absolute h-8 w-8 rounded-full p-0 border-foreground border-2 bg-transparent',
       orientation === 'horizontal'
         ? '-left-12 top-1/2 -translate-y-1/2'
         : '-top-12 left-1/2 -translate-x-1/2 rotate-90',

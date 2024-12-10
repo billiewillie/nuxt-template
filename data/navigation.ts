@@ -291,7 +291,7 @@ const NAVIGATION: NavigationItem[] = [
   },
   {
     id: 2,
-    title: 'О компании',
+    title: 'О нас',
     slug: 'about',
     href: '/about'
   },

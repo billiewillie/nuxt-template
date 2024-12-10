@@ -128,8 +128,7 @@ async function setNewProductsCategory(category: string) {
               placeholder="bg-[#EBEEF6]"
               width="1920"
               height="860"
-              quality="90"
-            />
+              quality="90" />
 
             <div class="container">
               <div class="relative py-20 xl:pt-40 max-w-[620px]">

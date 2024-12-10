@@ -109,8 +109,7 @@ const branchesFiltered = Object.fromEntries(Object.entries(BRANCHES).filter(([ke
           alt="центральный офис"
           width="884"
           height="438"
-          placeholder="bg-[#2264B4]"
-        />
+          placeholder="bg-[#2264B4]" />
         <div class="basis-full md:basis-1/2 lg:basis-1/3">
           <h2 class="font-bold mb-2">Центральный офис:</h2>
           <span>{{ BRANCHES.spb.index }}, </span>
