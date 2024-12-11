@@ -20,6 +20,11 @@ interface direction {
   text: string
 }
 
+interface sliderItem {
+  id: number
+  img: string
+}
+
 const carouselData = ref<carouselItem[]>([
   {
     id: 1,
@@ -68,7 +73,7 @@ const carouselData = ref<carouselItem[]>([
 const statsData = ref<statsItem[]>([
   {
     id: 1,
-    title: '> 300',
+    title: '300+',
     text: 'сотрудников в штате компании'
   },
   {
@@ -88,22 +93,22 @@ const statsData = ref<statsItem[]>([
   },
   {
     id: 5,
-    title: '> 2500',
+    title: '2500+',
     text: 'государственных и частных клиентов'
   },
   {
     id: 6,
-    title: '> 2000',
+    title: '2000+',
     text: 'единиц запчастей и комплектующих в запасе'
   },
   {
     id: 7,
-    title: '> 50',
+    title: '50+',
     text: 'брендов в портфеле'
   },
   {
     id: 8,
-    title: '> 2300 м<sup>2</sup>',
+    title: '2300 м<sup>2</sup>',
     text: 'складских помещений в Санкт-Петербурге'
   }
 ])
@@ -128,6 +133,36 @@ const directions = ref<direction[]>([
     id: 4,
     logo: '/img/about/logo-biobaby.svg',
     text: 'Направление B2C, продукция для материнства и детства.'
+  }
+])
+
+const slider1 = ref<sliderItem[]>([
+  {
+    id: 1,
+    img: '/img/about/about-2-1.jpg'
+  },
+  {
+    id: 2,
+    img: '/img/about/about-2-2.jpg'
+  },
+  {
+    id: 3,
+    img: '/img/about/about-2-3.jpg'
+  }
+])
+
+const slider2 = ref<sliderItem[]>([
+  {
+    id: 1,
+    img: '/img/about/about-3-1.jpg'
+  },
+  {
+    id: 2,
+    img: '/img/about/about-3-2.jpg'
+  },
+  {
+    id: 3,
+    img: '/img/about/about-3-3.jpg'
   }
 ])
 </script>
@@ -203,7 +238,7 @@ const directions = ref<direction[]>([
     </section>
 
     <section class="mb-20 xl:mb-24">
-      <div class="container flex flex-col xl:flex-row gap-8">
+      <div class="container flex flex-col xl:flex-row gap-8 items-end">
         <div class="xl:basis-1/2 xl:pr-32">
           <h1 class="section-title mb-12">О нас</h1>
           <p class="~text-[16px]/[18px]">
@@ -222,7 +257,7 @@ const directions = ref<direction[]>([
         </div>
         <div class="xl:basis-1/2">
           <BaseImage
-            class="rounded overflow-hidden h-full w-full"
+            class="rounded overflow-hidden w-full"
             src="/img/about/main.jpg"
             alt="центральный офис"
             placeholder="bg-[#70705e]" />
@@ -272,13 +307,30 @@ const directions = ref<direction[]>([
 
     <section class="mb-20 xl:mb-24">
       <div class="container grid xl:grid-cols-2 gap-y-16 xl:gap-y-16 xl:gap-x-4">
-        <div class="flex flex-col rounded overflow-hidden shadow-md">
-          <BaseImage
-            class="h-full"
-            src="/img/about/about-2.jpg"
-            alt="sdf"
-            placeholder="bg-[#EBEEF6]"
-            quality="90" />
+        <div class="relative flex rounded overflow-hidden shadow-md">
+          <Carousel
+            class="relative w-full"
+            :opts="{ align: 'start', loop: true }">
+            <CarouselContent :is-visible="true">
+              <CarouselItem
+                v-for="item in slider1"
+                :key="item.id"
+                class="basis-full">
+                <BaseImage
+                  class="h-full"
+                  :src="item.img"
+                  alt="slider img"
+                  placeholder="bg-[#EBEEF6]"
+                  quality="90" />
+              </CarouselItem>
+            </CarouselContent>
+            <div class="absolute right-[16px] top-1/2 flex gap-4 items-center w-[calc(100%_-_32px)]">
+              <div class="flex gap-4 w-full justify-between">
+                <CarouselPrevious class="relative left-0 top-0 -translate-y-1/2 bg-white" />
+                <CarouselNext class="relative left-0 top-0 -translate-y-1/2 bg-white" />
+              </div>
+            </div>
+          </Carousel>
         </div>
         <div class="flex flex-col xl:pl-12 xl:pt-2">
           <h2 class="section-title mb-8 xl:mb-12">Как мы работаем</h2>
@@ -307,13 +359,30 @@ const directions = ref<direction[]>([
             обучение персонала, методическую поддержку и техническое обслуживание.
           </p>
         </div>
-        <div class="flex flex-col rounded overflow-hidden shadow-md">
-          <BaseImage
-            class="h-full"
-            src="/img/about/about-3.jpg"
-            alt="sdf"
-            placeholder="bg-[#EBEEF6]"
-            quality="90" />
+        <div class="relative flex rounded overflow-hidden shadow-md">
+          <Carousel
+            class="relative w-full"
+            :opts="{ align: 'start', loop: true }">
+            <CarouselContent :is-visible="true">
+              <CarouselItem
+                v-for="item in slider2"
+                :key="item.id"
+                class="basis-full">
+                <BaseImage
+                  class="h-full"
+                  :src="item.img"
+                  alt="sdf"
+                  placeholder="bg-[#EBEEF6]"
+                  quality="90" />
+              </CarouselItem>
+            </CarouselContent>
+            <div class="absolute right-[16px] top-1/2 flex gap-4 items-center w-[calc(100%_-_32px)]">
+              <div class="flex gap-4 w-full justify-between">
+                <CarouselPrevious class="relative left-0 top-0 -translate-y-1/2 bg-white" />
+                <CarouselNext class="relative left-0 top-0 -translate-y-1/2 bg-white" />
+              </div>
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>

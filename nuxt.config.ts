@@ -113,7 +113,7 @@ export default defineNuxtConfig({
           href: '/safari-pinned-tab.svg',
           color: '#5bbad5'
         }
-      ]
+      ],
     },
     pageTransition: { name: 'page', mode: 'out-in' }
   },

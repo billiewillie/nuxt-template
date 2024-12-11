@@ -2,15 +2,11 @@
   setup
   lang="ts">
 import { useRuntimeConfig } from '#app'
-import type { Ref } from 'vue'
 import URLs from '~/data/urls'
 
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const { data }: { data: Ref<any> } = await useFetch(`${API_ENDPOINT}${URLs.vacancies}`)
-
-console.log(data.value)
-
 </script>
 
 <template>
@@ -86,8 +82,55 @@ console.log(data.value)
 
     <section class="mb-12 xl:mb-16 group">
       <div
-        class="container vacancies-page flex flex-col gap-2"
+        class="container vacancies-page flex flex-col gap-4"
         v-html="data.content">
+      </div>
+    </section>
+
+    <section class="mb-12 xl:mb-16">
+      <div class="container flex flex-col gap-4">
+        <ClientOnly>
+          <component
+            :is="'script'"
+            class="hh-script"
+            src="https://api.hh.ru/widgets/vacancies/employer?employer_id=191518&links_color=009999&border_color=FFFFFF&area=2&title=Санкт-Петербург"
+            async />
+        </ClientOnly>
+        <ClientOnly>
+          <component
+            :is="'script'"
+            class="hh-script"
+            src="https://api.hh.ru/widgets/vacancies/employer?employer_id=191518&links_color=009999&border_color=FFFFFF&area=1&title=Москва"
+            async />
+        </ClientOnly>
+        <ClientOnly>
+          <component
+            :is="'script'"
+            class="hh-script"
+            src="https://api.hh.ru/widgets/vacancies/employer?employer_id=191518&links_color=009999&border_color=FFFFFF&area=4&title=Новосибирск"
+            async />
+        </ClientOnly>
+        <ClientOnly>
+          <component
+            :is="'script'"
+            class="hh-script"
+            src="https://api.hh.ru/widgets/vacancies/employer?employer_id=191518&links_color=009999&border_color=FFFFFF&area=3&title=Екатеринбург"
+            async />
+        </ClientOnly>
+        <ClientOnly>
+          <component
+            :is="'script'"
+            class="hh-script"
+            src="https://api.hh.ru/widgets/vacancies/employer?employer_id=191518&links_color=009999&border_color=FFFFFF&area=1530&title=Ростов-на-дону"
+            async />
+        </ClientOnly>
+        <ClientOnly>
+          <component
+            :is="'script'"
+            class="hh-script"
+            src="https://api.hh.ru/widgets/vacancies/employer?employer_id=191518&links_color=009999&border_color=FFFFFF&area=1975&title=Хабаровск"
+            async />
+        </ClientOnly>
       </div>
     </section>
 
