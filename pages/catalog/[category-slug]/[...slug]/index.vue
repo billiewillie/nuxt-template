@@ -17,8 +17,6 @@ const {
   data: Ref<ProductCategoryPageApi | ProductPageApi>
 } = await useFetch(`${API_ENDPOINT}${route.fullPath}`)
 
-console.log(data.value)
-
 const page = {
   catalog: ProductCategoryPageLayout,
   expendable_material: ProductExpendablePageLayout,

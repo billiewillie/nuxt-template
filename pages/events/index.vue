@@ -142,6 +142,8 @@ function dropFilter() {
 }
 
 setActiveEvents()
+
+console.log(events.value)
 </script>
 
 <template>

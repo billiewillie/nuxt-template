@@ -79,7 +79,7 @@ console.log(props.data)
               </BreadcrumbLink>
             </BreadcrumbItem>
             <template
-              v-for="(item, index) in props.data.bread_crumbs"
+              v-for="item in props.data.bread_crumbs"
               :key="item.slug">
               <BreadcrumbSeparator />
               <BreadcrumbItem>

@@ -88,6 +88,10 @@
     @apply relative ~text-[28px]/[42px] font-normal leading-normal pl-[28px] lg:pl-[42px];
   }
   
+  .section-title.section-title--product {
+    @apply ~text-[20px]/[28px];
+  }
+  
   .section-title::before {
     @apply absolute block content-[''] left-0 top-1/2 -translate-y-1/2 w-1 h-[calc(100%+20px)] rounded-full bg-gradient-to-b from-[#0AECEE] to-[#0B9798];
   }
