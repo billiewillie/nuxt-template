@@ -1,10 +1,8 @@
-type KeyTitle = keyof typeof URLs
-
 const URLs = {
   index: `/index`,
   news: '/news/all',
   newsArticle: '/news',
-  events: '/events/index',
+  events: '/events/get-list-current-month',
   inStock: '/stock/show/all',
   catalog: '/catalog',
   manufacturers: '/manufacturers',

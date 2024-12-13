@@ -2,7 +2,6 @@
   setup
   lang="ts">
 import { type Ref, ref } from 'vue'
-import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 import type { Events } from '~/types'
 import { useFetch, useId, useRuntimeConfig } from '#app'
 import URLs from '~/data/urls'
@@ -46,90 +45,40 @@ interface Event {
 const { API_ENDPOINT }: { API_ENDPOINT: string } = useRuntimeConfig().public
 
 const dropdownMenuId = useId()
-const date = ref<Date>(new Date())
-const month = date.value.getMonth() + 1
-const day = date.value.getDate()
-const categories = ref<CategoryType[]>([])
+const year = ref<number | null>(new Date().getFullYear())
+const month = ref<number | null>(new Date().getMonth() + 1)
+const categories = ref<CategoryType[] | null>(null)
 const activeEventType = ref<string | null>(null)
 const activeEvents = ref<Event[]>([])
 const typeIds = ref<number[]>([])
+const events = ref<Events | null>(null)
 
-const attributes = computed(() => [
-  ...activeEvents.value.map(todo => ({
-    dates: todo.dates,
-    dot: {
-      color: todo.color,
-      ...(todo.isComplete && { class: 'opacity-75' })
-    },
-    popover: {
-      label: todo.description
-    }
-  }))
-])
-
-const {
-  data: events
-}: {
-  data: Ref<Events>
-} = await useFetch(`${API_ENDPOINT}${URLs.events}/${month}/${day}`)
-
-categories.value = events.value.categories.map((category) => {
-  return {
-    id: category.id,
-    title: category.title,
-    isChecked: false
-  }
-})
-
-typeIds.value = events.value.type_events.map((type) => {
-  return type.id
-})
-
-function setActiveEvents() {
-  let filteredEvents
-
-  if (categories.value.length > 0 && categories.value.some((category) => category.isChecked)) {
-    filteredEvents = events.value.all_events_month.filter(event => {
-      return event.categories_id.some(item => {
-        return categories.value.find(category => category.id === item.id)?.isChecked
-      })
-    })
-  } else {
-    filteredEvents = events.value.all_events_month
-  }
-
-  if (activeEventType.value !== null) {
-    const id = events.value.type_events.find((type) => {
-      return type.title === activeEventType.value
-    })?.id
-    filteredEvents = filteredEvents.filter(({ type_id }) => {
-      return type_id === id
-    })
-  }
-
-  activeEvents.value = filteredEvents.map((event) => {
-    return {
-      id: event.id,
-      description: event.title,
-      annotation: event.annotation,
-      preview_img: event.preview_img,
-      categories_id: event.categories_id,
-      type_id: event.type_id,
-      title: event.title,
-      url: event.url,
-      isComplete: false,
-      dates: {
-        start: event.date_start,
-        end: event.date_end
-      },
-      color: 'green',
-      date_start: event.date_start,
-      date_end: event.date_end
-    }
-  })
+// const attributes = computed(() => [
+//   ...activeEvents.value.map(todo => ({
+//     dates: todo.dates,
+//     dot: {
+//       color: todo.color,
+//       ...(todo.isComplete && { class: 'opacity-75' })
+//     },
+//     popover: {
+//       label: todo.description
+//     }
+//   }))
+// ])
+async function getData() {
+  const res = await $fetch(`${API_ENDPOINT}${URLs.events}/${year.value}/${month.value}`)
+  console.log(res)
 }
 
-function dropFilter() {
+getData()
+
+function changeDate(newMonth: number, newYear: number) {
+  month.value = newMonth
+  year.value = newYear
+  getData()
+}
+
+if (events.value) {
   categories.value = events.value.categories.map((category) => {
     return {
       id: category.id,
@@ -137,13 +86,75 @@ function dropFilter() {
       isChecked: false
     }
   })
-  activeEventType.value = null
-  setActiveEvents()
+
+  typeIds.value = events.value?.type_events.map((type) => {
+    return type.id
+  })
 }
 
-setActiveEvents()
 
-console.log(events.value)
+function setActiveEvents() {
+  let filteredEvents
+
+  if (categories.value) {
+    if (categories.value.length > 0 && categories.value.some((category) => category.isChecked)) {
+      filteredEvents = events.value?.all_events_month.filter(event => {
+        return event.categories_id.some(item => {
+          return categories.value?.find(category => category.id === item.id)?.isChecked
+        })
+      })
+    } else {
+      filteredEvents = events.value?.all_events_month
+    }
+
+    if (activeEventType.value !== null) {
+      const id = events.value?.type_events.find((type) => {
+        return type.title === activeEventType.value
+      })?.id
+      filteredEvents = filteredEvents?.filter(({ type_id }) => {
+        return type_id === id
+      })
+    }
+
+    if (filteredEvents) {
+      activeEvents.value = filteredEvents.map((event) => {
+        return {
+          id: event.id,
+          description: event.title,
+          annotation: event.annotation,
+          preview_img: event.preview_img,
+          categories_id: event.categories_id,
+          type_id: event.type_id,
+          title: event.title,
+          url: event.url,
+          isComplete: false,
+          dates: {
+            start: event.date_start,
+            end: event.date_end
+          },
+          color: 'green',
+          date_start: event.date_start,
+          date_end: event.date_end
+        }
+      })
+    }
+  }
+}
+
+// function dropFilter() {
+//   categories.value = events.value.categories.map((category) => {
+//     return {
+//       id: category.id,
+//       title: category.title,
+//       isChecked: false
+//     }
+//   })
+//   activeEventType.value = null
+//   setActiveEvents()
+// }
+
+// setActiveEvents()
+
 </script>
 
 <template>
@@ -217,85 +228,87 @@ console.log(events.value)
       </div>
     </section>
 
-    <section class="mb-4">
-      <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-4 xl:gap-y-0 gap-x-4">
+    <!--    <section class="mb-4">-->
+    <!--      <div class="container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-4 xl:gap-y-0 gap-x-4">-->
 
-        <div class="xl:col-span-2 pt-0 bg-background relative">
-          <AppCalendar :attributes="attributes" />
-        </div>
+    <!--        <div class="xl:col-span-2 pt-0 bg-background relative">-->
+    <!--          <AppCalendar-->
+    <!--            :attributes="attributes"-->
+    <!--            @change-date="changeDate" />-->
+    <!--        </div>-->
 
-        <div class="flex flex-col border rounded-lg justify-between p-4 bg-background shadow-md gap-4">
-          <div class="flex flex-col gap-4 h-full">
-            <DropdownMenu>
-              <DropdownMenuTrigger as-child>
-                <Button
-                  variant="outline"
-                  :id="dropdownMenuId"
-                  class="w-full font-normal justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 [&>span]:line-clamp-1 text-left hover:bg-transparent">
-                  Категории 
-                  <ChevronDown class="w-4 h-4 opacity-50" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent class="w-[298px]">
-                <DropdownMenuLabel>Можно выбрать несколько</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem
-                  v-for="category in events.categories"
-                  @click="setActiveEvents()"
-                  v-model:checked="categories.find((item: CategoryType) => item.id === category.id)!.isChecked"
-                  :key="category.id"
-                  :value="category.title">
-                  {{ category.title }}
-                </DropdownMenuCheckboxItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <Select
-              v-model="activeEventType"
-              @update:model-value="activeEventType = $event; setActiveEvents()">
-              <SelectTrigger class="w-full">
-                <SelectValue placeholder="Тип мероприятия" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem
-                    v-for="type in events.type_events"
-                    :key="type.id"
-                    :value="type.title">
-                    {{ type.title }}
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Button
-              @click="dropFilter"
-              class="mt-auto">
-              Сбросить фильтры
-            </Button>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!--        <div class="flex flex-col border rounded-lg justify-between p-4 bg-background shadow-md gap-4">-->
+    <!--          <div class="flex flex-col gap-4 h-full">-->
+    <!--            <DropdownMenu>-->
+    <!--              <DropdownMenuTrigger as-child>-->
+    <!--                <Button-->
+    <!--                  variant="outline"-->
+    <!--                  :id="dropdownMenuId"-->
+    <!--                  class="w-full font-normal justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 [&>span]:line-clamp-1 text-left hover:bg-transparent">-->
+    <!--                  Категории -->
+    <!--                  <ChevronDown class="w-4 h-4 opacity-50" />-->
+    <!--                </Button>-->
+    <!--              </DropdownMenuTrigger>-->
+    <!--              <DropdownMenuContent class="w-[298px]">-->
+    <!--                <DropdownMenuLabel>Можно выбрать несколько</DropdownMenuLabel>-->
+    <!--                <DropdownMenuSeparator />-->
+    <!--                <DropdownMenuCheckboxItem-->
+    <!--                  v-for="category in events.categories"-->
+    <!--                  @click="setActiveEvents()"-->
+    <!--                  v-model:checked="categories.find((item: CategoryType) => item.id === category.id)!.isChecked"-->
+    <!--                  :key="category.id"-->
+    <!--                  :value="category.title">-->
+    <!--                  {{ category.title }}-->
+    <!--                </DropdownMenuCheckboxItem>-->
+    <!--              </DropdownMenuContent>-->
+    <!--            </DropdownMenu>-->
+    <!--            <Select-->
+    <!--              v-model="activeEventType"-->
+    <!--              @update:model-value="activeEventType = $event; setActiveEvents()">-->
+    <!--              <SelectTrigger class="w-full">-->
+    <!--                <SelectValue placeholder="Тип мероприятия" />-->
+    <!--              </SelectTrigger>-->
+    <!--              <SelectContent>-->
+    <!--                <SelectGroup>-->
+    <!--                  <SelectItem-->
+    <!--                    v-for="type in events.type_events"-->
+    <!--                    :key="type.id"-->
+    <!--                    :value="type.title">-->
+    <!--                    {{ type.title }}-->
+    <!--                  </SelectItem>-->
+    <!--                </SelectGroup>-->
+    <!--              </SelectContent>-->
+    <!--            </Select>-->
+    <!--            <Button-->
+    <!--              @click="dropFilter"-->
+    <!--              class="mt-auto">-->
+    <!--              Сбросить фильтры-->
+    <!--            </Button>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </section>-->
 
-    <section class="mb-16">
-      <div class="container">
-        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+    <!--    <section class="mb-16">-->
+    <!--      <div class="container">-->
+    <!--        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4">-->
 
-          <template v-if="events.all_events_month && events.all_events_month.length">
-            <BaseEventCard
-              v-for="event in activeEvents"
-              :key="event.id"
-              :event="event" />
-          </template>
+    <!--          <template v-if="pending">-->
+    <!--            <EventCardSkeleton-->
+    <!--              v-for="index in 3"-->
+    <!--              :key="index" />-->
+    <!--          </template>-->
 
-          <template v-else>
-            <EventCardSkeleton
-              v-for="index in 3"
-              :key="index" />
-          </template>
+    <!--          <template v-if="events.all_events_month && events.all_events_month.length">-->
+    <!--            <BaseEventCard-->
+    <!--              v-for="event in activeEvents"-->
+    <!--              :key="event.id"-->
+    <!--              :event="event" />-->
+    <!--          </template>-->
 
-        </div>
-      </div>
-    </section>
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </section>-->
 
   </main>
 </template>

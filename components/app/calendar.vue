@@ -26,6 +26,10 @@ defineProps<{
     }
   }[]
 }>()
+
+const emit = defineEmits<{
+  changeDate: [newMonth: number, newYear: number]
+}>()
 </script>
 
 <template>
@@ -35,6 +39,7 @@ defineProps<{
         trim-weeks
         v-model="date"
         locale="ru"
+        @update:pages="emit('changeDate', $event[0].month, $event[0].year)"
         :attributes="attributes" />
     </ClientOnly>
   </div>
