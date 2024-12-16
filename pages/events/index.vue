@@ -1,21 +1,10 @@
 <script
   setup
   lang="ts">
-import { type Ref, ref } from 'vue'
+import { ref } from 'vue'
 import type { Events } from '~/types'
-import { useFetch, useId, useRuntimeConfig } from '#app'
+import { useId, useRuntimeConfig } from '#app'
 import URLs from '~/data/urls'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import EventCardSkeleton from '~/components/base/EventCardSkeleton.vue'
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
-import { ChevronDown } from 'lucide-vue-next'
 
 interface CategoryType {
   id: number,
@@ -66,11 +55,8 @@ const events = ref<Events | null>(null)
 //   }))
 // ])
 async function getData() {
-  const res = await $fetch(`${API_ENDPOINT}${URLs.events}/${year.value}/${month.value}`)
-  console.log(res)
+  events.value = await $fetch(`${API_ENDPOINT}${URLs.events}/${year.value}/${month.value}`) satisfies Events
 }
-
-getData()
 
 function changeDate(newMonth: number, newYear: number) {
   month.value = newMonth
@@ -78,20 +64,31 @@ function changeDate(newMonth: number, newYear: number) {
   getData()
 }
 
-if (events.value) {
-  categories.value = events.value.categories.map((category) => {
-    return {
-      id: category.id,
-      title: category.title,
-      isChecked: false
-    }
-  })
+async function setCategoriesAndTypes() {
+  if (events.value) {
+    categories.value = events.value.categories.map((category) => {
+      return {
+        id: category.id,
+        title: category.title,
+        isChecked: false
+      }
+    })
 
-  typeIds.value = events.value?.type_events.map((type) => {
-    return type.id
-  })
+    typeIds.value = events.value.type_events.map((type) => {
+      return type.id
+    })
+
+    console.log(categories.value)
+    console.log(typeIds.value)
+  }
 }
 
+async function pageInit() {
+  await getData()
+  await setCategoriesAndTypes()
+}
+
+pageInit()
 
 function setActiveEvents() {
   let filteredEvents

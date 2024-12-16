@@ -43,10 +43,6 @@ function setWishList(id: number) {
   }
 }
 
-defineEmits<{
-  (f: 'removeFromCompare', id: number): void;
-}>()
-
 defineProps<{
   product: ProductCard;
   isCompared?: boolean;

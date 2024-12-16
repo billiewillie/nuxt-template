@@ -119,7 +119,6 @@ function setSearchCategory(item): void {
 function setSearchSubCategory(item): void {
   subcategory.value = item
 }
-
 </script>
 
 <template>
@@ -201,10 +200,12 @@ function setSearchSubCategory(item): void {
           <h3 class="title text-2xl font-semibold">Продукция</h3>
           <Separator class="mt-4 mb-6" />
           <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
-            <BaseProductCard
+            <div
               v-for="item in productsOutput"
               :key="item.id"
-              :product="item" />
+              @click="isOpen = !isOpen">
+              <BaseProductCard :product="item" />
+            </div>
           </div>
           <Button @click="productsOutput = setResultOutput(products, productsOutput.length + SEARCH_RESULT_LENGTH)">
             Загрузить еще
@@ -218,14 +219,16 @@ function setSearchSubCategory(item): void {
           <h3 class="title text-2xl font-semibold">На складе</h3>
           <Separator class="mt-4 mb-6" />
           <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
-            <BaseProductCard
+            <div
               v-for="item in stockOutput"
               :key="item.id"
-              :product="item" />
+              @click="isOpen = !isOpen">
+              <BaseProductCard :product="item" />
+            </div>
+            <Button @click="productsOutput = setResultOutput(products, productsOutput.length + SEARCH_RESULT_LENGTH)">
+              Загрузить еще
+            </Button>
           </div>
-          <Button @click="productsOutput = setResultOutput(products, productsOutput.length + SEARCH_RESULT_LENGTH)">
-            Загрузить еще
-          </Button>
         </div>
       </section>
       <section
