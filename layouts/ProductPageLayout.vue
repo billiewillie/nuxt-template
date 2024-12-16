@@ -277,8 +277,8 @@ function setActiveTab(id: number): void {
                 </DialogHeader>
                 <form
                   @submit="onSubmit"
-                  class="flex flex-col gap-4">
-                  <div class="flex flex-col gap-4">
+                  class="flex flex-col gap-8">
+                  <div class="flex flex-col gap-8">
                     <FormField
                       v-slot="{ componentField }"
                       name="name">
@@ -371,3 +371,9 @@ function setActiveTab(id: number): void {
 
   </main>
 </template>
+
+<style scoped>
+.text-destructive {
+  @apply absolute top-9;
+}
+</style>

@@ -225,10 +225,10 @@ function setSearchSubCategory(item): void {
               @click="isOpen = !isOpen">
               <BaseProductCard :product="item" />
             </div>
-            <Button @click="productsOutput = setResultOutput(products, productsOutput.length + SEARCH_RESULT_LENGTH)">
-              Загрузить еще
-            </Button>
           </div>
+          <Button @click="productsOutput = setResultOutput(products, productsOutput.length + SEARCH_RESULT_LENGTH)">
+            Загрузить еще
+          </Button>
         </div>
       </section>
       <section
