@@ -32,7 +32,7 @@ const nameId = useId()
 const contactId = useId()
 const messageId = useId()
 const checkId = useId()
-const [isOpen, _] = dialogState()
+const [isOpen, _]: any = dialogState()
 const formSchema = toTypedSchema(z.object({
   name: z
     .string({ message: 'Обязательное поле' })
@@ -49,9 +49,11 @@ const formSchema = toTypedSchema(z.object({
     .optional(),
   checkbox: z.boolean({ message: 'Подтвердите согласие' })
 }))
+
 const form = useForm({
   validationSchema: formSchema
 })
+
 const tabs = ref([
   {
     id: 1,
@@ -104,7 +106,6 @@ const onSubmit = form.handleSubmit(async (values) => {
     message: values.message,
     token: `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`
   }
-  console.log(data)
   const responseData = await $fetch(
     `${API_ENDPOINT}${URLs.indexPageForm}`,
     {
@@ -125,6 +126,7 @@ const onSubmit = form.handleSubmit(async (values) => {
     })
   }
 })
+
 const props = defineProps<{
   data: ProductPageApi
 }>()
@@ -173,7 +175,6 @@ function setActiveTab(id: number): void {
 </script>
 
 <template>
-
   <main class="flex-auto">
 
     <section class="mb-16 pt-8">

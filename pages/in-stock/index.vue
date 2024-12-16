@@ -307,8 +307,8 @@ onMounted(() => {
         </DialogHeader>
         <form
           @submit="onSubmit"
-          class="flex flex-col gap-4">
-          <div class="grid gap-4">
+          class="flex flex-col gap-8">
+          <div class="grid gap-8">
             <FormField
               v-slot="{ componentField }"
               name="name">
@@ -386,5 +386,10 @@ onMounted(() => {
     </Dialog>
 
   </main>
-
 </template>
+
+<style scoped>
+.text-destructive {
+  @apply absolute top-9;
+}
+</style>
