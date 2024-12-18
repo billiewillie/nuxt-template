@@ -21,6 +21,7 @@ import * as z from 'zod'
 import { useForm } from 'vee-validate'
 import URLs from '~/data/urls'
 import { toast } from '~/components/ui/toast'
+import dateFormatter from '~/utils/dateFormatter'
 
 const {
   API_ENDPOINT
@@ -175,41 +176,93 @@ function setActiveTab(id: number): void {
 </script>
 
 <template>
-  <main class="flex-auto">
+  <main class="flex-auto bg-white h-full">
+
+    <Head>
+      <Title>Product | Группа компаний ООО «БиоЛайн»</Title>
+      <Meta
+        name="description"
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+      <Meta
+        name="og:image"
+        content="/img/og-logo.jpg" />
+      <Meta
+        name="twitter:image"
+        content="/img/og-logo.jpg" />
+      <Meta
+        name="og:title"
+        content="Каталог | Группа компаний ООО «БиоЛайн»" />
+      <Meta
+        name="og:description"
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+      <Meta
+        name="og:site_name"
+        content="bioline.vercel.app" />
+      <Meta
+        name="og:url"
+        content="https://bioline.vercel.app/contacts" />
+      <Meta
+        name="og:image:width"
+        content="1200" />
+      <Meta
+        name="og:image:height"
+        content="630" />
+      <Meta
+        name="og:type"
+        content="article" />
+      <Meta
+        name="og:locale"
+        content="ru_RU" />
+      <Meta
+        name="twitter:title"
+        content="Каталог | Группа компаний ООО «БиоЛайн»" />
+      <Meta
+        name="twitter:description"
+        content="Группа компаний ООО «БиоЛайн» - один из ведущих поставщиков продукции для лабораторий и учреждений научного и медицинского профиля." />
+      <Meta
+        name="twitter:site"
+        content="bioline.vercel.app" />
+      <Meta
+        name="twitter:card"
+        content="summary_large_image" />
+    </Head>
 
     <section class="mb-16 pt-8">
       <div class="container">
-        <Breadcrumb class="mb-12">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink as-child>
-                <NuxtLink to="/">Главная</NuxtLink>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <template
-              v-for="item in props.data.bread_crumbs"
-              :key="item.slug">
+        <ClientOnly>
+          <Breadcrumb class="mb-12">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink as-child>
+                  <NuxtLink to="/">Главная</NuxtLink>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <template
+                v-for="item in props.data.bread_crumbs"
+                :key="item.slug">
+                <BreadcrumbItem>
+                  <div class="flex items-center">
+                    <BreadcrumbSeparator />
+                     
+                    <BreadcrumbLink as-child>
+                      <NuxtLink :to="item.url">
+                        {{ item.title }}
+                      </NuxtLink>
+                    </BreadcrumbLink>
+                  </div>
+                </BreadcrumbItem>
+              </template>
               <BreadcrumbItem>
                 <div class="flex items-center">
                   <BreadcrumbSeparator />
                    
-                  <BreadcrumbLink as-child>
-                    <NuxtLink :to="item.url">
-                      {{ item.title }}
-                    </NuxtLink>
-                  </BreadcrumbLink>
+                  <BreadcrumbPage>{{ props.data.title }}</BreadcrumbPage>
                 </div>
               </BreadcrumbItem>
-            </template>
-            <BreadcrumbItem>
-              <div class="flex items-center">
-                <BreadcrumbSeparator />
-                 
-                <BreadcrumbPage>{{ props.data.title }}</BreadcrumbPage>
-              </div>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </ClientOnly>
+
         <div class="flex flex-col xl:flex-row justify-between xl:items-center gap-8 xl:gap-16">
           <div class="flex">
             <NuxtImg
@@ -367,6 +420,90 @@ function setActiveTab(id: number): void {
           :class="{'bg-background-dark text-white hover:bg-transparent hover:text-foreground': tab.isActive }">
           {{ tab.title }}
         </Button>
+      </div>
+    </section>
+
+    <section>
+      <div class="container flex flex-col gap-8 pb-8">
+        <div class="flex">
+          <div class="basis-1/3">
+            <BaseImage
+              :src="props.data.preview_img"
+              alt="slider image"
+              class=""
+              placeholder="bg-[#EBEEF6]"
+              quality="90" />
+          </div>
+          <div class="basis-2/3">
+            <p class="font-bold">Описание</p>
+            <hr />
+            <div>
+              <p>
+                Проточный цитометр BD FACSCanto™ II – прибор для полноценного многопараметрического анализа, позволяющий
+                свободно комбинировать до 8 флуоресцентных меток с минимальными ограничениями в выборе сочетаний
+                флуорохромов. Автоматизация процедуры запуска, контроля качества, выключения и плановой промывки
+                обеспечивает простоту эксплуатации.
+              </p>
+              <br>
+              <p>
+                Проточный цитометр BD FACSCanto™ II – прибор для полноценного многопараметрического анализа, позволяющий
+                свободно комбинировать до 8 флуоресцентных меток с минимальными ограничениями в выборе сочетаний
+                флуорохромов. Автоматизация процедуры запуска, контроля качества, выключения и плановой промывки
+                обеспечивает простоту эксплуатации.
+              </p>
+            </div>
+            <hr />
+            <div class="flex gap-4">
+              <NuxtLink
+                to="/pdf/blank.pdf"
+                class="flex flex-col"
+                target="_blank"
+                external>
+                <Icon
+                  name="vscode-icons:file-type-pdf2"
+                  color="#575757"
+                  width="64"
+                  height="64" />
+                <p>Регистрационное удостоверение</p>
+                <span class="uppercase underline text-primary underline-offset-4">
+                скачать
+              </span>
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <p>Подобрали для Вас</p>
+          <hr>
+          <div class="flex gap-4">
+            <Card
+              v-for="(_, index) in 4"
+              class="basis-1/4"
+              :key="index">
+              <CardHeader>
+                <BaseImage
+                  class="w-full"
+                  :img-attrs="{ class: 'w-full h-full object-scale-down object-center' }"
+                  :src="props.data.preview_img"
+                  :alt="props.data.title"
+                  aspect-ratio="aspect-square"
+                  placeholder="bg-white"
+                  width="390"
+                  height="390"
+                />
+              </CardHeader>
+              <CardContent class="flex flex-col gap-4 p-0 px-6 flex-auto">
+                <CardTitle class="~text-[16px]/[18px] leading-[1.2]">
+                  {{ props.data.title }}
+                </CardTitle>
+                <Separator />
+                <CardDescription class="~text-[14px]/[16px] text-foreground">
+                  annotation
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </section>
 

@@ -189,7 +189,6 @@ export interface IndexPageApi {
 
 export interface ProductPageApi {
   id: number;
-  sort: number;
   title: string;
   preview_img: string;
   url: string;

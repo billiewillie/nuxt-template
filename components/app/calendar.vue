@@ -50,10 +50,6 @@ const emit = defineEmits<{
   @apply !h-auto;
 }
 
-.vc-popover-content-wrapper .vc-popover-content > div {
-  @apply max-w-[360px];
-}
-
 .calendar-wrapper > div:nth-child(1) {
   @apply flex flex-col h-full w-full flex-grow;
 }
