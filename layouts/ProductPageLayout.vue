@@ -871,7 +871,9 @@ function setActiveTab(id: number): void {
               class="flex flex-col xl:flex-row gap-4"
               v-if="tab.id === 5">
               <div class="basis-1/2 flex flex-col gap-4">
-                <p class="font-bold">Описание</p>
+                <p class="~text-[16px]/[18px]">
+                  ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ДЛЯ КЛИНИЧЕСКИХ ИССЛЕДОВАНИЙ BD FACS Canto™
+                </p>
                 <hr />
                 <div>
                   <p>
@@ -889,104 +891,152 @@ function setActiveTab(id: number): void {
                     флуорохромов. Автоматизация процедуры запуска, контроля качества, выключения и плановой промывки
                     обеспечивает простоту эксплуатации.
                   </p>
-                </div>
-                <hr />
-                <div class="flex gap-4">
-                  <NuxtLink
-                    to="/pdf/blank.pdf"
-                    class="flex flex-col"
-                    target="_blank"
-                    external>
-                    <Icon
-                      name="vscode-icons:file-type-pdf2"
-                      color="#575757"
-                      width="64"
-                      height="64" />
-                    <p>Регистрационное удостоверение</p>
-                    <span class="uppercase underline text-primary underline-offset-4">
-                скачать
-              </span>
-                  </NuxtLink>
                 </div>
               </div>
               <div class="basis-1/2 flex flex-col gap-4">
-                <p class="font-bold">Описание</p>
+                <p class="~text-[16px]/[18px]">
+                  УНИВЕРСАЛЬНОЕ ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ FACSDiva™
+                </p>
                 <hr />
-                <div>
-                  <p>
-                    Проточный цитометр BD FACSCanto™ II – прибор для полноценного многопараметрического анализа,
-                    позволяющий
-                    свободно комбинировать до 8 флуоресцентных меток с минимальными ограничениями в выборе сочетаний
-                    флуорохромов. Автоматизация процедуры запуска, контроля качества, выключения и плановой промывки
-                    обеспечивает простоту эксплуатации.
-                  </p>
-                  <br>
-                  <p>
-                    Проточный цитометр BD FACSCanto™ II – прибор для полноценного многопараметрического анализа,
-                    позволяющий
-                    свободно комбинировать до 8 флуоресцентных меток с минимальными ограничениями в выборе сочетаний
-                    флуорохромов. Автоматизация процедуры запуска, контроля качества, выключения и плановой промывки
-                    обеспечивает простоту эксплуатации.
-                  </p>
-                </div>
-                <hr />
-                <div class="flex gap-4">
-                  <NuxtLink
-                    to="/pdf/blank.pdf"
-                    class="flex flex-col"
-                    target="_blank"
-                    external>
-                    <Icon
-                      name="vscode-icons:file-type-pdf2"
-                      color="#575757"
-                      width="64"
-                      height="64" />
-                    <p>Регистрационное удостоверение</p>
-                    <span class="uppercase underline text-primary underline-offset-4">
-                скачать
-              </span>
-                  </NuxtLink>
-                </div>
+                <ul class="list-disc pl-5 flex flex-col gap-4">
+                  <li>
+                    Полностью автоматизированные протоколы промывки прибора перед включением и выключением системы,
+                    управляемые из программного обеспечения дополнительные протоколы промывки прибора.
+                  </li>
+                  <li>
+                    Автоматическая промывка иглы (SIT Flush) между пробами.
+                  </li>
+                  <li>
+                    Отдельная стойка для размещения обслуживающих растворов непосредственно в фабричных упаковках.
+                  </li>
+                  <li>
+                    Дегазация проточной жидкости перед подачей в проточную кювету.
+                  </li>
+                  <li>
+                    Датчики уровня жидкости во всех емкостях с обслуживающими растворами. Информация об уровне наполнения контейнеров отображается в программном обеспечении.
+                  </li>
+                </ul>
               </div>
             </div>
             <div
               v-else-if="tab.id === 6"
               class="flex flex-col">
-              <div class="flex mb-12">
-                <div class="basis-1/3">
-                  <BaseImage
-                    :src="tab.image"
-                    alt="slider image"
-                    class="aspect-auto"
-                    placeholder="bg-[#EBEEF6]"
-                    quality="90" />
-                </div>
-                <div class="flex basis-2/3 flex-col">
-                  <p>Проточная система</p>
+              <div class="flex flex-col md:flex-row mb-12 gap-4">
+                <div class="flex md:basis-1/2 xl:basis-1/4 flex-col">
+                  <div class="mb-8">
+                    <BaseImage
+                      :src="tab.image"
+                      alt="slider image"
+                      class="aspect-auto"
+                      placeholder="bg-[#EBEEF6]"
+                      quality="90" />
+                  </div>
+                  <p class="font-bold">
+                    Модуль BD™ High Throughput Sampler (HTS) для автоматической подачи проб из планшетов
+                  </p>
                   <hr class="my-2">
-                  <ul class="list-disc pl-5 flex flex-col gap-4">
+                  <ul class="list-disc pl-5 flex flex-col gap-2">
                     <li>
-                      Полностью автоматизированные протоколы промывки прибора перед включением и выключением системы,
-                      управляемые из программного обеспечения дополнительные протоколы промывки прибора.
+                      Совместимость с 96-луночными и 384-луночными планшетами
                     </li>
                     <li>
-                      Автоматическая промывка иглы (SIT Flush) между пробами.
+                      2 режима работы: стандартный и высокопроизводительный
                     </li>
                     <li>
-                      Отдельная стойка для размещения обслуживающих растворов непосредственно в фабричных упаковках.
+                      ≤ 15 минут на 96-луночный планшет
                     </li>
                     <li>
-                      Дегазация проточной жидкости перед подачей в проточную кювету.
+                      кроссконтаминация ≤0,5% в высокпроизводительном режиме
+                    </li>
+                  </ul>
+                </div>
+                <div class="flex md:basis-1/2 xl:basis-1/4 flex-col">
+                  <div class="mb-8">
+                    <BaseImage
+                      :src="tab.image"
+                      alt="slider image"
+                      class="aspect-auto"
+                      placeholder="bg-[#EBEEF6]"
+                      quality="90" />
+                  </div>
+                  <p class="font-bold">
+                    Модуль BD™ High Throughput Sampler (HTS) для автоматической подачи проб из планшетов
+                  </p>
+                  <hr class="my-2">
+                  <ul class="list-disc pl-5 flex flex-col gap-2">
+                    <li>
+                      Совместимость с 96-луночными и 384-луночными планшетами
                     </li>
                     <li>
-                      Датчики уровня жидкости во всех емкостях с обслуживающими растворами. Информация об уровне
-                      наполнения контейнеров отображается в программном обеспечении.
+                      2 режима работы: стандартный и высокопроизводительный
+                    </li>
+                    <li>
+                      ≤ 15 минут на 96-луночный планшет
+                    </li>
+                    <li>
+                      кроссконтаминация ≤0,5% в высокпроизводительном режиме
+                    </li>
+                  </ul>
+                </div>
+                <div class="flex md:basis-1/2 xl:basis-1/4 flex-col">
+                  <div class="mb-8">
+                    <BaseImage
+                      :src="tab.image"
+                      alt="slider image"
+                      class="aspect-auto"
+                      placeholder="bg-[#EBEEF6]"
+                      quality="90" />
+                  </div>
+                  <p class="font-bold">
+                    Модуль BD™ High Throughput Sampler (HTS) для автоматической подачи проб из планшетов
+                  </p>
+                  <hr class="my-2">
+                  <ul class="list-disc pl-5 flex flex-col gap-2">
+                    <li>
+                      Совместимость с 96-луночными и 384-луночными планшетами
+                    </li>
+                    <li>
+                      2 режима работы: стандартный и высокопроизводительный
+                    </li>
+                    <li>
+                      ≤ 15 минут на 96-луночный планшет
+                    </li>
+                    <li>
+                      кроссконтаминация ≤0,5% в высокпроизводительном режиме
+                    </li>
+                  </ul>
+                </div>
+                <div class="flex md:basis-1/2 xl:basis-1/4 flex-col">
+                  <div class="mb-8">
+                    <BaseImage
+                      :src="tab.image"
+                      alt="slider image"
+                      class="aspect-auto"
+                      placeholder="bg-[#EBEEF6]"
+                      quality="90" />
+                  </div>
+                  <p class="font-bold">
+                    Модуль BD™ High Throughput Sampler (HTS) для автоматической подачи проб из планшетов
+                  </p>
+                  <hr class="my-2">
+                  <ul class="list-disc pl-5 flex flex-col gap-2">
+                    <li>
+                      Совместимость с 96-луночными и 384-луночными планшетами
+                    </li>
+                    <li>
+                      2 режима работы: стандартный и высокопроизводительный
+                    </li>
+                    <li>
+                      ≤ 15 минут на 96-луночный планшет
+                    </li>
+                    <li>
+                      кроссконтаминация ≤0,5% в высокпроизводительном режиме
                     </li>
                   </ul>
                 </div>
               </div>
               <div class="flex flex-col">
-                <p>специализированное программное обеспечение</p>
+                <p class="font-bold ~text-[16px]/[18px]">Специализированное программное обеспечение</p>
                 <hr class="my-4">
                 <div class="flex flex-col gap-2 mb-4">
                   <p class="font-bold">Программные модули для клинического ПО BD FACSCanto:</p>
