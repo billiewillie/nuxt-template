@@ -799,17 +799,17 @@ function setActiveTab(id: number): void {
             <div
               v-else-if="tab.id === 4"
               class="flex flex-col">
-              <div class="flex mb-12">
+              <div class="flex mb-12 gap-4">
                 <div class="basis-1/3">
-                  <BaseImage
-                    :src="tab.image"
+                  <NuxtImg
+                    src="/img/product-page/proto-1.jpg"
                     alt="slider image"
-                    class="aspect-auto"
+                    class="aspect-auto w-full max-h-[300px] object-contain"
                     placeholder="bg-[#EBEEF6]"
-                    quality="90" />
+                    quality="100" />
                 </div>
                 <div class="flex basis-2/3 flex-col">
-                  <p>Проточная система</p>
+                  <p class="font-bold uppercase text-gray-500">Проточная система</p>
                   <hr class="my-2">
                   <ul class="list-disc pl-5 flex flex-col gap-4">
                     <li>
@@ -833,7 +833,7 @@ function setActiveTab(id: number): void {
                 </div>
               </div>
               <div class="flex flex-col">
-                <p>специализированное программное обеспечение</p>
+                <p class="font-bold uppercase text-gray-500">специализированное программное обеспечение</p>
                 <hr class="my-4">
                 <div class="flex flex-col gap-2 mb-4">
                   <p class="font-bold">Программные модули для клинического ПО BD FACSCanto:</p>
@@ -871,7 +871,7 @@ function setActiveTab(id: number): void {
               class="flex flex-col xl:flex-row gap-4"
               v-if="tab.id === 5">
               <div class="basis-1/2 flex flex-col gap-4">
-                <p class="~text-[16px]/[18px]">
+                <p class="~text-[16px]/[18px] uppercase font-bold text-gray-500">
                   ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ДЛЯ КЛИНИЧЕСКИХ ИССЛЕДОВАНИЙ BD FACS Canto™
                 </p>
                 <hr />
@@ -916,8 +916,8 @@ function setActiveTab(id: number): void {
                 </div>
               </div>
               <div class="basis-1/2 flex flex-col gap-4">
-                <p class="~text-[16px]/[18px]">
-                  УНИВЕРСАЛЬНОЕ ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ FACSDiva™
+                <p class="~text-[16px]/[18px] uppercase font-bold text-gray-500">
+                  универсальное программное обеспечение FACSDiva™
                 </p>
                 <hr />
                 <ul class="list-disc pl-5 flex flex-col gap-2">
@@ -946,19 +946,19 @@ function setActiveTab(id: number): void {
               class="flex flex-col">
               <div class="flex flex-col md:flex-row mb-12 gap-4">
                 <div class="flex md:basis-1/2 xl:basis-1/4 flex-col">
-                  <div class="mb-8">
-                    <BaseImage
-                      :src="tab.image"
+                  <div class="mb-8 flex justify-center h-[220px]">
+                    <NuxtImg
+                      src="/img/product-page/options-1.jpg"
                       alt="slider image"
-                      class="aspect-auto"
+                      class="flex h-full"
                       placeholder="bg-[#EBEEF6]"
-                      quality="90" />
+                      quality="100" />
                   </div>
                   <p class="font-bold">
                     Модуль BD™ High Throughput Sampler (HTS) для автоматической подачи проб из планшетов
                   </p>
                   <hr class="my-2">
-                  <ul class="list-disc pl-5 flex flex-col gap-2">
+                  <ul class="list-disc pl-5 flex flex-col gap-1">
                     <li>
                       Совместимость с 96-луночными и 384-луночными планшетами
                     </li>
@@ -974,19 +974,19 @@ function setActiveTab(id: number): void {
                   </ul>
                 </div>
                 <div class="flex md:basis-1/2 xl:basis-1/4 flex-col">
-                  <div class="mb-8">
-                    <BaseImage
-                      :src="tab.image"
+                  <div class="mb-8 flex justify-center h-[220px]">
+                    <NuxtImg
+                      src="/img/product-page/options-2.jpg"
                       alt="slider image"
-                      class="aspect-auto"
+                      class="flex h-full"
                       placeholder="bg-[#EBEEF6]"
-                      quality="90" />
+                      quality="100" />
                   </div>
                   <p class="font-bold">
-                    Модуль BD™ High Throughput Sampler (HTS) для автоматической подачи проб из планшетов
+                    Модуль Sample temperature control
                   </p>
                   <hr class="my-2">
-                  <ul class="list-disc pl-5 flex flex-col gap-2">
+                  <ul class="list-disc pl-5 flex flex-col gap-1">
                     <li>
                       Совместимость с 96-луночными и 384-луночными планшетами
                     </li>
@@ -1002,19 +1002,19 @@ function setActiveTab(id: number): void {
                   </ul>
                 </div>
                 <div class="flex md:basis-1/2 xl:basis-1/4 flex-col">
-                  <div class="mb-8">
-                    <BaseImage
-                      :src="tab.image"
+                  <div class="mb-8 flex justify-center h-[220px]">
+                    <NuxtImg
+                      src="/img/product-page/options-3.jpg"
                       alt="slider image"
-                      class="aspect-auto"
+                      class="flex h-full"
                       placeholder="bg-[#EBEEF6]"
-                      quality="90" />
+                      quality="100" />
                   </div>
                   <p class="font-bold">
-                    Модуль BD™ High Throughput Sampler (HTS) для автоматической подачи проб из планшетов
+                    Станция BD FACS™ Sample Preparation Assistant III (SPA III)
                   </p>
                   <hr class="my-2">
-                  <ul class="list-disc pl-5 flex flex-col gap-2">
+                  <ul class="list-disc pl-5 flex flex-col gap-1">
                     <li>
                       Совместимость с 96-луночными и 384-луночными планшетами
                     </li>
@@ -1030,19 +1030,19 @@ function setActiveTab(id: number): void {
                   </ul>
                 </div>
                 <div class="flex md:basis-1/2 xl:basis-1/4 flex-col">
-                  <div class="mb-8">
-                    <BaseImage
-                      :src="tab.image"
+                  <div class="mb-8 flex justify-center h-[220px]">
+                    <NuxtImg
+                      src="/img/product-page/options-4.jpg"
                       alt="slider image"
-                      class="aspect-auto"
+                      class="flex h-full"
                       placeholder="bg-[#EBEEF6]"
-                      quality="90" />
+                      quality="100" />
                   </div>
                   <p class="font-bold">
-                    Модуль BD™ High Throughput Sampler (HTS) для автоматической подачи проб из планшетов
+                    Станция BD FACS™ Lyse Wash Assistant (LWA)
                   </p>
                   <hr class="my-2">
-                  <ul class="list-disc pl-5 flex flex-col gap-2">
+                  <ul class="list-disc pl-5 flex flex-col gap-1">
                     <li>
                       Совместимость с 96-луночными и 384-луночными планшетами
                     </li>
@@ -1059,7 +1059,9 @@ function setActiveTab(id: number): void {
                 </div>
               </div>
               <div class="flex flex-col">
-                <p class="font-bold ~text-[16px]/[18px]">Специализированное программное обеспечение</p>
+                <p class="uppercase text-gray-500 font-bold ~text-[16px]/[18px]">
+                  Специализированное программное обеспечение
+                </p>
                 <hr class="my-4">
                 <div class="flex flex-col gap-2 mb-4">
                   <p class="font-bold">Программные модули для клинического ПО BD FACSCanto:</p>
@@ -1073,22 +1075,15 @@ function setActiveTab(id: number): void {
                   </p>
                 </div>
                 <div class="flex flex-col gap-2">
-                  <p class="font-bold">Программные модули для клинического ПО BD FACSCanto:</p>
-                  <p>
-                    <b>BD™ Stem Cell Enumeration Software module</b> – модуль разработанный для автоматизированного
-                    гейтирования, вычисления статистики и предоставления результатов по выделению жизнеспособных
-                    популяций CD45+/CD34+ гемопоэтических стволовых клеток для расчёта дозы при трансплантации.
-                    BD™ HLA-B27 Software module автоматизирует анализ антигена HLA-B27, который имеет клиническое
-                    значение для оценки анкилозирующего спондилоартрита, псориаза, реактивного артрита и воспалительных
-                    заболеваний кишечника.
+                  <p class="font-bold ~text-[14px]/[16px]">
+                    Программы для анализа цитометрических данных:
                   </p>
                   <p>
-                    <b>BD™ Stem Cell Enumeration Software module</b> – модуль разработанный для автоматизированного
-                    гейтирования, вычисления статистики и предоставления результатов по выделению жизнеспособных
-                    популяций CD45+/CD34+ гемопоэтических стволовых клеток для расчёта дозы при трансплантации.
-                    BD™ HLA-B27 Software module автоматизирует анализ антигена HLA-B27, который имеет клиническое
-                    значение для оценки анкилозирующего спондилоартрита, псориаза, реактивного артрита и воспалительных
-                    заболеваний кишечника.
+                    <b>ModFit LT™</b> - гибкая программа, разработанная для автоматического анализа сложных гистограмм ДНК –цитометрии. Она позволяет определять популяции на стадиях G0/G1, S и G2/M клеточного цикла, анализировать пролиферацию при окрашивании клеток CFSE и т.д. Функции AutoLinearity™, AutoDebris™ и AutoAggregate™ существенно упрощают обработку данных. Программа содержит более 65 редактируемых моделей с возможностью добавления новых и доступна в двух вариантах: ModFit LT v3.3 for PC и ModFit LT v3.3 for Mac OS® X.
+                  </p>
+                  <p>
+                    <b>FCAP Array Software v3.0.1</b> - приложение для анализа цитометрических данных по качественному и количественному содержанию растворимых молекул в биологических жидкостях. Доступны ручная настройка ряда параметров и калькулятор стандартного разведения для упрощения ввода данных. Поддерживает возможность анализа до 30-ти молекул. Совместимые форматы импортируемых файлов: FCS 2.0 или 3.0.
+                    FlowJo ® - универсальная интегрированная среда для анализа и автоматизированной обработки данных проточной цитометрии. Встроенные аналитические платформы для анализа ДНК/клеточного цикла, кинетики, пролиферации, а также инструменты для экспорта необработанных данных для анализа в других программы. Расчет компенсационных матриц с последующим их применением для экспериментальных данных.
                   </p>
                 </div>
               </div>
@@ -1097,7 +1092,7 @@ function setActiveTab(id: number): void {
               class="flex"
               v-if="tab.id === 7">
               <div class="flex flex-col gap-4">
-                <p class="uppercase text-gray-500 ~text-[16px]/[18px]">
+                <p class="uppercase text-gray-500 font-bold font-bold ~text-[16px]/[18px]">
                   ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ДЛЯ КЛИНИЧЕСКИХ ИССЛЕДОВАНИЙ BD FACSCanto™
                 </p>
                 <hr />
