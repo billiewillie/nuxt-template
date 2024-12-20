@@ -875,22 +875,44 @@ function setActiveTab(id: number): void {
                   ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ДЛЯ КЛИНИЧЕСКИХ ИССЛЕДОВАНИЙ BD FACS Canto™
                 </p>
                 <hr />
-                <div>
+                <div class="flex flex-col gap-4">
                   <p>
-                    Проточный цитометр BD FACSCanto™ II – прибор для полноценного многопараметрического анализа,
+                    <b>Проточный цитометр BD FACSCanto™ II</b> – прибор для полноценного многопараметрического анализа,
                     позволяющий
                     свободно комбинировать до 8 флуоресцентных меток с минимальными ограничениями в выборе сочетаний
                     флуорохромов. Автоматизация процедуры запуска, контроля качества, выключения и плановой промывки
                     обеспечивает простоту эксплуатации.
                   </p>
-                  <br>
-                  <p>
-                    Проточный цитометр BD FACSCanto™ II – прибор для полноценного многопараметрического анализа,
-                    позволяющий
-                    свободно комбинировать до 8 флуоресцентных меток с минимальными ограничениями в выборе сочетаний
-                    флуорохромов. Автоматизация процедуры запуска, контроля качества, выключения и плановой промывки
-                    обеспечивает простоту эксплуатации.
+                  <ul class="list-disc pl-5 flex flex-col gap-2">
+                    <li>
+                      Готовые протоколы исследований, включающие логическую последовательность графиков и гейтов, для
+                      определения субпопуляционного составав лимфоцитов (T-, B-, NK-лимфоцитов).
+                    </li>
+                    <li>
+                      Автоматическое создание отчетов с результатами анализа по каждому пациенту
+                    </li>
+                    <li>
+                      Встроенный контроль качества каждого результата.
+                    </li>
+                  </ul>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <p class="font-bold">
+                    Возможность интеграции дополнительных программных модулей для автоматизации исследований:
                   </p>
+                  <ul class="list-disc pl-5 flex flex-col gap-4">
+                    <li>
+                      Модуль для определения антигена HLA-B27 (BD™ HLA-B27 Software module).
+                    </li>
+                    <li>
+                      Модуль для определения активационных маркеров CD38 и HLA-DR (BD™ Activation Marker Software
+                      module).
+                    </li>
+                    <li>
+                      Модуль для определения маркеров стволовых гемопоэтических клеток CD45 и CD34 (BD™ Stem Cell
+                      Enumeration Software module) по протоколу ISHAGE.
+                    </li>
+                  </ul>
                 </div>
               </div>
               <div class="basis-1/2 flex flex-col gap-4">
@@ -898,7 +920,7 @@ function setActiveTab(id: number): void {
                   УНИВЕРСАЛЬНОЕ ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ FACSDiva™
                 </p>
                 <hr />
-                <ul class="list-disc pl-5 flex flex-col gap-4">
+                <ul class="list-disc pl-5 flex flex-col gap-2">
                   <li>
                     Полностью автоматизированные протоколы промывки прибора перед включением и выключением системы,
                     управляемые из программного обеспечения дополнительные протоколы промывки прибора.
@@ -913,7 +935,8 @@ function setActiveTab(id: number): void {
                     Дегазация проточной жидкости перед подачей в проточную кювету.
                   </li>
                   <li>
-                    Датчики уровня жидкости во всех емкостях с обслуживающими растворами. Информация об уровне наполнения контейнеров отображается в программном обеспечении.
+                    Датчики уровня жидкости во всех емкостях с обслуживающими растворами. Информация об уровне
+                    наполнения контейнеров отображается в программном обеспечении.
                   </li>
                 </ul>
               </div>
@@ -1073,51 +1096,140 @@ function setActiveTab(id: number): void {
             <div
               class="flex"
               v-if="tab.id === 7">
-              <div class="basis-1/3">
-                <BaseImage
-                  :src="tab.image"
-                  alt="slider image"
-                  class="aspect-auto"
-                  placeholder="bg-[#EBEEF6]"
-                  quality="90" />
-              </div>
-              <div class="basis-2/3 flex flex-col gap-4">
-                <p class="font-bold">Описание</p>
+              <div class="flex flex-col gap-4">
+                <p class="uppercase text-gray-500 ~text-[16px]/[18px]">
+                  ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ДЛЯ КЛИНИЧЕСКИХ ИССЛЕДОВАНИЙ BD FACSCanto™
+                </p>
                 <hr />
-                <div>
-                  <p>
-                    Проточный цитометр BD FACSCanto™ II – прибор для полноценного многопараметрического анализа,
-                    позволяющий
-                    свободно комбинировать до 8 флуоресцентных меток с минимальными ограничениями в выборе сочетаний
-                    флуорохромов. Автоматизация процедуры запуска, контроля качества, выключения и плановой промывки
-                    обеспечивает простоту эксплуатации.
+                <div class="flex flex-col gap-4">
+                  <p class="font-bold">
+                    Инструкции:
                   </p>
-                  <br>
-                  <p>
-                    Проточный цитометр BD FACSCanto™ II – прибор для полноценного многопараметрического анализа,
-                    позволяющий
-                    свободно комбинировать до 8 флуоресцентных меток с минимальными ограничениями в выборе сочетаний
-                    флуорохромов. Автоматизация процедуры запуска, контроля качества, выключения и плановой промывки
-                    обеспечивает простоту эксплуатации.
-                  </p>
+                  <ul class="list-disc pl-5 text-primary flex flex-col gap-1">
+                    <li>
+                      Проточный цитофлуориметр BD FACSCanto™ II (Техническая спецификация)
+                    </li>
+                    <li>
+                      Оптическая схема проточного цитофлуориметра BD FACSCanto™ II
+                    </li>
+                    <li>
+                      Модуль BD™ High Throughput Sampler (HTS) для автоматической подачи проб из планшетов (Техническая
+                      спецификация)
+                    </li>
+                    <li>
+                      Руководство пользователя. Система программного обеспечения и реагентов BD™ HLA-B27
+                    </li>
+                  </ul>
                 </div>
-                <hr />
-                <div class="flex gap-4">
-                  <NuxtLink
-                    to="/pdf/blank.pdf"
-                    class="flex flex-col"
-                    target="_blank"
-                    external>
-                    <Icon
-                      name="vscode-icons:file-type-pdf2"
-                      color="#575757"
-                      width="64"
-                      height="64" />
-                    <p>Регистрационное удостоверение</p>
-                    <span class="uppercase underline text-primary underline-offset-4">
-                скачать
-              </span>
-                  </NuxtLink>
+                <div class="flex flex-col gap-4">
+                  <p class="font-bold">
+                    Ресурсы:
+                  </p>
+                  <ul class="list-disc pl-5 text-primary flex flex-col gap-1">
+                    <li>
+                      Лоты частиц BD CS&T
+                    </li>
+                    <li>
+                      Часто задаваемые вопросы о проточном цитометре BD FACSCanto ™ II и клиническом программном
+                      обеспечении BD FACSCanto ™
+                    </li>
+                    <li>
+                      Диагностика и устранение неполадок в клиническом программном обеспечении BD FACSCanto™
+                    </li>
+                    <li>
+                      Программное обеспечение BD FACSDiva™ Software
+                    </li>
+                    <li>
+                      Контроль качества и верификаця BD FACSCanto™.Клинические данные подсчета CD4
+                    </li>
+                  </ul>
+                </div>
+                <div class="flex flex-col gap-4">
+                  <p class="font-bold">
+                    Статьи:
+                  </p>
+                  <ul class="list-decimal pl-5 flex flex-col gap-4">
+                    <li>
+                      <p class="mb-1">
+                        Внеклеточный АТФ оказывает противоположное действие на активированные и регуляторные CD4 + Т-клетки через активацию пуринергического рецептора P2.
+                      </p>
+                      <p class="text-primary">
+                        Trabanelli, S. et al. Extracellular ATP exerts opposite effects on activated and regulatory CD4+ T cells via purinergic P2 receptor activation. The Journal of Immunology, 189(3), 2012. doi: 10.4049/jimmunol.1103800
+                      </p>
+                    </li>
+                    <li>
+                      <p class="mb-1">
+                        Использование красителей LysoTracker: исследование аутофагии методом проточной цитометрии.
+                      </p>
+                      <p class="text-primary">
+                        Chikte, S. et al. Use of LysoTracker dyes: a flow cytometric study of autophagy. Cytometry Part A, 85(2), 2014. doi: 10.1002/cyto.a.2231
+                      </p>
+                    </li>
+                    <li>
+                      <p class="mb-1">
+                        Интерлейкин-2 и регуляторные Т-клетки при реакции «трансплантат против хозяина».
+                      </p>
+                      <p class="text-primary">
+                        Koreth, J.et al. Interleukin-2 and regulatory T cells in graft-versus-host disease. New England Journal of Medicine, 365(22), 2011. doi: 10.1056/NEJMoa1108188
+                      </p>
+                    </li>
+                    <li>
+                      <p class="mb-1">
+                        Клеточный ответ клеток рака молочной железы человека MCF-7 на воздействие тимохиноном.
+                      </p>
+                      <p class="text-primary">
+                        Motaghed, M. et al. Cellular responses with thymoquinone treatment in human breast cancer cell line MCF-7. Pharmacognosy research, 5(3), 2013. doi: 10.4103/0974-8490.112428
+                      </p>
+                    </li>
+                    <li>
+                      <p class="mb-1">
+                        Tim4- и MerTK-опосредованное поглощение апоптотических клеток резидентными перитонеальными макрофагами мыши.
+                      </p>
+                      <p class="text-primary">
+                        Nishi, C. Tim4-and MerTK-mediated engulfment of apoptotic cells by mouse resident peritoneal macrophages. Molecular and cellular biology, 34(8), 2014. doi: 10.1128/MCB.01394-13
+                      </p>
+                    </li>
+                    <li>
+                      <p class="mb-1">
+                        Воспалительные состояния определяют влияние мезенхимальных стволовых или стромальных клеток на функцию В-клеток.
+                      </p>
+                      <p class="text-primary">
+                        Luk, F. et al. Inflammatory conditions dictate the effect of mesenchymal stem or stromal cells on B cell function. Frontiers in Immunology, 8, 2017. doi: 10.3389/fimmu.2017.01042
+                      </p>
+                    </li>
+                    <li>
+                      <p class="mb-1">
+                        Цитокин-индуцированное связывание иммунного комплекса с высокоаффинным рецептором IgG, FcγRI в присутствии мономерного IgG
+                      </p>
+                      <p class="text-primary">
+                        Van Der Poel, C.E. et al. Cytokine-induced immune complex binding to the high-affinity IgG receptor, FcγRI, in the presence of monomeric IgG. Blood, 116(24), 2010. doi: 10.1182/blood-2010-04-280214
+                      </p>
+                    </li>
+                    <li>
+                      <p class="mb-1">
+                        Визуализация свойств стволовых клеток при гепатоцеллюлярной карциноме человека выявляет важность взаимодействия опухоль-хозяин in vivo и предполагаемое направление терапии
+                      </p>
+                      <p class="text-primary">
+                        Muramatsu, S. et al. Visualization of stem cell features in human hepatocellular carci noma reveals in vivo significance of tumor‐host interaction and clinical course. Hepatology, 58(1), 2013. doi: 10.1002/hep.26345
+                      </p>
+                    </li>
+                    <li>
+                      <p class="mb-1">
+                        Прайминг IL-33 регулирует несколько этапов опосредованного нейтрофилами ответа против Candida albicans путем модуляции TLR и Dectin-1 сигналов.
+                      </p>
+                      <p class="text-primary">
+                        Le, H.T. et al. IL-33 priming regulates multiple steps of the neutrophil-mediated anti-Candida albicans response by modulating TLR and dectin-1 signals. The Journal of Immunology, 189(1), 2012. doi: 10.4049/jimmunol.1103564
+                      </p>
+                    </li>
+                    <li>
+                      <p class="mb-1">
+                        Ингибирование MEK, отдельно или в сочетании с ингибированием BRAF, влияет на множество функций изолированных нормальных лимфоцитов и дендритных клеток человека.
+                      </p>
+                      <p class="text-primary">
+                        Vella, L.J. et al. MEK inhibition, alone or in combination with BRAF inhibition, affects multiple functions of isolated normal human lymphocytes and dendritic cells. Cancer immunology research, 2(4), 2014. doi: 10.1158/2326-6066.
+                      </p>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
