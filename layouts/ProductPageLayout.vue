@@ -684,35 +684,35 @@ function setActiveTab(id: number): void {
               class="flex flex-col gap-16"
               v-if="tab.id === 3">
               <div class="flex gap-4">
-              <div class="basis-1/2">
-                <BaseImage
-                  class="aspect-auto"
-                  src="/img/product-page/optica-1.jpg"
-                  alt="оптика"
-                  width="884"
-                  height="438"
-                  placeholder="bg-[#2264B4]" />
+                <div class="basis-1/2">
+                  <BaseImage
+                    class="aspect-auto"
+                    src="/img/product-page/optica-1.jpg"
+                    alt="оптика"
+                    width="884"
+                    height="438"
+                    placeholder="bg-[#2264B4]" />
+                </div>
+                <div class="basis-1/2">
+                  <p class="font-bold uppercase text-gray-500">оптика возбуждения</p>
+                  <hr class="my-2">
+                  <ul class="list-disc pl-5 flex flex-col gap-4">
+                    <li>
+                      Конструкция оптической системы включает в себя два или три источника излучения (488 нм, 633 нм,
+                      405 нм (опция).
+                    </li>
+                    <li>
+                      Пространственное разделение лучей лазеров обеспечивает истинную многопараметровость анализа,
+                      позволяя в одном исследовании использовать флуорохромы с близкими спектрами эмиссии, но
+                      возбуждаемые на различных длинах волн.
+                    </li>
+                    <li>
+                      Фиксация всех элементов оптической системы не требует ежедневной юстировки пользователем и
+                      обуславливает воспроизводимость результатов от эксперимента к эксперименту.
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <div class="basis-1/2">
-                <p class="font-bold uppercase text-gray-500">оптика возбуждения</p>
-                <hr class="my-2">
-                <ul class="list-disc pl-5 flex flex-col gap-4">
-                  <li>
-                    Конструкция оптической системы включает в себя два или три источника излучения (488 нм, 633 нм,
-                    405 нм (опция).
-                  </li>
-                  <li>
-                    Пространственное разделение лучей лазеров обеспечивает истинную многопараметровость анализа,
-                    позволяя в одном исследовании использовать флуорохромы с близкими спектрами эмиссии, но
-                    возбуждаемые на различных длинах волн.
-                  </li>
-                  <li>
-                    Фиксация всех элементов оптической системы не требует ежедневной юстировки пользователем и
-                    обуславливает воспроизводимость результатов от эксперимента к эксперименту.
-                  </li>
-                </ul>
-              </div>
-            </div>
               <div class="flex gap-4">
                 <div class="basis-1/2">
                   <BaseImage
@@ -730,13 +730,16 @@ function setActiveTab(id: number): void {
                   <hr class="my-2">
                   <ul class="list-disc pl-5 flex flex-col gap-4 mb-4">
                     <li>
-                      Кварцевая кювета соединена со светособирающей линзой оптическим гелем, исключающим потерю интенсивности флуоресцентного сигнала.
+                      Кварцевая кювета соединена со светособирающей линзой оптическим гелем, исключающим потерю
+                      интенсивности флуоресцентного сигнала.
                     </li>
                     <li>
                       Флуоресцентный сигнал предается от проточной кюветы к системам детекторов по оптоволокну.
                     </li>
                     <li>
-                      Независимые системы детекторов BD™ Octagon и BD™ Trigon с круговым расположением фотоэлектронных умножителей для регистрации и разделения сигнала индивидуально от каждого лазера позволяют свободно комбинировать различные флуоресцентные метки в многоцветных исследованиях.
+                      Независимые системы детекторов BD™ Octagon и BD™ Trigon с круговым расположением фотоэлектронных
+                      умножителей для регистрации и разделения сигнала индивидуально от каждого лазера позволяют
+                      свободно комбинировать различные флуоресцентные метки в многоцветных исследованиях.
                     </li>
                   </ul>
                   <p>
@@ -746,30 +749,59 @@ function setActiveTab(id: number): void {
                 </div>
               </div>
               <div class="flex gap-4">
-                <div class="basis-1/2">
-                  <p class="font-bold uppercase text-gray-500">
-                    оптика регистрации сигнала
-                  </p>
+                <div class="basis-1/2 flex flex-col">
+                  <p class="font-bold uppercase text-gray-500">оптика регистрации сигнала</p>
                   <hr class="my-2">
-                  <ul class="list-disc pl-5 flex flex-col gap-4">
-                    <li>
-                      Конструкция оптической системы включает в себя два или три источника излучения (488 нм, 633 нм,
-                      405 нм (опция).
-                    </li>
-                    <li>
-                      Пространственное разделение лучей лазеров обеспечивает истинную многопараметровость анализа,
-                      позволяя в одном исследовании использовать флуорохромы с близкими спектрами эмиссии, но
-                      возбуждаемые на различных длинах волн.
-                    </li>
-                    <li>
-                      Фиксация всех элементов оптической системы не требует ежедневной юстировки пользователем и
-                      обуславливает воспроизводимость результатов от эксперимента к эксперименту.
-                    </li>
-                  </ul>
-                  <p>
-                    Походы, реализованные в конструкции оптической системы прибора, позволяют обеспечить самый высокий
-                    в классе уровень флуоресцентной чувствительности.
-                  </p>
+                  <div class="flex flex-col gap-4">
+                    <div class="flex">
+                      <p class="basis-1/2 font-bold">
+                        Регистрируемые параметры
+                      </p>
+                      <p class="basis-1/2">
+                        До 8 параметров флуоресценции, до 10 оптических параметров.
+                      </p>
+                    </div>
+                    <div class="flex">
+                      <p class="basis-1/2 font-bold">
+                        Чувствительностьрегистрации флуоресценции (MESF)
+                      </p>
+                      <p class="basis-1/2">
+                        До 8 параметров флуоресценции, до 10 оптических параметров.
+                      </p>
+                    </div>
+                    <div class="flex">
+                      <p class="basis-1/2 font-bold">
+                        Чувствительность по FSC
+                      </p>
+                      <p class="basis-1/2">
+                        1 мкм
+                      </p>
+                    </div>
+                    <div class="flex">
+                      <p class="basis-1/2 font-bold">
+                        Чувствительность по SSC
+                      </p>
+                      <p class="basis-1/2">
+                        0,5 мкм
+                      </p>
+                    </div>
+                    <div class="flex">
+                      <p class="basis-1/2 font-bold">
+                        Скорость регистрации событий
+                      </p>
+                      <p class="basis-1/2">
+                        10.000 событий в секунду
+                      </p>
+                    </div>
+                    <div class="flex">
+                      <p class="basis-1/2 font-bold">
+                        Максимальный размер детектируемых частиц
+                      </p>
+                      <p class="basis-1/2">
+                        50 мкм
+                      </p>
+                    </div>
+                  </div>
                 </div>
                 <div class="basis-1/2">
                   <p class="font-bold uppercase text-gray-500">
@@ -778,22 +810,28 @@ function setActiveTab(id: number): void {
                   <hr class="my-2">
                   <ul class="list-disc pl-5 flex flex-col gap-4">
                     <li>
-                      Автоматическая процедура настройки и контроля качества выполняется в программном модуле Cytometer Setup and Tracking™.
+                      Автоматическая процедура настройки и контроля качества выполняется в программном модуле Cytometer
+                      Setup and Tracking™.
                     </li>
                     <li>
-                      По результатам проверки качества создаются графики Леви-Дженнингса, позволяющие контролировать изменение состояния прибора во времени.
+                      По результатам проверки качества создаются графики Леви-Дженнингса, позволяющие контролировать
+                      изменение состояния прибора во времени.
                     </li>
                     <li>
-                      Автоматическая корректировка настроек цитометра в соответствии с текущим состоянием прибора,по калибровочным материалам.
+                      Автоматическая корректировка настроек цитометра в соответствии с текущим состоянием прибора,по
+                      калибровочным материалам.
                     </li>
                     <li>
-                      Автоматическая оптимизация настроек прибора для работы с отдельными приложениями проточной цитометрии и различными типами образцов.
+                      Автоматическая оптимизация настроек прибора для работы с отдельными приложениями проточной
+                      цитометрии и различными типами образцов.
                     </li>
                     <li>
                       Обеспечение стабильности и воспроизводимости результатов исследований.
                     </li>
                     <li>
-                      Автоматическая калибровка и настройка всех параметров цитометра (напряжение, компенсация, линейность) для клинических исследований по одной пробирке – в клиническом программном обеспечении FACSCanto.
+                      Автоматическая калибровка и настройка всех параметров цитометра (напряжение, компенсация,
+                      линейность) для клинических исследований по одной пробирке – в клиническом программном обеспечении
+                      FACSCanto.
                     </li>
                   </ul>
                 </div>
@@ -1082,11 +1120,22 @@ function setActiveTab(id: number): void {
                     Программы для анализа цитометрических данных:
                   </p>
                   <p>
-                    <b>ModFit LT™</b> - гибкая программа, разработанная для автоматического анализа сложных гистограмм ДНК –цитометрии. Она позволяет определять популяции на стадиях G0/G1, S и G2/M клеточного цикла, анализировать пролиферацию при окрашивании клеток CFSE и т.д. Функции AutoLinearity™, AutoDebris™ и AutoAggregate™ существенно упрощают обработку данных. Программа содержит более 65 редактируемых моделей с возможностью добавления новых и доступна в двух вариантах: ModFit LT v3.3 for PC и ModFit LT v3.3 for Mac OS® X.
+                    <b>ModFit LT™</b> - гибкая программа, разработанная для автоматического анализа сложных гистограмм
+                    ДНК –цитометрии. Она позволяет определять популяции на стадиях G0/G1, S и G2/M клеточного цикла,
+                    анализировать пролиферацию при окрашивании клеток CFSE и т.д. Функции AutoLinearity™, AutoDebris™ и
+                    AutoAggregate™ существенно упрощают обработку данных. Программа содержит более 65 редактируемых
+                    моделей с возможностью добавления новых и доступна в двух вариантах: ModFit LT v3.3 for PC и ModFit
+                    LT v3.3 for Mac OS® X.
                   </p>
                   <p>
-                    <b>FCAP Array Software v3.0.1</b> - приложение для анализа цитометрических данных по качественному и количественному содержанию растворимых молекул в биологических жидкостях. Доступны ручная настройка ряда параметров и калькулятор стандартного разведения для упрощения ввода данных. Поддерживает возможность анализа до 30-ти молекул. Совместимые форматы импортируемых файлов: FCS 2.0 или 3.0.
-                    FlowJo ® - универсальная интегрированная среда для анализа и автоматизированной обработки данных проточной цитометрии. Встроенные аналитические платформы для анализа ДНК/клеточного цикла, кинетики, пролиферации, а также инструменты для экспорта необработанных данных для анализа в других программы. Расчет компенсационных матриц с последующим их применением для экспериментальных данных.
+                    <b>FCAP Array Software v3.0.1</b> - приложение для анализа цитометрических данных по качественному и
+                    количественному содержанию растворимых молекул в биологических жидкостях. Доступны ручная настройка
+                    ряда параметров и калькулятор стандартного разведения для упрощения ввода данных. Поддерживает
+                    возможность анализа до 30-ти молекул. Совместимые форматы импортируемых файлов: FCS 2.0 или 3.0.
+                    FlowJo ® - универсальная интегрированная среда для анализа и автоматизированной обработки данных
+                    проточной цитометрии. Встроенные аналитические платформы для анализа ДНК/клеточного цикла, кинетики,
+                    пролиферации, а также инструменты для экспорта необработанных данных для анализа в других программы.
+                    Расчет компенсационных матриц с последующим их применением для экспериментальных данных.
                   </p>
                 </div>
               </div>
@@ -1149,10 +1198,13 @@ function setActiveTab(id: number): void {
                   <ul class="list-decimal pl-5 flex flex-col gap-4">
                     <li>
                       <p class="mb-1">
-                        Внеклеточный АТФ оказывает противоположное действие на активированные и регуляторные CD4 + Т-клетки через активацию пуринергического рецептора P2.
+                        Внеклеточный АТФ оказывает противоположное действие на активированные и регуляторные CD4 +
+                        Т-клетки через активацию пуринергического рецептора P2.
                       </p>
                       <p class="text-primary">
-                        Trabanelli, S. et al. Extracellular ATP exerts opposite effects on activated and regulatory CD4+ T cells via purinergic P2 receptor activation. The Journal of Immunology, 189(3), 2012. doi: 10.4049/jimmunol.1103800
+                        Trabanelli, S. et al. Extracellular ATP exerts opposite effects on activated and regulatory CD4+
+                        T cells via purinergic P2 receptor activation. The Journal of Immunology, 189(3), 2012. doi:
+                        10.4049/jimmunol.1103800
                       </p>
                     </li>
                     <li>
@@ -1160,7 +1212,8 @@ function setActiveTab(id: number): void {
                         Использование красителей LysoTracker: исследование аутофагии методом проточной цитометрии.
                       </p>
                       <p class="text-primary">
-                        Chikte, S. et al. Use of LysoTracker dyes: a flow cytometric study of autophagy. Cytometry Part A, 85(2), 2014. doi: 10.1002/cyto.a.2231
+                        Chikte, S. et al. Use of LysoTracker dyes: a flow cytometric study of autophagy. Cytometry Part
+                        A, 85(2), 2014. doi: 10.1002/cyto.a.2231
                       </p>
                     </li>
                     <li>
@@ -1168,7 +1221,8 @@ function setActiveTab(id: number): void {
                         Интерлейкин-2 и регуляторные Т-клетки при реакции «трансплантат против хозяина».
                       </p>
                       <p class="text-primary">
-                        Koreth, J.et al. Interleukin-2 and regulatory T cells in graft-versus-host disease. New England Journal of Medicine, 365(22), 2011. doi: 10.1056/NEJMoa1108188
+                        Koreth, J.et al. Interleukin-2 and regulatory T cells in graft-versus-host disease. New England
+                        Journal of Medicine, 365(22), 2011. doi: 10.1056/NEJMoa1108188
                       </p>
                     </li>
                     <li>
@@ -1176,55 +1230,72 @@ function setActiveTab(id: number): void {
                         Клеточный ответ клеток рака молочной железы человека MCF-7 на воздействие тимохиноном.
                       </p>
                       <p class="text-primary">
-                        Motaghed, M. et al. Cellular responses with thymoquinone treatment in human breast cancer cell line MCF-7. Pharmacognosy research, 5(3), 2013. doi: 10.4103/0974-8490.112428
+                        Motaghed, M. et al. Cellular responses with thymoquinone treatment in human breast cancer cell
+                        line MCF-7. Pharmacognosy research, 5(3), 2013. doi: 10.4103/0974-8490.112428
                       </p>
                     </li>
                     <li>
                       <p class="mb-1">
-                        Tim4- и MerTK-опосредованное поглощение апоптотических клеток резидентными перитонеальными макрофагами мыши.
+                        Tim4- и MerTK-опосредованное поглощение апоптотических клеток резидентными перитонеальными
+                        макрофагами мыши.
                       </p>
                       <p class="text-primary">
-                        Nishi, C. Tim4-and MerTK-mediated engulfment of apoptotic cells by mouse resident peritoneal macrophages. Molecular and cellular biology, 34(8), 2014. doi: 10.1128/MCB.01394-13
+                        Nishi, C. Tim4-and MerTK-mediated engulfment of apoptotic cells by mouse resident peritoneal
+                        macrophages. Molecular and cellular biology, 34(8), 2014. doi: 10.1128/MCB.01394-13
                       </p>
                     </li>
                     <li>
                       <p class="mb-1">
-                        Воспалительные состояния определяют влияние мезенхимальных стволовых или стромальных клеток на функцию В-клеток.
+                        Воспалительные состояния определяют влияние мезенхимальных стволовых или стромальных клеток на
+                        функцию В-клеток.
                       </p>
                       <p class="text-primary">
-                        Luk, F. et al. Inflammatory conditions dictate the effect of mesenchymal stem or stromal cells on B cell function. Frontiers in Immunology, 8, 2017. doi: 10.3389/fimmu.2017.01042
+                        Luk, F. et al. Inflammatory conditions dictate the effect of mesenchymal stem or stromal cells
+                        on B cell function. Frontiers in Immunology, 8, 2017. doi: 10.3389/fimmu.2017.01042
                       </p>
                     </li>
                     <li>
                       <p class="mb-1">
-                        Цитокин-индуцированное связывание иммунного комплекса с высокоаффинным рецептором IgG, FcγRI в присутствии мономерного IgG
+                        Цитокин-индуцированное связывание иммунного комплекса с высокоаффинным рецептором IgG, FcγRI в
+                        присутствии мономерного IgG
                       </p>
                       <p class="text-primary">
-                        Van Der Poel, C.E. et al. Cytokine-induced immune complex binding to the high-affinity IgG receptor, FcγRI, in the presence of monomeric IgG. Blood, 116(24), 2010. doi: 10.1182/blood-2010-04-280214
+                        Van Der Poel, C.E. et al. Cytokine-induced immune complex binding to the high-affinity IgG
+                        receptor, FcγRI, in the presence of monomeric IgG. Blood, 116(24), 2010. doi:
+                        10.1182/blood-2010-04-280214
                       </p>
                     </li>
                     <li>
                       <p class="mb-1">
-                        Визуализация свойств стволовых клеток при гепатоцеллюлярной карциноме человека выявляет важность взаимодействия опухоль-хозяин in vivo и предполагаемое направление терапии
+                        Визуализация свойств стволовых клеток при гепатоцеллюлярной карциноме человека выявляет важность
+                        взаимодействия опухоль-хозяин in vivo и предполагаемое направление терапии
                       </p>
                       <p class="text-primary">
-                        Muramatsu, S. et al. Visualization of stem cell features in human hepatocellular carci noma reveals in vivo significance of tumor‐host interaction and clinical course. Hepatology, 58(1), 2013. doi: 10.1002/hep.26345
+                        Muramatsu, S. et al. Visualization of stem cell features in human hepatocellular carci noma
+                        reveals in vivo significance of tumor‐host interaction and clinical course. Hepatology, 58(1),
+                        2013. doi: 10.1002/hep.26345
                       </p>
                     </li>
                     <li>
                       <p class="mb-1">
-                        Прайминг IL-33 регулирует несколько этапов опосредованного нейтрофилами ответа против Candida albicans путем модуляции TLR и Dectin-1 сигналов.
+                        Прайминг IL-33 регулирует несколько этапов опосредованного нейтрофилами ответа против Candida
+                        albicans путем модуляции TLR и Dectin-1 сигналов.
                       </p>
                       <p class="text-primary">
-                        Le, H.T. et al. IL-33 priming regulates multiple steps of the neutrophil-mediated anti-Candida albicans response by modulating TLR and dectin-1 signals. The Journal of Immunology, 189(1), 2012. doi: 10.4049/jimmunol.1103564
+                        Le, H.T. et al. IL-33 priming regulates multiple steps of the neutrophil-mediated anti-Candida
+                        albicans response by modulating TLR and dectin-1 signals. The Journal of Immunology, 189(1),
+                        2012. doi: 10.4049/jimmunol.1103564
                       </p>
                     </li>
                     <li>
                       <p class="mb-1">
-                        Ингибирование MEK, отдельно или в сочетании с ингибированием BRAF, влияет на множество функций изолированных нормальных лимфоцитов и дендритных клеток человека.
+                        Ингибирование MEK, отдельно или в сочетании с ингибированием BRAF, влияет на множество функций
+                        изолированных нормальных лимфоцитов и дендритных клеток человека.
                       </p>
                       <p class="text-primary">
-                        Vella, L.J. et al. MEK inhibition, alone or in combination with BRAF inhibition, affects multiple functions of isolated normal human lymphocytes and dendritic cells. Cancer immunology research, 2(4), 2014. doi: 10.1158/2326-6066.
+                        Vella, L.J. et al. MEK inhibition, alone or in combination with BRAF inhibition, affects
+                        multiple functions of isolated normal human lymphocytes and dendritic cells. Cancer immunology
+                        research, 2(4), 2014. doi: 10.1158/2326-6066.
                       </p>
                     </li>
                   </ul>
