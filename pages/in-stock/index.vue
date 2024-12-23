@@ -104,7 +104,6 @@ function setActiveCategory(category: string) {
   activeCategory.value = <InStockCategory>data.value.find((item) => {
     return item.title === category
   })
-  console.log(activeCategory.value)
 }
 
 function orderProduct(id: number) {
@@ -121,10 +120,12 @@ function copyLink(id: number) {
 
 onMounted(() => {
   if (document.getElementById(String(route.query.id))) {
-    document.getElementById(String(route.query.id)).scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
-    })
+    setTimeout(() => {
+      document.getElementById(String(route.query.id)).scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      })
+    }, 300)
   }
 })
 </script>

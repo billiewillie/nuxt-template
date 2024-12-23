@@ -119,8 +119,7 @@ async function setNewProductsCategory(category: string) {
           <CarouselItem
             class="relative h-full"
             v-for="(_, index) in 3"
-            :key="index"
-          >
+            :key="index">
             <BaseImage
               src="/img/index-page-slider/slider-1.jpg"
               alt="slider image"
@@ -129,7 +128,6 @@ async function setNewProductsCategory(category: string) {
               width="1920"
               height="860"
               quality="90" />
-
             <div class="container">
               <div class="relative py-20 xl:pt-40 max-w-[620px]">
                 <h2 class="uppercase font-semibold ~text-[28px]/[33px]">

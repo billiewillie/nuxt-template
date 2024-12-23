@@ -1,7 +1,7 @@
 <script
   setup
   lang="ts">
-import type { ProductPageApi } from '~/types'
+import type { ProductCard, ProductPageApi } from '~/types'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '~/components/ui/tooltip'
 import {
   Dialog,
@@ -114,6 +114,17 @@ const tabs = ref([
       'Специализированное клиническое программное обеспечение FACSCanto™ разработано для автоматизации сбора и анализа данных при проведении клинических исследований.</p>'
   }
 ])
+
+const product = ref<ProductCard>({
+  id: 1,
+  title: 'Микроскоп Leica DM3000',
+  preview_img: '/img/items/item-1.jpg',
+  url: 'http://localhost:3000',
+  is_favourites: 0,
+  is_comparison: 0,
+  description: 'description 1',
+  is_new: false
+})
 
 const onSubmit = form.handleSubmit(async (values) => {
   const data = {
@@ -243,7 +254,7 @@ function setActiveTab(id: number): void {
         content="summary_large_image" />
     </Head>
 
-    <section class="mb-16 pt-8">
+    <section class="mb-24 xl:mb-32 pt-8">
       <div class="container">
         <ClientOnly>
           <Breadcrumb class="mb-12">
@@ -446,7 +457,7 @@ function setActiveTab(id: number): void {
           :key="tab.id">
           <template v-if="tabs.find(item => item.isActive)?.id === tab.id">
             <div
-              class="flex"
+              class="flex mb-24 xl:mb-32 gap-4"
               v-if="tab.id === 1">
               <div class="basis-1/3">
                 <BaseImage
@@ -498,7 +509,7 @@ function setActiveTab(id: number): void {
             </div>
             <div
               v-else-if="tab.id === 2"
-              class="flex flex-col xl:flex-row xl:columns-2 gap-x-4">
+              class="flex flex-col xl:flex-row xl:columns-2 gap-x-4 mb-24 xl:mb-32">
               <div class="flex basis-1/2 flex-col">
                 <div>
                   <div class="bg-gray-100 py-2 px-4 xl:px-6 rounded-t-md">Лазеры</div>
@@ -681,9 +692,9 @@ function setActiveTab(id: number): void {
               </div>
             </div>
             <div
-              class="flex flex-col gap-16"
+              class="flex flex-col gap-16 mb-24 xl:mb-32"
               v-if="tab.id === 3">
-              <div class="flex gap-4">
+              <div class="flex gap-8">
                 <div class="basis-1/2">
                   <BaseImage
                     class="aspect-auto"
@@ -713,7 +724,7 @@ function setActiveTab(id: number): void {
                   </ul>
                 </div>
               </div>
-              <div class="flex gap-4">
+              <div class="flex gap-8">
                 <div class="basis-1/2">
                   <BaseImage
                     class="aspect-auto"
@@ -748,7 +759,7 @@ function setActiveTab(id: number): void {
                   </p>
                 </div>
               </div>
-              <div class="flex gap-4">
+              <div class="flex gap-8">
                 <div class="basis-1/2 flex flex-col">
                   <p class="font-bold uppercase text-gray-500">оптика регистрации сигнала</p>
                   <hr class="my-2">
@@ -840,7 +851,7 @@ function setActiveTab(id: number): void {
             <div
               v-else-if="tab.id === 4"
               class="flex flex-col">
-              <div class="flex mb-12 gap-4">
+              <div class="flex gap-4 mb-24 xl:mb-32">
                 <div class="basis-1/3">
                   <NuxtImg
                     src="/img/product-page/proto-1.jpg"
@@ -909,7 +920,7 @@ function setActiveTab(id: number): void {
               </div>
             </div>
             <div
-              class="flex flex-col xl:flex-row gap-4"
+              class="flex flex-col xl:flex-row gap-8 mb-24 xl:mb-32"
               v-if="tab.id === 5">
               <div class="basis-1/2 flex flex-col gap-4">
                 <p class="~text-[16px]/[18px] uppercase font-bold text-gray-500">
@@ -984,7 +995,7 @@ function setActiveTab(id: number): void {
             </div>
             <div
               v-else-if="tab.id === 6"
-              class="flex flex-col">
+              class="flex flex-col mb-24 xl:mb-32">
               <div class="flex flex-col md:flex-row mb-12 gap-4">
                 <div class="flex md:basis-1/2 xl:basis-1/4 flex-col">
                   <div class="mb-8 flex justify-center h-[220px]">
@@ -1143,8 +1154,8 @@ function setActiveTab(id: number): void {
             <div
               class="flex"
               v-if="tab.id === 7">
-              <div class="flex flex-col gap-4">
-                <p class="uppercase text-gray-500 font-bold font-bold ~text-[16px]/[18px]">
+              <div class="flex flex-col gap-4 mb-24 xl:mb-32">
+                <p class="uppercase text-gray-500 font-bold ~text-[16px]/[18px]">
                   ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ДЛЯ КЛИНИЧЕСКИХ ИССЛЕДОВАНИЙ BD FACSCanto™
                 </p>
                 <hr />
@@ -1304,36 +1315,28 @@ function setActiveTab(id: number): void {
             </div>
           </template>
         </template>
-        <div class="flex flex-col gap-4">
-          <p>Подобрали для Вас</p>
-          <hr>
+        <div class="flex flex-col">
+          <p class="font-bold ~text-[16px]/[18px] uppercase text-gray-500 leading-none">Подобрали для Вас</p>
+          <hr class="my-4">
           <div class="flex gap-4">
-            <Card
-              v-for="(_, index) in 4"
-              class="basis-1/4"
-              :key="index">
-              <CardHeader>
-                <BaseImage
-                  class="w-full"
-                  :img-attrs="{ class: 'w-full h-full object-scale-down object-center' }"
-                  :src="props.data.preview_img"
-                  :alt="props.data.title"
-                  aspect-ratio="aspect-square"
-                  placeholder="bg-white"
-                  width="390"
-                  height="390"
-                />
-              </CardHeader>
-              <CardContent class="flex flex-col gap-4 p-0 px-6 flex-auto">
-                <CardTitle class="~text-[16px]/[18px] leading-[1.2]">
-                  {{ props.data.title }}
-                </CardTitle>
-                <Separator />
-                <CardDescription class="~text-[14px]/[16px] text-foreground">
-                  annotation
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <Carousel
+              class="relative w-full"
+              :opts="{ align: 'start' }">
+              <CarouselContent :is-visible="true">
+                <CarouselItem
+                  v-for="(_, index) in 4"
+                  :key="index"
+                  class="basis-full md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
+                  <BaseProductCard :product="product" />
+                </CarouselItem>
+              </CarouselContent>
+              <div class="absolute right-0 -top-[100px] md:-top-[108px] xl:-top-[58px] flex gap-4 items-center">
+                <div class="flex gap-4">
+                  <CarouselPrevious class="relative left-0 top-0 translate-y-0" />
+                  <CarouselNext class="relative left-0 top-0 translate-y-0" />
+                </div>
+              </div>
+            </Carousel>
           </div>
         </div>
       </div>
