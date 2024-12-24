@@ -254,7 +254,7 @@ function setActiveTab(id: number): void {
         content="summary_large_image" />
     </Head>
 
-    <section class="mb-24 xl:mb-32 pt-8">
+    <section class="mb-16 pt-8">
       <div class="container">
         <ClientOnly>
           <Breadcrumb class="mb-12">
