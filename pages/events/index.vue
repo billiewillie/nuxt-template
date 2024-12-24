@@ -2,7 +2,6 @@
   setup
   lang="ts">
 import { type Ref, ref } from 'vue'
-import { type DateValue, getLocalTimeZone, today } from '@internationalized/date'
 import type { Events } from '~/types'
 import { useFetch, useId, useRuntimeConfig } from '#app'
 import URLs from '~/data/urls'
@@ -72,7 +71,6 @@ const {
 }: {
   data: Ref<Events>
 } = await useFetch(`${API_ENDPOINT}${URLs.events}/${new Date().getFullYear()}/${new Date().getMonth() + 1}`)
-// 'https://telvla.ru/events/12/1'
 
 categories.value = events.value.categories.map((category) => {
   return {
