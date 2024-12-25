@@ -191,11 +191,34 @@ export interface ProductPageApi {
   id: number;
   title: string;
   preview_img: string;
+  content: string;
   url: string;
+  created_at: string;
   bread_crumbs: Array<BreadCrumb>;
   is_page: string;
   template: string;
-  content: string;
+  gallery?: Array<{
+    id: number,
+    title: string,
+    url: string
+  }>
+  tabs?: Array<{
+    id: number,
+    title: string,
+    content: string
+  }>
+  files?: Array<{
+    id: number,
+    title: string,
+    url: string,
+    expansion: string
+  }>
+  recommendations?: Array<{
+    id: number,
+    title: string,
+    preview_img: string,
+    url: string
+  }>
   metadata: Metadata;
   manufacturers: Array<Manufacturer>;
 }
